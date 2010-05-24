@@ -1,0 +1,19 @@
+
+	Starting Harvie's HTTPd at:
+	tcp://127.0.0.1:81
+
+200 [DIR] ./
+301 gbook_offline -> /gbook_offline/
+200 [DIR] gbook_offline/
+200 [DIR] gbook_offline/
+301 c: -> /c:/
+200 [DIR] c:/
+301 c:/WINDOWS -> /c:/WINDOWS/
+200 [DIR] c:/WINDOWS/
+301 c:/WINDOWS/repair -> /c:/WINDOWS/repair/
+200 [DIR] c:/WINDOWS/repair/
+200 c:/WINDOWS/repair/autoexec.nt
+200 c:/WINDOWS/repair/config.nt
+404 Some random name
+404 c:/Another notfound
+404 d:/notfoundtest

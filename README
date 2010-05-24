@@ -1,0 +1,6 @@
+This is repository with backup of various (mostly obsolete or incomplete) programs which i have written in past. But i will also continue producing some crap here. So you can find many single prupose (or single use) scripts in this directory as well as few single file scripts with source packages for archlinux...
+
+Each directory was named after language which was used for programming, but there are few directories which were not:
+	misc - multiple languages
+	plugins - plugins to another programs
+

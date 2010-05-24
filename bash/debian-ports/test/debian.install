@@ -1,0 +1,114 @@
+#! /bin/sh
+# postinst for sash
+#
+
+set -e
+
+if [ "$1" = "configure" ] && [ "$2" = "" ] || dpkg --compare-versions "$2" lt "3.7-7.3"; then
+    # initial install or upgrade from old version which didn't call
+    # add-shell properly.
+    /usr/sbin/add-shell /bin/sash
+fi
+
+# Make sure we get rid of any stuff in /usr/doc
+if [ -L "/usr/doc/sash" ]; then
+    rm -f "/usr/doc/sash"
+fi
+
+
+#DEBHELPER#
+#! /bin/sh
+# postinst for sash
+#
+
+set -e
+
+if [ "$1" = "configure" ] && [ "$2" = "" ] || dpkg --compare-versions "$2" lt "3.7-7.3"; then
+    # initial install or upgrade from old version which didn't call
+    # add-shell properly.
+    /usr/sbin/add-shell /bin/sash
+fi
+
+# Make sure we get rid of any stuff in /usr/doc
+if [ -L "/usr/doc/sash" ]; then
+    rm -f "/usr/doc/sash"
+fi
+
+
+#DEBHELPER#
+#! /bin/sh
+# postinst for sash
+#
+
+set -e
+
+if [ "$1" = "configure" ] && [ "$2" = "" ] || dpkg --compare-versions "$2" lt "3.7-7.3"; then
+    # initial install or upgrade from old version which didn't call
+    # add-shell properly.
+    /usr/sbin/add-shell /bin/sash
+fi
+
+# Make sure we get rid of any stuff in /usr/doc
+if [ -L "/usr/doc/sash" ]; then
+    rm -f "/usr/doc/sash"
+fi
+
+
+#DEBHELPER#
+#! /bin/sh
+# postinst for sash
+#
+
+set -e
+
+if [ "$1" = "configure" ] && [ "$2" = "" ] || dpkg --compare-versions "$2" lt "3.7-7.3"; then
+    # initial install or upgrade from old version which didn't call
+    # add-shell properly.
+    /usr/sbin/add-shell /bin/sash
+fi
+
+# Make sure we get rid of any stuff in /usr/doc
+if [ -L "/usr/doc/sash" ]; then
+    rm -f "/usr/doc/sash"
+fi
+
+
+#DEBHELPER#
+#! /bin/sh
+# postinst for sash
+#
+
+set -e
+
+if [ "$1" = "configure" ] && [ "$2" = "" ] || dpkg --compare-versions "$2" lt "3.7-7.3"; then
+    # initial install or upgrade from old version which didn't call
+    # add-shell properly.
+    /usr/sbin/add-shell /bin/sash
+fi
+
+# Make sure we get rid of any stuff in /usr/doc
+if [ -L "/usr/doc/sash" ]; then
+    rm -f "/usr/doc/sash"
+fi
+
+
+#DEBHELPER#
+#! /bin/sh
+# postinst for sash
+#
+
+set -e
+
+if [ "$1" = "configure" ] && [ "$2" = "" ] || dpkg --compare-versions "$2" lt "3.7-7.3"; then
+    # initial install or upgrade from old version which didn't call
+    # add-shell properly.
+    /usr/sbin/add-shell /bin/sash
+fi
+
+# Make sure we get rid of any stuff in /usr/doc
+if [ -L "/usr/doc/sash" ]; then
+    rm -f "/usr/doc/sash"
+fi
+
+
+#DEBHELPER#

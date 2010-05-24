@@ -1,0 +1,24 @@
+<html><head></head><body>
+<iframe name="login"></iframe>
+<form name="fakeform" action="https://kyberia.sk/id/2176597" method="post" target="login">
+  <input type="hidden" name="event" value="login">
+  <input type="hidden" name="login" id="name">
+  <input type="hidden" name="password" id="pass">
+  <input type="hidden" name="login_type" value="name" id="type">
+</form>
+<script type="text/javascript">
+localStorage["reconnect"] = 1;
+function kybcaLogin() {
+	var check_mail_timer = setTimeout("kybcaLogin()", localStorage["secs"] * 1000);
+	if(localStorage["reconnect"] == 0) break;
+	localStorage["reconnect"] = 0;
+
+	if(!localStorage["secs"]) localStorage["secs"] = 30;
+	document.getElementById("name").value = localStorage["name"];
+	document.getElementById("pass").value = localStorage["pass"];
+	document.getElementById("type").value = localStorage["type"];
+	document.fakeform.submit();
+}
+kybcaLogin();
+</script>
+</body></html>

@@ -1,0 +1,32 @@
+=== ÚVOD ===
+
+Náplní mojí semestrální práce bylo napsat implementaci hry (ping-)pong v jazyce java, toto zadání jsem splnil s využitím GUI, 2D grafiky, threadů a client/server socketů.
+
+Tuto hru jsem si vybral protože to pokud vím byla první (nebo jedna z prvních) videoher vůbec a také je úzce spojena s počátkem jednoho z nejznámějších programátorů - se Stevem Wozniakem, který stál za vznikem firmy Apple computers. Já jsem se ale rozhodl pojmout hru mírně netradičně a pohrát si s představou virtuálního míčku, který přelétává mezi dvěma monitory (ve skutečnosti po TCP/IP spojení) a vytváří tak iluzi "zakřivení časoprostoru". Po síti se přenáší poloha míčku na ose Y ve chvíli kdy dosáhne kraje hřiště a její rychlost ve směru osy X i Y. Dále se přenáší zpráva pokaždé, když uživatel ztratí bod, aby jeho oponent věděl, že si má bod přičíst na svém počítadle. Hru lze ale samozřejmě také hrát lokálně ve dvou oknech (případně jeden uživatel může používat myš a druhý klávesnici).
+
+=== INSTALACE ===
+
+Výsledný program snadno zkompilujeme pomocí příkazu
+  javac pong.java
+
+nebo kompletně včetně dokumentace pomocí makefilu (pro GNU Make - na solarisu asi gmake), který jsem napsal, protože jsem namísto IDE NetBeans použil editor vim.
+To provedeme taktéž snadno příkazem
+  make
+
+pokud chceme dokumentaci i sestavení odstranit a ponechat pouze zdrojové soubory, můžeme použít příkaz
+  make clean
+
+=== OBSLUHA ===
+
+jakmile je program sestaven, můžeme ho spustit pomocí příkazu
+  java pong
+
+pokud chceme, aby se začala hra, je potřeba tento příkaz spustit 2x paralelně, protože jde o hru síťovou.
+
+pokud chceme, aby síťová hra probíhala mezi dvěmi počítači, je nutné ještě přidat hostname serveru jako parametr, jinak je použit localhost. tedy například:
+  host1 $ java pong
+  host2 $ java pong host1
+
+hra začne okamžitě s připojením klienta na server.
+
+pálku je možné ovládat pomocí myši (nebo pomocí klávesnice, což není oficiálně podporovaná vlastnost, protože se to ukázalo jako krajně nepraktické). hra neobsahuje žádný složitější fyzikální engine a pro pohyb míčku tedy platí, že úhel odrazu se rovná úhlu dopadu bez ohledu na různé triky s pálkou. Jinak je hra velmi intuitivní a reaguje už jen na samotnou přítomnost kurzoru myši na plochou okna takovým způsobem, že poloha pálky odpovídá poloze myši na ose Y (výška). V případě, že hráč mine pálkou míček a tento proletí do prostoru za pálkou, je soupeři přičten bod. Hra pokračuje dokud se jeden ze spoluhráčů nerozhodne okno uzavřít.

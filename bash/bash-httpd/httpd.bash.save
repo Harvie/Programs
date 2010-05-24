@@ -1,0 +1,8 @@
+#!/bin/bash
+
+listen_port=8080;
+web_root='./';
+
+while true; do
+	nc -l -p $listen_port -e "$0 --client";
+done;

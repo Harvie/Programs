@@ -1,0 +1,45 @@
+;all lines containing ';' are comments
+;every line, that starts with '!' will be printed
+!MyLoop01 - (my 1st "Amen Break" try)
+
+;delay in ms = ( 60*1000 )/( BPM*(Beats_in_Bar) )
+;example: delay between beats = 150ms
+?150
+;or you can set BPM (only if you have 4beats in bar)...
+@120
+
+;load drums - starts with ':'
+;:bd.wav
+;:hi.wav
+;:s.wav
+:er0\tbd.wav
+:er0\snr.wav
+:er0\hi.wav
+
+
+;groove patern
+;-[1st drum][2nd drum][the other drum...]
+;beats are in the same order as loaded upper...
+;1 = beat
+;0 (or anything else) = silence
+;newline = next beat
+
+;Pattern starts with '#' (only lines, that starts with '-' will be accepted after '#')
+;Pattern is only thing, that you can change while playing...
+;Leave few blank lines after pattern!!
+;Maybe you need add silence (-000000) at start of your pattern for better sound...
+
+#Pattern starts here
+-110
+-000
+-110
+-011
+-110
+-001
+-010
+-001
+-110
+-100
+-011
+-000
+

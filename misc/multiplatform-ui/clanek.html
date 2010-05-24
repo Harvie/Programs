@@ -1,0 +1,227 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+<TITLE>Multiplatformní aplikace s GTK+ (C-Perl-Java-Python-PHP-C#)</TITLE>
+</HEAD>
+
+<h1>Multiplatformní aplikace s GTK+ (C-Perl-Java-Python-PHP-C#)</h1>
+
+﻿<p><img src="hello.png" style="float: left;" /><br /> 
+Dnes si ukážeme, jak pomocí knihovny GTK+ udělat podobnou &#8220;hello world&#8221; aplikaci, jako vidíte na obrázku. Bude složená z okna, textového vstupu a tlačítka. Při stisku tlačítka se zadaný text nastaví jako titulek tlačítka a navíc vypíše do konzole. Tuto aplikaci bude možné spouštět jak na Windows, tak na GNU/Linuxu, na BSD a dokonce na MacOS X. A aby toho nebylo málo, stejnou aplikaci napíši hned v několika jazycích. Cílem tohoto souhrnu je ukázat, jak snadné je vyvíjet multiplatformní aplikace pomocí open-source nástrojů.<br /> 
+<span id="more-532"></span><br style="clear: left;" /></p> 
+<h2>Návrh grafického rozhraní</h2> 
+<p>První, co musíme udělat je navrhnout (naklikat) grafické rozhraní naší aplikace. K použijeme program Glade 3, který je principiálně dost podobný všem ostatním gui builderům, jako QT Designer, nebo Microsoft Visual Studio. Tento hotový design potom můžeme snadno použít v celé řadě programovacích jazyků.</p> 
+<p>Na obrázku níže vidíte, co je naším cílem:<br /> 
+<img src="glade3.png" /></p> 
+<p>Glade a vlastně i ostatní potřebné knihovny se dají stáhnout na adrese <a href="http://ftp.gnome.org/pub/GNOME/binaries/win32/">http://ftp.gnome.org/pub/GNOME/binaries/win32/</a>, čtěte ale dále, protože možná pro vás bude výhodnější si stáhnout GTK+, Glade a další podpůrné knihovny jako jeden bundle i s vývojovým prostředím, nebo interpreterem vašeho oblíbeného jazyka.</p> 
+<p>Postup je také jednoduchý:<br /> 
+- vytvoříme nový projekt (použijeme formát GtkBuilder &#8211; ne LibGlade)<br /> 
+- na panelu vlevo pod záložkou &#8220;toplevels&#8221; poklikáme na &#8220;Window&#8221;, tím vytvoříme nové okno<br /> 
+- pod záložkou &#8220;containers&#8221; klikneme na &#8220;Vertical Box&#8221; a následně klikneme do vytvořeného okna, v dialogu změníme počet částí na &#8220;2&#8243;. okno by se mělo rozdělit na dvě části<br /> 
+- pod záložkou &#8220;Control and Display&#8221; klikneme na &#8220;Text Entry&#8221; a pak do horní části našeho okna, tím se umístí widget na zadávání textu<br /> 
+- stejným způsobem umístíme do dolní části widget &#8220;Button&#8221; ze stejné kategorie</p> 
+<p>Vsuvka: Pokud jde o ony &#8220;kontainery&#8221;, kam patří i &#8220;Vertical Box&#8221;, je třeba vysvětlit, co to znamená. Kontainer je widget, do kterého můžeme vkládat další widgety (třeba opět kontainery). Trik je v tom, že každý kontainer se jinak chová při resizování (změně velikosti) okna (nebo nadřazeného kontaineru). Pokud použijeme kontainer &#8220;Fixed&#8221;, tak můžeme přesně určit, kde který widget bude, ale při zvětšování a zmenšování okna to bude asi vypadat dost neprakticky a rozhodně ne elegantně. Proto máme třeba námi použitý &#8220;Vertical Box&#8221;, který prostor okna spravedlivě rozdělí mezi N widgetů a přizpůsobuje jejich velikost při každé změně. Pro složitější projekty je ale většinou třeba kombinovat různé druhy kontainerů.</p> 
+<p>Dále musíme přiřadit handlery signálů (jména funkcí, které se budou volat při dané akci):<br /> 
+- na panelu vpravo se nalézá strom widgetů, my vybereme okno &#8220;window1&#8243;<br /> 
+- v dolní části panelu přejdeme na záložku signály a najdeme signál &#8220;destroy&#8221; (ve třídě GtkObject), klikneme vedle něj do sloupce &#8220;handler&#8221; a z nabídky vybereme handler &#8220;on_window1_destroy&#8221; (asi nemá smysl vymýšlet si vlastní jména handlerů).<br /> 
+- stejným způsobem vybereme widget &#8220;button1&#8243;  a ke GtkButton signálu &#8220;clicked&#8221; opět z nabídky vybereme handler &#8220;on_button1_clicked&#8221;, tím jsme s návrhem hotovi<br /> 
+- pokud si nechcete s designem aplikace už nějak více hrát, můžete uložit svůj výtvor například do souboru &#8220;hello.ui&#8221;.<br /> 
+- Důležité je, že uložíte soubor ve formátu GtkBuilder a s příponou .ui (ta je kvůli Glade).</p> 
+<p>Nyní máme hotový XML soubor s popisem našeho rozhraní, který je možné buď externě načítat z našeho programu, což je výhodné, protože můžeme kdykoli upravit vzhled programu bez zásahu do kódu (a případné rekompilace), nebo ho nějakým způsobem umístit jako řetězec přímo do kódu našeho programu, což má zase jiné výhody (např. kompaktnost).</p> 
+<h2>Kód aplikace</h2> 
+<h3>Úvod</h3> 
+<p>Backend k našemu hello.ui jsem napsal hned v několika jazycích, které ovládám, abych ukázal výhody použití GTKBuilderu a přiblížil ho co nejširší programátorské veřejnosti. Je nutné vědět, že GTKBuilder nebyl součástí knihovny GTK+ odjakživa. Dříve se pomocí glade generovaly soubory s příponou .glade a v kódu se načítali pomocí knihovny LibGlade, nebo byla možnost pomocí Glade přímo vygenerovat kód v jazyce C, což bylo ve verzi 3 taktéž zrušeno &#8211; paradoxně kvůli nedostatečnému výkonu tohoto kódu. Nyní existuje tzv. GTKBuilder, což je funkce (nebo spíše třída) umožňující načíst GUI ze souboru nebo z řetězce.</p> 
+<p><font color="red">Ještě nejsou hotovy příklady ve všech jazycích, takže mohu zatím akorát slíbit, že je časem dopíši.</font></p> 
+<p>Teď je třeba popsat, jak funguje kód následujících příkladů. Nebudu rozebírat každý zvlášť, protože všechny dělají vesměs to samé (i když často pomocí dost odlišné logiky). Jen stručně shrnu, základní rysy kódu, který využívá GTKBuilder.</p> 
+<p>Tady je seznam akcí, které každý z programů musí vykonat:<br /> 
+- načte knihovnu GTK+ (případně moduly s interfacem k ní)<br /> 
+- definuje funkce/metody sloužící jako handlery signálů jednotlivých widgetů (viz. níže)<br /> 
+- Inicializuje GTK pomocí volání gtk_init<br /> 
+- vytvoří instanci GTKBuilderu<br /> 
+- pomocí gtk_builder_add_from_file nebo gtk_builder_add_from_string načte GUI vytvořené v Glade<br /> 
+- pomocí gtk_builder_connect_signals prováže handlery signálů s funkcemi nebo metodami v kódu (jména funkcí jsme již přiřazovali v Glade)<br /> 
+- pomocí gtk_builder_get_object získá reference na jednotlivé widgety (abychom s nimi mohli pracovat)<br /> 
+- v případě, že hlavní okno nemělo už z glade nastaveno visible=true (jako v našem případě), nastaví to<br /> 
+- pokud není programátor líný, tak uvolní GTKBuilder z paměti, protože jsou už všechny widgety načteny<br /> 
+- spustí hlavní cyklus GTK (gtk_main), který neustále hlídá, jestli nebylo stisknuto nějaké tlačítko, atp. Tento cyklus pokračuje donekonečna, dokud není z nějakého důvodu ukončen.<br /> 
+- zkončí</p> 
+<p>Dále tu máme handlery signálů, které musí program implementovat, jinak connect_signals() zkončí s chybou. V našem případě jsou pouze dva:<br /> 
+- on_window1_destroy: voláním gtk_main_quit ukončí hlavní cyklus GTK a tím se program ukončí (protože hned za cyklem je příkaz exit)<br /> 
+- on_button1_clicked: získá text zadaný do entry1, nastaví ho jako label widgetu button1 a navíc ho vypíše ho do konzole.</p> 
+<p>To je vše, co náš program dělá a nyní se již pojďme podívat na konkrétní kódy v jednotlivých jazycích.</p> 
+<hr /> 
+<h3>C</h3> 
+<p>Pokud jde o C, je situace trochu jiná než v ostatních jazycích (i když o něco lepší než v Assembleru). Knihovna GTK je napsaná v C, takže s kompatibilitou nebo rychlostí by problém být neměl, největší obtíží je asi kompilace (resp. dodání správných přepínačů kompilátoru). Na GNU/Linuxu většinou stačí mít dostatečnou verzi příslušné knihovny a potřebné hlavičkové soubory, potom lze celou aplikaci hezky zkompilovat pomocí příkazu, který jsem si poznamenal do zdrojáku.</p> 
+<p>V případě Windows jsou požadavky víceméně stejné, ale pokud nechcete používat CygWin bude nejtěžší do systému správně nainstalovat všechny knihovny. Moje znalosti jsou v tomto směru omezené, protože Windows nepoužívám a přenositelnost svých aplikací zkouším jen občas ve VirtualBoxu. Vím ale, že se mi podařilo můj program zkompilovat pomocí vývojového prostředí <a href="http://www.codeblocks.org/">Code::Blocks</a> (nástupce Dev-Cpp), které umožňuje při startu vytvořit GTK+ Projekt, stejně je ale potřeba nainstalovat všechny knihovny na své místo a sdělit kompilátoru jejich umístění. V té době ale tuším ještě nebyly k dispozici windowsí binárky Glade a celé se to muselo takhle bastlit, teď tuším by to šlo nějak přehledněji stáhnout a nainstalovat z repozitářů Gnome. Každopádně se mi to podařilo. Tuším ale, že jsem musel kód psaný na Linuxu pro Windows drobně upravit (tuším přidat makro G_MODULE_EXPORT před každou funkci, která je handlerem signálu), potom už se dal program zkompilovat jak na Windows, tak na Linuxu.</p> 
+<pre><font color="#444444">/* GTK Hello world! by Harvie 2oo9
+ *
+ * Compile this with:
+ * gcc -o hello hello.c $(pkg-config --cflags --libs gtk+-2.0) -export-dynamic
+ * or
+ * gcc -Wall -g -o hello hello.c `pkg-config --cflags --libs gtk+-2.0` -export-dynamic
+ */</font> 
+ 
+<font color="0000ff"><strong>#include <font color="#008000">&lt;stdio.h&gt;</font></strong></font> 
+<font color="0000ff"><strong>#include <font color="#008000">&lt;gtk/gtk.h&gt;</font></strong></font> 
+ 
+<font color="#2040a0">GtkBuilder</font>      <font color="4444FF">*</font><font color="#2040a0">builder</font><font color="4444FF">;</font> 
+<font color="#2040a0">GtkWidget</font>       <font color="4444FF">*</font><font color="#2040a0">window1</font>, <font color="4444FF">*</font><font color="#2040a0">button1</font>, <font color="4444FF">*</font><font color="#2040a0">entry1</font><font color="4444FF">;</font> 
+ 
+<strong>void</strong> <font color="#2040a0">on_window1_destroy</font> <font color="4444FF">(</font><font color="#2040a0">GtkObject</font> <font color="4444FF">*</font><font color="#2040a0">object</font>, <font color="#2040a0">gpointer</font> <font color="#2040a0">user_data</font><font color="4444FF">)</font> 
+<font color="4444FF"><strong>{</strong></font> 
+	<font color="#2040a0">gtk_main_quit</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+<font color="4444FF"><strong>}</strong></font> 
+ 
+<strong>void</strong> <font color="#2040a0">on_button1_clicked</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font> 
+  <font color="#2040a0">gtk_button_set_label</font><font color="4444FF">(</font><font color="#2040a0">button1</font>, <font color="#2040a0">gtk_entry_get_text</font><font color="4444FF">(</font><font color="#2040a0">entry1</font><font color="4444FF">)</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+  <font color="#2040a0">puts</font><font color="4444FF">(</font><font color="#2040a0">gtk_entry_get_text</font><font color="4444FF">(</font><font color="#2040a0">entry1</font><font color="4444FF">)</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+<font color="4444FF"><strong>}</strong></font> 
+ 
+<strong>int</strong> <font color="#2040a0">main</font> <font color="4444FF">(</font><strong>int</strong> <font color="#2040a0">argc</font>, <strong>char</strong> <font color="4444FF">*</font><font color="#2040a0">argv</font><font color="4444FF">[</font><font color="4444FF">]</font><font color="4444FF">)</font> 
+<font color="4444FF"><strong>{</strong></font> 
+	<font color="#2040a0">gtk_init</font><font color="4444FF">(</font><font color="4444FF">&amp;</font><font color="#2040a0">argc</font>, <font color="4444FF">&amp;</font><font color="#2040a0">argv</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+ 
+	<font color="#2040a0">builder</font> <font color="4444FF">=</font> <font color="#2040a0">gtk_builder_new</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+	<font color="#2040a0">gtk_builder_add_from_file</font><font color="4444FF">(</font><font color="#2040a0">builder</font>, <font color="#008000">&quot;hello.ui&quot;</font>, <font color="#2040a0">NULL</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+ 
+  <font color="#2040a0">window1</font> <font color="4444FF">=</font> <font color="#2040a0">GTK_WIDGET</font> <font color="4444FF">(</font><font color="#2040a0">gtk_builder_get_object</font> <font color="4444FF">(</font><font color="#2040a0">builder</font>, <font color="#008000">&quot;window1&quot;</font><font color="4444FF">)</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+  <font color="#2040a0">button1</font> <font color="4444FF">=</font> <font color="#2040a0">GTK_WIDGET</font> <font color="4444FF">(</font><font color="#2040a0">gtk_builder_get_object</font> <font color="4444FF">(</font><font color="#2040a0">builder</font>, <font color="#008000">&quot;button1&quot;</font><font color="4444FF">)</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+  <font color="#2040a0">entry1</font> <font color="4444FF">=</font> <font color="#2040a0">GTK_WIDGET</font> <font color="4444FF">(</font><font color="#2040a0">gtk_builder_get_object</font> <font color="4444FF">(</font><font color="#2040a0">builder</font>, <font color="#008000">&quot;entry1&quot;</font><font color="4444FF">)</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+ 
+	<font color="#2040a0">gtk_builder_connect_signals</font><font color="4444FF">(</font><font color="#2040a0">builder</font>, <font color="#2040a0">NULL</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+ 
+  <font color="#2040a0">g_object_unref</font><font color="4444FF">(</font><font color="#2040a0">G_OBJECT</font> <font color="4444FF">(</font><font color="#2040a0">builder</font><font color="4444FF">)</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+ 
+  <font color="#2040a0">gtk_widget_show</font><font color="4444FF">(</font><font color="#2040a0">window1</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+  <font color="#2040a0">gtk_main</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font> 
+ 
+  <strong>return</strong> <font color="#FF0000">0</font><font color="4444FF">;</font> 
+<font color="4444FF"><strong>}</strong></font> 
+</pre> 
+<hr /> 
+<h3>Perl</h3> 
+<p>Musím se přiznat, že Perl se poslední dobou stává mým favoritem a je favoritem i mezi jazyky, které bych si vybral na tvorbu přenositelných okeních aplikací používajících GTK. Perl sice nemusí být tak rychlý jako C, ale je velmi pohodlný a kód je možné přenášet mezi různými systémy bez rekompilace. Teoreticky můžu mít jeden soubor s příponou .pl, který bude v sobě mít zakomponované i rozhraní z glade a který pustím prakticky všude.</p> 
+<p>Pro více informací bych doporučil web <a href="http://gtk2-perl.sourceforge.net/">http://gtk2-perl.sourceforge.net/</a>.</p> 
+<p>A pokud jde o instalaci na Windows, tak není o moc složitější, než pomocí některého z Linuxových balíčkovacích systémů. Všechno co potřebujete (a mnohem víc) dokáže stáhnout a nainstalovat program <a href="http://code.google.com/p/camelbox/">CamelBox</a>. Jediný problém, který mi nastal při instalaci CamelBoxu bylo to, že jsem již předtím nainstaloval starší verzi Glib (kvůli kompilaci GTK aplikace v C, ale myslím, že to potká i například uživatele GIMPu nebo InkScapu). Při pokusu o spuštění programu na mě tedy vyběhla jen konzolová hláška &#8220;<i>*** This build of Glib was compiled with glib 2.20.0, but is currently running with 2.16.3, which is too old. We&#8217;ll continue, but expect problems!</i>&#8221; následovaná popupem a pádem programu. Na stránkách CamelBoxu mi poradili, abych odstranil starou knihovnu z cesty (proměnná prostředí %PATH%), já ale knihovnu pro jistotu rovnou odinstaloval a potom už vše fungovalo jak má. Jen poznamenám, že kvůli inkompetenci Microsoftích programátorů musí mít v sobě každá aplikace zakompilované nastavení, jestli má ukazovat konzoli, nebo ne. Z toho vyplívá, že v adresáři c:/camelbox/bin/ naleznete kromě souboru perl.exe také soubor wperl.exe, který okno konzole nezobrazuje a tedy je pro většinu GTK+ aplikací nejvhodnější. Pro spuštění programu stačí na skript kliknout pravým tlačítkem a přes možnost &#8220;Otevřít v programu&#8221; nastavit, aby se všechny soubory s příponou .pl spouštěly pomocí zmíněného programu perl.exe nebo wperl.exe.</p> 
+<pre> 
+<font color="#444444">#!/usr/bin/env perl
+#GTK Hello world! by Harvie 2oo9
+ 
+</font><strong>use</strong> strict;
+<strong>use</strong> warnings;
+<strong>use</strong> utf8;
+<strong>use</strong> Gtk2 <font color="a52a2a"><strong>qw</strong></font><font color="4444FF"><strong>(</strong></font>-init<font color="4444FF"><strong>)</strong></font>;
+ 
+<strong>my</strong> <font color="#2040a0">$builder</font> = Gtk2::Builder-&gt;<strong>new</strong><font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font>;
+<font color="#2040a0">$builder</font>-&gt;add_from_file<font color="4444FF"><strong>(</strong></font><font color="#008000">'hello.ui'</font><font color="4444FF"><strong>)</strong></font>;
+ 
+<strong>my</strong> <font color="#2040a0">%widgets</font>;
+<strong>foreach</strong> <strong>my</strong> <font color="#2040a0">$widget</font> <font color="a52a2a"><strong>qw</strong></font><font color="4444FF"><strong>(</strong></font>window1 button1 entry1<font color="4444FF"><strong>)</strong></font> 
+<font color="4444FF"><strong>{</strong></font> 
+	<font color="#2040a0">$widgets</font><font color="4444FF"><strong>{</strong></font><font color="#2040a0">$widget</font><font color="4444FF"><strong>}</strong></font>=<font color="#2040a0">$builder</font>-&gt;get_object<font color="4444FF"><strong>(</strong></font><font color="#2040a0">$widget</font><font color="4444FF"><strong>)</strong></font>;
+<font color="4444FF"><strong>}</strong></font> 
+ 
+<font color="#2040a0">$builder</font>-&gt;connect_signals<font color="4444FF"><strong>(</strong></font> <font color="a52a2a"><strong>undef</strong></font> <font color="4444FF"><strong>)</strong></font>;
+<font color="#2040a0">$builder</font> = <font color="a52a2a"><strong>undef</strong></font>;
+ 
+<font color="#2040a0">$widgets</font><font color="4444FF"><strong>{</strong></font><font color="#008000">'window1'</font><font color="4444FF"><strong>}</strong></font>-&gt;show<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font>;
+ 
+Gtk2-&gt;main<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font>;
+<strong>exit</strong>;
+ 
+<strong>sub<font color="ff0000"> on_window1_destroy</font> 
+{</strong> 
+    Gtk2-&gt;main_quit<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font>;
+<font color="4444FF"><strong>}</strong></font> 
+ 
+<strong>sub<font color="ff0000"> on_button1_clicked</font> 
+{</strong> 
+	<font color="#2040a0">$widgets</font><font color="4444FF"><strong>{</strong></font><font color="#008000">'button1'</font><font color="4444FF"><strong>}</strong></font>-&gt;set_label<font color="4444FF"><strong>(</strong></font><font color="#2040a0">$widgets</font><font color="4444FF"><strong>{</strong></font><font color="#008000">'entry1'</font><font color="4444FF"><strong>}</strong></font>-&gt;get_text<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font><font color="4444FF"><strong>)</strong></font>;
+	<font color="a52a2a"><strong>print</strong></font> <font color="#2040a0">$widgets</font><font color="4444FF"><strong>{</strong></font><font color="#008000">'entry1'</font><font color="4444FF"><strong>}</strong></font>-&gt;get_text<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font>.<font color="#008000">&quot;</font><font color="#77dd77">\n</font>&quot;;
+<font color="4444FF"><strong>}</strong></font> 
+</pre> 
+<hr /> 
+<h3>Java</h3> 
+<p>&#8230;bude doplněno&#8230;</p> 
+<hr /> 
+<h3>Python</h3> 
+<p>Python může být také zajímavý pro některé účely, osobně ale nemám rád jeho syntaxi, takže ho moc nepoužívám. Pro více informací o PyGTK se podívejte na <a href="http://www.pygtk.org/">http://www.pygtk.org/</a>, je tam návod na instalaci na Windows i na Linux, ale na Linuxu ho pravděpodobně už nainstalovaný máte, nebo je to otázka pár kliknutí myší v oblíbeném správci balíčků.</p> 
+<pre><font color="#444444">#!/usr/bin/env python</font> 
+<font color="#444444">#GTK Hello world! by Harvie 2oo9</font> 
+ 
+<strong>import</strong> <font color="#2040a0">gtk</font> 
+ 
+<strong>class</strong> <font color="#2040a0">Hello</font><font color="4444FF">:</font> 
+ 
+<strong><font color="ff0000">	def</font><font color="ff0000"> on_window1_destroy</font><font color="2040a0">(self, widget, data=None)</font>:
+</strong>		<font color="#2040a0">gtk</font>.<font color="#2040a0">main_quit</font><font color="4444FF">(</font><font color="4444FF">)</font> 
+ 
+<strong><font color="ff0000">	def</font><font color="ff0000"> on_button1_clicked</font><font color="2040a0">(self, widget, data=None)</font>:
+</strong>		<font color="#2040a0">self</font>.<font color="#2040a0">button1</font>.<font color="#2040a0">set_label</font><font color="4444FF">(</font><font color="#2040a0">self</font>.<font color="#2040a0">entry1</font>.<font color="#2040a0">get_text</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">)</font> 
+		<strong>print</strong><font color="4444FF">(</font><font color="#2040a0">self</font>.<font color="#2040a0">entry1</font>.<font color="#2040a0">get_text</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">)</font> 
+ 
+<strong><font color="ff0000">	def</font><font color="ff0000"> __init__</font><font color="2040a0">(self)</font>:
+</strong>		<font color="#2040a0">builder</font> <font color="4444FF">=</font> <font color="#2040a0">gtk</font>.<font color="#2040a0">Builder</font><font color="4444FF">(</font><font color="4444FF">)</font> 
+		<font color="#2040a0">builder</font>.<font color="#2040a0">add_from_file</font><font color="4444FF">(</font><font color="#008000">&quot;hello.ui&quot;</font><font color="4444FF">)</font> 
+ 
+		<font color="#2040a0">self</font>.<font color="#2040a0">window1</font> <font color="4444FF">=</font> <font color="#2040a0">builder</font>.<font color="#2040a0">get_object</font><font color="4444FF">(</font><font color="#008000">&quot;window1&quot;</font><font color="4444FF">)</font> 
+		<font color="#2040a0">self</font>.<font color="#2040a0">button1</font> <font color="4444FF">=</font> <font color="#2040a0">builder</font>.<font color="#2040a0">get_object</font><font color="4444FF">(</font><font color="#008000">&quot;button1&quot;</font><font color="4444FF">)</font> 
+		<font color="#2040a0">self</font>.<font color="#2040a0">entry1</font> <font color="4444FF">=</font> <font color="#2040a0">builder</font>.<font color="#2040a0">get_object</font><font color="4444FF">(</font><font color="#008000">&quot;entry1&quot;</font><font color="4444FF">)</font> 
+		<font color="#2040a0">builder</font>.<font color="#2040a0">connect_signals</font><font color="4444FF">(</font><font color="#2040a0">self</font><font color="4444FF">)</font> 
+ 
+		<font color="#2040a0">self</font>.<font color="#2040a0">window1</font>.<font color="#2040a0">show</font><font color="4444FF">(</font><font color="4444FF">)</font> 
+ 
+<strong>if</strong> <font color="#2040a0">__name__</font> <font color="4444FF">=</font><font color="4444FF">=</font> <font color="#008000">&quot;__main__&quot;</font><font color="4444FF">:</font> 
+	<font color="#2040a0">main</font> <font color="4444FF">=</font> <font color="#2040a0">Hello</font><font color="4444FF">(</font><font color="4444FF">)</font> 
+	<font color="#2040a0">gtk</font>.<font color="#2040a0">main</font><font color="4444FF">(</font><font color="4444FF">)</font> 
+</pre> 
+<hr /> 
+<h3>PHP</h3> 
+<p>Bohužel zatím nemám dostatečnou verzi php-gtk, aby mi fungoval GtkBuilder, takže PHP kód zatím ponechám nedokončený. Tento kód je jen orientační a neměl by fungovat ani teoreticky <img src='/wp-includes/images/smilies/icon_wink.gif' alt=';-)' class='wp-smiley' />  dávám ho sem spíše pro představu. A pokud to s programováním s GTK+ myslíte vážně, doporučil bych vám vyzkoušet i ostatní jazyky. Pokud máte dobrý důvod používat PHP (i to je myslím možné), podívejte se na <a href="http://gtk.php.net/">http://gtk.php.net/</a> a <a href="http://php-gtk.eu/">http://php-gtk.eu/</a>.</p> 
+<pre><font color="#444444">#!/usr/bin/php -c /etc/php/php-gtk.ini
+#GTK Hello world! by Harvie 2oo9
+</font>&lt;?php
+ 
+function on_button1_clicked<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font> 
+<font color="4444FF"><strong>{</strong></font> 
+    echo <font color="#008000">&quot;button was clicked</font><font color="#77dd77">\n</font>&quot;;
+<font color="4444FF"><strong>}</strong></font> 
+ 
+class handler
+<font color="4444FF"><strong>{</strong></font> 
+    function on_button1_clicked<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font> 
+    <font color="4444FF"><strong>{</strong></font> 
+        echo <font color="#008000">&quot;another button was clicked</font><font color="#77dd77">\n</font>&quot;;
+    <font color="4444FF"><strong>}</strong></font> 
+<font color="4444FF"><strong>}</strong></font> 
+ 
+<font color="#2040a0">$builder</font> = <strong>new</strong> GtkBuilder<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font>;
+<font color="#2040a0">$builder</font>-&gt;add_from_file<font color="4444FF"><strong>(</strong></font><font color="#008000">'hello.ui'</font><font color="4444FF"><strong>)</strong></font>;
+<font color="#2040a0">$class</font> = <strong>new</strong> handler<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font>;
+<font color="b000d0">//</font><font color="#2040a0">$builder</font>-&gt;connect_signal<font color="b000d0">s(array('handler' =&gt; array(</font><font color="#2040a0">$class</font>, <font color="#008000">'doBar'</font><font color="4444FF"><strong>)</strong></font><font color="4444FF"><strong>)</strong></font><font color="4444FF"><strong>)</strong></font>;
+<font color="#2040a0">$builder</font>-&gt;connect_signals<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font>;
+<font color="b000d0">//</font> could also <strong>use</strong> <font color="#2040a0">$builder</font>-&gt;connect_signals_instance <strong>if</strong> they were all in a single class
+ 
+<font color="#2040a0">$builder</font>-&gt;get_object<font color="4444FF"><strong>(</strong></font><font color="#008000">'vbox'</font><font color="4444FF"><strong>)</strong></font>;
+ 
+/*
+<font color="#2040a0">$objects</font> = <font color="#2040a0">$builder</font>-&gt;get_objects<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font>;
+echo count<font color="4444FF"><strong>(</strong></font><font color="#2040a0">$objects</font><font color="4444FF"><strong>)</strong></font>, <font color="#008000">&quot; objects were created by GtkBuilder</font><font color="#77dd77">\n</font>&quot;;
+ 
+<font color="#2040a0">$builder</font>-&gt;set_translation_domain<font color="4444FF"><strong>(</strong></font><font color="#008000">'myapp'</font><font color="4444FF"><strong>)</strong></font>;
+echo <font color="#2040a0">$builder</font>-&gt;get_translation_domain<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font>, <font color="#008000">&quot;</font><font color="#77dd77">\n</font>&quot;;
+ 
+var_dump<font color="4444FF"><strong>(</strong></font><font color="#2040a0">$builder</font>-&gt;get_type_from_name<font color="4444FF"><strong>(</strong></font><font color="#008000">'GtkButton'</font><font color="4444FF"><strong>)</strong></font><font color="4444FF"><strong>)</strong></font>;
+*/
+ 
+<font color="#2040a0">$window</font> = <font color="#2040a0">$builder</font>-&gt;get_object<font color="4444FF"><strong>(</strong></font><font color="#008000">'window1'</font><font color="4444FF"><strong>)</strong></font>;
+<font color="#2040a0">$window</font>-&gt;show_all<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font>;
+ 
+Gtk::main<font color="4444FF"><strong>(</strong></font><font color="4444FF"><strong>)</strong></font>;
+?&gt;
+</pre> 
+<hr /> 
+<h3>C#</h3> 
+<p>&#8230;bude doplněno&#8230;</p> 
+ 

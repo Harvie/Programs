@@ -1,0 +1,19 @@
+#!/home/harvie/Work/bash-httpd/bhp/bhp
+<?bhp source "$BHP_LIB"; echo "Pouzivam knihovnu $BHP_LIB<br /><br />" ?>
+
+<form action="?" method="GET">
+	<input type="text" name="pocet" value="5" />
+	<input type="text" name="text" value="test" />
+	<input type="submit" value="go" />
+</form>
+<hr />
+
+<?bhp
+	pocet=$(urlvalue pocet);
+	text=$(urlvalue text);
+	for i in $(seq 1 $pocet); do
+		echo "$i: $text<br />";
+	done;
+?>
+
+<hr />

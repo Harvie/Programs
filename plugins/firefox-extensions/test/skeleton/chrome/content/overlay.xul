@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<overlay id="Skeleton-Overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script src="http://localhost/test.js" type="application/x-javascript" />
+	<script src="mozex.js" type="application/x-javascript" />
+	<script type="application/x-javascript">
+
+function harvie_showhide(eid) {
+	obj = window.content.document.getElementById(eid); obj.style.display = (obj.style.display == 'none' ? '' : 'none');
+}
+
+function harvie_showhide_all(eid) {
+	for(var i=0; i<gBrowser.browsers.length; i++) {
+		obj = gBrowser.getBrowserAtIndex(i).contentWindow.content.document.getElementById(eid); obj.style.display = (obj.style.display == 'none' ? '' : 'none');
+	}
+}
+
+// window.addEventListener("load", function() { harvie_showhide('manifesto'); window.content.document.write('h1337h'); }, false);
+
+
+//MozexRunProgram(cmd, esc);
+//fehmozexRunProgram ("gnome-terminal -x sh -c \"echo foo: %r | less\" ", {'r' : gContextMenu.linkURL});
+//fehmozexRunProgram ("gnome-terminal -x sh -c \"echo foo: lol | less\" ", {'r' : "%r"});
+
+		function skel_lol() {
+			alert('Harvie te sleduje ;o)');			
+			setTimeout("skel_lol()", 10000);
+		}
+		//skel_lol();
+
+		function run_term() {
+			//fehmozexRunProgram ("gnome-terminal -x sh -c \"echo foo: lol | less\" ", {'r' : "%r"});
+			fehmozexRunProgram ("xterm");
+		}
+
+	</script>
+	
+	<menupopup id="menu_ToolsPopup">
+   		<menuitem id="skeleton-menuitem" oncommand="skeleton_remote()" label="Test skeleton" />
+   	</menupopup>
+		
+</overlay>

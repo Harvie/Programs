@@ -1,0 +1,3 @@
+content skeleton chrome/content/
+overlay chrome://browser/content/browser.xul chrome://skeleton/content/overlay.xul
+skin skeleton classic/1.0 chrome/skin/

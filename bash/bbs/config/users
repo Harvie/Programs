@@ -1,0 +1,5 @@
+#login:password:group
+#groups: guest, user, admin
+harvie:lol:user
+guest:guest:guest
+admin:pwnya:admin

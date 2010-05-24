@@ -1,0 +1,23 @@
+{
+  "name": "Kyberia Mail Notifier",
+  "version": "0.2.2",
+  "description": "Keeps you loged on kyberia.sk social network and notifies new mails. Before first use you have to specify your login credentials.",
+	"icons": {
+      "128": "ico-big.png",
+      "16": "ico-big.png",
+      "32": "ico-big.png",
+      "48": "ico-big.png"
+   },	
+
+	"background_page": "background.html",
+	"options_page": "options.html",
+  "browser_action": {
+    "default_title": "Kyberia Mail Notifier",
+    "default_icon": "ico-big.png"
+  },
+  "permissions": [
+    "tabs",
+		"http://*/*",
+		"https://*/*"
+  ]
+}

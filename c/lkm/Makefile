@@ -1,0 +1,8 @@
+obj-m += hello.o
+obj-m += proc.o
+
+all:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+	modinfo *.ko | sed -e 's/filename:/\nfilename:/g'
+clean:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean

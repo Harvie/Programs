@@ -1,0 +1,57 @@
+#!/bin/sh
+#Binaries:
+EDITOR='/usr/bin/nano';
+ccrypt='/usr/bin/ccrypt'
+LAZYTEE='./tee-lazy'
+
+#code##############################################
+#if [[ -z "$EDITOR" ]]; then EDITOR='/usr/bin/nano'; fi;
+CRYPTFILE="$1"
+TMPPIPE="/tmp/ccrypt-nano-pipe-$UID-$$"
+
+if [[ -z "$CRYPTFILE" ]]; then
+	echo Usage: "$0" file.txt.cpt;
+	echo "
+This script allows you to create/edit ccenrypted textfiles using nano.
+There is no copy of unencrypted file on filesystem everything is in pipes.
+You can use this as secure way to keep your passwords or phone numbers (etc...).
+Check man ccrypt & man nano for more informations."
+	exit;
+fi;
+
+if [[ -a "$CRYPTFILE" ]]; then
+	false;
+	while [[ $? != 0 ]]; do
+		echo -ne '\nEnter password: '
+		stty -echo; read KEY; stty echo;
+		$ccrypt -c "$CRYPTFILE" -K "$KEY" > /dev/null;
+	done;
+else
+	KEY=a; KEYY=b;
+	while [[ "$KEY" != "$KEYY" ]]; do
+	  echo -ne '\n\nEnter password: '
+		stty -echo; read KEY; stty echo;
+	  echo -ne '\nEnter password (again): '
+		stty -echo; read KEYY; stty echo;
+	done;
+fi;
+
+handle_crypt_pipe() {
+	rm -rf "$2";
+	mkfifo "$2";
+	chmod a-rwx "$2";
+	chmod u+rw "$2";
+
+	$ccrypt -d -c -K "$3" "$1" > "$2";
+
+	while [[ -a "$2" ]]; do
+		cat "$2" | $ccrypt -e -K "$3" | $LAZYTEE "$1";
+	done;
+}
+
+handle_crypt_pipe "$CRYPTFILE" "$TMPPIPE" "$KEY" &
+$EDITOR "$TMPPIPE"
+rm -rf "$TMPPIPE"
+kill -s SIGINT  $(jobs -p); > /dev/null 2>&1
+kill -s SIGKILL $(jobs -p); > /dev/null 2>&1
+

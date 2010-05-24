@@ -1,0 +1,12 @@
+TARGET				:= hello
+WARN					:= -W -Wall -Wstrict-prototypes -Wmissing-prototypes
+INCLUDE				:= -isystem /usr/src/linux-$(shell uname -r)/include/
+EXTRA_CFLAGS	:= -O3 -fomit-frame-pointer -DMODULE -D__KERNEL__ $(WARN) $(INCLUDE)
+CC						:= gcc
+
+	
+$(TARGET).ko: $(TARGET).c
+clean:
+	rm -rf (TARGET).o
+module:
+	$(MAKE) -C /usr/src/linux-$(shell uname -r) M=$(shell pwd) modules

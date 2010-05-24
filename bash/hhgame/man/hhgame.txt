@@ -1,0 +1,17 @@
+ -=-= Harvie's Hacking Game =-=-
+
+> Main shell commands:
+
+exit
+logout
+
+man [page] - display man page
+
+lsgames - list available games
+game [game-name] - start game (game name without extension)
+	(stupid.sh -> game stupid)
+
+winners - list winners
+
+> There will be more help...
+

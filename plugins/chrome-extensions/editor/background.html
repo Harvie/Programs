@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script>
+            var exceptionHandler = function(exc) {
+                if (exc) alert(exc.name + ": " + exc.message);
+            };
+            var sendToSelectedTab = function(data, responseHandler) {
+                chrome.tabs.getSelected(null, function(tab) {
+                    chrome.tabs.sendRequest(tab.id, data, responseHandler)
+                });
+            };
+            var execute = function(code) {
+                sendToSelectedTab({code: code}, exceptionHandler);
+                //sendToSelectedTab({code: function(){ alert('alertingddd'); }}, exceptionHandler);
+            };
+            var reload = function() {
+                sendToSelectedTab({reload: true});
+            };
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

@@ -1,0 +1,1 @@
+cmd_/home/harvie/Work/lkm/hello.ko := ld -r -m elf_i386 -T /usr/src/linux-2.6.32-ARCH/scripts/module-common.lds --build-id -o /home/harvie/Work/lkm/hello.ko /home/harvie/Work/lkm/hello.o /home/harvie/Work/lkm/hello.mod.o

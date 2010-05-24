@@ -1,0 +1,16 @@
+#N canvas 670 212 568 420 10;
+#X msg 241 78 0;
+#X obj 191 115 osc~;
+#X msg 184 75 700;
+#X obj 191 144 outlet~;
+#X obj 208 6 inlet;
+#X obj 125 42 trigger f b;
+#X obj 222 52 delay 10;
+#X connect 0 0 1 0;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X connect 4 0 5 0;
+#X connect 4 0 6 0;
+#X connect 5 0 1 0;
+#X connect 5 1 2 0;
+#X connect 6 0 0 0;

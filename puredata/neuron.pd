@@ -1,0 +1,63 @@
+#N canvas 106 24 500 381 10;
+#X obj 195 17 inlet;
+#X obj 110 291 outlet;
+#X obj 204 116 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 102 103 tgl 15 0 empty empty empty 17 7 0 10 -262144 -258113
+-1 0 1;
+#X obj 102 123 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-260097 -1;
+#X msg 146 154 bang;
+#X obj 144 177 delay 1000;
+#X obj 358 169 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 246 132 +;
+#X obj 301 261 osc~;
+#X obj 259 293 throw~ neuron;
+#X obj 421 191 loadbang;
+#X obj 399 243 random 10;
+#X obj 401 268 + 1;
+#X obj 331 234 *;
+#X msg 246 110 100;
+#X obj 247 157 % 1000;
+#X obj 397 294 / 5;
+#X obj 332 216 *;
+#X obj 248 12 loadbang;
+#X msg 248 33 1;
+#X obj 316 41 receive sedate;
+#X obj 236 69 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 1 256;
+#X obj 202 88 sel 1;
+#X obj 66 199 *;
+#X msg 384 205 500;
+#X connect 0 0 23 0;
+#X connect 2 0 3 0;
+#X connect 2 0 15 0;
+#X connect 3 0 5 0;
+#X connect 3 0 24 1;
+#X connect 3 0 18 0;
+#X connect 4 0 24 0;
+#X connect 5 0 6 0;
+#X connect 6 0 4 0;
+#X connect 7 0 8 1;
+#X connect 7 0 6 1;
+#X connect 7 0 18 1;
+#X connect 8 0 16 0;
+#X connect 9 0 10 0;
+#X connect 11 0 12 0;
+#X connect 11 0 25 0;
+#X connect 12 0 13 0;
+#X connect 13 0 17 0;
+#X connect 14 0 9 0;
+#X connect 15 0 8 0;
+#X connect 16 0 7 0;
+#X connect 17 0 14 1;
+#X connect 18 0 14 0;
+#X connect 19 0 20 0;
+#X connect 20 0 22 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 1;
+#X connect 23 1 2 0;
+#X connect 24 0 1 0;
+#X connect 25 0 18 1;
+#X coords 0 -1 1 1 20 40 2 100 100;

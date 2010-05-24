@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ItemType>PackagingProject</ItemType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{93836047-EEB5-48BF-8211-84AA47061F81}</ProjectGuid>
+    <Packages>
+      <Packages xmlns="">
+        <Package name="Mono Makefile Zdrojových">
+          <Builder targetFile="testgtk-.tar.gz" format="MonoDevelop.Projects.FileFormat" ctype="SourcesZipPackageBuilder">
+            <ChildEntries>
+              <SolutionItemReference path="testgtk\testgtk.csproj" />
+            </ChildEntries>
+            <RootEntry path="testgtk.sln" id="testgtk" />
+          </Builder>
+        </Package>
+        <Package name="Linux Binárních">
+          <Builder targetFile="testgtk-linux.tar.gz" platform="Linux" configuration="Debug" ctype="BinariesZipPackageBuilder">
+            <ChildEntries>
+              <SolutionItemReference path="testgtk\testgtk.csproj" />
+            </ChildEntries>
+            <RootEntry path="testgtk.sln" id="testgtk" />
+          </Builder>
+        </Package>
+        <Package name="Microsoft Windows Binárních">
+          <Builder targetFile="testgtk-windows.tar.gz" platform="Windows" configuration="Debug" ctype="BinariesZipPackageBuilder">
+            <ChildEntries>
+              <SolutionItemReference path="testgtk\testgtk.csproj" />
+            </ChildEntries>
+            <RootEntry path="testgtk.sln" id="testgtk" />
+          </Builder>
+        </Package>
+      </Packages>
+    </Packages>
+  </PropertyGroup>
+</Project>

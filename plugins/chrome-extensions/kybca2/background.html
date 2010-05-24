@@ -1,0 +1,49 @@
+<html><head>
+<meta http-equiv="refresh" content="10" /> 
+
+<script>
+
+function setIcon(badge,title){
+	chrome.browserAction.setBadgeText({'text':badge});
+	chrome.browserAction.setTitle({'title':title});
+}
+
+function getKybcaMails(){
+	if(!localStorage["secs"]) localStorage["secs"] = 30;
+	var check_mail_timer = setTimeout("getKybcaMails()", localStorage["secs"] * 1000);
+	var pkReqUrl='https://kyberia.sk/ajax/check_new_mail.php';
+	var pkReq=new XMLHttpRequest();
+	pkReq.onload=function(){
+  	var mail = pkReq.responseText.split(";");
+		switch(mail[0].replace(/^\s+|\s+$/g,"")) { //trim() := replace(/^\s+|\s+$/g,"")
+			case "":
+				setIcon("?!", "Connection problem... Not loged in?");
+				localStorage["reconnect"] = 1;
+				break;
+			case "offline":
+				localStorage["reconnect"] = 1;
+			case "0":
+				setIcon("", "No new mail on Kyberia.");
+				break;
+			default:
+				setIcon(mail[0], mail[0]+" new mails! last from: "+mail[1]);
+		}
+	};
+	pkReq.open('GET',pkReqUrl);
+	pkReq.send();
+}
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+	chrome.tabs.create({url:'https://kyberia.sk/id/24'});
+	setIcon("", "");
+});
+setIcon("?", "Waiting for first contact...");
+
+getKybcaMails();
+
+</script></head>
+<body>
+	<iframe id="lif" src="login.html"></iframe>
+</body>
+</html>
+

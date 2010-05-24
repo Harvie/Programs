@@ -1,0 +1,18 @@
+#!/bin/bash
+#BHP - BASH Home Page - Engine
+
+export BHP_LIB=$(dirname $0)'/bhplib.bhp';
+
+exec=0;
+cat "$1" | sed -e 's/<?bhp/\n<?bhp\n/g;s/?>/\n?>\n/g' | while read line; do
+	case "$line" in
+		'<?bhp')	exec=1; continue ;;
+		'?>')			exec=0; continue ;;
+		'')				continue ;;
+	esac
+	case $exec in
+		1) echo "$line" ;;
+		0) echo "echo '"$( echo "$line" | sed -e "s/'/'\\\\''/g" )"'" ;;
+	esac
+done | bash
+

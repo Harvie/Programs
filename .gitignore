@@ -1,0 +1,16 @@
+*~
+*.bak
+
+*.gz
+*.bz2
+*.xz
+*.rar
+*.zip
+*.tar
+
+*.mp3
+*.wav
+*.mpeg
+*.avi
+*.ogg
+*.ogv

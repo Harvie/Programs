@@ -1,0 +1,21 @@
+#!/bin/bash
+#KAlive (<-Harvie 2oo7)
+#Use this to prevent ssh timeouting...
+
+SLP=1;
+KAM="Keeping alive... ";
+
+clear;
+while true; do
+	echo -e -n \\r$KAM 8w==D;
+	sleep $SLP;
+	echo -e -n \\r$KAM 8=w=D;
+        sleep $SLP;
+	echo -e -n \\r$KAM 8==wD;
+        sleep $SLP;
+	echo -e -n \\r$KAM 8=w=D;
+        sleep $SLP;
+done;
+
+##EOF
+

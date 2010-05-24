@@ -1,0 +1,29 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" ctype="Workspace" />
+  <MonoDevelop.Ide.DebuggingService>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Prohlížeč assembly" ctype="Workbench">
+    <Files>
+      <File FileName="testgtk/MainWindow.cs" Line="1" Column="1" />
+      <File FileName="testgtk/Main.cs" Line="1" Column="1" />
+      <File FileName="testgtk/AssemblyInfo.cs" Line="1" Column="1" />
+      <File FileName="Prohlížeč assembly" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="testgtk" expanded="True">
+            <Node name="References" expanded="True">
+              <Node name="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" selected="True" />
+            </Node>
+            <Node name="UserInterface" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>

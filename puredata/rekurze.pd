@@ -1,0 +1,8 @@
+#N canvas 304 247 450 300 10;
+#X obj 150 56 inlet;
+#X obj 153 162 outlet;
+#X obj 160 128 + 1;
+#X obj 155 101 rekurze;
+#X connect 0 0 3 0;
+#X connect 2 0 1 0;
+#X connect 3 0 2 0;

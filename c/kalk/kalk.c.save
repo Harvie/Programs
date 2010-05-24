@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main() {
+	puts("KALK\n");
+	
+	float a, b;
+	char op;
+	
+	char loop = 1;
+	while(loop) {
+		scanf("%f", &a);
+		scanf("%c%c", &op);
+		scanf("%f", &b);
+		printf("%f %c %f = ?\n", a, op, b);
+	}
+}

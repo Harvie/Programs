@@ -1,0 +1,9 @@
+<h1>hello</h1>
+
+<b><?bhp
+
+echo this is BHP
+
+?>
+</b>
+bla bla bla

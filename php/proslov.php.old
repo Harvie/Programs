@@ -1,0 +1,89 @@
+#!/usr/bin/php
+<?php
+/* Nejnudnejsi prednaska na svete
+ * Harvie 2oo7
+ */
+$celkem = 40;
+$odstavec = 5;
+$start = "Vážené dámy, vážení pánové,";
+
+$part1=array(
+  "Na druhe strane",
+  "Stejne tak",
+  "Nesmime vsak zapominat, ze",
+  "Timto zpusobem",
+  "Zavaznost techto problemu je natolik zrejma, ze",
+  "Kazdodenni praxe nam potvrzuje, ze",
+  "Pestre a bohate zkusenosti jasne rikaji, ze",
+  "Poslani organizace, zejmena pak",
+  "Ideove uvahy nejyssiho radu a rovnez",
+  "Nase dlouhodobe ambice, stejne jako",
+  "Vzajemne postaveni organizacnich autorit zastavajicich"
+  );
+
+$part2=array(
+  "realizace planovanych vytycenych ukolu",
+  "ramec stavu a vyvoje postaveni",
+  "stabilni a kvantitativni vzrust a sfera nasi aktivity",
+  "novy model organizacni cinnosti",
+  "stale informativni a propagativni zabezpeceni nasi prace",
+  "dalsi rozvoj ruznych forem cinnosti",
+  "upresneni a rozvoj struktur",
+  "komplexni analyza nasich moznosti",
+  "konzultace se sirokym aktivem",
+  "cilevedome zasahy do vyvoje organizacni struktury",
+  "pocatek kazdodenni prace na poli formovani pozice"
+  );
+
+$part3=array(
+  "hraje zavaznou roli pri utvareni",
+  "od nas vyzaduje analyzy",
+  "vyzaduji nalezeni a jednoznacne upresneni",
+  "napomaha priprave a realizaci",
+  "zvysuje potrebu aplikace",
+  "jednoznacne predurcuji implementaci",
+  "zabezpecuje sirokemu okruhu specialistu ucast pri tvorbe",
+  "ve znacne mire podminuje vytvoreni",
+  "umoznuje splnit vyznamne ukoly na rozpracovani",
+  "umoznuje zhodnotit vyznam",
+  "predstavuje pozoruhodny experiment proverky",
+  "vyvolava proces zavadeni a modernizace",
+  "pretvari strukturu vedeni",
+  "posiluje platnost",
+  "vyzaduje navrh a realizaci",
+  "vyzaduje rozsirovani logistickych prostredku a",
+  "pomaha udrzovat kumulativni progresi",
+  "dostatecne oddaluje propad"
+  );
+
+$part4=array(
+  "existujicich financnich a administrativnich podminek.",
+  "dalsich smeru rozvoje.",
+  "systemu masove ucasti.",
+  "moznosti nasazeni veskerych dostupnych prostredku.",
+  "pozic jednotlivych ucastniku k zadanym ukolum.",
+  "novych navrhu.",
+  "systemu rizeni procesu odpovidajicimu aktualnim potrebam.",
+  "smeru progresivniho rozvoje.",
+  "odpovidajicich podminek aktivizace.",
+  "modelu rozvoje.",
+  "forem pusobeni.",
+  "tvorby novych zdroju."
+  );
+
+echo('Pocet vet v DB: '.sizeof($part1)*sizeof($part2)*sizeof($part3)*sizeof($part4)."\n\n");
+
+echo("$start\n");
+echo($part2[rand(0,sizeof($part2)-1)]." ");
+echo($part3[rand(0,sizeof($part3)-1)]." ");
+echo($part4[rand(0,sizeof($part4)-1)]." ");
+
+for(;$celkem>1;$celkem--) {
+  if($celkem%$odstavec == 0) echo("\n\n");
+  echo($part1[rand(0,sizeof($part1)-1)]." ");
+  echo($part2[rand(0,sizeof($part2)-1)]." ");
+  echo($part3[rand(0,sizeof($part3)-1)]." ");
+  echo($part4[rand(0,sizeof($part4)-1)]." ");
+}
+
+echo("\n\n");

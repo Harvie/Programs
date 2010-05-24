@@ -1,0 +1,441 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkWindow" id="window1">
+    <child>
+      <object class="GtkVBox" id="vbox1">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkTable" id="table1">
+            <property name="visible">True</property>
+            <property name="n_rows">2</property>
+            <property name="n_columns">3</property>
+            <child>
+              <object class="GtkEntry" id="entry1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">&#x25CF;</property>
+                <property name="text" translatable="yes">Harvie</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="entry2">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="visibility">False</property>
+                <property name="invisible_char">&#x25CF;</property>
+                <property name="text" translatable="yes">Beruska</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button2">
+                <property name="label" translatable="yes">Login ;o)</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
+                <property name="x_options">GTK_FILL</property>
+                <property name="y_options">GTK_SHRINK</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button3">
+                <property name="label" translatable="yes">Logout ;o(</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+                <property name="x_options">GTK_FILL</property>
+                <property name="y_options">GTK_SHRINK</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage" id="image2">
+                <property name="visible">True</property>
+                <property name="stock">gnome-stock-mail</property>
+                <property name="icon-size">3</property>
+              </object>
+              <packing>
+                <property name="x_options"></property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label2">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Kyberia.sk
+Mail Client</property>
+              </object>
+              <packing>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">automatic</property>
+            <property name="vscrollbar_policy">automatic</property>
+            <child>
+              <object class="GtkLabel" id="label1">
+                <property name="visible">True</property>
+                <property name="label">17452476 --&gt; 1538
+
+3764224;00:46:10 - 10.09.2009;1;hmm s tymi neprecitanimi spravami to mozno bude problem teda mozno je samotna php funkcia naviazana na tu nodu
+ale este to pozrem
+---------------------------------
+17451577 --&gt; 3764224
+
+1538;21:19:41 - 09.09.2009;0;jo a ten template, co jsi delal taky nenastavuje ty zpravy na unread (takze si zpravu prectu, ale furt mi to hlasi ze mam neprecteny zpravy...), takze kdyby se ti podarilo nejak okopirovat ten kod z 24ky, tak by to bylo super.
+---------------------------------
+17451220 --&gt; 3764224
+
+3764224;19:23:36 - 09.09.2009;0;test;test;
+rofl
+
+te;st
+---------------------------------
+17451125 --&gt; 3764224
+
+1538;18:57:12 - 09.09.2009;0;ok, dik... ja du zatim ladit ten software k tomu
+---------------------------------
+17451120 --&gt; 1538
+
+3764224;18:55:06 - 09.09.2009;0;nejak to nestiham ale okolo polnoci to nahodim
+---------------------------------
+17451044 --&gt; 1538
+
+3764224;18:41:25 - 09.09.2009;0;ok idem to tam dat
+---------------------------------
+17451033 --&gt; 3764224
+
+1538;18:39:26 - 09.09.2009;0;no teoreticky by to slo dat pred ten text:
+MSG-ID;FROM;FROM-ID;TO;TO-ID;TIME;NEW;TEXT
+
+MSG-ID = cislo (bude se hodit pro mazani zprav...)
+TIME = nejaky retezec
+NEW = boolean (0 nebo 1)
+
+1 = nove nebo neprectene
+0 = prectene
+---------------------------------
+17450922 --&gt; 1538
+
+3764224;18:17:05 - 09.09.2009;0;ok uz by to malo byt
+a co to idspravy/new/unread/datum ?
+---------------------------------
+17450893 --&gt; 3764224
+
+1538;18:11:35 - 09.09.2009;0;super, vypada to dobre, akorat prosim odstran
+"TO-ID:"
+a prazdny radky na zacatku (pokud to kyberka zvladne...)
+---------------------------------
+17450888 --&gt; 1538
+
+3764224;18:09:43 - 09.09.2009;0;mno to stym backslashom mi je jasne, len som nevedel ako to dat cez ten kyberia parser [kedze templaty vkladam priamo z kyberie momentalne]
+
+ale uz by to malo ist musel som ich tam dat 4
+---------------------------------
+17450869 --&gt; 3764224
+
+1538;18:04:51 - 09.09.2009;0;text je posledni bunka, proto se ze radku urizne jenom zacatek a od 4tyho ; bude az do konce libovolny text
+---------------------------------
+17450863 --&gt; 3764224
+
+1538;18:03:59 - 09.09.2009;0;hlavicka nebude oddelena, proste to bude uplne prvni radek...
+
+1 backslash --&gt; 2 backslashe (to je kvuli '
+' v mailech)
+1 newline --&gt; 1 backslash + n
+
+proste normalni escapovani, jako v C, PERLu nebo PHP
+---------------------------------
+17450856 --&gt; 1538
+
+3764224;18:03:09 - 09.09.2009;0;hmm a co ak niekto pouzije v tekxte ';'?
+---------------------------------
+17450854 --&gt; 1538
+
+3764224;18:01:52 - 09.09.2009;0;opensource asi az ked sa spravi kod odznova pri verzii 3
+---------------------------------
+17450852 --&gt; 1538
+
+3764224;18:01:26 - 09.09.2009;0;no ja som ho uz zdvojil kvoly kyberii pri pouziti patternu ale neviem cim to nahradit lebo aj ked som to dal trikrat tak to ten parser dal akoby som to dal 2x [cize nakoniec ho tam dalo jeden]
+
+a ta hlavicka bude od zvysku riadku oddelena ako?
+---------------------------------
+17450843 --&gt; 3764224
+
+1538;17:58:21 - 09.09.2009;0;a jak je to se zdrojakama, dockame se opensource?
+---------------------------------
+17450839 --&gt; 3764224
+
+1538;17:57:49 - 09.09.2009;0;a backslash muzes zdvojit (i kdyz kyberka evidentne backslashe odmita)
+---------------------------------
+17450838 --&gt; 1538
+
+3764224;17:57:45 - 09.09.2009;0;no mam pristup k svn ale nie k databaze
+---------------------------------
+17450833 --&gt; 3764224
+
+1538;17:57:08 - 09.09.2009;0;newliny bych klidne znacil jako n (backslash+'n')
+---------------------------------
+17450830 --&gt; 1538
+
+3764224;17:56:50 - 09.09.2009;0;alebo tag &lt;br&gt; ?
+---------------------------------
+17450825 --&gt; 3764224
+
+1538;17:56:15 - 09.09.2009;0;no tak nevidel bych jako dobrej napad kazdymu davat access do databaze ;)
+
+no myslim, ze ty popisky sou tam zbytecny (myslel sem, ze tam budou jenom data, kdyz to bude takovahle tabulka)...
+
+akorat treba na prvnim radku muze byt hlavicka FROM;FROM-ID;TO;TO-ID;TEXT (kdyby to chtel vyuzit este nekdo jinej, tak at je to prehledny...)
+
+a ty teda patris k ty elite, co ma pristup i ke zdrojakum kyberky?
+---------------------------------
+17450824 --&gt; 1538
+
+3764224;17:56:00 - 09.09.2009;0;&#xFFFD; toto by mohol byt novy riadok
+i ked zase uz som videl aj taky nick
+---------------------------------
+17450784 --&gt; 1538
+
+3764224;17:45:25 - 09.09.2009;0;ok uz som to updatol, este treba vymysliet ako zaznacit nove riadky priamo v texte
+---------------------------------
+17450734 --&gt; 1538
+
+3764224;17:34:32 - 09.09.2009;0;jj bohuzial =/
+ale kedysi to mohol robit kazdy
+---------------------------------
+17450679 --&gt; 3764224
+
+1538;17:22:49 - 09.09.2009;0;hele asi potrebuju adminske prava na takovy template vid? jinak bych si to uz doladil klidne sam...
+---------------------------------
+17450677 --&gt; 3764224
+
+1538;17:21:36 - 09.09.2009;0;no a ze este otravuju ;)
+ted me napadlo, ze kdyz bude ten TEXT na jedny radce, tak by to slo udelat jako CSV traba
+
+FROM;FROM-ID;TO;TO-ID;TEXT... ;)
+FROM;FROM-ID;TO;TO-ID;TEXT... ;)
+FROM;FROM-ID;TO;TO-ID;TEXT... ;)
+---------------------------------
+17450664 --&gt; 1538
+
+3764224;17:17:16 - 09.09.2009;0;jj to by slo
+---------------------------------
+17450654 --&gt; 1538
+
+3764224;17:16:20 - 09.09.2009;0;no to osm tam dal podla toho co bolo v tom tvojom prispevku
+
+ako by si si predstavoval bloky tych elementov?
+---------------------------------
+17450651 --&gt; 3764224
+
+1538;17:15:51 - 09.09.2009;0;idealne, kdyby se podarilo oescapovat newliny a narvat cely TEXT na jeden radek... to by se dalo?
+---------------------------------
+17450643 --&gt; 3764224
+
+1538;17:13:19 - 09.09.2009;0;no hej. akorat by to chtelo nak oznacit konec toho textu... proc je ten text odsazeny? a co kdyz nekdo napise do mailu naky z tech ridicich slov?
+---------------------------------
+17450624 --&gt; 1538
+
+3764224;17:10:40 - 09.09.2009;0;pripadne by sa tam dalo podstrcit aj nieco co by vravelo ci je dany clovek online
+---------------------------------
+17450474 --&gt; 1538
+
+3764224;16:32:29 - 09.09.2009;0;jo a ak by si potreboval aj id danej spravy tak aj to by som tam mohol dat
+---------------------------------
+17450472 --&gt; 1538
+
+3764224;16:32:04 - 09.09.2009;0;&lt;a target='_blank' href="/id/2176597/"&gt;https://kyberia.sk/id/2176597/&lt;/a&gt;
+moze byt?
+
+[este by sa tam hodilo doplnit ci je to new/unread a cas odoslania]
+---------------------------------
+17450436 --&gt; 1538
+
+3764224;16:24:14 - 09.09.2009;0;hmm a tak ma teda napada ze ReadNode nemusis osefovat lebo tam das rovno cislo tej templaty
+---------------------------------
+17450323 --&gt; 3764224
+
+1538;16:08:40 - 09.09.2009;0;no asi neco jako je tady: &lt;a target='_blank' href="/id/4897142"&gt;https://kyberia.sk/id/4897142&lt;/a&gt;
+imho se to bude v perlu nejrychlejc parsovat bez potreby nejakyho XML modulu...
+---------------------------------
+17450286 --&gt; 1538
+
+3764224;15:59:17 - 09.09.2009;0;teda jej vystup
+
+---------------------------------
+17450282 --&gt; 1538
+
+3764224;15:58:55 - 09.09.2009;0;raz som mu tu nodu dal[=
+vlastne este donedavna sa dal menit owner nod
+
+a aka by mala byt ta templata xml?
+---------------------------------
+17450261 --&gt; 3764224
+
+1538;15:52:43 - 09.09.2009;0;Cau,
+hele vrta mi v hlave jedna vec, jaktoze tvoji usernodu vlastni user acidmilk? to je alterego nebo naka haluz? ;)
+
+Jinak, kdyby se ti podarilo udelat ten template, tak by to bylo fajn... Udelat naky graficky rozhrani pak bude fraska. Dik ;o)
+---------------------------------
+17447266 --&gt; 3764224
+
+598;21:56:30 - 08.09.2009;0;papiry nebo papiry?
+bych se asi hodne divil, kdybych mel v zari nekam ject a resit pri tom skolu, takze to bylo spis stesti ;)
+kazdopadne byla zajimava akce na tom machaci, docela haluz uplnek... akorat skoda, ze se nepodarilo tam nak zorganizovat kyberiany ;(
+
+no a jak resis praci?
+---------------------------------
+17447189 --&gt; 598
+
+3764224;21:43:26 - 08.09.2009;0;papiry v pecku...
+nepustili me do letadla :=]
+---------------------------------
+17447172 --&gt; 3764224
+
+598;21:40:21 - 08.09.2009;0;to uz si back? ;)
+---------------------------------
+17437569 --&gt; 672167
+
+3764224;17:41:04 - 06.09.2009;0;ano vyjde to lacnejsie, a cena je moja motivacie..nasiel som kamosa v pha ktory mi to kupi (aspon dufam..)
+a do ba sa to uz nejako dostane&gt;))
+takze tak
+
+---------------------------------
+17437492 --&gt; 3764224
+
+672167;17:12:36 - 06.09.2009;0;stoji ti vubec za to obednavat si to az z cech? ;)
+---------------------------------
+17437460 --&gt; 3764224
+
+672167;17:00:52 - 06.09.2009;0;no... to je teda vyber... ;) na internetu se tyhle nebo podobny veci urcite najdou, treba o ty ayahausce ;) ruzny pozitivni mysleni a marketingy - tech je taky plnej internet...
+---------------------------------
+17431513 --&gt; 672167
+
+3764224;12:47:20 - 04.09.2009;0;fyi
+BN 01/ 7 Hausdorf Hartwig : B&#xFFFD;l&#xFFFD; pyramida ( 158 str. V5) 149 K&#xFFFD; (po slev&#xFFFD;: 75)
+K1 04/ 1 Hausdorf Hartwig : N&#xFFFD;vrat drak&#xFFFD;-Na stop&#xFFFD; posledn&#xFFFD;m &#xFFFD;ij&#xFFFD;c&#xFFFD;m dinosaur&#xFFFD;m ( 175 str. V5) 199 K&#xFFFD; (po slev&#xFFFD;: 100 )
+ZT 24/ 4 Hill Napoleon : Pozitivn&#xFFFD;m my&#xFFFD;len&#xFFFD;m k &#xFFFD;sp&#xFFFD;chu 120 K&#xFFFD; (po slev&#xFFFD;: 60 K&#xFFFD;)
+TA 33/ 2 Keeffe John : T&#xFFFD;den pro osobn&#xFFFD; &#xFFFD;sp&#xFFFD;ch ( 106 str. B5) 59 K&#xFFFD; (po slev&#xFFFD;: 30 K&#xFFFD;)
+PQ 26/ 6 Kiyosaki Robert T. : Cashflow kvadrant ( 290 str. V5) 220 K&#xFFFD; (po slev&#xFFFD;: 110 K&#xFFFD;)
+EM 45/16 Kucha&#xFFFD; Ji&#xFFFD;&#xFFFD; : Ayahuasca aneb Tanec s Bohy ( 236 str. V5) JAKO NOV&#xFFFD; 139 K&#xFFFD; (po slev&#xFFFD;: 70 K&#xFFFD;)
+AA 05/ 2 Li&#xFFFD;ka Vladim&#xFFFD;r : Ufo - n&#xFFFD;vraty Boh&#xFFFD; ? ( 180 str. V5) 118 K&#xFFFD; (po slev&#xFFFD;: 59 K&#xFFFD;)
+PG 85/ 7 Mandino Og : Nejv&#xFFFD;t&#xFFFD;&#xFFFD; obchodn&#xFFFD;k na sv&#xFFFD;t&#xFFFD; ( 177 str. V5) 180 K&#xFFFD; (po slev&#xFFFD;: 90 K&#xFFFD;)
+
+
+nasiel  som este aj ine ale nemam na ne uz budget&gt;))
+
+zatial bratku
+---------------------------------
+17430448 --&gt; 3764224
+
+672167;01:13:41 - 04.09.2009;0;lol pres ulici od toho knihkupectvi bydli prarodice, sem tam docela casto ;)
+akorat nejsem ted v praze... co shanis za knihy?
+---------------------------------
+17430110 --&gt; 672167
+
+3764224;23:41:42 - 03.09.2009;0;&lt;a target='_blank' href="/id/4884434"&gt;http://kyberia.sk/id/4884434&lt;/a&gt;
+
+zadal som to kamosovi tak dufam ze tento quest splni&gt;))
+---------------------------------
+17429603 --&gt; 3764224
+
+672167;21:21:13 - 03.09.2009;0;proc?
+---------------------------------
+17424843 --&gt; 3764224
+
+672167;17:56:34 - 02.09.2009;0;jj
+---------------------------------
+17422840 --&gt; 672167
+
+3764224;10:55:38 - 02.09.2009;0;pocuj harvie nebyvas v prahe?
+---------------------------------
+
+&lt;a href="lol"&gt;dfdsfds&lt;/a&gt;sdd</property>
+                <property name="wrap">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox1">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkComboBoxEntry" id="comboboxentry1">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkTextView" id="textview1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button1">
+                <property name="label" translatable="yes">FIRE</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="image">image1</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="stock">gnome-stock-mail-snd</property>
+  </object>
+</interface>

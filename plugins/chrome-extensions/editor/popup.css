@@ -1,0 +1,14 @@
+html {
+  background: #C0C0C0;
+}
+
+#code {
+  background: black;
+  color: #00FF00;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+button {
+  width: 80px;
+}

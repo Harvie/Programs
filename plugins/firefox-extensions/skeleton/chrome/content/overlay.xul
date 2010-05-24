@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<overlay id="Skeleton-Overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<menupopup id="menu_ToolsPopup">
+   		<menuitem id="skeleton-menuitem" oncommand="alert('Extension skeleton works!!')" label="Test skeleton" />
+   	</menupopup>
+		
+</overlay>

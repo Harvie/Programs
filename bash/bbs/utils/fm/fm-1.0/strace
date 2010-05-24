@@ -1,0 +1,573 @@
+execve("./fm", ["./fm"], [/* 68 vars */]) = 0
+brk(0)                                  = 0x9d9c000
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb781c000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=169412, ...}) = 0
+mmap2(NULL, 169412, PROT_READ, MAP_PRIVATE, 3, 0) = 0xb77f2000
+close(3)                                = 0
+open("/lib/libncursesw.so.5", O_RDONLY) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\300\305\0\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=345186, ...}) = 0
+mmap2(NULL, 313604, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0xb77a5000
+mmap2(0xb77ef000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4a) = 0xb77ef000
+close(3)                                = 0
+open("/usr/lib/libglib-2.0.so.0", O_RDONLY) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\20\372\0\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=876260, ...}) = 0
+mmap2(NULL, 727652, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0xb76f3000
+mmap2(0xb77a4000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xb1) = 0xb77a4000
+close(3)                                = 0
+open("/lib/libc.so.6", O_RDONLY)        = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\340l\1\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=1540581, ...}) = 0
+mmap2(NULL, 1337608, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0xb75ac000
+mmap2(0xb76ed000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x141) = 0xb76ed000
+mmap2(0xb76f0000, 10504, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb76f0000
+close(3)                                = 0
+open("/lib/libpcre.so.0", O_RDONLY)     = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\300\16\0\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=213417, ...}) = 0
+mmap2(NULL, 202464, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0xb757a000
+mmap2(0xb75ab000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x30) = 0xb75ab000
+close(3)                                = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb7579000
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb7578000
+set_thread_area({entry_number:-1 -> 6, base_addr:0xb75786c0, limit:1048575, seg_32bit:1, contents:0, read_exec_only:0, limit_in_pages:1, seg_not_present:0, useable:1}) = 0
+mprotect(0xb76ed000, 8192, PROT_READ)   = 0
+mprotect(0xb783a000, 4096, PROT_READ)   = 0
+munmap(0xb77f2000, 169412)              = 0
+brk(0)                                  = 0x9d9c000
+brk(0x9dbd000)                          = 0x9dbd000
+open("/usr/lib/locale/locale-archive", O_RDONLY|O_LARGEFILE) = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=2135408, ...}) = 0
+mmap2(NULL, 2097152, PROT_READ, MAP_PRIVATE, 3, 0) = 0xb7378000
+close(3)                                = 0
+rt_sigaction(SIGSEGV, {0x8049c40, [], 0}, NULL, 8) = 0
+rt_sigaction(SIGINT, {0x8049c20, [], 0}, NULL, 8) = 0
+rt_sigaction(SIGWINCH, {0x804bb70, [], 0}, NULL, 8) = 0
+ioctl(1, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f398) = -1 ENOTTY (Inappropriate ioctl for device)
+stat64("/home/harvie/.terminfo", 0xbf82e344) = -1 ENOENT (No such file or directory)
+stat64("/usr/share/terminfo", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+access("/usr/share/terminfo/x/xterm", R_OK) = 0
+open("/usr/share/terminfo/x/xterm", O_RDONLY|O_LARGEFILE) = 3
+read(3, "\32\0010\0&\0\17\0\235\1l\5xterm|xterm terminal"..., 4097) = 3258
+close(3)                                = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f398) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f358) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f358) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f3a8) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f3a8) = -1 ENOTTY (Inappropriate ioctl for device)
+brk(0x9dde000)                          = 0x9dde000
+ioctl(1, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f3b8) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+rt_sigaction(SIGTSTP, NULL, {SIG_DFL, [], 0}, 8) = 0
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGINT, NULL, {0x8049c20, [], 0}, 8) = 0
+rt_sigaction(SIGTERM, NULL, {SIG_DFL, [], 0}, 8) = 0
+rt_sigaction(SIGTERM, {0xb77c3580, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGWINCH, NULL, {0x804bb70, [], 0}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f478) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33(B\33[m\33[4l\33[?7h\33["..., 37) = 37
+write(1, "\33[?25l", 6)                 = 6
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+write(1, "\33[H\33[2J", 7)              = 7
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+getcwd("/home/harvie/Work/bbs/utils/fm/fm-1.0", 4096) = 38
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+gettimeofday({1262029956, 210248}, NULL) = 0
+open("/home/harvie/Work/bbs/utils/fm/fm-1.0", O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_DIRECTORY|O_CLOEXEC) = 3
+fcntl64(3, F_GETFD)                     = 0x1 (flags FD_CLOEXEC)
+getdents(3, /* 23 entries */, 32768)    = 436
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/Makefile", {st_mode=S_IFREG|0644, st_size=670, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/Makefile", {st_mode=S_IFREG|0644, st_size=670, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/ui.c", {st_mode=S_IFREG|0644, st_size=9958, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/ui.c", {st_mode=S_IFREG|0644, st_size=9958, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/.hg_archival.txt", {st_mode=S_IFREG|0644, st_size=94, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/.hg_archival.txt", {st_mode=S_IFREG|0644, st_size=94, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/fm.h", {st_mode=S_IFREG|0644, st_size=4688, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/fm.h", {st_mode=S_IFREG|0644, st_size=4688, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/TODO", {st_mode=S_IFREG|0644, st_size=65, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/TODO", {st_mode=S_IFREG|0644, st_size=65, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/ui.o", {st_mode=S_IFREG|0644, st_size=9536, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/ui.o", {st_mode=S_IFREG|0644, st_size=9536, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/fm.c", {st_mode=S_IFREG|0644, st_size=2186, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/fm.c", {st_mode=S_IFREG|0644, st_size=2186, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/README", {st_mode=S_IFREG|0644, st_size=3162, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/README", {st_mode=S_IFREG|0644, st_size=3162, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/fs.c", {st_mode=S_IFREG|0644, st_size=11143, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/fs.c", {st_mode=S_IFREG|0644, st_size=11143, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/fs.o", {st_mode=S_IFREG|0644, st_size=8024, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/fs.o", {st_mode=S_IFREG|0644, st_size=8024, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/ino.c", {st_mode=S_IFREG|0644, st_size=635, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/ino.c", {st_mode=S_IFREG|0644, st_size=635, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/.hgtags", {st_mode=S_IFREG|0644, st_size=45, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/.hgtags", {st_mode=S_IFREG|0644, st_size=45, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/gen_protos.sh", {st_mode=S_IFREG|0755, st_size=273, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/gen_protos.sh", {st_mode=S_IFREG|0755, st_size=273, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/fm.o", {st_mode=S_IFREG|0644, st_size=2648, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/fm.o", {st_mode=S_IFREG|0644, st_size=2648, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/.hgignore", {st_mode=S_IFREG|0644, st_size=31, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/.hgignore", {st_mode=S_IFREG|0644, st_size=31, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/COPYING", {st_mode=S_IFREG|0644, st_size=35147, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/COPYING", {st_mode=S_IFREG|0644, st_size=35147, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/strace", {st_mode=S_IFREG|0644, st_size=9254, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/strace", {st_mode=S_IFREG|0644, st_size=9357, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/fm", {st_mode=S_IFREG|0755, st_size=22436, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/fm", {st_mode=S_IFREG|0755, st_size=22436, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/cmd.o", {st_mode=S_IFREG|0644, st_size=6968, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/cmd.o", {st_mode=S_IFREG|0644, st_size=6968, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/AUTHOR", {st_mode=S_IFREG|0644, st_size=51, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/AUTHOR", {st_mode=S_IFREG|0644, st_size=51, ...}) = 0
+stat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/cmd.c", {st_mode=S_IFREG|0644, st_size=7614, ...}) = 0
+lstat64("/home/harvie/Work/bbs/utils/fm/fm-1.0/cmd.c", {st_mode=S_IFREG|0644, st_size=7614, ...}) = 0
+getdents(3, /* 0 entries */, 32768)     = 0
+close(3)                                = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33(B\33[0;1;7m/home/harvie/Work/bbs"..., 466) = 466
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+read(0, 0xbf82f4eb, 1)                  = ? ERESTARTSYS (To be restarted)
+--- SIGWINCH (Window changed) @ 0 (0) ---
+sigreturn()                             = ? (mask now [])
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+brk(0x9dff000)                          = 0x9dff000
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+read(0, 0xbf82f4eb, 1)                  = ? ERESTARTSYS (To be restarted)
+--- SIGWINCH (Window changed) @ 0 (0) ---
+sigreturn()                             = ? (mask now [])
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+read(0, 0xbf82f4eb, 1)                  = ? ERESTARTSYS (To be restarted)
+--- SIGWINCH (Window changed) @ 0 (0) ---
+sigreturn()                             = ? (mask now [])
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+brk(0x9e20000)                          = 0x9e20000
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+read(0, 0xbf82f4eb, 1)                  = ? ERESTARTSYS (To be restarted)
+--- SIGWINCH (Window changed) @ 0 (0) ---
+sigreturn()                             = ? (mask now [])
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+brk(0x9e41000)                          = 0x9e41000
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+read(0, 0xbf82f4eb, 1)                  = ? ERESTARTSYS (To be restarted)
+--- SIGWINCH (Window changed) @ 0 (0) ---
+sigreturn()                             = ? (mask now [])
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+brk(0x9e62000)                          = 0x9e62000
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+read(0, 0xbf82f4eb, 1)                  = ? ERESTARTSYS (To be restarted)
+--- SIGWINCH (Window changed) @ 0 (0) ---
+sigreturn()                             = ? (mask now [])
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+read(0, 0xbf82f4eb, 1)                  = ? ERESTARTSYS (To be restarted)
+--- SIGWINCH (Window changed) @ 0 (0) ---
+sigreturn()                             = ? (mask now [])
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+brk(0x9e83000)                          = 0x9e83000
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+read(0, 0xbf82f4eb, 1)                  = ? ERESTARTSYS (To be restarted)
+--- SIGWINCH (Window changed) @ 0 (0) ---
+sigreturn()                             = ? (mask now [])
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+brk(0x9ea4000)                          = 0x9ea4000
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+read(0, 0xbf82f4eb, 1)                  = ? ERESTARTSYS (To be restarted)
+--- SIGWINCH (Window changed) @ 0 (0) ---
+sigreturn()                             = ? (mask now [])
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+read(0, 0xbf82f4eb, 1)                  = ? ERESTARTSYS (To be restarted)
+--- SIGWINCH (Window changed) @ 0 (0) ---
+sigreturn()                             = ? (mask now [])
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+brk(0x9ec5000)                          = 0x9ec5000
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+read(0, 0xbf82f4eb, 1)                  = ? ERESTARTSYS (To be restarted)
+--- SIGWINCH (Window changed) @ 0 (0) ---
+sigreturn()                             = ? (mask now [])
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+write(1, "\33[24;1H\33[?12l\33[?25h", 19) = 19
+write(1, "\33[?1049l\r\33[?1l\33>", 16) = 16
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1h\33=", 7)              = 7
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf82f328) = -1 ENOTTY (Inappropriate ioctl for device)
+ioctl(2, SNDCTL_TMR_STOP or TCSETSW, {B0 -opost -isig -icanon -echo ...}) = -1 ENOTTY (Inappropriate ioctl for device)
+write(1, "\33[?1049h\33[1;24r\33[?25l", 21) = 21
+write(1, "\33(B\33[m\33[4l\33[?7h\33[H\33[2J\33(B\33[0;1;7"..., 485) = 485
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+brk(0x9ee6000)                          = 0x9ee6000
+rt_sigaction(SIGTSTP, {SIG_IGN, [], SA_RESTART}, {0xb77c3680, [], SA_RESTART}, 8) = 0
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+poll([{fd=0, events=POLLIN}], 1, 0)     = 0 (Timeout)
+write(1, "\33[24d", 5)                  = 5
+rt_sigaction(SIGTSTP, {0xb77c3680, [], SA_RESTART}, NULL, 8) = 0
+read(0,  <unfinished ...>

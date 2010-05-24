@@ -1,0 +1,56 @@
+# Contributor: Your Name youremail at domain dot com
+# This PKGBUILD was automatically generated and it will probably need few manual fixes
+
+pkgname=sash
+pkgver=3.7
+pkgrel=1
+pkgdesc='Port of Debian package sash to ArchLinux'
+arch=('i686' 'x86_64')
+url='http://ftp.de.debian.org/debian/pool/main/s/sash/sash_3.7-8.dsc'
+license=('GPL')
+#ArchLinux packages will probably have different names to Debian packages:
+#depends=() #check ${srcdir}/${pkgname}-${pkgver}/control for info about depends
+#makedepends=( zlib1g-dev (>= 1:1.2.2-7), cdbs, debhelper (>= 4.1.0), e2fslibs-dev )
+#install=debian.install #uncomment if needed
+source=(
+	http://ftp.de.debian.org/debian/pool/main/s/sash/sash_3.7-8.diff.gz
+	http://ftp.de.debian.org/debian/pool/main/s/sash/sash_3.7.orig.tar.gz
+)
+md5sums=(
+	#Make your own using md5sum *
+)
+
+build() {
+	srcsubdir=$(ls -1 --group-directories-first "$srcdir" | head -n 1) #guess it... ;)
+
+	echo -e "\n-------------------------------------------"
+	echo "==> Note you can check ${srcdir}/${srcsubdir}/debian/control for more info and run-time dependencies"
+	echo "==> and ${srcdir}/${srcsubdir}/debian/README.debian for even more info"
+	echo "==> Short version follows:"
+	cat  "${srcdir}/${srcsubdir}/debian/control" | grep -i "^\(Depends\|Conflicts\|Suggests\|Description\):"
+	echo -e "-------------------------------------------\n"
+
+	cd "${srcdir}"
+
+	#Apply debian patch (which contains more patches lol)
+	#patch -p0 < ${pkgname}_${pkgver}.diff
+	patch -p0 < ${pkgname}*.diff #another ugly asterisk hack muhwahwa...
+
+	#cd ${srcdir}/${pkgname}-${pkgver}/
+	cd "${srcdir}/${srcsubdir}/"
+
+	#Apply Debian patches (if any ;o)
+	for i in $(cat ./debian/patches/00list); do
+		bash "./debian/patches/$i.dpatch" -patch
+	done;
+
+	#Debian install script (if any...)
+	cp ./debian/postinst "${startdir}/debian.install"
+
+	#real build() work here (you will probably need to edit this):
+  cd "${srcdir}/${srcsubdir}" || return 1
+  ./configure --prefix=/usr
+  make || return 1
+  make DESTDIR=$pkgdir install || return 1
+}
+

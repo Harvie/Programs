@@ -1,0 +1,710 @@
+
+
+                                
+   
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+
+	<title>Using arrays in bash</title>
+
+	<meta name="description" content="Learn two ways two declare an array in bash in this Linux tip." />
+	<meta name="keywords" content="Linux,Vincent Danen,Foo,Linux Tips Newsletter" />
+
+	<style type="text/css" media="screen">
+    	@import url("http://i.techrepublic.com.com/css/tr2006.css");
+		@import url("http://i.techrepublic.com.com/css/tr_ws2006.css");
+		@import url("http://news.zdnet.com/css/z/ads/hs.css");
+		@import url("http://i.techrepublic.com.com/css/trArticle.css");
+	</style>
+	
+	<link rel="stylesheet" type="text/css" media="print" href="http://i.techrepublic.com.com/css/trArticlePrint.css">
+	<link REL="SHORTCUT ICON" HREF="http://techrepublic.com.com/images/favicon.ico">
+	<script type="text/javascript" SRC="http://i.techrepublic.com.com/js/articleScript.js"></script>
+	<script type="text/javascript">var dwInfo = "&oid=2100-10878_11-5820685&ptId=2100&onId=10878&sId=11&asId=5820685";</script>
+	<!-- MAC ad --><!-- NO AD TEXT: _QUERY_STRING="sp=80&pos=100" _REQ_NUM="0"  --><!-- default ad --><IMG SRC="http://adlog.com.com/adlog/i/r=7007&s=501815&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=100&e=87&rqid=00c17-ad-e5477C00C37AAE066&orh=www.google.com&ort=&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&dvar=&ucat_rsi=&t=2008.01.14.02.23.42/http://i.i.com.com/cnwk.1d/Ads/common/dotclear.gif" HEIGHT="0" WIDTH="0" alt="" style="position:absolute; top:0px; left:0px" /><!-- MAC [r20071210-1033-DynamicVars:1.13.8] c13-b2b-publish-web2.cnet.com::39603120 2008.01.14.02.23.42 --><!-- MAC T 689.689.68B.68B -->
+
+</head>
+<body id="EyeBrow">
+
+<div id="goiter">
+
+	<div id="width">
+<div id="eyebrowsBanner">
+		<div id="eyebrowsInner">
+			<!-- MAC ad --><div class="rubics_netxp1_main">
+	On CHOW: 
+	<a target="_top" href="http://dw.com.com/rubicsclk?ver=2&ts=2008.01.13.18.23.44&edId=87&onId=1035&ptId=5100&sId=11&appId=19&offId=948&unitId=45&poolId=1&f1=9&f2=%2d0&f3=%2d0&alg=3&&opt=0&linkPos=1&destUrl=http:%2F%2Fwww.chow.com%2Fstories%2F10785" class="xpromolink">Ten perfect grilled cheese sandwiches</a>
+	<img src="http://dw.com.com/rubicsimp/c.gif?ver=2&ts=2008.01.13.18.23.44&edId=87&onId=1035&ptId=5100&sId=11&appId=19&unitId=45&poolId=1&f1=9&f2=%2d0&f3=%2d0&alg=3&opt=0&off=948,-1" alt="" height="1" width="1"/>
+</div>
+<!-- ros [r20070521-1832-ronr-v1-13-5:1.13.5] c17-ad-rubics-ros4.cnet.com::3971599280 2008.01.13.18.23.44 --><!-- ros t 0.0.0.0.0.0.0.0 --><!-- MAC [r20071210-1033-DynamicVars:1.13.8] c13-b2b-publish-web2.cnet.com::39603120 2008.01.14.02.23.42 --><!-- MAC T 68B.68B.68D.68E -->
+			<ul class="cnbLinks">
+				<li>BNET Business Network: </li>
+				<li><a href="http://www.bnet.com">BNET</a> |</li>
+				<li><a href="http://techrepublic.com.com">TechRepublic</a> |</li>
+				<li><a href="http://www.zdnet.com">ZDNet</a></li>
+			</ul>
+		</div><!-- /eyebrowsInner -->
+	</div><!-- /eyebrowsBanner -->
+				<div id="masthead">
+		<a id="logo" href="http://techrepublic.com.com"></a>
+
+		
+
+			<ul class="tool">
+				<li><a href="/5265-11518-0.html" class="blue">My Workspace</a>&nbsp;|&nbsp;<a href="http://nl.com.com/acct_mgmt.sc?brand=techrepublic" class="blue">My Newsletters</a></li>
+				 <li><a href="/1320-4-55.html?path=/5213-6257-0.html" class="orange normal">Log in</a>&nbsp;|&nbsp;<a href="/1301-4-55.html?path=/5213-6257-0.html" class="orange normal">Get a free membership</a></li>
+			</ul>
+
+		  
+		
+	</div><!-- /masthead -->
+
+
+<div id="main">
+	<ul id="headerNav">
+	   <li><a href="http://techrepublic.com.com/">Home</a></li>   
+	   <li><a href="http://blogs.techrepublic.com.com/">Blogs</a></li>
+	   <li><a href="http://downloads.techrepublic.com.com/">Downloads</a></li>
+	   <li><a href="http://techrepublic.com.com/5221-6230-0.html">Forums</a></li>
+	   <li><a class="on" href="http://techrepublic.com.com/2001-10875-0.html">Articles</a></li>
+		<li><a href="http://content.techrepublic.com.com/2350-1_11-0.html">Photos</a></li>
+	   <li><a  href="http://video.techrepublic.com.com/2434-13789_11-167680.html">Videos</a></li>
+		<li><a href="http://webcasts.techrepublic.com.com">Webcasts</a></li> 
+	   <li><a href="http://whitepapers.techrepublic.com.com/">White Papers</a></li>
+	   <li><a href="http://software.techrepublic.com.com">Software</a></li>
+	   <li><a href="http://jobs.techrepublic.com.com/">Jobs</a></li>
+		
+		<li><a href="http://techrepublic.com.com/1393-6242-97.html">Store</a></li>
+   		 
+	</ul>
+	
+	<div id="topHTML">
+		<form  action="http://search.techrepublic.com.com/index.php" method="get" name="tr_site_search" id="searchForm"  class="articleForm">
+
+			<input id="searchInput" name="q" type="text" value="Search" onFocus="this.value=''" />
+			<select id="searchList" name="t">
+										<option value="11">in Articles</option>
+		   							<option value="0">all of TechRepublic</option>
+			</select>
+			<input id="searchButton" name="go" value="Search" type="submit" />
+			
+		</form>
+	</div><!--/topHTML-->
+
+	<div id="content" class="clearFix">
+		<div id="leftCol">
+			<div id="contentHeader">
+				<h1>Using arrays in bash</h1>
+				<p class="byline">by <a href="http://search.techrepublic.com.com/search/Vincent Danen.html">Vincent Danen</a>&nbsp;|&nbsp;Aug 08, 2005 7:00:00 AM</p>
+
+							<p class="tags"><b>Tags:</b> 										<a href="http://search.techrepublic.com.com/search/Linux.html">Linux</a>, 										<a href="http://search.techrepublic.com.com/search/Vincent Danen.html">Vincent Danen</a>, 										<a href="http://search.techrepublic.com.com/search/Foo.html">Foo</a>, 										<a href="http://search.techrepublic.com.com/search/Linux Tips Newsletter.html">Linux Tips Newsletter</a>									</p>
+			
+
+
+			                                                
+			
+			
+			
+						
+			
+				<div class="interact fadeBtmLeft clearFix">
+					<div class="cmntCount">
+					   <a href="#comments"><span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   	4
+  
+
+
+</span> comment(s)</a>
+					</div>
+					<ul class="toolbar">
+						
+
+
+<li class="share"><a title="Email this to a friend" href="javascript:usrActionReg(this,19);">Email</a></li>
+
+<li class="save"><a title="Save this to my Workspace" href="http://techrepublic.com.com/5262-6257-0.html?link=http%3A%2F%2Farticles.techrepublic.com.com%2F5100-1035_11-5820685.html%3Fpart%3Drss%26tag%3Dfeed%26subj%3Dtr&title=Using+arrays+in+bash&path=http%3A%2F%2Farticles.techrepublic.com.com%2F5100-1035_11-5820685.html%3Fpart%3Drss%26tag%3Dfeed%26subj%3Dtr">Save</a></li>
+		<li class="print"><a title="Printer-friendly version" href="javascript:usrActionReg(this,20);">Print</a></li>
+	<li class="digg"><a href="http://digg.com/submit?phase=2&url=http://articles.techrepublic.com.com/5100-1035_11-5820685.html&title=Using+arrays+in+bash&bodytext=Learn+two+ways+two+declare+an+array+in+bash+in+this+Linux+tip.&topic=tech_news" class="last">Digg This</a></li>
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         <li class="recommend"><a href="http://articles.techrepublic.com.com/1320-4-55.html?path=http://articles.techrepublic.com.com/5100-10878_11-5820685.html" TITLE="Click to recommend" class="last"></a></li>
+   
+   <li class="vote"><div id="votecount" class="votecount" TITLE="How many people recommended this item">1 </div></li>
+
+<script language="JavaScript">
+        var http = createRequestObject();
+        var existing_votes = '';
+
+        function createRequestObject()
+        {
+            var ro;
+            var browser = navigator.appName;
+            if(browser == "Microsoft Internet Explorer"){
+                ro = new ActiveXObject("Microsoft.XMLHTTP");
+            }else{
+                ro = new XMLHttpRequest();
+            }
+            return ro;
+        }
+
+        function Set_Cookie(name, value, expires, path)
+        {
+            // set time, it's in milliseconds
+            var today = new Date();
+            today.setTime( today.getTime() );
+
+            expires = expires * 1000 * 60 * 60 * 24;
+            var expires_date = new Date( today.getTime() + (expires) );
+
+            document.cookie = name + "=" + escape( value ) +  ";expires=" + expires_date.toGMTString() + ";path=" + path;
+
+        }
+
+        function sendVote()
+        {
+            http.open('get', '');
+            http.onreadystatechange = handleResponse;
+            http.send(null);
+        }
+
+        function handleResponse()
+        {
+            if(http.readyState == 4)
+            {
+                var response = http.responseText;
+                var temp_array = new Array();
+                temp_array = response.split('~');
+                var ranking = temp_array[0];
+
+                if (ranking > 0) {
+                   ranking = ranking;
+                }
+
+				// Replace with ajax magic
+                document.getElementById('votecount').innerHTML = ranking;
+
+                // Remove the thumbs
+                var voter = document.getElementById('recommend');
+                voter.className = "thanks";
+                voter.innerHTML = "";
+
+                Set_Cookie('service',(existing_votes + '~85140'),30,'/');
+            }
+        }
+</script>
+
+
+					</ul><!-- /toolbar -->
+				</div><!-- /interact -->
+			</div><!-- /contentHeader -->
+
+			<div id="articleText">
+				<p class="takeaway"><b>Takeaway:</b> Learn two ways two declare an array in bash in this Linux tip.</p>
+
+								   <div class="related">
+				   <div class="relatedBg">
+				     			<!--Medusa Related Content-->
+				        		        			<script type="text/javascript" src="http://service.techrepublic.com.com/wi?spot=related-js&format=text&count=5&null=true&id=TR.TA.1.5820685&referer=http%3A%2F%2Fwww.google.com%2Fsearch%3Fhl%3Dcs%26client%3Diceweasel-a%26rls%3Dorg.debian%253Acs-CZ%253Aunofficial%26q%3Dbash%2Barray%26btnG%3DHledat%26lr%3D"></script>
+                					<script type="text/javascript">getrelatedContent()</script>		
+			<!--/Medusa Related Content-->
+										</div><!--relatedBg-->
+					</div><!-- /related -->
+				
+				<p>Assigning variables in bash is easily done and extremely
+useful, but like other programming languages, bash can also use arrays. This is
+particularly handy when you want to read the contents of a file into an array or
+simply keep your scripts more organized and logical.</p>
+
+<p>There are two ways of declaring an array:</p>
+
+<pre>&lt;code&gt;<br>declare -a FOO<br>&lt;/code&gt;</pre>
+
+<p>This creates an empty array called FOO. You can also declare
+an array by assigning values to it:</p>
+
+<pre>&lt;code&gt;<br>FOO[2] = 'bar'<br>&lt;/codE&gt;</pre>
+
+<p>This assigns the third element of the array to the value
+'bar'. In this instance, FOO[0] and FOO[1] are also
+created, but their values are empty.</p>
+
+<p>To populate an array, use:</p>
+
+<pre>&lt;code&gt;<br>FOO=( bar string 'some text' )<br>&lt;/code&gt;</pre>
+
+<p>This assigns the first element (FOO[0])
+to 'bar', the second (FOO[1]) to 'string' and the final element (FOO[3]) to
+'some text'. Notice that the array elements are separated by a blank space, so
+if a value contains white spaces it must be quoted.</p>
+
+<p>To use an array, it is referred to as $FOO[2]
+but it also needs to be surrounded in curly braces, otherwise bash will not
+expand it correctly:</p>
+
+<pre>&lt;code&gt;<br>$ echo {$FOO[2]}<br>some text<br>&lt;/code&gt;</pre>
+
+<p>To loop through an array, you can use a piece of shell code
+like the following:</p>
+
+<pre>&lt;code&gt;<br>
+#!/bin/sh</pre><pre>FOO=( bar string 'some text')<br>foonum=${#FOO}<br>
+for ((i=0;i&lt;$foonum;i++)); do<br>   echo ${FOO[${i}]}</pre><pre>done<br>&lt;/code&gt;</pre>
+
+<p>Here we loop through each item of the array and print out its
+value. Each array element is accessed by number, so we use the special variable
+${#FOO} which gives the number of elements in the array (in the above case, it
+would return the number 3). That value is then used in the <i>for</i> loop to determine how many
+times to loop. By accessing the array in this manner, you can easily generate
+arrays from external data or command-line arguments, and process each element
+one at a time.</p>
+
+<p><i>Delivered each Tuesday, TechRepublic's free Linux NetNote provides tips, articles, and other resources to help you hone your Linux skills. <a href="http://nl.com.com/MiniFormHandler?brand=techrepublic&list_id=e011">Automatically sign up today!</a></i></p>
+			</div><!-- /articleText -->
+			<div id="contentLower">	
+			<div class="interact fadeBtmLeft clearFix">
+				<div class="cmntCount">
+				   <a href="#comments"><span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   	4
+  
+
+
+</span> comment(s)</a>
+				</div>
+				<ul class="toolbar">
+					
+
+
+<li class="share"><a title="Email this to a friend" href="javascript:usrActionReg(this,19);">Email</a></li>
+
+<li class="save"><a title="Save this to my Workspace" href="http://techrepublic.com.com/5262-6257-0.html?link=http%3A%2F%2Farticles.techrepublic.com.com%2F5100-1035_11-5820685.html%3Fpart%3Drss%26tag%3Dfeed%26subj%3Dtr&title=Using+arrays+in+bash&path=http%3A%2F%2Farticles.techrepublic.com.com%2F5100-1035_11-5820685.html%3Fpart%3Drss%26tag%3Dfeed%26subj%3Dtr">Save</a></li>
+		<li class="print"><a title="Printer-friendly version" href="javascript:usrActionReg(this,20);">Print</a></li>
+	<li class="digg"><a href="http://digg.com/submit?phase=2&url=http://articles.techrepublic.com.com/5100-1035_11-5820685.html&title=Using+arrays+in+bash&bodytext=Learn+two+ways+two+declare+an+array+in+bash+in+this+Linux+tip.&topic=tech_news" class="last">Digg This</a></li>
+					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         <li class="recommend"><a href="http://articles.techrepublic.com.com/1320-4-55.html?path=http://articles.techrepublic.com.com/5100-10878_11-5820685.html" TITLE="Click to recommend" class="last"></a></li>
+   
+   <li class="vote"><div id="votecount" class="votecount" TITLE="How many people recommended this item">1 </div></li>
+
+<script language="JavaScript">
+        var http = createRequestObject();
+        var existing_votes = '';
+
+        function createRequestObject()
+        {
+            var ro;
+            var browser = navigator.appName;
+            if(browser == "Microsoft Internet Explorer"){
+                ro = new ActiveXObject("Microsoft.XMLHTTP");
+            }else{
+                ro = new XMLHttpRequest();
+            }
+            return ro;
+        }
+
+        function Set_Cookie(name, value, expires, path)
+        {
+            // set time, it's in milliseconds
+            var today = new Date();
+            today.setTime( today.getTime() );
+
+            expires = expires * 1000 * 60 * 60 * 24;
+            var expires_date = new Date( today.getTime() + (expires) );
+
+            document.cookie = name + "=" + escape( value ) +  ";expires=" + expires_date.toGMTString() + ";path=" + path;
+
+        }
+
+        function sendVote()
+        {
+            http.open('get', '');
+            http.onreadystatechange = handleResponse;
+            http.send(null);
+        }
+
+        function handleResponse()
+        {
+            if(http.readyState == 4)
+            {
+                var response = http.responseText;
+                var temp_array = new Array();
+                temp_array = response.split('~');
+                var ranking = temp_array[0];
+
+                if (ranking > 0) {
+                   ranking = ranking;
+                }
+
+				// Replace with ajax magic
+                document.getElementById('votecount').innerHTML = ranking;
+
+                // Remove the thumbs
+                var voter = document.getElementById('recommend');
+                voter.className = "thanks";
+                voter.innerHTML = "";
+
+                Set_Cookie('service',(existing_votes + '~85140'),30,'/');
+            }
+        }
+</script>
+
+
+				</ul><!-- /toolbar -->
+			</div><!-- /interact -->
+
+			   			<!--Medusa Related Content-->
+				        		        			<script type="text/javascript" src="http://service.techrepublic.com.com/wi?spot=related-js&format=text&count=5&null=true&id=TR.TA.1.5820685&referer=http%3A%2F%2Fwww.google.com%2Fsearch%3Fhl%3Dcs%26client%3Diceweasel-a%26rls%3Dorg.debian%253Acs-CZ%253Aunofficial%26q%3Dbash%2Barray%26btnG%3DHledat%26lr%3D"></script>
+                					<script type="text/javascript">getrelatedContent()</script>				
+			<!--/Medusa Related Content-->
+         			<!--talkback-->
+			<a name="comments"></a>
+
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+
+
+<h2><span class="farRight">   
+   
+
+
+
+   <a rel="nofollow" href="1320-4-55.html?path=5206-10878-0.html%3FforumID%3D3%26threadID%3D179275%26start%3D0">Print/View all Posts</a>
+   
+
+</span>Comments on this 
+article
+</h2><!--End of comment-->
+
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody>
+  <tr><td class="trcThreadOddRow" height="45"><img src="/i/tr/treeItem.gif" align="left" border="0" width="20" height="45"><span class="threadHed"><a href="/5208-10878-0.html?forumID=3&threadID=179275&messageID=1826115">More bash scripting tips</a></span><span class="contentType">DanLM &nbsp;|&nbsp;08/09/05</span></td></tr></td></tr>
+
+
+
+<tr><td class="trcThreadEvenRow" height="45"><img src="/i/tr/treeSkipItem.gif" align="left" border="0" width="20" height="45"><img src="/i/tr/treeLastItem.gif" align="left" border="0" width="20" height="45"><span class="threadHed"><a href="/5208-10878-0.html?forumID=3&threadID=179275&messageID=1826269">Have you checked out the <a href="http://www.tl...</a></span><span class="contentType">Tony K &nbsp;|&nbsp;08/09/05</span></td></tr></td></tr>
+
+
+
+<tr><td class="trcThreadOddRow" height="45"><img src="/i/tr/treeItem.gif" align="left" border="0" width="20" height="45"><span class="threadHed"><a href="/5208-10878-0.html?forumID=3&threadID=179275&messageID=1826890">Mistakes?</a></span><span class="contentType">kiri@... &nbsp;|&nbsp;08/10/05</span></td></tr></td></tr>
+
+
+
+<tr><td class="trcThreadEvenRow" height="45"><img src="/i/tr/treeLastItem.gif" align="left" border="0" width="20" height="45"><span class="threadHed"><a href="/5208-10878-0.html?forumID=3&threadID=179275&messageID=1834380">Semantic error</a></span><span class="contentType">8ored &nbsp;|&nbsp;08/22/05</span></td></tr></td></tr>
+
+
+
+
+     </tbody>
+     </table>
+
+<div class="cmntBox">
+            
+          
+
+	<form action="http://techrepublic.com.com/5210-10878-0-1.html" method="post" class="clearFix" name="postform">
+		<h3>What do you think?</h3>
+		<input class="cmntTitle" type="text" name="subject" size="40" maxlength="75" value="RE: Using arrays in bash" onClick="this.value=''">
+		<textarea name="body" cols="45" wrap="PHYSICAL" rows="8"></textarea>
+		
+		
+		            <label for="autoSubscribe">Alert me when new posts are added</label>
+		            <input type="checkbox" name="autoSubscribe">
+         	
+
+		<input type="hidden" name="reply" value="true">
+		<input type="hidden" name="forumID" value="3">
+		<input type="hidden" name="threadID" value="179275">
+		<input type="hidden" name="messageID" value="1826114">         
+		
+		<button type="submit" name="doPost">Add Comment</button>
+
+
+	</form>
+</div><!-- /cmntSubmit -->
+
+
+
+   
+   
+
+
+
+
+			<!-- /talkback -->
+			</div><!-- /contentLower -->
+		</div><!--/leftCol-->
+
+		<div id="rightCol" class="noAV">
+			<div class="keyline">
+
+			<!-- MAC ad --><div class="advert"><div style="text-align:center"><a href="http://www.cnetnetworks.com/adfeedback/?RGROUP=8530&SEGMENTID=731305&LINEID=195342&SP=16" target="new"><img src="http://i.i.com.com/cnwk.1d/Ads/common/ad_feedback_120x10_trans.gif" width="120" height="10" border="0" alt="advertisement" /></a><br /></div><IMG SRC="http://adlog.com.com/adlog/i/r=8530&s=731305&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=100&e=87&rqid=01c17-ad-e9476E46E712285D86&orh=www.google.com&ort=&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&dvar=&ucat_rsi=&t=2008.01.14.02.23.42/http://i.i.com.com/cnwk.1d/Ads/common/dotclear.gif" HEIGHT="0" WIDTH="0" alt="" style="position:absolute; top:0px; left:0px" /><div align="center"><iframe width="300" height="250" MARGINWIDTH="0" MARGINHEIGHT="0" HSPACE="0" VSPACE="0" FRAMEBORDER="0" SCROLLING="no" src="http://gflinks.industrybrains.com/gfifct?sid=654&ct=ENTERPRISE_IT_ROS&sz=300x250"></iframe></div></div><!-- MAC [r20071210-1033-DynamicVars:1.13.8] c13-b2b-publish-web2.cnet.com::39603120 2008.01.14.02.23.42 --><!-- MAC T B02.B02.B04.B04 -->
+
+			
+						<!--Linux,Vincent Danen,Foo,Linux Tips Newsletter-->
+			
+
+
+
+
+
+
+<style type="text/css" media="screen">
+@import url("http://i.techrepublic.com.com/css/simplyHired.css");
+</style>
+<div id="featuredJobs">
+	<h2><span>TechRepublic </span>Featured Jobs</h2>
+
+	<table  cellspacing="0" cellpadding="0">
+		<tr>
+			<th>Job Title/Location</th>
+			<th>Posted</th>
+		</tr>
+
+		<tr>
+			<td><a href="http://dw.com.com/redir?siteid=11&tag=pos1&desturl=http://techrepublic.simplyhired.com/a/jobs/view/jobkey-366a25ebc777d8842a6d72de52dfa14cc53d82/hits-20295&part=simplyhired.com&subj=Help+Desk+Support">Help Desk Support</a>Lake Forest, CA</td>
+			<td>01/08/2008</td>
+		</tr>
+
+
+		<tr>
+			<td><a href="http://dw.com.com/redir?siteid=11&tag=pos1&desturl=http://techrepublic.simplyhired.com/a/jobs/view/jobkey-5479.10154470/hits-20295&part=simplyhired.com&subj=Help+Desk+Network+Support">Help Desk Network Support</a>Goshen, NY</td>
+			<td>01/02/2008</td>
+		</tr>
+
+
+		<tr>
+			<td><a href="http://dw.com.com/redir?siteid=11&tag=pos1&desturl=http://techrepublic.simplyhired.com/a/jobs/view/jobkey-5235.1d2b5ed816dd992c1a16ce04b139bcc7/hits-20295&part=simplyhired.com&subj=Help+Desk">Help Desk</a>Gardner, KS</td>
+			<td>01/11/2008</td>
+		</tr>
+
+
+		<tr>
+			<td><a href="http://dw.com.com/redir?siteid=11&tag=pos1&desturl=http://techrepublic.simplyhired.com/a/jobs/view/jobkey-5235.877788387ed9d556d065dc81d276f34f/hits-20295&part=simplyhired.com&subj=Help+Desk">Help Desk</a>Houston, TX</td>
+			<td>11/07/2007</td>
+		</tr>
+
+
+	</table>
+	<ul>
+			<li class="search">
+			<form id="" action="http://jobs.techrepublic.com.com/a/jobs/search" method="GET" name="" onSubmit="return sh_process_search(this)">
+
+					<input id="searchInput" maxlength="45" name="l" value="Search Jobs by Zip Code" type="text" onFocus="this.value=''" />
+					<input id="searchButton" value="Go" type="submit" />
+			
+
+			</form>
+		</li>
+		<li class="poweredBy">Powered by: <a href="http://www.simplyhired.com"><img src="http://i.techrepublic.com.com/images/200709/logo_simplyHired.gif" alt="Simply Hired"></a></li>
+		<li class="clear">.</li>
+	</ul>
+</div>
+
+
+										
+         <h2>White Papers</h2>
+         <div class="rhContent">
+         <!-- MAC ad --><ul id="rubics">
+<li><a target="_top" href="http://dw.com.com/rubicsclk?ver=2&ts=2008.01.13.18.23.45&edId=87&onId=10878&ptId=2415&sId=11&appId=4&offId=1650&unitId=10&poolId=3&f1=11&f2=%2d0&f3=%2d0&alg=3&&opt=1&linkPos=1&destUrl=http%3A%2F%2Fwhitepapers.techrepublic.com.com%2Fabstract.aspx%3Fdocid%3D102740%26promo%3D100503">VoIP: A Big Success for Mainstream Manufacturer</a>  <cite>ShoreTel</cite></li>
+<li><a target="_top" href="http://dw.com.com/rubicsclk?ver=2&ts=2008.01.13.18.23.45&edId=87&onId=10878&ptId=2415&sId=11&appId=4&offId=1648&unitId=10&poolId=3&f1=11&f2=%2d0&f3=%2d0&alg=3&&opt=1&linkPos=2&destUrl=http%3A%2F%2Fwhitepapers.techrepublic.com.com%2Fabstract.aspx%3Fdocid%3D102793%26promo%3D100503">Voice over IP Manageability: Architecture Matters</a>  <cite>ShoreTel</cite></li>
+<li><a target="_top" href="http://dw.com.com/rubicsclk?ver=2&ts=2008.01.13.18.23.45&edId=87&onId=10878&ptId=2415&sId=11&appId=4&offId=92&unitId=10&poolId=3&f1=11&f2=%2d0&f3=%2d0&alg=3&&opt=1&linkPos=3&destUrl=http%3A%2F%2Fwhitepapers.techrepublic.com.com%2Fabstract.aspx%3Fdocid%3D149044%26promo%3D100503">InfoTech Report - Strategies for IP Telephony Evaluation and Migration</a>  <cite>ShoreTel</cite></li>
+<li><a target="_top" href="http://dw.com.com/rubicsclk?ver=2&ts=2008.01.13.18.23.45&edId=87&onId=10878&ptId=2415&sId=11&appId=4&offId=952&unitId=10&poolId=3&f1=11&f2=%2d0&f3=%2d0&alg=3&&opt=1&linkPos=4&destUrl=http%3A%2F%2Fwhitepapers.techrepublic.com.com%2Fabstract.aspx%3Fdocid%3D176363%26promo%3D100503">VoIP: Enhancing Customer Responsiveness and Employee Productivity at NORPAC Foods</a>  <cite>ShoreTel</cite></li>
+<li><a target="_top" href="http://dw.com.com/rubicsclk?ver=2&ts=2008.01.13.18.23.45&edId=87&onId=10878&ptId=2415&sId=11&appId=4&offId=1675&unitId=10&poolId=3&f1=11&f2=%2d0&f3=%2d0&alg=3&&opt=1&linkPos=5&destUrl=http%3A%2F%2Fwhitepapers.techrepublic.com.com%2Fabstract.aspx%3Fdocid%3D269636%26promo%3D100503">The Education Sector Rates Importance of IP Telephony Features, Management and Applications</a>  <cite>ShoreTel</cite></li>
+<li><a target="_top" href="http://dw.com.com/rubicsclk?ver=2&ts=2008.01.13.18.23.45&edId=87&onId=10878&ptId=2415&sId=11&appId=4&offId=870&unitId=10&poolId=3&f1=11&f2=%2d0&f3=%2d0&alg=3&&opt=1&linkPos=6&destUrl=http%3A%2F%2Fwhitepapers.techrepublic.com.com%2Fabstract.aspx%3Fdocid%3D170126%26promo%3D100503">Keeping Pace with Expansion through Voice Services</a>  <cite>ShoreTel</cite></li>
+<img src='http://dw.com.com/rubicsimp/c.gif?ver=2&ts=2008.01.13.18.23.45&edId=87&onId=10878&ptId=2415&sId=11&appId=4&unitId=10&poolId=3&f1=11&f2=%2d0&f3=%2d0&alg=3&opt=1&off=1650,-1;1648,-1;92,-1;952,-1;1675,-1;870,-1' height='1' width='1' alt=''/>
+</ul>
+<!-- ros [r20070521-1832-ronr-v1-13-5:1.13.5] c17-ad-rubics-ros3.cnet.com::4039179184 2008.01.13.18.23.45 --><!-- ros t 0.0.0.0.1.1.1.1 --><!-- MAC [r20071210-1033-DynamicVars:1.13.8] c13-b2b-publish-web2.cnet.com::39603120 2008.01.14.02.23.42 --><!-- MAC T B05.B05.B08.B08 -->
+         </div><!-- /rhContent -->
+
+			<!-- MAC ad --><div class="advert"><div style="text-align:center"><a href="http://www.cnetnetworks.com/adfeedback/?RGROUP=8539&SEGMENTID=775110&LINEID=232783&SP=16" target="new"><img src="http://i.i.com.com/cnwk.1d/Ads/common/ad_feedback_120x10_trans.gif" width="120" height="10" border="0" alt="advertisement" /></a><br /></div><iframe src="http://view.atdmt.com/MRT/iview/cntnsitp0320000050mrt/direct;vt.1/01/2008.01.14.02.23.42?buster_url=&pub_view_url=&click=http:%2F%2Fadlog%2Ecom%2Ecom%2Fadlog%2Fe%2Fr%3D8539%26s%3D775110%26o%3D1035:%26h%3Dcn%26p%3D2%26b%3D9%26l%3Den_US%26site%3D11%26pt%3D5100%26nd%3D1035%26pid%3D%26cid%3D5820685%26pp%3D200%26e%3D87%26rqid%3D01c17-ad-e9476E46E712285D87%26orh%3Dwww.google.com%26oepartner%3D%26epartner%3D%26cpnmodule%3D%26count%3D%26ra%3D213.220.241.158%26t%3D2008.01.14.02.23.42%26event%3D58%2F" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0" allowtransparency="true" width="300" height="250">
+<script language="JavaScript" type="text/javascript">
+document.write('<a href="http://adlog.com.com/adlog/e/r=8539&s=775110&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=200&e=87&rqid=01c17-ad-e9476E46E712285D87&orh=www.google.com&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&t=2008.01.14.02.23.42&event=58/http://clk.atdmt.com/MRT/go/cntnsitp0320000050mrt/direct/01/2008.01.14.02.23.42" target="_blank"><img src="http://view.atdmt.com/MRT/view/cntnsitp0320000050mrt/direct/01/2008.01.14.02.23.42"/></a>');
+</script><noscript><a href="http://adlog.com.com/adlog/e/r=8539&s=775110&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=200&e=87&rqid=01c17-ad-e9476E46E712285D87&orh=www.google.com&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&t=2008.01.14.02.23.42&event=58/http://clk.atdmt.com/MRT/go/cntnsitp0320000050mrt/direct/01/2008.01.14.02.23.42" target="_blank"><img border="0" src="http://view.atdmt.com/MRT/view/cntnsitp0320000050mrt/direct/01/2008.01.14.02.23.42" /></a></noscript></iframe><IMG SRC="http://adlog.com.com/adlog/i/r=8539&s=775110&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=200&e=87&rqid=01c17-ad-e9476E46E712285D87&orh=www.google.com&ort=&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&dvar=&ucat_rsi=&t=2008.01.14.02.23.42/http://i.i.com.com/cnwk.1d/Ads/common/dotclear.gif" HEIGHT="0" WIDTH="0" alt="" style="position:absolute; top:0px; left:0px" /></div><!-- MAC [r20071210-1033-DynamicVars:1.13.8] c13-b2b-publish-web2.cnet.com::39603120 2008.01.14.02.23.42 --><!-- MAC T B08.B09.B0A.B0B -->
+<iframe style="border:none;background:#fff" align="top" scrolling="no" width="100%" height="420" marginheight="0" marginwidth="0" frameborder="0" target="_top" src="http://bwp.techrepublic.com.com/search?dw-siteid=11&dw-ptid=5100&dw-ontid=10878" class="bidwar"></iframe>
+			</div><!-- /keyline -->
+		</div><!-- /rightCol -->
+
+	</div><!--/content-->
+
+	<div id="preFooter">
+		<hr />
+
+	</div><!-- /preFooter -->
+
+		<ul id="footer">
+
+	<li id="footFeedback">		
+		<a class="eb_foot" href="http://www.zdnet.com">A ZDNet brand</a>
+		<a href="http://techrepublic.custhelp.com/">Site Help & Feedback</a>
+	</li>
+	
+		<li id="footCnet">
+
+			<div class="clearFix">
+
+			<p><a href="http://www.cnetnetworks.com/"><b>About CNET Networks</b></a> | <a href="http://www.cnetnetworks.com/careers/">Jobs</a> | <a href="http://www.cnetnetworks.com/advertise/">Advertise</a> | <a href="http://www.cnetnetworks.com/partnerships/">Partnerships</a> | <a href="http://m.techrepublic.com.com/">Mobile</a></p>
+
+					<script language="javascript">
+				document.write("<form><p>Visit other CNET Networks sites:</p> <select name=\"menu\" id=\"form_menu\" ><option selected value=\"\">Select Site</option><option value=\"http://www.bnet.com\">BNET</option><option value=\"http://www.cnet.com\">CNET.com</option><option value=\"http://www.cnetchannel.com\">CNET Channel</option><option value=\"http://www.gamespot.com\">GameSpot</option><option value=\"http://www.cnetnetworks.com/advertise/properties/international.html\">International Media</option><option value=\"http://www.mp3.com\">MP3.com</option><option value=\"http://www.mysimon.com\">mySimon</option><option value=\"http://www.search.com\">Search.com</option><option value=\"http://techrepublic.com.com/\">TechRepublic</option><option value=\"http://www.tv.com\">TV.com</option><option value=\"http://www.webshots.com\">Webshots</option><option value=\"http://www.zdnet.com\">ZDNet</option></select><a onClick=\"window.location=document.getElementById('form_menu').options[document.getElementById('form_menu').selectedIndex].value;\"><img src=\"http://i.techrepublic.com.com/images/200609/go_search_button.gif\" id=\"visitButton\" height=\"21\" width=\"55\"  /></a></form>");
+					</script>
+
+				<noscript>
+					<a href="http://www.bnet.com/">BNET</a> | 
+					<a href="http://www.cnet.com/">CNET.com</a> | 
+					<a href="http://www.cnetchannel.com/main/default.aspx">CNET Channel</a> | 
+					<a href="http://www.gamespot.com/">GameSpot</a> | 
+					<a href="http://www.cnetnetworks.com/advertise/properties/international.html">International Media</a> | 
+					<a href="http://www.mp3.com/">MP3.com</a> | 
+					<a href="http://www.mysimon.com/2001-1_8-0.html">mySimon</a> | 
+					<a href="http://www.search.com/">Search.com</a> | 
+					<a href="http://techrepublic.com.com/">TechRepublic</a> | 
+					<a href="http://www.tv.com/">TV.com</a> | 
+					<a href="http://www.webshots.com/">Webshots</a> | 
+					<a href="http://www.zdnet.com/">ZDNet</a>
+				</noscript> 
+			</div>
+
+		</li>
+		<li id="footCopyright">
+			Copyright &copy; 2008 CNET Networks, Inc. All Rights Reserved.  <a href="http://www.cnet.com/html/aboutcnet/editorial/privacy.html?tag=tr.ft.co">Privacy Policy</a>  |  <a href="http://www.cnet.com/html/aboutcnet/editorial/terms.html?tag=tr.ft.co">Terms of Use</a>
+
+		</li>
+	</ul><!--/footer-->
+
+</div><!--/main -->
+</div><!--/width-->
+	<!-- MAC ad --><div class="hotspot">
+	<ul>
+		<li class="head">
+<a href="http://adlog.com.com/adlog/c/r=9108&s=774121&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=100&e=87&rqid=01c17-ad-e9476E46E712285E10&orh=www.google.com&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&t=2008.01.14.02.23.42/http://dw.com.com/redir?tag=hs.bestbuy.ppthreats&destUrl=http://news.zdnet.com/2422-13569_22-176090.html"><img width="125" height="50" src="http://i.i.com.com/cnwk.1d/Ads/1451/12/hs-header-125x50.gif"/></a>
+		</li>
+		<li class="noBd img">
+		<a href="http://adlog.com.com/adlog/c/r=9108&s=774121&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=100&e=87&rqid=01c17-ad-e9476E46E712285E10&orh=www.google.com&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&t=2008.01.14.02.23.42/http://dw.com.com/redir?tag=hs.bestbuy.ppthreats&destUrl=http://news.zdnet.com/2422-13569_22-176090.html"><img width="97" height="72" alt="Getting Hooked" src="http://i.i.com.com/cnwk.1d/Ads/1451/12/176091-96-72.jpg"/></a>
+		</li>
+
+		<li class="yesBd">
+		<span><a href="http://adlog.com.com/adlog/c/r=9108&s=774121&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=100&e=87&rqid=01c17-ad-e9476E46E712285E10&orh=www.google.com&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&t=2008.01.14.02.23.42/http://dw.com.com/redir?tag=hs.bestbuy.ppthreats&destUrl=http://news.zdnet.com/2422-13569_22-176090.html">Getting hooked: Phishing, pharming and online threats  </a></span>
+Agent Peterson of the Geek Squad offers some tips on how to protect yourself from viruses and spyware.
+		<span><a href="http://adlog.com.com/adlog/c/r=9108&s=774121&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=100&e=87&rqid=01c17-ad-e9476E46E712285E10&orh=www.google.com&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&t=2008.01.14.02.23.42/http://dw.com.com/redir?tag=hs.bestbuy.ppthreats&destUrl=http://news.zdnet.com/2422-13569_22-176090.html" class="normal">Watch the ZDNet Whiteboard video &raquo;</a></span>
+		</li>
+		<li class="yesBd">
+Photos: Ten views of Leopard
+		<span><a class="normal" href="http://adlog.com.com/adlog/c/r=9108&s=774121&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=100&e=87&rqid=01c17-ad-e9476E46E712285E10&orh=www.google.com&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&t=2008.01.14.02.23.42/http://dw.com.com/redir?tag=hs.bestbuy.leopard&destUrl=http://content.techrepublic.com.com/2346-10877_11-30586.html">View the gallery at TechRepublic</a></span>
+		</li>
+		<li class="noBd">
+		From our sponsors
+		</li>
+		<li class="noBd img">
+		<span>Raise your</span><span>Business IQ</span>
+		</li>
+		<li class="noBd img">
+<a href="http://adlog.com.com/adlog/c/r=9108&s=774121&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=100&e=87&rqid=01c17-ad-e9476E46E712285E10&orh=www.google.com&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&t=2008.01.14.02.23.42/http://dw.com.com/redir?tag=hs.bestbuy.visitdlc&destUrl=http://news.zdnet.com/2422-13569_22-176090.html"><img width="97" height="65" alt="BestBuy" src="http://i.i.com.com/cnwk.1d/Ads/1451/12/hs-bestbuy-97x65.jpg"/></a>
+		</li>
+		<li class="yesBd">
+		ZDNet and Best Buy keep you informed on the latest technologies and strategies.
+		<span><a href="http://adlog.com.com/adlog/c/r=9108&s=774121&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=100&e=87&rqid=01c17-ad-e9476E46E712285E10&orh=www.google.com&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&t=2008.01.14.02.23.42/http://dw.com.com/redir?tag=hs.bestbuy.visitdlc&destUrl=http://news.zdnet.com/2422-13569_22-176090.html" class="normal">Visit the learning center</a></span>
+		</li>
+		<li class="noBd img">
+		<a href="http://adlog.com.com/adlog/c/r=9108&s=774121&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=100&e=87&rqid=01c17-ad-e9476E46E712285E10&orh=www.google.com&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&t=2008.01.14.02.23.42/http://dw.com.com/redir?tag=hs.bestbuy.logo&destUrl=http://clk.atdmt.com/AVE/go/cntnsbb80090000114ave/direct;wi.88;hi.31/01"><img width="89" height="32" alt="BestBuy" src="http://i.i.com.com/cnwk.1d/Ads/1451/12/hs-bestbuy-logo-89x32.gif"/></a>
+		</li>
+
+		
+	</ul>
+</div><IMG SRC="http://adlog.com.com/adlog/i/r=9108&s=774121&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=100&e=87&rqid=01c17-ad-e9476E46E712285E10&orh=www.google.com&ort=&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&dvar=&ucat_rsi=&t=2008.01.14.02.23.42/http://i.i.com.com/cnwk.1d/Ads/common/dotclear.gif" HEIGHT="0" WIDTH="0" alt="" style="position:absolute; top:0px; left:0px" /><!-- MAC [r20071210-1033-DynamicVars:1.13.8] c13-b2b-publish-web2.cnet.com::39603120 2008.01.14.02.23.42 --><!-- MAC T CF0.CF1.CF3.CF4 -->
+
+	<!-- MAC ad --><div class="window"><div style="text-align:center"><a href="http://www.cnetnetworks.com/adfeedback/?RGROUP=10767&SEGMENTID=721172&LINEID=185730&SP=8" target="new"><img src="http://i.i.com.com/cnwk.1d/Ads/common/ad_feedback_120x10_trans.gif" width="120" height="10" border="0" alt="advertisement" /></a><br /></div><a href="http://adlog.com.com/adlog/c/r=10767&s=721172&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=300&e=87&rqid=00c17-ad-e2477BFD657BA1C8A&orh=www.google.com&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&t=2008.01.14.02.23.42/http://www.bnet.com/" target="_blank"><img src="http://adlog.com.com/adlog/i/r=10767&s=721172&o=1035:&h=cn&p=2&b=9&l=en_US&site=11&pt=5100&nd=1035&pid=&cid=5820685&pp=300&e=87&rqid=00c17-ad-e2477BFD657BA1C8A&orh=www.google.com&ort=&oepartner=&epartner=&cpnmodule=&count=&ra=213.220.241.158&dvar=&ucat_rsi=&t=2008.01.14.02.23.42/http://i.i.com.com/cnwk.1d/Ads/6506/10/070319_BNET_gen_125x125.gif" height="125" width="125" alt="Click Here" border="0" /></a></div><!-- MAC [r20071210-1033-DynamicVars:1.13.8] c13-b2b-publish-web2.cnet.com::39603120 2008.01.14.02.23.42 --><!-- MAC T CF4.CF4.CF6.CF6 -->
+
+</div><!--/goiter-->
+
+
+
+<img src="http://dw.com.com/clear/c.gif?ts=1200277422&edId=87&prtnr=CNET%20Networks,%20Inc.&oid=5100-1035_11-5820685&ptId=5100&onId=1035&sId=11&asId=5820685&astId=1&ursAppId=55&ursClc=0&usraction=20&ld=articles.techrepublic.com.com&clgf=Cg8ILkdudw0kAAAATQg&xref=http://www.google.com/search&xrq=hl=cs%26client=iceweasel-a%26rls=org.debian%253Acs-CZ%253Aunofficial%26q=bash+array%26btnG=Hledat%26lr=" border="0" height="1" width="1" alt="" />
+
+</body>
+</html>
+

@@ -1,0 +1,31 @@
+#!/bin/bash
+#BHP - BASH Home Page - Library
+
+$_GET="$QUERY_STRING";
+read _POST;
+if [ "$REQUEST_METHOD" == 'POST' ]; then
+   QUERY_STRING="$POST";
+fi
+
+QUERY_STRING='hl=cs&q=%C5%BElu%C5%A5ou%C4%8Dk%C3%BD+k%C3%BA%C5%88&btnG=Hledat&lr='; #debug-only
+
+echo -ne 'Content-type: text/html\n\n'
+
+urldecode() {
+	echo -e $( echo "$@" | sed -e 's/+/ /g;s/%/\\x/g' );
+}
+
+urlvalue() {
+	if [[ ! -z "$2" ]]; then QUERY_STRING="$2"; fi;
+	echo "$QUERY_STRING" | sed -e 's/&/\n/g'| while read i; do
+		param="$(echo $i | cut -d = -f 1)"; param="$(urldecode $param)";
+		value="$(echo $i | cut -d = -f 2)"; value="$(urldecode $value)";
+		if [[ "$param" == "$1" ]]; then echo "$value"; break; fi;
+	done;
+	return 1;
+}
+
+urlvalue q
+echo "ret = $?";
+urlvalue qos
+echo "ret = $?";

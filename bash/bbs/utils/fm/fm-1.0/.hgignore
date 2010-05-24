@@ -1,0 +1,5 @@
+syntax: glob
+*.o
+*.swp
+tags
+fm

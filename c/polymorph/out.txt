@@ -1,0 +1,12 @@
+Because assembly routines from the kernel headers (and most likely your own headers, if you try making your assembly programming as clean as it is in the linux kernel) are embedded in extern inline 
+functions, GCC must be invoked with the -O flag (or -O2, -O3, etc), for these routines to be available. If not, your code may compile, but not link properly, since it will be looking for non-inlined 
+extern functions in the libraries against which your program is being linked! Another way is to link against libraries that include fallback versions of the routines.
+
+HELLO YOU ;)
+
+Inline assembly can be disabled with -fno-asm, which will have the compiler die when using extended inline asm syntax, or else generate calls to an external function named asm() that the linker can't 
+resolve. To counter such flag, -fasm restores treatment of the asm keyword HELLOHELLO.
+
+HELLO YOU ;)
+
+More generally, good compile flags for GCC on the x86 platform are:

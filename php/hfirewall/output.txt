@@ -1,0 +1,25 @@
+Harvie's Firewall
+	<-Harvie 2oo7
+	Version 0.1 Alpha
+
+Loading rulesfile hfwrules.conf... Loaded!
+
+Rules info: 
+Author: Harvie 2oo7
+Description: Sample HFW Configuration File (THX2 http://www.brandonhutchinson.com/iptables_fw.html)
+
+Rules Others:
+Ignore ICMP echo-request messages sent to broadcast or multicast addresses
+Enable TCP SYN cookie protection from SYN floods
+Enable source address spoofing protection
+Log packets from Martians (with impossible source addresses)
+
+Rules IPTables:
+Flush old rules
+Allow all traffic on loopback
+Default policies: INPUT DROP, OUTPUT DROP, FORWARD DROP, 
+Open ports: 80, 22, 
+Other traffic will be droped
+
+Closing fwscript.sh
+chmod u+x fwscript.sh

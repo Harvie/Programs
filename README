@@ -1,5 +1,7 @@
 This is repository with backup of various (mostly obsolete or incomplete) programs which i have written in past. But i will also continue producing some crap here. So you can find many single prupose (or single use) scripts in this directory as well as few single file scripts with source packages for archlinux...
 
+NOTE: It's also possible that some 3rd party code or file which i've used for some reason somehow leaked to this repository. It's probably open/free software too... but if it's not please report such issue to me and i will remove the file(s) from repository.
+
 Maybe you can find some more info about me and particular programs at those pages:
 	http://softz.harvie.cz/
 	http://blog.harvie.cz/

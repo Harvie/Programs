@@ -1,5 +1,9 @@
 *~
 *.bak
+*.old
+
+*.exe
+*.com
 
 *.gz
 *.bz2

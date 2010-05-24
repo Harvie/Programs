@@ -1,0 +1,438 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.12"/>
+  <object class="GtkWindow" id="window">
+    <property name="visible">True</property>
+    <signal name="destroy" handler="on_window_destroy"/>
+    <child>
+      <object class="GtkVBox" id="vbox1">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkVBox" id="vbox2">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkHBox" id="hbox2">
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkEntry" id="entry_a">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_op">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">?</property>
+                  </object>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="entry_b">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label2">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">=</property>
+                  </object>
+                  <packing>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry" id="entry_calc">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox1">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkLabel" id="label_mem">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">MEM:</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_mplus">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">+</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_mem_clicked"/>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_mminus">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">-</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_mem_clicked"/>
+              </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_mclear">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">C</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_mem_clicked"/>
+              </object>
+              <packing>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="entry_mem">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="text" translatable="yes">0</property>
+              </object>
+              <packing>
+                <property name="position">4</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkTable" id="table1">
+            <property name="visible">True</property>
+            <property name="n_rows">4</property>
+            <property name="n_columns">5</property>
+            <child>
+              <object class="GtkButton" id="button_divide">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">/</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_op_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_multiply">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">*</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_op_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_minus">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">-</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_op_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_plus">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">+</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_op_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_sqr">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">SQRT</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_op_clicked"/>
+              </object>
+              <packing>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_pow">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">^</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_op_clicked"/>
+              </object>
+              <packing>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_reset">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">RST</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="reset"/>
+              </object>
+              <packing>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_clear">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">C</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_clear_clicked"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_point">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">.</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_no_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="right_attach">4</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_0">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">0</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_no_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_3">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">3</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_no_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
+                <property name="right_attach">5</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_2">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">2</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_no_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="right_attach">4</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">1</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_no_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_6">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">6</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_no_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
+                <property name="right_attach">5</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_5">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">5</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_no_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="right_attach">4</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_4">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">4</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_no_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_9">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">9</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_no_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
+                <property name="right_attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_8">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">8</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_no_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="right_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_7">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">7</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_no_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_eq">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">=</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="on_button_op_clicked"/>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
+                <property name="right_attach">5</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

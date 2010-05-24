@@ -1,0 +1,53 @@
+import java.io.*;
+import java.util.*;
+import java.lang.Math;
+
+/** Pisemka - trida "PolCoordinate"
+ * Copylefted by: Harvie 2oo9 ( http://blog.harvie.cz/ )
+ * @author      Thomas Harvie Mudrunka (mudruto1)
+ * @version     1.0
+ */
+class PolCoordinate {
+	private double phi = 0, r = 0;
+	private double x = 0, y = 0;
+	private Scanner sc = new Scanner(System.in);
+
+	PolCoordinate(double uhel, double vzdalenost) {
+		phi = uhel;
+		r = vzdalenost;
+		x = vzdalenost * Math.cos(uhel);
+		y = vzdalenost * Math.sin(uhel);
+	}
+
+	public double getX() { return x; }
+	public double getY() { return y; }
+
+	public String toString() {
+		return new String("X = "+x+"\nY = "+y);
+	}
+
+	public void addCoor(PolCoordinate b) {
+		x += b.getX();
+		y += b.getY();
+	}
+	public boolean equals(PolCoordinate b) {
+		if(x == b.getX() && y == b.getY()) return true;
+		return false;
+	}
+
+}
+
+public class Polar {
+	public static void main(String[] argv) {
+		PolCoordinate A = new PolCoordinate(45, 100);
+		PolCoordinate B = new PolCoordinate(45, 10);
+		System.out.println("A:\n"+A);
+		System.out.println("B:\n"+B);
+		if(A.equals(B)) System.out.println("A==B");
+			else System.out.println("A!=B");
+		A.addCoor(B);
+		System.out.println("A+B:\n"+A);
+	}
+}
+
+

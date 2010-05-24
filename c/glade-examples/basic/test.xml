@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<interface>
+  <object class="GtkWindow" id="window">
+    <property name="visible">True</property>
+    <signal name="destroy" handler="on_window_destroy"/>
+    <child>
+      <object class="GtkVBox" id="vbox1">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkEntry" id="entry1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="button1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="label" translatable="yes">Button1</property>
+            <property name="response_id">0</property>
+            <signal name="clicked" handler="on_button1_clicked"/>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

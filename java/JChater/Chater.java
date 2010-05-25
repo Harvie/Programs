@@ -16,7 +16,7 @@ import java.net.*;
 import javax.swing.JOptionPane;
 
 
-//Veøejná tøída
+//VeÅ™ejnÃ¡ tÅ™Ã­da
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 public class Chater {
@@ -40,23 +40,23 @@ public class Chater {
 	try {port = Integer.parseInt(args[0]);} catch (java.lang.ArrayIndexOutOfBoundsException ex) {System.out.println("- ERROR, YOU MUST SPECIFY PORT !!!\nSyntax: java Chater {port, popup, pass}\njava Chater help - for detail help"); System.exit(1);}
 	if(args.length > 1){popup = args[1];}
 	
-	ServerSocket ss = new ServerSocket(port); //Vytvoøit serverovı soket
+	ServerSocket ss = new ServerSocket(port); //VytvoÅ™it serverovÃ½ soket
 	System.out.println("Server started on: localhost:" + port + "\nPopups enabled: " + popup + "\nNow waiting for incoming connection!");
 	
-//Pøijetí pøíchozího spojení
+//PÅ™ijetÃ­ pÅ™Ã­chozÃ­ho spojenÃ­
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 		
 	while(true){
 	Socket sckt = ss.accept();
 		System.out.println("Connected!");
-	BufferedReader br = new BufferedReader (new InputStreamReader(sckt.getInputStream())); //BufferedReader vytvoøíme z InputStreamReaderu vytvoøeného z InputStreamu vráceného metodou soketu vráceného pøijmutím spojení serverovım soketem.
+	BufferedReader br = new BufferedReader (new InputStreamReader(sckt.getInputStream())); //BufferedReader vytvoÅ™Ã­me z InputStreamReaderu vytvoÅ™enÃ©ho z InputStreamu vrÃ¡cenÃ©ho metodou soketu vrÃ¡cenÃ©ho pÅ™ijmutÃ­m spojenÃ­ serverovÃ½m soketem.
 	
 
 /*
-//Ovìøení hesla
+//OvÄ›Å™enÃ­ hesla
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	line = br.readLine(); //Pøeèíst další øádek z telnetu	
+	line = br.readLine(); //PÅ™eÄÃ­st dalÅ¡Ã­ Å™Ã¡dek z telnetu	
 		
 	System.out.println("Waiting for password.");
 		
@@ -64,7 +64,7 @@ public class Chater {
 		
 		line = "ahoj";//debug
 		if(args[2].equals(line)) {goodpass = "true";}
-		line = br.readLine(); //Pøeèíst další øádek z telnetu
+		line = br.readLine(); //PÅ™eÄÃ­st dalÅ¡Ã­ Å™Ã¡dek z telnetu
 		line = "ahoj";//debug
 		
 		while((line != null) || (goodpass.equals("false"))){
@@ -76,11 +76,11 @@ public class Chater {
 				}
 					}
 */
-//Zpracování pøíkazù					
+//ZpracovÃ¡nÃ­ pÅ™Ã­kazÅ¯					
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 			System.out.println("Incoming data:");
-			line = br.readLine(); //Pøeèíst další øádek z telnetu
+			line = br.readLine(); //PÅ™eÄÃ­st dalÅ¡Ã­ Å™Ã¡dek z telnetu
 			
 		while(line != null){
 			if(line.equals("|exit") || line.equals("|exit1") || line.equals("|cmd") || line.equals("|popup") || line.equals("|plain")){
@@ -118,7 +118,7 @@ public class Chater {
 				
 				}
 			
-//Tisk zpráv do konzole a otevírání popapek				
+//Tisk zprÃ¡v do konzole a otevÃ­rÃ¡nÃ­ popapek				
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 				
 				else {
@@ -127,7 +127,7 @@ public class Chater {
 					JOptionPane.showMessageDialog(null, line);
 				}
 				}
-				line = br.readLine();//Pøeèíst další øádek z telnetu
+				line = br.readLine();//PÅ™eÄÃ­st dalÅ¡Ã­ Å™Ã¡dek z telnetu
 				
 		}
 	System.out.print("Connection closed by client!\nNow waiting for incoming connection!");
@@ -136,7 +136,7 @@ public class Chater {
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 		
-	public static void slow() { //Metoda pro zahlcení CPU.
+	public static void slow() { //Metoda pro zahlcenÃ­ CPU.
 		int a, b, c;
 		a=1; b=1; c=0;
 				
@@ -150,7 +150,7 @@ public class Chater {
 			}
 		}
 
-//Konec tøídy		
+//Konec tÅ™Ã­dy		
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 		
 	}

@@ -5,6 +5,8 @@
 *.exe
 *.dll
 *.com
+*.o
+*.so
 
 *.gz
 *.bz2

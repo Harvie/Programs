@@ -11,7 +11,7 @@ i:byte;
 
 begin
 writeln ('***PROGRAM  *M*O*R*S*E*  ----  PREVEDE TEXT DO MORSEOVY ABECEDY*** ');
-write   ('ZADEJ TEXT PRO PRýEVOD: '); READLN (s);
+write   ('ZADEJ TEXT PRO PREVOD: '); READLN (s);
 
 FOR i:= 1 TO LENGTH (s) DO
 CASE s[i] OF

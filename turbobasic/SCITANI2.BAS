@@ -20,10 +20,10 @@ B(I)=INT(RND*V+1)
 B(I)=B(I)+1
 
 VYP:
-REM pokud je A vetsi ne§ 100 zmençit
+REM pokud je A vetsi neÅ¾ 100 zmenÅ¡it
 IF A(I)>=100 THEN A(I)=INT(A(I)*.9)+1: GOTO VYP
 C(I)=A(I)+B(I)
-REM pokud je souŸet vØtç¡ ne§ 100 zmençit B
+REM pokud je souÄet vÄ›tÅ¡Ã­ neÅ¾ 100 zmenÅ¡it B
 IF C(I)>100 THEN B(I)=INT(B(I)*.9)+1: GOTO VYP
 
 LOCATE I+5,1

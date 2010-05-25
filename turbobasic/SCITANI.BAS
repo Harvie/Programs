@@ -20,13 +20,13 @@ B(I)=B(I)+1
 
 VYP:
 IF A(I)>=B(I) THEN C(I)=A(I)-B(I):D(I)=B(I):GOTO VYSL
-REM pokud je B vØtç¡ ne§ A zmenç¡ se
+REM pokud je B vÄ›tÅ¡Ã­ neÅ¾ A zmenÅ¡Ã­ se
 B(I)=INT(B(I)*.9)
 B(I)=B(I)+1
 GOTO VYP
 
 VYSL:
-REM aby druhì sŸ¡tanec nebyl 0
+REM aby druhÃ½ sÄÃ­tanec nebyl 0
 IF C(I)=O THEN A(I)=A(I)+2:GOTO VYP
 
 REM VYSLEDEK JE V A(x)

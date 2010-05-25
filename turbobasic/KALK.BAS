@@ -2,7 +2,7 @@ CLS
 SCREEN 9
 COLOR 3,15
 LOCATE 2,2
-INPUT " Pü¡KLAD (BEZ*=*) " ;A
+INPUT " PÅ˜Ã­KLAD (BEZ*=*) " ;A
 CLS
 LOCATE 2,2
 PRINT " = " A

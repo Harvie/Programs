@@ -6,14 +6,14 @@ CLS
 COLOR 0,15
 SCREEN 0
 LOCATE 2,2
-                                      INPUT " S¨÷TANEC= " ;S1
+                                      INPUT " Sƒå√çTANEC= " ;S1
 LOCATE 23,23
                                       INPUT "      " ;K$
 IF K$="X" THEN GOTO KONEC
 LOCATE 3,2
  PRINT " + "
 LOCATE 4,2
-                                      INPUT " S¨÷TANEC= " ;S2
+                                      INPUT " Sƒå√çTANEC= " ;S2
 LOCATE 5,2
  PRINT " = "
 V=S1+S2

@@ -3,7 +3,7 @@ CLS
 COLOR 14,1
 SCREEN 0
 LOCATE 2,2
-INPUT " ZADEJTE VSTUPN÷ PIN " ;A
+INPUT " ZADEJTE VSTUPN√ç PIN " ;A
 IF A<>4545 THEN START
 
  GOTO POKR
@@ -42,21 +42,21 @@ RETURN
 '-----------------------------------------------------------------------------
 DIR :
 LOCATE 8,23
-PRINT "PRAVE STE SE DOVOLALI NA TEL.¨.:158"
+PRINT "PRAVE STE SE DOVOLALI NA TEL.ƒå.:158"
 LOCATE 10,10
 print "TADY POLICIE H.L.M.PRAHY"
 RETURN
 '-----------------------------------------------------------------------------
 KONEC :
-print "stlaü kl†vesu*ENTER*"
+print "stlaƒç kl√°vesu*ENTER*"
 END
 '-----------------------------------------------------------------------------
 HELP :
 A$="ZKOUSKA OVLADANI TELEFONU"
 CALL ECHO (5,16,A$,13)
-A$="STISKN∑TE TELEFON1 NEBO POMOC"
+A$="STISKNƒöTE TELEFON1 NEBO POMOC"
 CALL ECHO (7,17,A$,13)
-A$="VIDITE U¶ TELEFONUJETE PO SITI MUDRU’KANET"
+A$="VIDITE U≈Ω TELEFONUJETE PO SITI MUDRU≈áKANET"
 CALL ECHO (7,18,A$,13)
 
 

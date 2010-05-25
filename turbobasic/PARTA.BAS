@@ -29,7 +29,7 @@ FOR A=1 TO 6
 NEXT A
 
 DO
-   A$="TELEFONY CLUB   exit!  HESLA  PARõ†CI "
+   A$="TELEFONY CLUB   exit!  HESLA  PAR≈§√°CI "
    D=5:X=5:Y=17:C=14
    GOSUB MENU
    ON MENU GOSUB TELEFON,DIR,KONEC,HELP,LOAD
@@ -43,7 +43,7 @@ RETURN
 '-----------------------------------------------------------------------------
 DIR :
 SOUND RND*150+12,13
-PRINT "KROTITELê DUCHÖ"
+PRINT "KROTITEL√â DUCH≈Ø"
 RETURN
 '-----------------------------------------------------------------------------
 KONEC :

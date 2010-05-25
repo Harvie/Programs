@@ -1,14 +1,14 @@
 SCREEN 8
 COLOR 14,1
 LOCATE 2,2
-PRINT " PO- ¬J* M* PR 2.* ¬T/PS "
+PRINT " PO- ÄŒJ* M* PR 2.* ÄŒT/PS "
 LOCATE 3,2
-PRINT " éT- M* ¬J* PR 1.* ¬J:SL* PLAVµNÖ* PLAVµNÖ:NµVRAT "
+PRINT " ÃšT- M* ÄŒJ* PR 1.* ÄŒJ:SL* PLAVÃNÃ* PLAVÃNÃ:NÃVRAT "
 LOCATE 4,2
-PRINT " ST- ¬J* M* Tv* ¬T* Hv "
+PRINT " ST- ÄŒJ* M* Tv* ÄŒT* Hv "
 LOCATE 5,2
-PRINT " ¬T- M* ¬J* PR 2.* P¬* ¬T/PS "
+PRINT " ÄŒT- M* ÄŒJ* PR 2.* PÄŒ* ÄŒT/PS "
 LOCATE 6,2
-PRINT " Pµ- ¬J* M* Vv* ¬T "
+PRINT " PÃ- ÄŒJ* M* Vv* ÄŒT "
 SOUND 100+12,150
 END

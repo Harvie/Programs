@@ -4,7 +4,7 @@ SCREEN 0
 CLS
 COLOR 15,9
 LOCATE 6,24
-PRINT " MEGA ZVUKY         UKON¬I  ENTER "
+PRINT " MEGA ZVUKY         UKONÄŒI  ENTER "
 LOCATE 7,24
 PRINT " -------------------------------- "
 

@@ -23,7 +23,7 @@ cls
 print "hustota....."hmotnost " g/cm3"
 print "objem......."objem    " cm3"
 print "hmotnost.....? g"
-print "ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ"
+print "â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€"
 print "hmotnost = hustota . objem"
 print "hmotnost = "hmotnost" g . "objem " cm3"
 print "hmotnost = "hustota" g/cm3"

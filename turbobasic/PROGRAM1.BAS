@@ -32,7 +32,7 @@ LOOP
 '-----------------------------------------------------------------------------
 TEXT :
 LOCATE 10,5
-print "JESTLI ¶E NEUM÷TE NASOBIT:*KONEC*,!!!POZOR!!! NASOB2 ZNAMKUJE"
+print "JESTLI ≈ΩE NEUM√çTE NASOBIT:*KONEC*,!!!POZOR!!! NASOB2 ZNAMKUJE"
 RETURN
 '-----------------------------------------------------------------------------
 NASOB :

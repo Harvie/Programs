@@ -1,0 +1,13 @@
+﻿|popup		Show messages also like popups.
+|plain		Show mesages just on command line.
+|close		Close connection.
+|exit		Shutdown the server.
+|exit1		Shutdown the server with exit code 1.
+|cmd		Execute the command from next line.
+|cmdl		Read commands from telnet until cmdl is closed.	// Not implemented yet! - Why not?
+|cmdc		Close cmdl.					// Not implemented yet!
+|slow		Eat some CPU speed :).				// Not implemented yet! - May be it will never
+|rnd		Show random error message :).			// Not implemented yet! - ???
+|hot		Show some error messages :).			// Not implemented yet! - !!!
+|sound		Play sound once.				// Not implemented yet! - too slow
+|alert		Play sound repeatedly.				// Not implemented yet! - May be it wil never

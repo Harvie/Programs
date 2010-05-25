@@ -1,0 +1,26 @@
+﻿<=======JChater==============================================================================>
+<===================================================================================Harvie===>
+
+- Program měl původně sloužit k chatu přes příkazový řádek, přidělal jsem
+popup zprávy,
+ovládání vzdáleného pc pomocí posílání příkazů,
+
+ještě dodělám,
+heslo, celý vzdálený příkazový řádek, a další...
+
+Program zapnete pomocí příkazu java Chater [int port][bool popupsEnabled][String pass-zatímne]
+Pokud nevíte, jaký port, doporučuji port 23,
+
+program totiž používá telnet protokol, nic neposílá zpět, jen příjmá a vypisuje, případně
+otevírá popupy a rozpoznává příkazy
+
+pro zakázání a povolení popupů,
+spuštění příkazu
+a ukončení služby (Exit code 0 nebo 1).
+
+Pro více: Commands.txt
+
+<==o=========================================================================================>
+<===o========================================================================================>
+<=ooo========================================================================================>
+<==================================================================================THE=END===>

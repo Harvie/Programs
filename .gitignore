@@ -3,6 +3,7 @@
 *.old
 
 *.exe
+*.EXE
 *.dll
 *.com
 *.o

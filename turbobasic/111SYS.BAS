@@ -1,0 +1,4 @@
+CLS
+SHELL "C:"
+SHELL "SYS A:"
+END

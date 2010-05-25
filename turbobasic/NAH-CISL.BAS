@@ -1,0 +1,17 @@
+V=TIMER
+PRINT V
+
+V=V-INT(V)
+PRINT V
+V=V*120
+PRINT V
+V=INT(V)
+
+G=RND*40
+I=G+V
+I=INT(V)+(G)
+I=I+55
+I=INT(V)+(G)+(I)
+I=INT(I)
+PRINT I
+END

@@ -1,0 +1,16 @@
+cls
+
+FOR I=1 TO 100
+A$=INKEY$
+IF LEN(A$)<>0 THEN ANO
+PRINT A$
+NEXT I
+
+GOTO NE
+
+ANO:
+PRINT " ANO "
+END
+
+NE:
+PRINT " NE "

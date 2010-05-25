@@ -1,0 +1,9 @@
+
+            ***************************************
+	    *	Hlaseni o pokusu narusit ochranu  *
+            ***************************************
+Current date is Wed 30/10/1991
+Enter new date (dd-mm-yy): 
+Current time is   8:45:28,27
+Enter new time: 
+******

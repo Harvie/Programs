@@ -1,0 +1,3 @@
+CLS
+SHELL "A:"
+END

@@ -1,0 +1,7 @@
+COLOR 14,1
+SCREEN 1
+PRINT CHR$ 200
+
+
+
+

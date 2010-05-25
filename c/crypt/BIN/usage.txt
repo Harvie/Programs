@@ -1,0 +1,23 @@
+Harvie's symetric encoding toolkit.
+
+
+USAGE:
+
+1. Generate key:
+	keygen 128 > key.txt
+	- keygen --help		for more options
+	- this will 128 generate pseudorandom bytes (if number is not specified, 1024 will be used instead)
+	- 128 may be size of encrypted file in bytes for optimal security.
+	- You can use any file (MP3, EXE, etc...) instead of this.
+	- The key mustn't contains the lots of NULL bytes
+
+2. Encrypt
+	crypt key.txt file.to.process file.output
+	- crypt		for more options
+	- key.txt is some file used as key
+	- file.to.process is file to encrypt/decrypt by key (if not specified, STDIN is used)
+	- file.output is output of process (if not specified, STDOUT is used)
+
+3. Decrypt
+	crypt key.txt file.output file.plain
+	- decrypting is done the same way as encrypting, you need the same key for decrypting and for encrypting.

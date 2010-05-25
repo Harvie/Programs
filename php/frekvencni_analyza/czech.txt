@@ -1,0 +1,219 @@
+﻿O sifre DN a hashovaci funkci HDN
+Autor: .cCuMiNn.
+
+Rekne-li se jmeno Vlastimil Klima, jiste si kazdy z vas vybavi jeho nositele, predniho ceskeho kryptologa, ktery je znam jak u nas, tak i v zahranici diky sve jedinecne praci, kterou v oblasti kryptologie odvadi. Je autorem skoro dvou stovek odbornych clanku a mnoha prednasek. Podili se na vyvoji spickovych sifrovacich technologii a mezi jeho prace lze pocitat projekty pro NBU, prvni cesky sifrovaci chip, prvni on-line sifrovani ve Windows a nekolik sifrovacich algoritmu. Do povedomi siroke verejnosti se zapsal predevsim algoritmem nejrychlejsiho nalezeni kolizi u hashovaci funkce MD5 z lonskeho roku.
+
+V poslednich dnech se vsak nejvice mluvi o specialni blokove sifre DN a hashovaci funkci HDN, ktere jsou diky zcela novemu pojeti meznikem v oblasti kryptologie. Vlastimil Klima stravil nad projektem dlouhe dva roky, jejichz vysledkem je popis slabin soucasnych sifrovacich algoritmu a novy, mnohem bezpecnejsi koncept, ktery je tak prevratny, ze jej NBU uvolnil ke zverejneni a oponenture.
+
+Vysledek sve prace publikoval Vlastimil Klima na svem webu a v e-zinu Crypto-world, ktery je registrovanym odberatelum dostupny ke stazeni na strance http://crypto-world.info. Volne dostupny bude ovsem az za tri tydny a tak redakce e-zinu Crypto-world souhlasila s uverejnenim tohoto clanku na nasem portale. Vy se tak muzete zacist do techto nadcasovych informaci, ktere se s nejvetsi pravdepodobnosti zapisi tucnym pismem do dejin kryptologie.
+
+Prace Vlastimila Klimy vcetne uvodu Tomase Rosy o specialni blokove sifre DN a hashovaci funkci HDN ke stazeni: Rodina specialnich blokovych sifer DN a hasovacich funkci nove generace HDN typu SNMAC
+Ptejte se Vlastimila Klimy
+
+Az do konce brezna mate navic moznost polozit Vlastimilu Klimovi svuj doplnujici dotaz prostrednictvim nize umisteneho formulare. Abych trochu uklidnil ty z vas, kteri by meli pred timto velikanem ostych, neodpustim si citaci pana Klimy, ktery mi ve svem e-mailu napsal tato slova:
+
+„Otazky od ctenaru, vsechny, dokonce i ty zcela zdanlive nejhloupejsi otazky (maji blize ke genialite nebo necemu prevratnemu nez ty prumerne chytre), jsou pro me zpestrenim, duvodem k zamysleni a motivaci.“
+
+(Tato moznost jiz koncem brezna skoncila. Odpovedi na sve dotazy naleznete v tomto clanku.)
+
+Sifry a kody moderni doby 4.dil
+Autor: .cCuMiNn.
+
+Steganografie
+
+Jakmile si lide zacali uvedomovat cenu nekterych informaci, zacali premyslet, jak tyto informace ukryt pred zraky tech, jimz tato informace neni urcena. Mnohdy totiz stalo az prilis penez, ci lidskych zivotu, pokud se informace ocitla v nespravnych rukou.
+Skryti :)
+Steganografie
+(z reckych slov steganos-skryte, graphein-pismo)
+
+Vedni obor, ktery se zabyva utajenim informaci s cilem ukryt komunikaci pred okolnim svetem.
+
+Asi nejstarsi dolozitelna zminka o pouziti steganografie pochazi ze stare povesti, jejiz dej se odehrava v patem stoleti pred nasim letopoctem, v dobe vlady krale Dariuse. Ten veznil Reka Histiaea, ktery tajne odeslal zpravu svemu zeti Aristagorovi do Anatolianu tak, ze zpravu nechal vytetovat na oholenou hlavu sveho otroka. Teprve pote co hlava otroka opet zarostla vlasy, vydal se na cestu, aby tento vzkaz dorucil. Prijemce zpravy nechal hlavu otroka opet oholit, aby si tak mohl informaci vytetovanou na jeho hlave precist. Sami vidite, ze se jednalo o velice zdlouhavou proceduru, kterou nebylo mozne pouzit ve vsech pripadech utajovane komunikace.
+
+V historii se proto setkavame s dalsimi zpusoby pouziti steganografie. V antickem Recku se napriklad pouzivaly drevene desticky. Na ty se vzkaz nechal napsat nebo do nich vyryt a posleze se zalil vrstvou vosku, ktery byl podobneho vzhledu jako desticka. Informace se pak objevila teprve ve chvili, kdy se vosk opet zahral a z desticky odstranil.
+
+Patrne nejznamejsi steganograficke metody zname z historie jsou zalozeny na pouziti ruznych neviditelnych inkoustu. Zpravy napsane takovouto tekutinou nebyly za beznych podminek na papire viditelne a svuj obsah odhalovaly teprve, pokud byly vystaveny zvlastnimu osvetleni nebo pokud prosly nejakou chemickou cestou, nejcasteji po zahrati archu nad plamenem. Mezi tyto neviditelne inkousty patrily ruzne ovocne stavy (vymackany citron), mleko nebo moc. Dnes se muzeme v zabavne steganografii setkat s neviditelnymi inkousty, ktere jsou bezne k dostani v obchodech, napriklad v podobe fixu, jejichz pismo je citelne, pouze pod ultrafialovym zarenim.
+
+Dalsi z metod, kterou si muzete sami vyzkouset, je pismo pod skorapku neoloupaneho, natvrdo uvareneho vajicka. Rikate si, ze to neni mozne? Jiz v patnactem stoleti popsal tuto metodu italsky renesancni vedec Giovanni Battista della Porta. Pripravite-li si roztok octa a kamence (je bezne dostupny v drogerii), muzete timto roztokem neviditelne psat po skorapce uvareneho vajicka, pricemz roztok pronika az na bilek a zanechava na nem kresby. Vysledek je citelny az ve chvili, kdy nekdo vejce oloupe a jeho popsany bilek odhali. Stejne tak priklady ukryti informace ve skorapce od orechu nejsou nijak ojedinele. Z doby druhe svetove valky pak jsou zname priklady, kdy byla informace drobounkym pismem napsana na druhe strane knofliku nebo byla ukryta na pasu filmu pomoci jakychsi mikrotecek.
+
+Pouziti steganografie muzeme dale podporit neznamym zpusobem kodovani nebo zasifrovanim skryvane informace. Zved usilujici o takovou informaci je postaven hned pred dva nelehke ukoly. Skrytou informaci musi nejenom nalezt a prolomit tak steganografii, ale pote i dekodovat nebo desifrovat a tim prorazit kryptologii.
+
+Ukazeme si zde par prikladu, ktere spojuji steganografii s Morseovym kodovanim (Morseova abeceda). Informaci, kterou potrebujeme ukryt nejprve znak po znaku zakodujeme Morseovym kodovanim za pouziti nasledujici tabulky do vysledku skladajiciho se pouze z tecek a carek.
+
+A takto bychom ji mohli ukryt pomoci steganografie:
+
+- Velikosti pismen
+Nahrazenim tecek za mala pismena a carek za pismena velka. Jednotliva slova volime stejne delky jako je pocet carek a tecek jednoho pismena. Nejlepsich vysledku pak dosahneme, pokud vznikla veta dava smysl.
+
+Ukryti informace do velikosti pismen.
+
+
+- Nakreslenim pily
+Tecky delame jako nizsi zuby, carky jako vyssi. Pismena oddelujeme mensim zubem smerujicim dolu, cela slova pak zubem vetsim.
+
+Sifry a kody moderni doby 3.dil
+Autor: .cCuMiNn.
+
+Signal a jeho prenos
+Po precteni prvnich kapitol, kde jsme se seznamili s informacemi a zpusobem jejich kodovani, prichazi nyni na radu, rici si neco o cestach, kterymi se zakodovana informace muze sirit. K cemu by informace byla, pokud by se nemohla prenaset?
+
+Signal – znameni s urcitym vyznamem, ktere s sebou nese informaci.
+
+
+Signaly se k prenosu informace vyuzivaji od nepameti. Nejprve slouzily k prenosu zprav mezi u sebe stojicimi jedinci nebo se signaly predavaly jako znameni pomoci ruznych obrazcu. Objevila se vsak myslenka na rychly prenos informace na velke vzdalenosti. Americti Indiani pouzivaly napriklad kourove signaly a africane prenaseli zpravy zvukem pomoci bubnu. Zhruba pred tremi tisici lety zacaly prvni rise stavet signalni site straznic na vyvysenych mistech, odkud se mohly informace sirit v podobe kourovych, ohnivych, vlajkovych nebo jinych signalu na velikou vzdalenost a rychle tak dokazaly pozadat o pomoc pri napadeni. Z jednoho takoveho stanoviste bylo vzdy videt k mistum dalsim, takze vznikala jakasi postupna reakce tvorena napriklad zapalovanim hranic a signal se tak mohl prenest na stovky kilometru vzdalena mista. Signal prenasejici informaci, se tak stal dulezitou soucasti zivota. Kdo neovladal umeni prenest informaci, mel ve valkach predem predurcenu porazku. Stejne podstatne, jako schopnost prenaset vlastni informace, je pro strategicke ucely valky dulezite narusovani komunikace nebo obsah zprav znepratelene strany. Drive se stacilo zmocnit jedne signalni hranice a cela sit byla nahle narusena. Stejne tak bylo mnoho bitev vyhrano diky podvrzeni falesnych zprav a odchycenim zprav druhe strany. Asi nejvetsi a nejznamejsi vladce, ktery dokazal s informacemi a jejich prenosem delat prave zazraky byl Alexandr Veliky, ktery se tak stal jednim z nejmocnejsich vladaru. Dnes se pro ruseni signalu pouzivaji nejruznejsi rusicky radioveho signalu a jina podobna zarizeni. Na Internetu se s podobnym rusenim muzeme setkat napriklad v podobe DOS utoku, ktery nam odepre ziskani pozadovanych informaci.
+
+Popiseme si zde blize jakym zpusobem k prenosu informace dochazi.
+Schema prenosu signalu
+
+    * Zdroj zpravy (informace)
+    * Kodovani (prevede informaci na dohodnuty tvar)
+    * Modulace (premeni zakodovanou informaci na prenosovy signal)
+    * Prenos signalu (sireni signalu prenosovou cestou)
+    * Demodulace (premeni signal na zakodovanou informaci)
+    * Dekodovani (prevede kod na srozumitelnou informaci)
+    * Prijemce zpravy
+
+
+
+Od doby, kdy se signal prenasel vyse popsanym zpusobem uplynuly jiz tisice let, nicmene schema prenosu informace se zachovalo az do dnesni doby. Samozrejme s tim rozdilem, ze doslo k nahrazeni jednotlivych fyzickych soucasti modernimi prvky. Funkci vojaka jez zapaluje hranici, nahradili elektronicke kodery a modulatory, ktere prevadi informace na presne elektricke signaly. Rychlost a objem prenasenych informaci se take mnohonasobne zvysily. Zpusoby, jakymi se dnes na dlouhe vzdalenosti signaly prenasi jsou jine. V dnesni dobe nam k prenosu informace slouzi nejcasteji elektricke impulsy nebo elektromagneticke vlneni.
+
+Moderni historie prenosu informace se zrodila na prelomu 18. a 19. stoleti, kdy byl vynalezen telegraf. Doslo k vytvoreni telegrafni site, ktera se zacala nahrazovat siti telefonni pote, co Alexander Graham Bell sestrojil v roce 1876 prvni telefonni pristroj. Z prenosu signalu se stal business. Dnes jsme obklopeni signaly temer vsude, kde se nachazime. Kolem nas na ruznych frekvencich proudi kazdou vterinou miliony bitu ruznych informaci, od rozhlasovych ci televiznich vysilani, pres pasma mobilnich operatoru ci site poskytovatelu wi-fi pripojeni k Internetu. Z druzic na obezne draze na nas neustale dopadaji informace o presnem case pro urceni presne polohy (GPS), prochazime se pod dratovym vedenim telefonnich spolecnosti a vse nam pripada naprosto normalni.
+
+
+Alexandr Makedonsky (Veliky) Alexandr Makedonsky (Veliky)
+(20.7.356pr.n.l. – 13.6.323pr.n.l.)
+
+Jedna z nejvetsich osobnosti svetoveho valecnictvi.
+Jako jeden z prvnich dokazal ovladnout silu informace a tuto schopnost nalezite vyuzit ve svych valecnych tazenich.
+
+
+Kdo ma informace, je mocny. Ten, kdo jich ma vice a rychleji je mocnejsi. Zivot bez informaci a bez jejich prenosu neni v soucasne spolecnosti mozny.
+
+Sifry a kody moderni doby 2.dil
+Autor: .cCuMiNn.
+
+Kodovani
+Kdyz nyni vime co jsou to informace, je na case si povedet neco o zpusobu, jakym informace sdelujeme. Informace sami o sobe by byly pouze zmeti chaosu, kdyby neexistovalo kodovani.
+
+
+Kodovani - dohodnuty zpusob komunikace, neboli souhrn pravidel pro vyjadreni informace.
+
+
+Nebudeme-li pocitat ruzne posunky, mimicka gesta a skreky, ktere mezi kody samozrejme patri take, muzeme za nejstarsi kodovani povazovat jazyk, kterym se lide dorozumivaji a pismo, ktere informaci dokaze uchovat po veky. Nebude proto od veci, kdyz si historii pisma trochu pripomeneme.
+
+Historie pisma
+Za tvurce prvniho pisma jsou povazovani Sumerove. Ti zacali nejdrive pouzivat obrazkove pismo, kde kazdy obrazek vyjadruje jednu konkretni vec nebo osobu. Takovemu pismu rikame piktogramy. Nasledne se jednotlive piktogramy zacaly slucovat do slozitejsich obrazku, ktere vyjadrovaly cele myslenky, ci deje. Tyto nazyvame ideogramy.
+
+Rosettska deska Materialem pro zaznamenani informaci se na dlouhou dobu stal kamen. Diky pouziti tohoto tvrdeho materialu se podarilo uchovat tisice let stare pisemne dedictvi az do dnesni doby. O davno zaniknutych civilizacich se muzeme docist napriklad z egyptskych hieroglyfu, ktere se podarilo rozkodovat teprve nedavno. Francouzky vedec Jean Francois Champollion diky zname Rosettske desce, dokazal roku 1822 precist informace, ktere zustavaly po staleti zapomenuty. Tato vzacna kamenna deska, ktera byla nalezena roku 1799 dustojnikem Napoleonske armady, obsahuje totiz text v hieroglyfech a soucasne preklad textu v rectine.
+
+Klinove pismo Tesani informaci do kamene, bylo pomerne narocne, v Mezopotamii se proto pouzivaly tabulky z vlhke, tvarne hliny, do kterych se seriznutym rakosem vrypovalo pismo slozene prevazne z car. Vrypy tvaru klinu, dali nazev klinovemu pismu, jehoz vznik je prisuzovan take Sumerum. Tabulky se pote nechali vysusit na slunci nebo se ve vyjimecnych pripadech vypalovaly. Mezi dalsimi materialy pro zaznam pisma najdeme papyrus nebo pergamen.
+
+Za dalsi dulezity meznik v historii lze povazovat vznik foinickeho pisma. Toto pismo vzniklo kolem roku 1500 pr.n.l. a na rozdil od piktogramu nebo ideogramu predstavoval kazdy znak urcitou slabiku. Pismo obsahovalo pouze souhlasky a celkem bylo slozeno ze 22 znaku. Foinicke pismo prevzali pozdeji Rekove, kteri jej upravili a rozsirili o nektera pismena vcetne samohlasek. Recka abeceda se rozsirila do Italie, kde dala vzniknout latince, kterou pouzivame dodnes.
+
+Soucasna kodovani
+S kody v ruznych podobach se setkavame opravdu na kazdem kroku. Auto ukazujici na krizovatce smer jizdy vysila kod, ktery si spravne interpretujeme, predpokladame-li jeho odboceni. Semafor na krizovatce nas pomoci barevnych kodu take informuje o urcite situaci, na kterou musime reagovat. Krome pisma pouzivame dale barevne, obrazkove ci zvukove kody. Obrazkove kody, kterymi jsou napriklad dopravni znacky nebo symboly na ruznych kontrolkach maji tu vyhodu, ze prekonavaji jazykovou barieru a stavaji se mezinarodne srozumitelne. S rozmachem vypocetni techniky se zacaly pouzivat nove kody (programovaci jazyky), pomoci kterych programatori komunikuji se strojem. U osobniho pocitace se muzete setkat s vyrazem kodovani cestiny a podobne.
+
+Ten, kdo si pod pojmem kodovani predstavoval tajne sifry, kterym rozumi pouze hrstka vyvolenych, ma nyni snad jasno. Kodovani je bezna soucast vsedniho zivota, nikterak se nesnazi o ukryti informace, ale naopak zajistuje pravidla pro jeji srozumitelny prenos. Jak jsme si vsak ukazali na priklade egyptskych hieroglyfu, nastava jina situace v pripade, ze dojde k zapomenuti pravidel, ktera byla pri kodovani pouzita. V takovem pripade se kryptoanalitici pekne zapoti, nez dokazi tyto kody dekodovat. Dodnes tak mnoho pradavnych kodu ceka na rozlusteni, aby mohli vydat sva tajemstvi…
+
+Sifry a kody moderni doby 1.dil
+Autor: .cCuMiNn.
+
+Abychom spravne pochopili principy moderniho sifrovani, neobejdeme se bez znalosti historie a nekolika definic. No a kde zacit jinde nez u definice informace, u ktere vsechno zacina a take konci…
+Informace
+Informace – slovo, ktere kazdy z nas pouziva denne pri mnoha prilezitostech. Informace jsou beznou soucasti naseho zivota, ovlivnuji v nem kazdy okamzik a da se rici, ze bez informaci by v dnesni informacni spolecnosti nemohl clovek existovat. Ne nadarmo se rika, ze informace maji cenu zlata. I kdyz dokazeme toto slovo vsichni bez problemu pouzivat, jen malokdo zna presny vyznam tohoto slova, pricemz dostupnych vykladu a definic muzeme najit hned nekolik. Jelikoz se k informacim pristupuje v ruznych vednich oborech odlisne, jsou i definice v kazdem z nich ruzne, presto se da ale rici, ze zaklad maji vsechny tyto definice stejny.
+
+Informace – sdelitelny poznatek, ktery ma smysl a snizuje nejistotu.
+
+
+Na prikladech si rozvineme predchozi definici, tak aby byla vsem srozumitelna:
+
+Do losovaciho bubnu vlozime jeden los. Pokud od nekoho dostaneme zpravu, ze bude vylosovan prave tento los, bude to pro nas informace s nulovou informacni hodnotou, protoze jde o jev jisty. Pokud bychom do bubnu vlozili losu sto a nekdo by nas predem informoval, ktery los bude tazen, bude pro to pro nas informace s vysokou informacni hodnotou, jelikoz jde o jev velmi malo pravdepodobny.
+
+Podobnym prikladem muze byt i tato uvaha: Je normalni, ze kazdy den jezdim do prace autobusem, ktery vzdy prijizdi presne. Informace typu „zitra prijede autobus presne“ pro me tedy nema temer zadnou hodnotu, vzhledem k tomu, ze to predpokladam. Ovsem informace „autobus ma poruchu a zitra nepojede“ ma pro me informacni hodnotu velikou, protoze to nemohu predpokladat a musim si tim padem zajistit jiny zpusob prepravy.
+
+Z uvedenych prikladu vyplyva, ze kazda zprava nese urcite mnozstvi informace. Velikost tohoto mnozstvi zalezi na predpokladatelnosti jevu, o kterem informuje. Pravdepodobnost vyskytu urciteho jevu se oznacuje mirou neurcitosti (entropie). Cim je entropie vetsi, je vyskyt jevu pravdepodobnejsi a mnozstvi informace je mensi. Stejne plati i opak, cim je entropie mensi, je mene pravdepodobny vyskyt jevu a mnozstvi informace je proto vetsi. Aby se dala velikost informace porovnavat, byla zavedena velicina informace a jednotkou teto veliciny byl zvolen Sh [shannon]. Nazev byl zvolen podle matematika C.E.Shannona, ktery jako prvni vytvoril definici informace a dokazal jeji meritelnost.
+
+Claude Elwood Shannon (30. 4. 1916 – 24.2.2001) Claude Elwood Shannon (30. 4. 1916 – 24.2.2001)
+
+Americky matematik a inzenyr, jeden ze zakladatelu teorie informace. Zamestnanec Bellovych laboratori, v roce 1948 publikoval v casopise Bell System Technical Journal clanek "The Mathematical Theory of Communication". Spolu s Warrenem Weaverem autor obecneho modelu komunikace (1947).
+
+
+V souvislosti s informacemi, se pouzivaji take terminy data a znalosti, ktera maji s informacemi velmi pribuzny vztah. Informace, ktere nemaji samy o sobe smysl nazyvame data a informace, ktere jsme si jiz osvojili a ktere tedy vime, oznacujeme jako znalosti.
+
+Kryptologie, sifrovani a tajna pisma
+Autor: .cCuMiNn.
+
+obalka knihy Po par mesicich se mi opet dostala rukou kniha venujici se kryptologii. Kniha s vystiznym nazvem Kryptologie, sifrovani a tajna pisma znameho ceskeho kryptologa Pavla Vondrusky, kterou vydalo nakladatelstvi Albatros v edici OKO. Ihned po precteni prvnich stran bylo zjevne, ze autor tuto knihu psal privetivym stylem, ktery je velmi ctivy a porozumet obsahu vam rozhodne nebude cinit potize.
+
+Autor ctenare postupne zasveti do zakladu kryptologie, vysvetli mu nejpouzivanejsi vyrazy a ukaze prakticke pouziti jednotlivych sifrovacich systemu a pouzivanych sifer. Je jich tolik, ze kdybych mel vsechny sifry a sifrovaci systemy, kterym se kniha podrobne venuje, vyjmenovat, popsal bych zde nekolik stran. Uvedu proto pouze strucny prehled klasickych sifrovych systemu, ktere kniha popisuje:
+
+    * Polyalfabeticke sifry
+    * Jednoducha transpozice
+    * Uhloprickove-sloupcova transpozice
+    * Dalsi transpozicni systemy
+    * Zlomkovy sifrovaci system
+    * Kombinovane klasicke sifry
+    * Steganograficke metody
+    * Neviditelne inkousty
+
+U kazdeho z uvedenych sifrovacich systemu jsou uvedeny i jeho slabiny a jsou popsany metody a postupy, kterymi je mozne jednotlive sifry desifrovat.
+
+Nasleduje bohaty vycet dulezitych dat a mezniku v dejinach kryptologie zhruba od roku 1900 pr.n.l. az po soucasnost. V tomto vyctu nalezne ctenar popis vsech dulezitych sifrovacich systemu, ktere se v historii pouzivaly a se kterymi se muze setkat.
+
+Panu Vondruskovi se podarilo nenasilnou formou vysvetlit zaklady kryptologie a zapalit tak ve ctenarich touhu po novych informacich. Kniha je tak urcena jak naprostym zacatecnikum, tak i pokrocilejsim zajemcum o tajemstvi tohoto obru. Trochu me zamrzelo, ze kniha nebyla o par set stran tlustsi a ze se autor nemohl vice venovat soucasnym sifrovacim medodam, ktere se bezne pouzivaji ve svete informacnich technologii. Takova kniha mi na pultech knihkupectvi v soucasne dobe opravdu schazi a pral bych si, aby se stala pristim dilem tohoto autora. Ackoli ma kniha Kryptologie, sifrovani a tajna pisma na nasem trhu jiz nejakou tu konkurenci v podobe knih Sifry a kody od hyeroglifu po hackery nebo Sifrovani a biometrika aneb tajemne bity a dotyky, ktera se navic venuje i soucasnym systemum, musim konstatovat, ze uvod do kryptologie zvlada kniha pana Vondrusky mnohem lepe a detailneji nez ostatni zminovane tituly.
+
+Pokud se mi ve vas podarilo vzbudit zajem o knihu Kryptologie, sifrovani a tajna pisma, pak tato recenze splnila svuj ucel. Nemilou povinnosti vsak zustava upozorneni na skutecnost, ze kniha byla vydana v mensim nakladu a behem kratke doby byla temer vyprodana. Doporucuji vam proto vyrazit na pruzkum knihkupectvi co nejdrive, protoze jedine tak mate jeste sanci zahlednout tuto knihu v nekterem z regalu. Pokud byste to stesti nemeli a knihu jiz nesehnali, nezbyva nez doufat, ze diky uspechu, ktery kniha mela, se brzy dockame i jejiho opetovneho vydani.
+
+
+Budoucnost ropy
+
+Svetove zasoby ropy se pomalu ztencuji. Spotreba teto tekutiny se kazdym rokem zvysuje a za poslednich 5 let stoupla ze 77 milionu barelu na 84 milionu barelu za den. Z tohoto vyvoje lze jednoduse spocitat, ze behem 21.stoleti budou veskera svetova loziska ropy vycerpana. Jednotlive zeme tezici ropu maji dnes zasoby uz pouze na nekolik desetileti. Saudska Arabie ma pri zvysujici se produkci zasobu maximalne na 40 let. Zasoby Iranu a Iraku se diky velmi nizke tezbe odhaduji na 90 let. V techto statech navic panuje napjata politicka situace a dodavky ropy z techto zemi mohou byt touto skutecnosti znacne poznamenany. Na ruskem uzemi se odhaduje zasoba ropy priblizne na 25 let a nova loziska se v teto zemi budou hledat jen velmi obtizne v mistech tezko dostupnych strojum potrebnym pro tezbu a prepravu. Co se ropy tyce, stane se vsak Rusko pro pristi desetileti pravdepodobne nejspolehlivejsim dodavatelem.
+
+Nedojde-li na trhu s ropou k nahlym vykyvum dodavek, zpusobenych vojenskymi konflikty v Iranu, rozpadem Saudske Arabie nebo terorismem v Iraku, poroste denni svetova spotreba ropy zhruba k roku 2020. V tomto roce se podle odhadu bude spotreba pohybovat na hranici priblizne 115 milionu barelu za den. V dalsich letech jiz bude ropy viditelne ubyvat a spotreba bude klesat diky neunosne vysoke cene teto tekutiny.
+
+Je proto zrejme, ze se lidstvo musi touto problematikou zabyvat a musi tedy najit surovinu, kterou by slo „cerne zlato“ plne nahradit. Vedci se jiz dlouho pokousi vyrobit takovou surovinu z obnovitelnych zdroju. Jednim z uspesnych pokusu, ktery z rukou vedcu vzesel je BIO nafta. Tato tekutina je smesi metylesteru a motorove nafty, pricemz metylester se ziskava ze semen repky olejne a v BIO nafte je ho tretinovy podil. Toto palivo navic produkuje mnohem mene spalin nez bezne pohonne hmoty, cimz mene zatezuje zivotni prostredi. V soucasne dobe tvori podil biologickeho paliva zhruba 2% z celkove spotreby pohonnych hmot v Ceske republice. Nase vlada se navic jako clenska zeme Evropske Unie zavazala do roku 2010 zvysit tento pomer na 5,75%.
+
+Aby se vsak Ceske republice podarilo dostat sveho zavazku, je nutne udrzet vyrobu metylesteru na urovni 100.000 tun za rok. Takto vysoka produkce ale predstavuje zpracovani 280.000 tun semene repky olejne a vyuziti priblizne 120 000 hektaru orne pudy. Ceska vlada se proto rozhodla podporovat v teto oblasti zemedelce a vyrobce metylesteru. Od roku 1997 uvolnuje kazdym rokem dotace ve vysi nekolika set milionu Korun. Pro spotrebitele je pak BIO nafta zvyhodnena nizkou spotrebni dani.
+
+Cena BIO nafty bohuzel zustava v soucasne dobe vyssi nez cena bezne nafty a spotrebitel tak radeji voli mene ekologickou variantu. Cenovy rozdil se vsak postupne snizuje. Skutecnost, ze cena bezne ropy postupne poroste vlivem jejiho nedostatku, nahrava prave zvysovani podilu bio slozky v palivech. V brzke dobe se tak pravdepodobne dockame uplneho nahrazeni stavajicich pohonnych hmot nekterou z vice ekologickych variant ziskavanou z obnovitelnych zdroju energie. Vyhneme se tak katastrofickemu ropnemu soku, ktery by nas mohl behem nekolika desetileti postihnout.
+
+
+
+
+Bezpecnost na webu Volny.cz
+Autor: .cCuMiNn.
+
+nologo Po bezpecnostnim testu venovanem freemailu spolecnosti Seznam.cz, ktery skoncil s oznamenim zranitelnosti na CSRF utoky, jsem se tentokrat zameril na web Volny.cz spolecnosti Telekom Austria. Vysledkem bezpecnostniho testu je tento report, ktery informuje o nalezenych zranitelnostech.
+
+Jako prvni jsem se zameril na hledani zranitelnosti v podobe XSS. Tyto by mely byt na portalech teto velikosti podchyceny, protoze jde snad o nejvice diskutovany a zdokumentovany druh zranitelnosti. Ac jsem nachylnost na utoky XSS necekal, nasel jsem jich na webu Volny.cz spousty. Da se dokonce rici, ze bylo spise vyjimkou, pokud prihlasovaci nebo vyhledavaci formular touto chybou netrpel.
+XSS na webu Volny.cz
+
+    * Vyhledavani, na uvodni strance a pod odkazem vyhledavani, ktere bezi na domene volny.zlatestranky.cz.
+    * Vyhledavani ve zbozi, ktere bezi na domene zbozi.volny.cz
+    * Vzhledavani v e-shopu na domene shop.volny.cz
+    * Dalsi chybicka se nachazi na domene web.volny.cz pri prihlasovani k SMS.
+    * XSS zranitelnosti trpi i formular pro prihlaseni k mailovemu uctu, ktery je umisten na hlavni strance web.volny.cz. Tomuto formulari sice nelze predat data odkazem, protoze je cerpa z cookies, ale presto tuto zranitelnost obsahuje.
+    * Dalsim postizenym mistem je chat.volny.cz, kde obsahuje XSS zranitelnost prihlasovaci formular, kteremu je nutne data poslat metodou post.
+    * Stranka s SMS je ve svem formulari pro vyhledavani take nachylna pres POST vhodne upravenych dat, stejne jako formular pro vyhledavani v televiznich programech na adrese http://web.volny.cz/zabava/tv/
+    * Sekce album.volny.cz je nachylna ve formulari pro prihlaseni a soucasne take ve formulari pro vyhledavani.
+    * Zrejme proto, aby v tom spolecnost Volny.cz nezustala sama, umoznuje neosetrene prihlasovani i do dalsich domen. Napriklad na adrese http://sex.volny.cz/ muzete vyvolat XSS pokud se pokusite prihlasit s vhodne upravenym PoST pozadavkem k seznamce www.amateri.cz. Tato chyba ovsem vznika az v kontextu zminene seznamky a proto se ji zde nebudeme zabyvat.
+
+
+Legalita software a softwarovy audit (2)
+Autor: .cCuMiNn.
+
+V minulem dile tohoto serialu jsme si rekli neco o autorskem zakonu, o tom kdy dochazi k jeho porusovani a o trestech, ktere hrozi tomu, kdo autorsky zakon porusi. Priblizili jsme si take policejni zakrok pri kontrole legalnosti pouzivaneho softwaru a prave na ten dnes navazeme dilem, ktery se bude venovat dokladum, ktere potrebujeme k prokazani legalniho nabyti softwaru.
+Cim dokladovat legalni nabyti softwaru
+
+Nejdulezitejsim dokladem o legalnim nabyti softwaru je faktura nebo jiny doklad vystaveny prodejcem. Timto dokladem deklarujeme pri kontrole legalni nabyti softwaru. Z tohoto duvodu je nutne veskere doklady o koupi softwaru peclive uschovat a mit je dostupne po celou dobu pouzivani daneho programu. Na toto je dulezite myslet hlavne ve firmach, ktere maji povinnost uchovavat danove doklady pouze po dobu peti let a pak casto dochazi k jejich skartovani. V pripade, ze by ke skartovani techto nabyvacich dokladu doslo, budete legalnost softwaru prokazovat jen tezko a pokud nedohleda tyto doklady ani vas dodavatel, budete software nuceni koupit podruhe. Jestlize jste porizovali k nekterym svym programum upgrade, pak je dulezite uschovat doklady nejen od koupe tohoto upgradu, ale zaroven musime dokladovat i legalni nabyti predchozi verze, kterou v soucasne dobe jiz nepouzivame, ale diky ktere jsme meli narok na slevu v ramci upgrade.
+
+Pokud se nyni zamerime na OEM licence, ktere je mozne (az na vyjimky), poridit pouze spolecne s novym hardwarem, pak nesmime zapomenout na to, aby byl veskery OEM software uveden na kupnim dokladu k tomuto hardwaru. V zadnem pripade nestaci, aby bylo na dokladu uvedeno napriklad: "Predmetem koupe je pocitac LINX spolecne s nainstalovanym softwarem." Vzdy musime trvat na tom, aby byl na dokladu uveden presny nazev programu, jeho verze a v nekterych pripadech i jazykova mutace. Spravne vypsany doklad by mel tedy obsahovat napriklad takovouto vetu: " Uvedeny hardware je dodan spolecne s nainstalovanym operacnim systemem OEM MS Windows XP profesional CZ." OEM verze softwaru jsou vazany na hardware, se kterym byly porizeny (casto musime na skrin pocitace nalepit stitek dodavany s OEM verzemi programu) a pokud dochazi k odpisu tohoto hardware, musime spolecne s nim vyradit i OEM software, uvedeny na prodejnim dokladu k hardwaru. V zadnem pripade nemuzeme OEM verze programu vzit a nainstalovat je na jiny hardware. Pokud by probihala kontrola legalnosti a byla by zjistena skutecnost, ze OEM verze softwaru jsou nainstalovany na jinem hardwaru, nez ktery je uveden na nabyvacim dokladu s inkriminovanym softwarem, pak by se tato kopie brala jako nelegalni. Kdyz uz jsme nakousli software kupovany spolecne s hardwarem, musime si take uvedomit, ze spolecne s hardwarem dostavame casto darem i ruzny software v podobe her a uzitecnych programu. Vzdy bychom meli trvat na tom, aby byl seznam veskereho softwaru, ktery je s hardwarem dodan, uveden na dokladu o koupi.
+Uvedme si priklad:
+Koupime si fotoaparat a spolecne s nim dostaneme program pro upravu fotek, kadernicke studio pro tvorbu ucesu a dalsi napriklad pro tvorbu fotoalbumu. Vsechno budou komercni programy, ktere nebudou uvedeny na dokladu o koupi fotoaparatu ani v seznamu jeho prislusenstvi a my si je vsechny nainstalujeme. Kdyz potom prijde kontrola, tak si s nejvetsi pravdepodobnosti nevzpomeneme na to, kde jsme k temto programum prisli a pokud si preci jen vzpomeneme, nebudeme moci legalitu nabyti nijak dokazat. V takovem pripade nam pak hrozi nahrada skody za pouziti techto programu.
+
+Dalsi veci, o ktere jsem se zapomnel zminit v minulem dilu jsou pocitace cekajici na vyrazeni, pokud je prestaneme pouzivat. Pokud software, ktery jsme na nich pouzivali, nainstalujeme na novy pocitac, musime jej vzdy z vyrazovaneho pocitace ihned odinstalovat. Rekneme, ze si koupime krabicovou verzi MS Office, kterou pouzivame na svem pocitaci. Za nejakou dobu se rozhodneme, ze se stareho pocitace zbavime a misto nej si poridime novy. Stary pocitac hodime bez odinstalace do kouta a nas MS Office si nainstalujeme na novy pocitac. Pokud v tuto chvili prijde kontrola, nebude ji v zadnem pripade zajimat, ze je pocitac v koute vyrazeny a jedna kopie nainstalovaneho baliku MS Office bude povazovana za nelegalni.
+Softwarovy audit
+
+Z vyse uvedenych faktu je patrne, ze pravidelna kontrola instalovaneho softwaru, mnozstvi licenci a jejich spravne prirazeni k nabyvacim dokladum je z preventivniho hlediska velmi dulezita. Pokud patrite mezi uzivatele, kteri se snazi instalovat na svuj pocitac pouze legalne nabyty software, pak si zkuste polozit otazku, zda byste byli v pripade kontroly schopni dohledat vsechny doklady o koupi pouzivaneho softwaru. Pokud nemate doklady naprosto v poradku, zrejme vam da celkem dost prace, nez vsechny potrebne dokumenty date dohromady. A co teprve, pokud jste spravcem IT ve vetsi firme a musite priradit nabyvaci doklady k softwaru, ktery je instalovan na desitkach pocitacu? Vzdy byste meli myslet na nejhorsi a povazovat policejni kontrolu legalniho pouzivani softwaru za realnou vec, ktera vas muze kdykoliv potkat. Netreba zduraznovat, ze pokud budete provadet preventivni softwarovy audit sami od sebe, budete na policejni kontrolu vzdy pripraveni a nebudete se ji muset obavat. Nehlede na to, ze jste-li zminenym spravcem IT ve firme, pak nesete plnou zodpovednost za nainstalovany software a v pripade, kdy si na sve pocitace nainstaluji nelegalni software samotni zamestnanci, stejne stanete pred soudem s nejvetsi pravdepodobnosti prave vy. To uz je snad dostatecny duvod, ktery by vas mel k softwarovymu auditu prinutit. Co to tedy softwarovy audit vlastne je? Jde o vytvoreni seznamu veskereho softwaru nainstalovaneho na pocitacich, kterych se softwarovy audit tyka, dohledani vsech nabyvacich dokladu a pripadne dokoupeni licenci nebo odinstalace softwaru, ktery byl na pocitace instalovan nelegalne.
+
+Priste se sejdeme jiz u posledniho dilu tohoto serialu, abychom si povedeli neco o tom, jak spravne provadet softwarovy audit a jakym zpusobem mohou spravci IT prenest zodpovednost za instalovany software na koncove uzivatele.

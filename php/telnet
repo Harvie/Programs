@@ -1,0 +1,19 @@
+#!/usr/bin/php
+<?php
+
+$usage = "telnet host [port]\n";
+if($argc > 1) $host = $argv[1]; else die($usage);
+$port = 23; if($argc > 2) $port = $argv[2];
+if($argc > 3) die($usage);
+
+echo("Connecting to $host:$port...\n");
+$sock = pfsockopen($host, $port);
+if($sock) echo("Connected!\n\n"); else die("Failed!\n");
+$stdin = fopen('php://stdin', 'r');
+stream_set_blocking($sock, 0);
+stream_set_blocking($stdin, 0);
+
+while(!feof($sock) && !feof($stdin)) {
+	echo(fgetc($sock));
+	fwrite($sock, fgetc($stdin));
+}

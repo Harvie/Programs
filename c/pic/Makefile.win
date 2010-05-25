@@ -1,0 +1,33 @@
+# Project: pic
+# Compiler: Default GCC compiler
+# Compiler Type: MingW 3
+# Makefile created by wxDev-C++ 6.10 on 12.11.06 21:29
+
+CPP       = g++.exe
+CC        = gcc.exe
+WINDRES   = windres.exe
+OBJ       = MingW/main.o
+LINKOBJ   = MingW/main.o
+LIBS      = -L"D:/Program Files/Dev-Cpp/Lib"  
+INCS      = -I"D:/Program Files/Dev-Cpp/Include"
+CXXINCS   = -I"D:/Program Files/Dev-Cpp/lib/gcc/mingw32/3.4.2/include" -I"D:/Program Files/Dev-Cpp/include/c++/3.4.2/backward" -I"D:/Program Files/Dev-Cpp/include/c++/3.4.2/mingw32" -I"D:/Program Files/Dev-Cpp/include/c++/3.4.2" -I"D:/Program Files/Dev-Cpp/include" -I"D:/Program Files/Dev-Cpp/" -I"D:/Program Files/Dev-Cpp/include/common/wx/msw" -I"D:/Program Files/Dev-Cpp/include/common/wx/generic" -I"D:/Program Files/Dev-Cpp/include/common/wx/fl" -I"D:/Program Files/Dev-Cpp/include/common/wx/gizmos" -I"D:/Program Files/Dev-Cpp/include/common/wx/html" -I"D:/Program Files/Dev-Cpp/include/common/wx/mmedia" -I"D:/Program Files/Dev-Cpp/include/common/wx/net" -I"D:/Program Files/Dev-Cpp/include/common/wx/ogl" -I"D:/Program Files/Dev-Cpp/include/common/wx/plot" -I"D:/Program Files/Dev-Cpp/include/common/wx/protocol" -I"D:/Program Files/Dev-Cpp/include/common/wx/stc" -I"D:/Program Files/Dev-Cpp/include/common/wx/svg" -I"D:/Program Files/Dev-Cpp/include/common/wx/xml" -I"D:/Program Files/Dev-Cpp/include/common/wx/xrc" -I"D:/Program Files/Dev-Cpp/include/common/wx" -I"D:/Program Files/Dev-Cpp/include/common"
+RCINCS    = --include-dir "D:/PROGRA~1/Dev-Cpp/include/common"
+BIN       = MingW/pic.exe
+DEFINES   = 
+CXXFLAGS  = $(CXXINCS) $(DEFINES)  
+CFLAGS    = $(INCS) $(DEFINES)  
+GPROF     = gprof.exe
+RM        = rm -f
+LINK      = g++.exe
+
+.PHONY: all all-before all-after clean clean-custom
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	$(RM) $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(LINK) $(LINKOBJ) -o "MingW\pic.exe" $(LIBS)
+
+MingW/main.o: $(GLOBALDEPS) main.cpp
+	$(CPP) -c main.cpp -o MingW/main.o $(CXXFLAGS)

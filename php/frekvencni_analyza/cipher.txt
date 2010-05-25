@@ -1,0 +1,158 @@
+﻿Hakin9 - 4/2007
+Autor: .cCuMiNn.
+
+obalka casopisu
+
+Mame zde zacatek prazdnin, a protoze to pro vetsinu z nas znamena i mnohem vice casu pro sve zaliby, neutekla zajiste nikomu z vas novinka, ze vyslo nove cislo naseho oblibeneho casopisu Hakin9.
+
+
+
+
+
+
+Obsah CD
+
+Jiz tradicne se muzete tesit na CD, ktere obsahuje live distribuci Aurox vydavanou pod nazvem Hakin9 live a mnozstvi zajimavych aplikaci, tutorialu a navodu v elektronicke podobe. Za zminku stoji tentokrat tyto aplikace:
+
+SecrecyKeeper by Smart Protection Labs - aplikace umoznujici ridit pristup k jednotlivym souborum na stanicich a serverech na zaklade pristupovych prav, ktera maji jednotlivi uzivatele. O vsech pristupech k informacim jsou vedeny podrobne protokoly. Verzi, kterou na CD nalenete, lze pouzivat po dobu jednoho roku peti agenty.
+AES Password Manager - pokud si kladete otazku, jak na pocitaci bezpecne uchovavat sva pristupova hesla k ruznym sluzbam, cisla kreditnich karet a jejich PINy, pak by se tento program pro vas mohl stat tim spravnym resenim. Aplikace chrani tyto citlive informace 256bitovym AES sifrovanim a umoznuje napriklad jejich vkladani do webovych formularu.
+Event Log Manager - program rozsirujici moznosti klasickeho prohlizece udalosti, ktery je dostupny v systemech Windows. Jednotlive zaznamy je mimojine mozne velice jednoduse radit, tridit, prohlizet ci mazat.
+IisKeeper - 99denni trial verze programu, ktery vam umozni chranit pristup k nekterym zdrojum na IIS webovem serveru bez nutnosti zakladani novych uzivtelskych uctu.
+Norman Virus Control Plus - antivirus obsahujici funkce SandBoxu a vsechno, co lze od dobreho antiviroveho programu ocekavat. Na CD naleznete i verzi pro operacni systemy Windows Vista.
+Licence protektor - aplikace umoznujici ochranu multimedialnich souboru pred neopravnenych kopirovanim. Soubory jsou zasifrovany a pro jejich prezentaci se pouziva prehravac, ktery je soucasti tohoto baliku.
+Obsah tisteneho casopisu
+
+Po te, co bychom za sebou meli strucny popis obsahu CD, muzeme spolecne nahlednout do stranek tisteneho casopisu. Tam na ctenare tentokrat cekaji clanky:
+
+Netrivialni uvod do vyzkumu malware - obsah tohoto clanku ctenarum priblizuje postupy, ktere se pouzivaji pri zkoumani skodlivych kodu zvanych malware. Predstaveny jsou nam nastroje, ktere se pri teto cinnosti vyuzivaji a strucne jsou popsany i ruzne triky, ktere soucasny malware vyuziva.
+Slabiny elektronickeho bankovnictvi - v tomto clanku predstavuji jeho autori ctenarum nejrozsirenejsi kanaly elektronickeho bankovnictvi a poukazuji na slabiny kazdeho z nich.
+Skutecny pribeh o celem prubehu jednech penetracnich testu - tento nazev nese clanek, ktery popisuje cinnosti pri penetracnich testech od sameho zacatku po konecnou zpravu. Ctenari se dozvi, jak mohou tyto testy probihat a jake nastroje jsou behem testu pouzity.
+Prehled vybranych metod na ruseni omezeni v lokalnich sitich - v tomto clanku s mirne nepruhlednym nazvem se muzete docist o metodach, jejichz vyuzitim se daji obchazet omezeni, ktera do cesty uzivatelum kladou administratori site. Doctete o tunelovani sitoveho provozu na otevrenych portech nebo za vyuziti protokolu, ktere byly puvodne urceny k jinemu vyuziti.
+Pokrocile overovani pristupu k Oracle - clanek pojednava o systemu Kerberos a o tom, jak lze pomoci aplikaci tretich stran zajistit bezpecnost pri pristupu k databazovemu serveru Oracle.
+Znepristupneni zdrojoveho programoveho kodu - patrite-li mezi programatory, kteri by radi ukryli sve zdrojove kody pred nenechavym pohledem verejnosti a tak zamezili nebo alespon ztizili dekompilaci vasich binarek, pak je tento clanek urcen prave vam. Autor clanku predstavuje ruzne aplikace, ktere lze nasadit pri zatemnovani kodu, nebo pro jeho komprimaci.
+DNS inSECure - clanek venujici se zranitelnostem systemu DNS a jeho rozsireni DNSSEC, ktere lze pro zvyseni bezpecnosti pouzit.
+Overovani a autorizace v ASP.NET 2.0 - clanek pojednavajici o nejpopularnejsim zpusobu overovani uzivatelu na portalech ASP.NET a ukazuje cesty jak prejit z manualniho na plne automatizovane formy overovani a autorizace uzivatelu.
+
+Na zaver ceka na ctenare jeste rozhovor s Janem Hlavacem, tiskovym mluvcim BSA pro Ceskou republiku, recenze knih Hacking bez zahad a Hacking - Buffer overflow a fejeton Libora Dostalka - Jak jsem prisel o GSMbanking.
+
+Ac v zaveru sve recenze na jednotliva cisla casopisu Hakin9 pravidelne jeho obsah chvalim a minule jsem se dokonce rozplyval nad tim, ze jeho kvalita neustale roste, dnes tomu bude jinak. Obsah tohoto cisla mi pripadal velice povrchni a prosty. Autori jednotlivych clanku nezabihali do detailu a texty tak ztraceji informacni bohatstvi, na ktere jsme v tomto casopise zvykli. Doufejme, ze jde jen o okurkovou sezonu a jiz v pristim cisle na nas bude opet cekat spousta zajimaveho cteni.
+
+Hakin9 - 3/2007
+Autor: .cCuMiNn.
+
+obalka casopisu
+
+Cekani na nove cislo casopisu Hakin9 mi tentokrat pripadalo jako nekonecne. Kveten je ale jiz tady a s nim i treti cislo casopisu Hakin9 v roce 2007. Hned po rychlem preletnuti obsahu bylo zrejme, ze se dlouhe cekani vyplatilo. Nejde totiz o cislo jen tak ledajake, ale o nadupane (pekne od zacatku az do konce) samymi informacnimi skvosty. Mou milou povinnosti jako vzdy je, vam tento zajimavy obsah trochu priblizit.
+
+
+Obsah CD
+
+Jak uz je mym zvykem, zacnu obsahem CD. To obsahuje live distribuci linuxu s nazvem Hakin9 live, ktera je zalozena na Auroxu a mnozstvi uzitecnych utilit, tutorialu a textu. Za zminku stoji napriklad tutorial Metasploit - Exploiting framework a tyto programy:
+
+Ashampoo AntispyWare - program urceny pro Windows2000/XP, ktery ochrani vas pocitac pred vice nez 410.000 injekcemi. Jde o kompletni anti-malware aplikaci, ktera je schopna vyhledat a znicit nejenom viry, wormy, trojany, spyware, adware, ale i ruzne rootkity.
+
+Intelli HyperSpeed 2005 - i tento program je urcen pro pocitace s operacnim systemem Windows. Tato aplikace je pomaha rychlostne optimalizovat podle pozadavku na jejich vyuziti, pricemz vzdy nabizi krok zpet pro pripad, ze nam nebudou provedene upravy zcela vyhovovat.
+
+A-squared Anti-Malware - aplikace, ktera se snazi zaplnit mezeru v oblasti zabezpeceni osobniho pocitace pred skodlivym software. Program je jakymsi IDS, ktery bezi na pozadi a monitoruje vsechny spustene procesy, aby vyloucil pritomnost ruzneho malware.
+
+Comodo Personal Firewall - firewall dostupny zdarma pro domaci pouziti, ktery vam umozni ziskat plnou kontrolu nad vytizenim vasi site jednotlivymi programy. Plna konfigurovatelnost je u produktu podobneho typu samozrejmosti.
+
+NetConceal AntiHistory - program pro Windows, ktery velice jednoduchym zpusobem dokaze zahladit stopy o pritomnosti uzivatele u PC. Aplikace se postara o smazani seznamu navstivenych stranek, otevrenych souboru, apd.
+Obsah tisteneho casopisu
+
+Pote, co jsme si predstavili obsah CD, se konecne dostavam k jadru teto recenze, kterym je obsah tisteneho casopisu Hakin9.
+
+Po par uvodnich stranach, ktere vas seznami s novinkami ze sveta bezpecnosti, nas jako prvni privita clanek Jacka Matulewskiho: Hacky ve Windows. Ten podrobne rozebira zachytavani zprav pod operacnim systemem Windows a naznacuje moznosti vyuziti. Dozvite se napriklad, jak hookovat klavesnici a jak si diky tomu muzete vytvorit svuj vlastni softwarovy keylogger.
+
+Nasleduje clanek Metasploit - Exploiting framework od Michala Merty, ktery vam priblizi novou treti verzi programu Metasploit Framework. Jde o znamy produkt, ktery je urcen pro tvorbu, ladeni a spravu exploitu.
+
+Ve clanku Neviditelne backdoory od Michala Styse se dozvite, jak ukryt svuj backdoor tak, aby nebyl odhalen spravcem systemu. Pomoci rozvinutych technik jej skryjete i pred vsekontrolujicim firewallem.
+
+Obrana databaze Oracle za pomoci pokrocilych bezpecnostnich opatreni je nazev dalsiho clanku. Jak jiz samotny nazev napovida, pujde v nem o databazi Oracle a jeji obranu. Autor clanku Mikolas Pansky v nem pojednava o autentizaci, autorizaci a bezpecnostnich konceptech databaze. Uvadi problematiku pouziti Oracle Advanced Security a mnoho dalsiho.
+
+Ve stejny den, kdy se ukazala prvni verejna verze weboveho prohlizece Internet Explorer 7, se rozpoutala diskuze na tema jeho bezpecnosti. IE7 obsahuje mnoho novych fukci, ktere maji uzivateli zajistit nekolikanasobne vetsi bezpeci nez tomu bylo u predchozi verze. Ktere funkce to jsou, vam priblizi Artur Zarski ve svem clanku Bezpecnost Internet Exploreru 7.
+
+Bezpecnost kont PHP je znacne obsahly clanek o zranitelnostech v PHP, na ktere spravci systemu velmi casto zapominaji. Autor Pawel Maziarz vam za pomoci nazornych prikladu ukaze moznosti zneuziti nekolika ruznych funkci php, ktere mohou vest k plnemu ovladnuti ciziho php konta.
+
+Text Zabezpeceni WWW sluzeb ve Windows Loghorn Server vam predstavi nejnovejsi verzi operacniho systemu Windows Server, ktera je aktualne vedena pod nazvem Loghorn. Na trhu by se mel tento system objevit v listopadu tohoto roku, ale vy se na nej muzete spolecne s autorem clanku podivat jiz nyni.
+
+Co mit na pameti pri vytvareni vlastni webove sluzby a jak se vyhnout nejbeznejsim bezpecnostnim problemum, se doctete ve clanku Web Services Security.
+
+Zajima vas, jak zajistit sifrovani jiz na urovni aplikaci a ne az pri sitovem prenosu? Pokud ano, pak je prave vam urcen clanek Pawla Maziarze o Sifrovani v aplikacich - knihovna Openssl.
+
+Francesco Arruzzoli vam ve clanku Steganografie - umeni okultniho pisma predstavi steganografii tak, jak ji mozna jeste neznate. Pokud vas nekdy zajimalo, jak lze ukryt informace do obrazku, zvuku, videa nebo filesystemu, nemel by vam tento clanek uniknout.
+
+Kvetnove cislo uzavira fejeton Libora Dostalka, prekladatele knihy Hacking bez tajemstvi, v nemz se zaobira otazkou zajmu o hacking a co si lide pod timto pojmem predstavuji.
+
+Sami vidite, ze je toto cislo opravdu plne zajimavosti. Osobne bych rekl, ze se mnozstvi a uroven clanku stale zlepsuje, protoze to ale muze byt pouze muj subjektivni nazor, necham posouzeni na kazdem z vas...
+
+Umeni klamu
+Autor: .cCuMiNn.
+
+Kevin Mitnick
+Kazdy zije svuj vlastni zivot. Nekdo venuje svuj volny cas sportu, jiny zabave. Nekdo pojida chipsy, jiny cokoladu. Jedno vsak mame spolecne. Vsichni vytvarime odpad, kterym chte nechte plnime odpadkove kose ve svych domacnostech. Protoze vsak nadoby na odpadky nejsou bezedne, nezbyva nam, nez je jednou za cas vynest do kontejneru, odkud je pracovnici technickych sluzeb odvezou do spalovny. Urcite se vam take nekdy stalo, ze jste se u kontejneru na komunalni odpad potkali s clovekem, ktery se s hulkou v ruce pohrabava obsahem kontejneru a hleda neco zajimaveho. Bydlite-li blizko budov, v nich jsou kancelare a obchodni sidla firem, mohlo by se vam stat, ze byste krome ruznych postav bez domova potkali v techto spinavych a pachnoucich mistech i jej.
+
+Jeho stredne vysoka, stihla postava by se hrbila v zari mesice nad hromadkou pomackanych papiru. Delsi kastanove vlasy by zakryvaly vyhled jeho velkym, tmave hnedym ocim, ktere by se s dychtivosti snazily nalezt mezi bezcennymi odpadky nejakou stopu. Videli byste, jak se zajmem sklada mozaiky z roztrhanych archu a jak jeho hbite ruce zalovi sem tam v kapsach dlouheho tmaveho kabatu s kapuci, aby neco zapsaly do poznamkoveho blocku, ktery se v nem skryva.
+
+Narazit na nej v techto mistech, urcite byste se lekli. Kdybyste ho vsak chvili pozorovali, pripadal by vam smesny. "Mladik", rekli byste si. Vypada tak na 20let a nebyt tak spinavy, jiste by to byl hoch k pokukani. Co tu dela? Nema snad domov? Ale ano, ma. Dokonce jen par bloku odtud. Je to Kevin Mitnick, ktery sem prisel, stejne jako kazdy den v tomto tydnu, na lov informaci. Rika tomu trashing. Je to jedna z veci, ktera patri mezi jeho konicky. Hleda zde na dokumentech vyhozenych z kancelari jakekoliv duverne informace, ktere neprosly skartovackou. Divili byste se, na jake informace zde nejednou narazi. Seznamy se jmeny zamestnancu, telefonni cisla a funkce osob. Obcas dokonce nejake to rodne cislo, ci cislo zdravotniho pojisteni. Asi vas napadne otazka: "Proc? Proc to dela? Co z toho ma?"
+
+Kevin je sociotechnik. Mezi jeho konicky patri vypocetni technika a jednani s lidmi. Vyziva se v dlouhych telefonnich hovorech, v nichz se vydava za nekoho jineho. Nekoho, jehoz jmeno objevil napsane na formularich mezi odpadky. Snazi se tak z cloveka na druhem konci dratu vylakat dalsi duverne informace, ktere by mu pomohli v jeho ceste k cili. Neni tak pro nej problem vylakat z lidi pristupova hesla do pocitacove site nebo dokonce cisla kreditnich karet jakekoliv osoby na kterou jen pomysli. Nekdy si dokonce oblekne krasny drahy oblek, uvaze si kravatu a s kufrikem v ruce vyrazi primo do vytypovane firmy. Na vratnici predlozi falesny prukaz, ktery si predem vytvoril. Jakmile se jednou ocitne v budove firmy, nic jiz pred nim neudrzi informace v bezpeci. Z kufriku vytahne notebook a pripoji jej do zasuvky s ethernetem. Stahne si soubor s hesly a nahraje na server program, ktery mu pozdeji umozni pripojit se do pocitacove site firmy zvenci. S peknym rozloucenim pak opusti budovu.
+
+Kevin je velice charismaticky, inteligentni a vzdelany clovek, ktery presne vi, co chce. Jeho talent v jednani s lidmi by mu mohl zavidet kazdy psycholog. Vzdyt se mu vzdy podari dostat lidi presne tam, kde je chce mit, pricemz nikdy neztraci hlavu. Kazdou akci si dopredu bezchybne naplanuje a bez mrknuti oka i chladne provede. Miluje tu atmosferu, ktera mu vhani adrenalin do zil. Je v tom proste dobry. Nekteri dokonce tvrdi, ze je nejvetsi hacker vsech dob.
+
+O knize
+Pokud vas zaujali predchozi odstavce, pak byste si urcite nemeli nechat ujit knihu Umeni klamu, ve ktere sve skutky popsal sam Kevin Mitnick. Kniha je jakousi ucebnici socialniho inzenyrstvi. Je plna praktickych prikladu, na nichz autor ukazuje slabiny lidi a jejich zranitelnosti. Na druhou stranu nam touto knihou dava do ruky klic k porozumeni sociologum a jimi pouzivanym praktikam. Naucite se zakladni principy odhaleni podvodu tak, abyste byli schopni jej rozeznat a ubranit se mu.
+
+Mekkou nebo tvrdou drogu?
+
+Toto zari bylo pro meho syna jednim z mezniku v jeho zivote. Nastupoval totiz povinnou skolni dochazku a ja pochopitelne absolvoval jeho prvni skolni den s nim. Po krasne reci, kterou tridni ucitelka vitala ve sve tride prvnacky, se otevrely dvere a do tridy vesel pan obleceny do habitu s kolarkem kolem krku. Pritomne deti taktez privital, lec rec zrucne balil do perinek slozenych ze slov laska, buh a odpusteni. Doporucil prvnackum hodiny krestanske vychovy, a otevrene dvere domu pane. Dale nabidl svou malickost, ktera na ne v tento vyjimecny den pocka prede dvermi ucebny, kde bude ocekavat jejich dotazy a prihlasky.
+
+Nemohl jsem se ubranit pocitu, ze prede mnou stoji drogovy diler, ktery chce meho syna udelat zavislym na „droze“ se jmenem nabozenstvi. Tato „droga“ jiz dokazala zlomit nejednoho dospeleho a zivot tohoto maleho clovicka by v budoucnu mohla naprosto rozdrtit. Kdyz jsme pak opousteli tridu, pan kazatel stal ihned vedle dveri. Stejne jako ruzne existence, o nichz slychavame, ze chteji nevinne deti po odchodu ze skoly nalakat s nekalym umyslem. Sveho syna jsem radeji vedl tak, abych mu zakryval vyhled na tohoto cloveka.
+
+Myslim si, ze je na case, abych si se synem promluvil a podobne jako varuje vetsina rodicu sve deti pred nasledky uzivani drog, mu vysvetlil, co by se mohlo stat, pokud by se nechal podobnym clovekem zlakat.
+
+Co bych mu rekl? Proc si myslim, ze je nabozenstvi tak nebezpecne? V podstate nejde ani tak o nabozenstvi, jako spise o samotnou cirkev, ktera ve jmenu nabozenstvi vystupuje. Od dob kdy na Zemi prisel Kristus, aby vsem lidem ukazal, ze je mozne prozit zivot bez hrichu, se mnohe zmenilo. Kristus sam byl chudym clovekem. Trapil ho hlad a casto nemel ani kam hlavu slozit. Na rozdil od nej je katolicka cirkev nejbohatsi a nejvlivnejsi mocnosti sveta. Jak se to stalo? Kde cirkev ke vsemu tomuto majetku prisla? Vse zacalo uz ve stredoveku. V dobe, kdy se propletly koreny cirkve se zajmy statu a krestane jiz nemuseli svou viru tajit. Pod zastitou viry ziskali v dobe inkvizice nevidanou moc a nashromazdili znacny majetek. Skutecnost, ze se knezi nesmi zenit, aby mohli vsechny sve myslenky venovat bohu, svadi po zamysleni k dojmu, ze pravda lezi nekde jinde. Vstoupi-li do cirkve novy knez, je skrytym cilem cirkve jej pripravit o majetek. Pokud tento knez zemre, neni nikdo, kdo by po nem mohl dedit. Svuj majetek uz ale cirkvi stejne davno takto zfanatizovany clovek odkazal. Kdyby vsak ne a mel tento knez zenu a deti, ktere by po nem dedily, nemohla by tak cirkev prichazet k novym statkum a teoreticky by tak mohl cirkevni majetek dokonce mizet v nenavratnu. Katolicka cirkev dnes jiz nastesti neni jedinou krestanskou cirkvi. Objevilo se spousty lidi, kteri ac byly verici, zacali poukazovat na nespravny vyklad Bible a prekrucovani zcela jasnych faktu. Vezmeme-li napriklad desatero, nedodrzuje katolicka cirkev snad ani polovinu jednotlivych prikazani. Jednim z prikazani je zakaz zpodobnovat boha. V kazdem kostele vsak najdeme Krista na krizi a vyobrazeni nespocetneho mnozstvi svatych. Neznam zadneho z vericich, ktery by obcas nerekl slova jako „Kriste pane“ nebo „pane Boze“, cimz porusuji druhe z prikazani. Uctivani boha sedmy den, bylo cirkvi take davno prekrouceno, kdyz se sedmym dnem stala nedele namisto soboty. O prikazanich: „Nezabijes“, „Nepokrades“, a dalsich., nema po inkvizici snad ani cenu hovorit. V cele historii nezemrelo nikdy vice lidi nez ve jmenu viry. Kvuli vire vzplanula vetsina valek a potycek mezi lidmi. Lide, kteri poukazovali na spatny vyklad Bible, proto zalozili cirkve nove. Patri mezi ne Svedci Jehovovi, Adventisti sedmeho dne, Husitsko bratrska cirkev a mnoho dalsich. Vetsina techto cirkvi jde vsak dnes za moci a majetkem stejne, jako to drive delala cirkev katolicka. V dnesnim demokratickem svete to vsak jiz nema tak jednoduche. Musi se uchylovat k humanejsim zpusobum a sve obeti tak vytvari z dobrovolniku, ktere do cirkve vstoupi. Samotnych dobrovolniku by ovsem bylo malo a casto tak u nasich dveri zazvoni pekne obleceny par mladych lidi, kteri se snazi nalakat nas do sparu prave te jeho viry. Pokud clovek podlehne, necha se zviklat a vstoupi, zacne jej cirkev pretvaret k obrazu svemu. Styl, ktery cirkve pro vychovu jedince voli, bych prirovnal k „vymyvani mozku“. „Spravne vychovany“ clovek pak pravidelne odvadi desatky, stara se o lov novych dusi a casto v dobre vire prenecha teto cirkvi i cely svuj majetek. Jedinec, ktery chce z cirkve vystoupit, to ovsem nema tak jednoduche. Je svymi druhy premlouvan a presvedcovan. Je na nej kladen psychicky natlak a dobrovolny odchod mu nebyva umoznen.
+
+Pokud jde o beznou cirkev, nezbyva mi, nez ji prirovnat k mekkym drogam. Ma-li clovek silnou vuli, muze casto svuj dosavadni postoj zmenit i navzdory prekazkam, ktere mu neduhy teto zavislosti staveji do cesty. Po boku cirkvi vsak jdou jeste sekty. Jedna se v podstate o totez. Rozdil je jen ten, ze jejich vira se ubira jinym smerem. Maji sve vlastni metody a clovek, ktery je jejich chapadly pohlcen, v nich casto najde i svou smrt. Zfanatizovani lide zavisli na teto tvrde droze casto nemaji moznost uniku.
+
+Nezbyva mi, nez se zamyslet nad tim, kam jsme to dopracovali. Drogovy dileri dnes mohou beztrestne nabizet sve zbozi prvnackum pred zraky rodicu i vyucujicich a svuj rozhovor se synem bych ukoncit slovy: „Chces-li byt vericim, klidne jim bud. Nevidim ale duvod, proc se nechat ovlivnovat nekym druhym. Muzes se treba rozhodnout studovat nabozenstvi. Knih na toto tema je vsude dostatek a nabozenstvi samo o sobe z tebe muze dokonce udelat lepsiho cloveka. Proc vsak zacit uzivat drogy, ktere te zaslepi a ohlusi? Drogy, ktere ti budou naseptavat jen tu svou pravdu. Pravdu, nad kterou kdyz se zamyslis, zustane ti rozum stat. Tak co? Rozumis mi?“
+
+
+
+
+
+Legalita software a softwarovy audit (1)
+Autor: .cCuMiNn.
+
+Ackoliv nemam serialy prilis v lasce, protoze si jen zridka udrzim chut k jejich dopsani az do zaverecneho dilu, je tema legality softwaru a softwaroveho auditu natolik obsahle, ze se rozdeleni clanku do nekolika dilu stalo nezbytnosti. Slibuji, ze se tentokrat pokusim dotahnout serial az do konce.
+Autorsky zakon a licencni smlouvy
+
+Abychom spravne pochopili vse okolo legality softwaru, zacneme pekne od zacatku, to je od nasich zakonu. O zakonu, ktery vse zastresuje jste jiz urcite slyseli. Jedna se o autorsky zakon, ktery autorum dila a uzvatelum prisuzuje jista prava a povinnosti. Autorsky zakon je napsan velmi vseobecne, aby podchytil co nejvetsi okruh autorskych del. Z tohoto duvodu se muze zdat, ze je tento zakon ponekud povrchni. Co se primo softwaru tyce, najdeme v tomto zakone jen par paragrafu, ktere se mu primo venuji. Naopak velmi casto v nem muzeme narazit na slova "neni-li uvedeno jinak". Jak si mame tato slova vykladat a kde najdeme to zminovane "uvedeno jinak"? Tato slova vyjadruji vlaste licencni smlouvu, kterou uzavira uzivatel software s jeho autorem. Licencni ujednani musi byt uzivateli pristupne jeste drive, nez dojde k nainstalovani softwaru a jeho autor si muze do teto smlouvy vlozit cokoliv. Licencni smlouva, jako jedna z mala, nemusi byt opatrena podpisem smluvnich stran a pokud pri instalaci softwaru tuto smlouvu prijmete, jste timto licencnim ujednanim vazani. Je dokonce jedno, v jakem jazyce je licencni smlouva sepsana. Pokud danemu jazyku (muze jim byt napriklad cinstina) nerozumite, je na vas, abyste si zajistili jeji preklad.
+
+Z pohledu autorskeho zakona jsou pocitacove programy chapany jako literarni dilo a jejich koupi si kupujeme pouze nosic a manual. Predmetem koupe jsou pouze hmotne veci a samozrejme pravo uzivat software za podminek stanovenych licencni smlouvou.
+
+Kdyz uz jsem zminil, ze autor muze v licencnim ujednani uvest opravdu cokoliv, musim se zminit i o tom, ze nektere z techto bodu mohou napriklad zasahovat do minima opravneni, odporovat autorskemu zakonu, nebo jinym zakonum Ceske republiky, i kdyz v jine zemi zakonum odporovat nemusi. V takovem pripade je licencni smlouva neplatna pouze v tomto bode. V ostatnich bodech pak zustava platna. U nekterych typu licencnich smluv mohou ale nastat i takove pripady, kdy dojde ke zneplatnenismlouvy cele.
+
+Licencnim smlouvam se podrobneji venuje napriklad 6.dil autorskeho zakona, konkretne §46-§57. Licencni smlouvy mivaji ruzna zneni a casto byvaji sepsany dosti obsahle a nesrozumintelne. Presto vyrazne doporucuji jejich precteni pred odsouhlasenim. Ve smlouve najdeme napriklad informace, za jakych podminek muzeme dany software pouzivat. Zda jde o komercni software, o shareware, freeware nebo freeware pro nekomercni pouziti. Pozor si dejte na pripady, kdy je znam autor software, ale u samotneho programu neni uvedena zadna licencni smlouva. Autorsky zakon v §46/1 totiz prisuzuje autoru dila pravo na odmenu a i kdyz uklada povinnost informaci o odmene v licencni smlouve uvadet, muze dojit k pripadu podle §49/2a. Pokud vas bude autor za pouziti dila zalovat nebo pokud bude osloven policii po pripadnem zasahu, aby vycislil svou skodu, muze dojit k tomu, ze po vas bude pozadovat za pouziti sveho dila odmenu. Pokud se jedna o freeware pro nekomercni pouziti, pak takovy software nesmi byt bez splneni licencnich podminek pouzivan na firemnich pocitacich a to ani v pripade, kdy si jej zamestnanec nainstaloval pro sve soukrome pouziti. Jednou se jedna o firemni pocitac a jako takovy je bran. Vyjimky neexistuji.
+
+Zatim jsem se jeste zapomnel zminit o tom, komu autorska prava nalezi. Autorska prava nalezi autoru dila (tj. konkretni fyzicke osobe) a ten se techto prav podle §11/4 nemuze nijak vzdat. Jednim z techto prav je napriklad to, ze ma autor dila pravo na to, aby bylo dilo oznaceno jeho jmenem. To plati i v pripade, kdy dilo vyvyji napriklad v zamestnaneckem pomeru pro firmu, nebo zak pri praci na skolnim dile. Pravo uvedeni jmena autora proste plati ve vsech pripadech. Pokud autor skutecne nestoji o publicitu a s autorstvim dila nechce mit nic spolecneho, muze udelat pouze to, ze dilo uverejni anonymne bez uvedeni sveho jmena. Pokud vas zajimaji podrobnosti o vytvareni del ve skolach nebo v zamestnaneckem pomeru, pak vas take odkazi na autorsky zakon, ve kterem na sve otazky naleznete odpoved.
+Vyjimka pro osobni pouziti
+
+Kdyz uz se bavime o autorskem zakone, je dulezite zminit take §30, ktery umoznuje vytvoreni rozmnozeniny a uziti del s vyjimkou pocitacovych programu a databazi, pro osobni uziti. Z tohoto paragrafu proto vyplyva, ze muzete vlastnit a mit na nosicich nebo v pocitaci ulozeno nepreberne mnozstvi hudebnich nahravek, filmu, knih v elektronicke podobe, fotek a cehokoliv dalsiho, pokud se nebude jednat o programy nebo databaze. Nekomu by mohlo pripadat divne, ze vam nekdo dava neco zadarmo. Nenechte se vsak plest. Autori del maji podle §25 narok na odmenu za uziti dila pro osobni potrebu a tuto odmenu ziskavaji z prodeje pristroju pro tvorbu rozmnozenin a z prodeje prazdnych nosicu.
+BSA
+O teto organizaci jste jiz urcite take slyseli. V mnoha lidech vyvolava nazev teto organizace dojem, ze jde o jakousi softwarovou polici, ktera k vam muze kdykoliv vtrhnout do domu nebo do firmy a provest kontrolu legality softwaru na vasich pocitacich. Skutecnost je vsak jina. Jde o organizaci, ktera byla zalozena softwarovymi firmami, aby je zastupovala v soudnich rizenich pri pouzivani jejich nelegalniho softwaru. Pro zminene firmy je totiz daleko jednoduzsi pokud se s pachateli soudi spolecne, nez kdyby se kazda ze spolecnosti musela soudit sama. Ve vetsine zemi funguje tato spolecnost pouze jako pravni kancelar. U nas se jedna o advokatni kancelar Vobornik - Nigrini, ktera se specializuje na autorske pravo a na internetu ji najdeme na strance www.bsa.cz. BSA navic plni funkci osvety a prevence, kdy upozornuje predevsim firmy na rizika spojena s pouzivanim nelegalniho softwaru. Tou nejznamejsi funkci, kterou BSA zastava vsak zustava podavani trestnich oznameni pri podezreni z pouzivani nelegalniho software a neprilis oblibeny prijem anonymnich udani. Na sdruzeni BSA se totiz muze obratit kdokoliv, kdo ma podezreni nebo dukazy, ze k pouzivani nelegalniho software dochazi. Casto jsou timto zpusobem reseny konkurencni boje mezi spolecnostmi, prevazne z rad projektantu a architektu, kteri ke sve praci potrebuji ne zrovna levny software a proto casto pouzivaji jeho nelegalni kopie. Na tomto miste jeste zminim cesty, kterymi se autor muze domahat svych prav. Pokud se chce autor dila soudit se softwarovym piratem, muze jit budto do civilniho sporu, kde musi zajistit veskere dukazy a vynalozit spousty financnich prostredku, nebo muze podat trestni oznameni a s obvinenym se potom na sve naklady soudi stat. Je zrejme, ze trestni rizeni je pro poskozene autory daleko vyhodnejsi a proto se ve vetsine pripadu uchyluji prave k nemu. V trestnim zakoniku existuji totiz §150 a §151, ktere pokladaji porusovani autorsych prav za trestny cin.
+
+Kdyz uz dojde k policejnimu zasahu
+
+K policejnimu zasahu dochazi ve chvili, kdy je podano trestni oznameni. To muze podat kdokoliv, ale nejcasteji jej podava prave BSA po obdrzenem udani nebo pri podezreni na trestou cinnost. Ve vetsine pripadu se jedna o zasah kontrolujici legalnost softwaru ve firmach. Na domaci uzivatele dochazi jen zridka. Kdyz uz je zahajeno rizeni s domacim uzivatelem, jedna se hlavne o softwarove piraty, kteri svuj nelegalni bussiness rozjeli ve velkem. Zasahovat muze pouze policie CR a to pouze pokud je vybavena soudnim povolenim. Zasah nemuze provadet mestka policie, ci jine organy. K provedeni policeni kontroly je potreba tolika policistu, kolik je ve firme pocitacu. Kazdy policista okamzite odpoji pocitac od site (az na vyjimky si to nespletou s elektrorozvodnou siti :) a zacne pomoci specializovaneho programu schromazdovat informace o tom, jaky software je na pocitaci nainstalovan. V urcitych pripadech, kdy neni mozna kontrola na miste, muze byt pocitac odvezen do kriminalistickeho ustavu. Z vyse uvedeneho duvodu se nemusi prilis bat policejniho zasahu velke firmy, ve kterych se nachazi stovky pocitacu. Nejsnadnejsim tercem se stavaji firmy o cca dvaceti pocitacich. Policie ma na zaklade soudniho povoleni moznost kontroly pouze tech pocitacu, ktere jsou ve vlastnictvi kontrolovaneho subjektu. Pokud tedy mate napriklad ve firme svuj osobni pocitac, nemuze policie pristoupit i k jeho kontrole. Kontrola se dale netyka obsahu datovych nosicu. Budete-li mit vedle pocitacu polozena zaznamova media, pak na nich muzete mit, co chcete a tyto se nestanou obsahem probihajici kontroly. Ta se zameruje vzdy jen na nainstalovany software. Jakmile policie skonci se soupisem nainstalovaneho softwaru, je nalez predan soudnimu znalci k vyhodnoceni. Na majiteli pocitacu nasledne je, aby dolozil legalitu zjisteneho softwaru. Pokud se v pocitacich najde nainstalovany software, u ktereho nemuze majitel pocitace dolozit jeho legalni nabyti, vyziva policie autory softwaru, aby si vycislili vzniklou skodu. V tuto chvili je posledni sance na mimosoudni vyrovnani, ktere je v kazdem pripade pro pachatele vyhodnejsi, nez dlouhotrvajici soudni spor. V blizke budoucnosti budou moci legalitu softwaru ve firmach kontrolovat i financni urady, pricemz v soucasne dobe probihaji prvni skoleni techto uredniku.
+Jake jsou tresty
+
+Pri prokazanem pouziti nelegalniho softwaru je pachtel povinnen uhradit krome nahrady skody take vydani bezduvodneho obohaceni autoru dila ve vysi dvojnasobku obvykle odmeny za uziti dila. Navic by bylo mylne se domnivat, ze nahradou skody a vydanim bezduvodneho obohaceni, si pachatel software zlegalizuje. Pokud chce dany software pouzivat, musi si jej nasledne jeste koupit. Celkem v takovem pripade zaplati pachatel mimo nahradu skody software trikrat. Krome peneziteho trestu stanovuje trestni zakon tresty i v podobe propadnuti veci nebo odneti svobody. Tento paragraf si proto dovolim citovat nize. Jen jeste uvedu, ze znacnym prospechem v odstavci 2 je mysleno obohaceni, nebo-li pouziti nelegalniho software v hodnote presahujici 500.000Kc.
+
+§ 152 Porusovani autorskeho prava, prav souvisejicich s pravem autorskym a prav k databazi
+(1) Kdo neopravnene zasahne do zakonem chranenych prav k autorskemu dilu, umeleckemu vykonu, zvukovemu ci zvukove obrazovemu zaznamu, rozhlasovemu nebo televiznimu vysilani nebo databazi, bude potrestan odnetim svobody az na dve leta nebo penezitym trestem nebo propadnutim veci.
+(2) Odnetim svobody na sest mesicu az pet let nebo penezitym trestem nebo propadnutim veci bude pachatel potrestan,
+a) ziska-li cinem uvedenym v odstavci 1 znacny prospech, nebo
+b) dopusti-li se takoveho cinu ve znacnem rozsahu.
+
+Priste si probereme, cim pro nas muze byt softwarovy audit prospesny a cim dokladovat legalitu softwaru.

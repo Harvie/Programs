@@ -1,0 +1,26 @@
+#!/usr/bin/php
+<?php
+if($argc < 2) die("usage: pwrap command\n");
+for($i=1;$i<$argc;$i++) $command = $command.' '.$argv[$i];
+
+$descriptorspec = array(
+   0 => array("pipe", "r"),  // stdout
+   1 => array("pipe", "w"),  // stdin
+   //2 => array("pipe", "r") // stderr
+   //2 => array("file", "./error-output.txt", "a") // stderr is a file to write to
+);
+
+$cwd = '~/';
+
+$process = proc_open($command, $descriptorspec, $pipes, $cwd, $_ENV);
+$stdin = fopen('php://stdin', 'r');
+
+stream_set_blocking($pipes[0], 0);
+stream_set_blocking($pipes[1], 0);
+//stream_set_blocking($pipes[2], 0);
+stream_set_blocking($stdin, 0);
+
+while(!feof($pipes[0]) && !feof($pipes[1])) {
+	echo(fgetc($pipes[1]));
+	fwrite($pipes[0], fgetc($stdin));
+}

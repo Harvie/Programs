@@ -1,0 +1,62 @@
+#!/usr/bin/php
+<?php
+//StreamRipper
+//Harvie 2007
+/*
+This can rip many types of streams simply by downloading them to file.
+(MP3,OGG,MPEG,AVI,WMA,WMV,etc..)
+*/
+
+///CODE///////////////////////////////////////////////////////////
+///Implicit values
+$len = 1000; //Block size
+//$out = "broadcast.mp3";
+
+///Args
+if(!isset($argc)) die('This is php-cli script you idiot!');
+if($argc < 2) die("Usage: streamrip stream_url [output file] [block_size]\n");
+if($argc > 1) $in = $argv[1];
+$out = explode('/', $in); $out = trim($out[sizeof($out)-1]);
+if($argc > 2) $out = $argv[2];
+if($argc > 3) $len = $argv[3];
+
+$i=1;
+while(is_file($out)) {
+	$sout = $i.'-'.$out;
+	if(!is_file($sout)) $out = $sout;
+	$i++;
+}
+
+//Banner
+echo("Rippin' da stream $in...\nSaving to $out\nc-C to stop\n\n");
+
+//Init
+$total = @(filesize($in));
+$in = fopen($in, 'rb');
+$out = fopen($out, 'wb');
+$b = 0;
+$sp = 'N/A';
+$perc = 'N/A';
+$st = time();
+
+while(!feof($in) && !feof($out)) {
+	//Info
+	$t = time()-$st;
+	$s=$t%60;
+	$m=floor($t/60);
+	$kb=floor($b/1000);
+	$mb=floor($b/1000000);
+	if($s!=0) $sp = round($kb/$s, 2);
+	if(is_int($total)) $perc = ceil($b/$total*100);
+	echo("$mb MB = $kb KB == $m:$s Mins == $perc% == $sp kB/s (avg.)              \r");
+	
+	//Download
+	$data = fgets($in,$len);
+	fputs($out,$data);
+	$b = $b+strlen($data);
+	}
+echo("\n");
+
+//Fclose all
+fclose($in);
+fclose($out);

@@ -1,0 +1,53 @@
+﻿OGB Engine 0.6
+Harvie 2oo7
+http://gbook.wz.cz/
+-----------------------
+Type h[ENTER] for help.
+
+> h
+HELP:
+h - Show help
+f - Show files
+l file - Load file
+l URL - Load file from HTTP or FTP
+y - set CP 1250 ONLY WINDOWS!!! (for some national characters)
+# - Go to line #
+2 - Go to start
+p - Print history
+n - Load next file from link
+r - Reload file
+c - Close file
+q - Quit
+
+> f
+FILES:
+
+aaa.txt
+compile.bat
+game01.txt
+gb_console.exe
+gb_console.php
+Hobit-01.txt
+index.php
+OpenGBook.rar
+screenshot.txt
+
+> l Hobit-01.txt
+LOADED: Hobit-01.txt
+Array
+(
+    [0] => Hobit
+    [1] => aneb cesta tam a zase zpátky
+    [2] => 01 - Neočekávaný dýchánek
+    [3] => napsal: Harvie 2oo7<br />hra na motivy knihy J.R.R. Tolkiena - Hobit aneb cesta tam a zase zpátky
+
+)
+
+
+> 2
+2: Jsi malý hobit s chlupatými chodidly a neuvěřitelnou schopností pohybovat se tiše, po svých předcích jsi zdědil malou podzemní noru s kulatými dveřmi, okny a spoustou dobrého jídla. [3|pokračuj...]
+
+> 3
+3: Jsi poslední z velice zámožného klanu Pytlíků a jmenuješ se Bilbo. [4|pokračuj...]
+
+> q

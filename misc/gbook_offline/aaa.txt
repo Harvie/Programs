@@ -1,0 +1,26 @@
+﻿Hobit|aneb cesta tam a zase zpátky|01 - Neočekávaný dýchánek|napsal: Harvie 2oo7<br />hra na motivy knihy J.R.R. Tolkiena - Hobit aneb cesta tam a zase zpátky
+Jsi malý hobit s chlupatými chodidly a neuvěřitelnou schopností pohybovat se tiše, po svých předcích jsi zdědil malou podzemní noru s kulatými dveřmi, okny a spoustou dobrého jídla. [3|pokračuj...]
+Jsi poslední z velice zámožného klanu Pytlíků a jmenuješ se Bilbo. [4|pokračuj...]
+Vstal jsi, chvíli mrkáš do tmy a pak otevřeš kulatou okenici, cestou do kuchyně si vyndáš ze spižírny dva povidlové koláče a jdeš [6|do kuchyně...]
+
+Chvíli sedíš a s chutí pracuješ na koláčích. Pak dostaneš chuť na dýmku plně nacpanou tím nejlepším hobitím tabákem vykouřenou na [8|zápraží] svého útulného domku.
+
+Posadil jsi se na lavici na svém zápraží, chvíli se napůl zasněně díváš na kopce svého rodného Kraje a pak si konečně začneš ládovat fajfku, když [9|v tom...]
+Před tebou stojí vysoký stařec se špičatým kloboukem, plnovousem, holí a zvláštní jiskrou v oku. "[10|Dobré jitro]" pozdravil jsi.
+"Jak to myslíte?" dotázal se muž. "Je krásné ráno na to, abyste si se mnou sedl a nacpal si odemne svojí fajfku. Jestli jí máte s sebou. Není naspěch." "[11|Ne děkuji..]"
+"Já dnes nemám čas na dlouhé rozmluvy. Sháním někoho,..." odmlčel se "někoho, kdo by se účastnil jistého dobrodružství." [18|"Dobře, tak kdy vyrazíme?"] - "[12|A táák. To nejste na správném místě.]"
+"A táák. Tak to nejste na správném místě. My tady v kraji jsme obyčejní pokojní lidičkové. Na dobrodružství nemáme ani pomyšlení, zdržují jednoho od oběda." [13|Rozloučit se]
+"Dobrýtro." stahuješ se do dveří "K čemu všemu vám to dobrýtro neslouží!" Poznamenal čaroděj. "Chcete říct, že byste se mě rád zbavil pane Pytlíku?" "[14|Odkud znáte mé jméno?]" - "[15|Ano.]"
+"Vy také znáte mé..., ačkoli si již zřejmě nevzpomínáte, že k němu náležím. Já jsem Gandalf Šedý." "[16|"Opravdu ten Gandalf? Čaroděj?"]" - "[17|Hmm...]"
+"Jistě si myslíte, že se vám to podaří..." "[17|To jistě ne.]" - "[21|Pokračujte.]"
+"Ano, Gandalf k vašim službám - to jsem já!" "[17|Bilbo Pytlík, k vašim službám a službám vaší rodiny.]"
+"Takže Bilbo, abychom přešli k [21|věci]..."
+"Né tak rychle pane Pytlíku! Mimochodem, já jsem Gandalf. Musím říci, že jste mě docela překvapil." "Těší mě, tak mne již [17|nenapínejte]."
+
+
+"Bilbo Pytlíku, rozhodl jsem se, že vás na jedno takové dobrodružství vezmu s sebou." "[23|Ano? Děkuji! Jsem poctěn.]" - "[22|Prosím? Co jste to říkal?]"
+"Že vás vezmu do světa." "[23|Kdo říká, že někam půjdu?!]"
+"To je vše. Nashledanou..." "[26|Nashledanou.]" - "[24|Nashledanou a přijďte někdy na svačinu...]"
+"Vážně? Mohu? A co třeba hned zítra?" "[26|Samozřejmě, u mne budete vždy vítán, nashledanou.]" "Nashledanou pane Pytlíku..." řekl Gandalf a jeho plnovous se mírně a spokojeně zacukal.
+
+Ten večer máš problém myslet na cokoli jiného, než na to podivné setkání. Ale [28|usneš] velice rychle.

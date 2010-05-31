@@ -9,6 +9,7 @@
 *.com
 *.o
 *.so
+*.class
 
 *.gz
 *.bz2

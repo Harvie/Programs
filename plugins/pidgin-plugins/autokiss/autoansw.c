@@ -33,13 +33,11 @@ gint compare_str(gconstpointer a, gconstpointer b) {
 
 static void
 received_im_msg_cb(PurpleAccount * account, char *who, char *buffer,
-		   PurpleConversation * conv, PurpleMessageFlags flags,
-		   void *data) {
+PurpleConversation * conv, PurpleMessageFlags flags,
+void *data) {
 
 	/* A workaround to avoid skipping of the first message as a result on NULL-conv: */
-	if (conv == NULL)
-		conv =
-		    purple_conversation_new(PURPLE_CONV_TYPE_IM, account, who);
+	if (conv == NULL) conv = purple_conversation_new(PURPLE_CONV_TYPE_IM, account, who);
 
 	buff = purple_markup_strip_html(buffer);
 	printf("\nHarvie received 1: %s\n", buffer);
@@ -48,7 +46,6 @@ received_im_msg_cb(PurpleAccount * account, char *who, char *buffer,
 
 }
 
-/* Plugin Routine */
 
 static gboolean plugin_load(PurplePlugin * plugin) {
 	void *conv_handle = purple_conversations_get_handle();
@@ -60,7 +57,6 @@ static gboolean plugin_load(PurplePlugin * plugin) {
 }
 
 static gboolean plugin_unload(PurplePlugin * plugin) {
-
 	return TRUE;
 }
 
@@ -74,20 +70,17 @@ static PurplePluginInfo info = {
 	NULL,
 	PURPLE_PRIORITY_DEFAULT,
 
-	"core-autokiss",					/**< id             */
-	"AutoKiss",				/**< name           */
-	"0.1",							/**< version        */
-								/**  summary        */
-	"Automatically answering based on regexes.",
-								/**  description    */
+	"core-autokiss",
+	"AutoKiss",
+	"0.1",
+	"Automatic answering",
 	"Automatically answering based on regexpppppppppppppppp",
-	"Harvie <harvie@email.cz>",			/**< author         */
-	"http://sourceforge.net/projects/pidgin-autoansw",	/**< homepage       */
+	"Harvie <harvie@email.cz>",
+	"http://sourceforge.net/projects/pidgin-autoansw",
 
-	plugin_load,						/**< load           */
-	plugin_unload,						/**< unload         */
+	plugin_load,
+	plugin_unload,
 	NULL,
-
 	NULL,
 	NULL,
 	NULL,

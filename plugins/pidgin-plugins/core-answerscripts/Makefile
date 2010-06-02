@@ -49,3 +49,6 @@ $(PIDGIN_AUTOANSWER).o:$(PIDGIN_AUTOANSWER).c
 
 clean:
 	rm -rf *.o *.c~ *.h~ *.so *.la .libs
+
+user:
+	cp -r purple/* $(HOME)/.purple/

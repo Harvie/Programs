@@ -79,7 +79,7 @@ static PurplePluginInfo info = {
 	"Framework for writing various hooks for libpurple clients",
 	"This plugin will call ~/.purple/" HOOK_SCRIPT " (or wherever purple_user_dir() points) "
 		"script (or any executable) for each single message called."
-		"Envinronment values PURPLE_FROM and PURPLE_FROM will be set to carry "
+		"Envinronment values PURPLE_MSG and PURPLE_FROM will be set to carry "
 		"informations about message text and sender so script can respond to that message. "
 		"Any text printed to STDOUT by the script will be sent back as answer to message. "
 		"Please see example scripts for more informations...",

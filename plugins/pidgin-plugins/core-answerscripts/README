@@ -1,4 +1,5 @@
 libPurple core-answerscripts plugin
+	Framework for hooking scripts to received messages for various libpurple clients
 
 This simple plugin just passes every single message received by any libPurple-based client (pidgin,finch) to sript(s) in user's home directory... So you can add various hooks to your pidgin or finch without need of writing and compiling own C plugin or messing with buggy perl plugin and restarting client after each change in plugin.
 

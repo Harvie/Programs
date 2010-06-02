@@ -13,41 +13,43 @@
 #include <libpurple/util.h>
 #include <libpurple/notify.h>
 
-#include <time.h>
-#include <string.h>
 #include <stdio.h>
-/*
-#include <sys/stat.h>
-#include <ftw.h>
-#include <glib.h>
-#include <unistd.h>
-*/
+#include <stdlib.h>
+
+#define RESPONSE_LINE_LENGTH 4096
+#define HOOK_SCRIPT "answerscripts.exe"
 
 char *buff = NULL;
-
-gint compare_str(gconstpointer a, gconstpointer b) {
-	if (a == NULL) return 1;
-	if (b == NULL) return -1;
-	return strcmp(a, b);
-}
+char *hook_script = NULL;
+char response[RESPONSE_LINE_LENGTH+1];
+int i;
 
 static void
 received_im_msg_cb(PurpleAccount * account, char *who, char *buffer,
 PurpleConversation * conv, PurpleMessageFlags flags,
 void *data) {
-
 	/* A workaround to avoid skipping of the first message as a result on NULL-conv: */
 	if (conv == NULL) conv = purple_conversation_new(PURPLE_CONV_TYPE_IM, account, who);
 
 	buff = purple_markup_strip_html(buffer);
-	printf("\nHarvie received 1: %s\n", buffer);
+	//printf("\nHarvie received: %s: %s\n", who, buff); //debug
+	//purple_conv_im_send(purple_conversation_get_im_data(conv), ":-*"); //debug
 
-	purple_conv_im_send(purple_conversation_get_im_data(conv), ":-*");
+	setenv("PURPLE_FROM", who, 1);
+	setenv("PURPLE_MSG", buff, 1);
 
+	FILE* pipe = popen(hook_script, "r"); //TODO: process scripts and send response asynchronously
+	while (pipe && fgets(response, RESPONSE_LINE_LENGTH, pipe)) {
+		for(i=0;response[i];i++) if(response[i]=='\n') response[i]=0;
+		purple_conv_im_send(purple_conversation_get_im_data(conv), response);
+	}
+	pclose(pipe);
 }
 
 
 static gboolean plugin_load(PurplePlugin * plugin) {
+	asprintf(&hook_script,"%s/%s",purple_user_dir(),HOOK_SCRIPT);
+
 	void *conv_handle = purple_conversations_get_handle();
 
 	purple_signal_connect(conv_handle, "received-im-msg",
@@ -57,6 +59,7 @@ static gboolean plugin_load(PurplePlugin * plugin) {
 }
 
 static gboolean plugin_unload(PurplePlugin * plugin) {
+	free(hook_script);
 	return TRUE;
 }
 
@@ -70,13 +73,18 @@ static PurplePluginInfo info = {
 	NULL,
 	PURPLE_PRIORITY_DEFAULT,
 
-	"core-autokiss",
-	"AutoKiss",
+	"core-answerscripts",
+	"AnswerScripts",
 	"0.1",
-	"Automatic answering",
-	"Automatically answering based on regexpppppppppppppppp",
+	"Framework for writing various hooks for libpurple clients",
+	"This plugin will call ~/.purple/" HOOK_SCRIPT " (or wherever purple_user_dir() points) "
+		"script (or any executable) for each single message called."
+		"Envinronment values PURPLE_FROM and PURPLE_FROM will be set to carry "
+		"informations about message text and sender so script can respond to that message. "
+		"Any text printed to STDOUT by the script will be sent back as answer to message. "
+		"Please see example scripts for more informations...",
 	"Harvie <harvie@email.cz>",
-	"http://sourceforge.net/projects/pidgin-autoansw",
+	"http://github.com/harvie",
 
 	plugin_load,
 	plugin_unload,
@@ -96,4 +104,3 @@ static void init_plugin(PurplePlugin * plugin) {
 }
 
 PURPLE_INIT_PLUGIN(autoanswer, init_plugin, info)
-

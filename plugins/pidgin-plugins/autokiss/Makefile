@@ -1,10 +1,7 @@
 #
-# pidgin-autoanswer Makefile
+# core-answerscripts Makefile
 #
-# Copyright 2009 Dmitriy Kostiuk < d.k AT list DOT ru>
-#
-# Heavily inspired and copied from :
-# pidgin-latex plugin by Kevin Stange <extprefs@simguy.net>
+# Copyright 2010 Thomas 'Harvie' Mudrunka <harvie AT email DOT cz>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,7 +27,7 @@ else
   LIB_INSTALL_DIR = $(PREFIX)/lib/pidgin
 endif
 
-PIDGIN_AUTOANSWER = autoansw
+PIDGIN_AUTOANSWER = answerscripts
 
 PIDGIN_CFLAGS  = $(shell pkg-config pidgin --cflags)
 GTK_CFLAGS   = $(shell pkg-config gtk+-2.0 --cflags)

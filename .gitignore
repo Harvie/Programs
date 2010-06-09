@@ -12,12 +12,14 @@ _*
 *.so
 *.class
 
-*.gz
-*.bz2
-*.xz
-*.rar
-*.zip
 *.tar
+*.gz
+*.xz
+*.bz
+*.bz2
+*.tgz
+*.zip
+*.rar
 
 *.mp3
 *.wav

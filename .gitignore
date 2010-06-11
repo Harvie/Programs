@@ -4,8 +4,8 @@ _*
 *.old
 *.part
 
-*/pkg/
-*/src/
+pkg/
+src/
 
 *.exe
 *.EXE

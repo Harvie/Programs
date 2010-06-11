@@ -4,6 +4,9 @@ _*
 *.old
 *.part
 
+*/pkg/
+*/src/
+
 *.exe
 *.EXE
 *.dll

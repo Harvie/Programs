@@ -30,7 +30,7 @@ echo -e "lame-recursive v$version (Harvie 2o1o)
 	Example:	cd ~/music;	$0 standart
 	Example:	cd ~/spoken;	$0 voice
 
-presets:	
+presets:
 	VBR: voice, medium, standart, extreme, insane (= 320kbps CBR)
 	ABR: 8, 16, 32, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320
 	For more info:	lame --preset help
@@ -39,6 +39,10 @@ cpu-cores:
 	You probably have $cpusguess CPU cores, i will use this value by default
 	Anyway... You can try any value higher than 0
 	(does not affect sound quality, probably you don't need to change this)
+
+tips & tricks:
+	- to quickly visualy check if all files were recoded:
+	  ls -R1 . | sort | less
 "
 exit;
 }

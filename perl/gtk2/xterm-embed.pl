@@ -5,6 +5,7 @@ use Gtk2 -init;
 
 my $window = Gtk2::Window->new ('toplevel');
 $window->set_default_size(640, 480);
+#$window->set_decorated(0);
 $window->signal_connect( destroy => sub {
     Gtk2->main_quit();
 });

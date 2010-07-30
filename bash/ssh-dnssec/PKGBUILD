@@ -1,0 +1,20 @@
+# Contributor: Thomas Mudrunka <harvie@@email..cz>
+# Maintainer: Thomas Mudrunka <harvie@@email..cz>
+# You can also contact me on http://blog.harvie.cz/
+
+pkgname=openssh-dnssec
+pkgver=0.1
+pkgrel=1
+pkgdesc="DNSSEC wrapper for OpenSSH client which will simply prevent you from connecting to hosts with fraudent DNS records"
+arch=('any')
+license=('GPL')
+url="http://github.com/Harvie/Programs/tree/master/bash/ssh-dnssec/"
+depends=('openssh' 'ldns' 'bash')
+source=('ssh-dnssec.sh')
+md5sums=('0576e782eb937c4607c8a9dd0d5f8437')
+
+build() {
+	mkdir -p ${pkgdir}/usr/bin
+	cp -f ${srcdir}/ssh-dnssec.sh ${pkgdir}/usr/bin/ssh-dnssec
+	chmod -R 755 ${pkgdir}/
+}

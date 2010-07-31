@@ -1,7 +1,16 @@
 #!/bin/sh
+#OpenSSH wrapper for DNSSEC (see $0 -h for help)
+
+#keys from lowest priority to highest:
+for key in\
+	'/usr/share/dnssec-trust-anchors/root-zone.key'\
+	'/etc/trusted-key.key'\
+	; do
+		[ -r "$key" ] && drillargs="-k $key";
+done;
+
 drill="$(which drill)"
 ssh="$(which ssh)"
-
 check_ssh_cmdline() {
 	while getopts "a:c:e:i:l:n:k:V:o:p:q:P:t:v:x:C:L:R:h" OPT; do
 		if [ "$OPT" == 'h' ]; then
@@ -21,6 +30,13 @@ check_ssh_cmdline() {
 		$0 user@rhybar.cz
 		(both commands should fail with DNSSEC error)
 
+	Known issues:
+		- DNS record can change between DNSSEC validation and SSH connection
+			- we should pass IP address directly to SSH binary (patches welcome)
+
+	If there are some autodetected drill arguments, you can see them here:
+		$drillargs
+
 "
 			"$ssh" --help
 			exit 0;
@@ -28,8 +44,8 @@ check_ssh_cmdline() {
 	done
 	shift $(($OPTIND -1));
 	host="${1##*@}";
-	echo "$drill -TD $host"
-	out="$("$drill" -TD "$host")"; ret=$?;
+	echo "$drill $drillargs -TD $host"
+	out="$("$drill" $drillargs -TD "$host")"; ret=$?;
 	echo "$out" | grep -i NO.DNSKEY;
 	return $ret;
 }

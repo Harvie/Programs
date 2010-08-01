@@ -20,10 +20,7 @@ check_ssh_cmdline() {
 
 	You can use alias ssh='$0' (and you can add it to your ~/.bashrc)
 
-	Command line options are just the same as for SSH, but you have to
-	specify all the options before hostname and optional command. eg.:
-		$0 -p2222 user@example.com		(good)
-		$0 user@example.com -p2222		(baad)
+	Command line options are just the same as for SSH
 
 	To test if $0 works as it's supposed to be working, you can try following:
 		$0 user@badsign-a.test.dnssec-tools.org

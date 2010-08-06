@@ -1,0 +1,26 @@
+{
+  "name": "Drill DNSSEC Validator. Using NPAPI plugin to launch Drill utility available in ldns package.",
+  "version": "0.1",
+  "description": "",
+	"icons": {
+      "128": "security-high.png",
+      "16": "security-high.png",
+      "32": "security-high.png",
+      "48": "security-high.png"
+   },	
+	"background_page": "background.html",
+	"options_page": "options.html",
+	"page_action": {
+    "default_icon": "gtk-dialog-question.png", // required
+    "default_title": "DNSSEC Validator"    // optional; shown in tooltip
+    //,"default_popup": "popup.html"    // optional
+  },
+	"plugins": [
+    { "path": "npexec.so", "public": false }
+    /*{ "path": "npexec64.so" },
+    { "path": "npexec.dll" }*/
+  ],
+  "permissions": [
+    "tabs"
+  ]
+}

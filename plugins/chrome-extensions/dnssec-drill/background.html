@@ -1,0 +1,40 @@
+<html><head>
+<meta http-equiv="refresh" content="10" /> 
+</head>
+<body>
+	<embed type="application/x-system-call" id="pluginId" width="0" height="0">Plugin FAILED to load</embed>
+	<script>
+	  var plugin = document.getElementById("pluginId");
+	  /*var result = plugin.myPluginMethod();  // call a method in your plugin
+	  console.log("my plugin returned: " + result);*/
+
+			function doDrill(tabId, changeInfo, tab) {
+				var domain = tab.url.match(/:\/\/(.[^/]+)/)[1];
+        chrome.pageAction.show(tabId);
+				
+				//alert('drill -k /etc/trusted-key.key -TD ' + domain);
+				var ret = plugin.system('drill -k /etc/trusted-key.key -TD ' + domain);
+				//alert(ret);
+        if(ret > 0) {
+					chrome.pageAction.setIcon({path:"security-low.png", tabId:tab.id});
+					chrome.pageAction.setTitle({tabId:tab.id, title:"DNSSEC key invalid!"});
+        } else {
+					chrome.pageAction.setIcon({path:"security-medium.png", tabId:tab.id});
+					chrome.pageAction.setTitle({tabId:tab.id, title:"DNSSEC key valid or not found..."});
+				}
+        chrome.pageAction.show(tabId);
+			}
+
+		  // Called when the url of a tab changes.
+      function checkForValidUrl(tabId, changeInfo, tab) {
+				chrome.pageAction.setIcon({path:"gtk-dialog-question.png", tabId:tab.id});
+				chrome.pageAction.setTitle({tabId:tab.id, title:"DNSSEC resolving in progress... Please wait..."});
+				var drill = setTimeout(function() { doDrill(tabId, changeInfo, tab); }, 0);
+      };
+
+      // Listen for any changes to the URL of any tab.
+      chrome.tabs.onUpdated.addListener(checkForValidUrl);
+	</script>
+</body>
+</html>
+

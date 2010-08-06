@@ -1,0 +1,62 @@
+<html>
+<head><title>Kyberia Notificator Options</title>
+<style>
+* {
+	color: lime;
+	background: black;	
+}
+</style>
+</head>
+<script type="text/javascript">
+
+
+if(!localStorage["name"]) localStorage["name"] = "";
+if(!localStorage["pass"]) localStorage["pass"] = "";
+if(!localStorage["type"]) localStorage["type"] = "name";
+if(!localStorage["secs"]) localStorage["secs"] = 30;
+
+// Saves options to localStorage.
+function save_options() {
+  localStorage["name"] = document.getElementById("name").value;
+  localStorage["pass"] = document.getElementById("pass").value;
+  localStorage["type"] = document.getElementById("type").value;
+  localStorage["secs"] = document.getElementById("secs").value;
+	localStorage["reconnect"] = 1;
+}
+
+// Restores select box state to saved value from localStorage.
+function restore_options() {
+  document.getElementById("name").value = localStorage["name"];
+  document.getElementById("pass").value = localStorage["pass"];
+  document.getElementById("type").value = localStorage["type"];
+  document.getElementById("secs").value = localStorage["secs"];
+}
+
+</script>
+
+<body onload="restore_options()">
+
+<div style="text-align: center; width: 100%;">
+<pre><h1>Kyberia.sk Mail Notificator</h1>
+name: <input type="text" id="name" />
+pass: <input type="password" id="pass" />
+type: <input type="text" id="type" title="login type (name|id)" />
+secs: <input type="text" id="secs" title="refresh interval in seconds" />
+<button onclick="save_options()">Save</button></pre>
+</div>
+
+<pre style="float: right;">
+  ___ ___                          __         
+ /   |   \ _____   _______ ___  __|__|  ____  
+/    ~    \\__  \  \_  __ \\  \/ /|  |_/ __ \ 
+\    Y    / / __ \_ |  | \/ \   / |  |\  ___/ 
+ \___|_  / (____  / |__|     \_/  |__| \___  >
+       \/       \/                         \/ 
+
+Brought to you by <a href="https://kyberia.sk/id/3764224">Harvie</a> 2o1o (<a href="http://blog.harvie.cz/">blog</a>).
+</pre>
+<img src="ico-big.png" style="float: left;" />
+
+</body>
+</html>
+

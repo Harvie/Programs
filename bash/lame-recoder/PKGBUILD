@@ -11,7 +11,7 @@ license=('GPL')
 url="http://aur.archlinux.org/packages.php?ID=35983"
 depends=('bash' 'lame')
 source=('lamer.bash')
-md5sums=('a77180ca36dfb966df860541734f5474')
+md5sums=('bca80a816f4598f4afb917088f34d95b')
 
 build() {
 	mkdir -p ${pkgdir}/usr/bin

@@ -82,11 +82,11 @@ encode() {
 	tsign "    Done: '$infile'; retval=$?";
 }
 
-echo "==> I will use $cpus CPU cores";	
+echo "==> I will use $cpus CPU cores";
 export -f encode; export quality outdir lamelog
-find -regextype posix-egrep -iregex '.*'"$filetypes" | grep -v /"$outdir" | tr '\r\n' '\0\0' | xargs -0 -n 1 -P "$cpus" bash -c 'encode "$@"' --
+find -regextype posix-egrep -iregex '.*'"$filetypes" | grep -v /"$outdir" | sort -n | tr '\r\n' '\0\0' | xargs -0 -n 1 -P "$cpus" bash -c 'encode "$@"' --
 echo '
 
-==> All files were processed. 
+==> All files were processed.
 ==> But you should rather check them before deleting the originals...
 ==> Thank you for using lame-recursive by Harvie ( http://blog.harvie.cz/ )'

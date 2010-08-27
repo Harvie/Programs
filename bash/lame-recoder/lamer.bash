@@ -27,11 +27,11 @@ echo -e "lame-recursive v$version (Harvie 2o1o)
 	- Supports multiple CPUs/cores
 
 	Usage:  	$0 [preset] [cpu-cores]
-	Example:	cd ~/music;	$0 standart
+	Example:	cd ~/music;	$0 standard
 	Example:	cd ~/spoken;	$0 voice
 
 presets:
-	VBR: voice, medium, standart, extreme, insane (= 320kbps CBR)
+	VBR: voice, medium, standard, extreme, insane (= 320kbps CBR)
 	ABR: 8, 16, 32, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320
 	For more info:	lame --preset help
 

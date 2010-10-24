@@ -1,0 +1,53 @@
+BACKUP_TARGET="ssh://user@server/.BackupCrypto/backup-name"
+export PASSPHRASE=looong-password-fjdshfkasdfhdsfhsdhfsdhfsdhsjdkfjkdsjfdshjfhdsjf
+### DO NOT WRAP THE PASSPHRASE WITH QUOTES, THEY WILL BE TAKEN AS PART OF IT ###
+
+BACKUP_SOURCE="./"
+DFLAGS=--exclude './Makefile' --exclude '**/_*'
+DUPLICITY=duplicity
+#BACKUP_TARGET="file:///tmp/bkp"
+
+.PHONY: backup full verify list status cleanup restore help man
+
+backup:
+	$(DUPLICITY) $(DFLAGS) $(BACKUP_SOURCE) $(BACKUP_TARGET)
+
+full:
+	$(DUPLICITY) full $(DFLAGS) $(BACKUP_SOURCE) $(BACKUP_TARGET)
+
+verify:
+	$(DUPLICITY) verify $(DFLAGS) $(BACKUP_TARGET) $(BACKUP_SOURCE)
+
+list:
+	$(DUPLICITY) list-current-files $(BACKUP_TARGET)
+
+status:
+	$(DUPLICITY) collection-status $(BACKUP_TARGET)
+
+cleanup:
+	$(DUPLICITY) cleanup --force $(BACKUP_TARGET)
+
+restore:
+	#	you can restore your files using this command:
+	#	PASSPHRASE='$(PASSPHRASE)' $(DUPLICITY) restore $(BACKUP_TARGET) /tmp/restored
+
+man:
+	man duplicity
+
+help:
+	###################################################################
+	#
+	#  Makefile for backing-up using duplicity
+	#  --> http://duplicity.nongnu.org/
+	#
+	#	make          -	same as "make backup"
+	#	make backup   - backup (full or incremental)
+	#	make full     -	full backup
+	#	make verify   -	compare local files with backup
+	#	make list     -	list files on backup
+	#	make status   -	print backup status
+	#	make cleanup  -	remove extraneous files from backup
+	#	make restore  -	print command to restore files
+	#	make help     -	print this help
+	#	make man      - show duplicity manpage
+	#

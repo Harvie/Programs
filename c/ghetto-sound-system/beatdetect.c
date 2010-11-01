@@ -1,4 +1,6 @@
 //CFLAGS=-lasound make beatdetect; echo -----; ./beatdetect hw:default
+//http://www.equalarea.com/paul/alsa-audio.html
+
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <alsa/asoundlib.h>

@@ -1,8 +1,22 @@
-#CFLAGS=-lSDL_sound -lSDL -lSDL_mixer
-CFLAGS+=`sdl-config --cflags --libs` -lSDL_mixer
-CFLAGS+=-lm
+sdl_BIN=sampler synth
+alsa_BIN=beatdetect
 
-.PHONY: all go
-all: sampler synth
+#sdl_CFLAGS+=-lSDL_sound -lSDL -lSDL_mixer
+sdl_CFLAGS+=$(shell sdl-config --cflags --libs) -lSDL_mixer
+sdl_CFLAGS+=-lm #synth
+alsa_CFLAGS+=-lasound
+
+.PHONY: all clean sdl alsa go
+all: sdl alsa
+clean:
+	rm $(sdl_BIN) $(alsa_BIN)
+
+sdl:
+	$(MAKE) CFLAGS+="$(sdl_CFLAGS)" $(sdl_BIN)
+
+alsa:
+	$(MAKE) CFLAGS="$(alsa_CFLAGS)" $(alsa_BIN)
+
+
 go: sampler
 	./$? samples/*/* 2>/dev/null

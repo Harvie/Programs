@@ -3,7 +3,7 @@
 # You can also contact me on http://blog.harvie.cz/
 
 pkgname=dream-strobe
-pkgver=3
+pkgver=4
 pkgrel=1
 pkgdesc="Stroboscope implementation for GNU/Linux console. Also called 'Dream Machine' or 'Strobe'. Can be used to alternate state of consciousness by affecting brainwave frequencies. Use only at your own risk!"
 arch=('any')
@@ -11,7 +11,7 @@ license=('GPL')
 url="http://aur.archlinux.org/packages.php?ID=27012"
 depends=()
 source=('strobe.c')
-md5sums=('8df74539c4f79aaf54a8a6d4423e3b4a')
+md5sums=('a23d214d2934cb5814e10bc9a2b92aa4')
 
 build() {
 	mkdir -p ${pkgdir}/usr/bin

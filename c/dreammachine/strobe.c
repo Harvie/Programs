@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
 		fputs(state_a, stdout);
 			fflush(stdout);
 			usleep(half_interval);
+			if(argc > 2) getchar(); //interactive strobe
 		fputs(state_b, stdout);
 			fflush(stdout);
 			usleep(half_interval);

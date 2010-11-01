@@ -8,12 +8,12 @@ alsa_CFLAGS+=-lasound
 
 .PHONY: all clean sdl alsa go
 all: sdl alsa
+	echo .gitignore $(sdl_BIN) $(alsa_BIN) | tr ' ' '\n' > .gitignore
 clean:
-	rm $(sdl_BIN) $(alsa_BIN)
+	rm .gitignore $(sdl_BIN) $(alsa_BIN)
 
 sdl:
 	$(MAKE) CFLAGS+="$(sdl_CFLAGS)" $(sdl_BIN)
-
 alsa:
 	$(MAKE) CFLAGS="$(alsa_CFLAGS)" $(alsa_BIN)
 

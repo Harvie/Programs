@@ -80,7 +80,10 @@
 			} else {
 				int j;
 				for(j=0;j<128;j++) if((int)buf[j] > 1000) {
-					printf("BOOM! %d\n", (int)buf[j]);
+					//printf("BOOM! %d\n", (int)buf[j]);
+					//puts("");
+					putchar('!');
+					fflush(stdout);
 					break;
 				}
 			}

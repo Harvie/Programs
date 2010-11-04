@@ -3,7 +3,7 @@
 #include <asm-generic/ioctls.h>
 #include <unistd.h>
 
-/* Pulse DTR (Harie 2o1o)
+/* Pulse DTR (Harvie 2o1o)
  * This can be used eg.: for reseting Arduino
  *
  * make serial-pulse-dtr

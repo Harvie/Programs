@@ -44,4 +44,6 @@ my $msg=1337;
 my $enc=rsa($msg,$n,$e); #encrypt
 	print "ENC: $enc\n";
 my $dec=rsa($enc,$n,$d); #decrypt
-	print "DEC: $dec\nTST: ".$msg.($msg==$dec?"=":"!=").$dec."\n";
+	$test=($msg==$dec);
+	print "DEC: $dec\nTST: ".$msg.($test?"=":"!=").$dec."\n";
+	exit !$test;

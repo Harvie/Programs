@@ -5,7 +5,7 @@ use bignum; #We'll need bignum for real messages
 
 sub rsa { #RSA (de)crypt function (message,modulus,exponent)
 	my ($msg,$m,$e) = @_;
-	($msg**$e)%($m);
+	($msg**$e)%($m); #TODO: reimplement using chinese remainder theorem (this is too slow!!!)
 }
 
 sub isprime { #Tell if number is prime or not (suboptimal)
@@ -40,6 +40,7 @@ print "\t[[[ Harvie's simple RSA demo ]]]\nfor study & testing purposes only (IN
 print "=== KEYS ===\nPUB: ($n,$e)\nPRV: ($n,$d)\n";
 
 my $msg=1337;
+$msg=$n-1;
 	print "=== TEST ===\nMSG: $msg\n";
 my $enc=rsa($msg,$n,$e); #encrypt
 	print "ENC: $enc\n";

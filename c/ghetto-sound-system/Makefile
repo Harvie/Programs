@@ -1,5 +1,5 @@
 sdl_BIN=sampler synth
-alsa_BIN=beatdetect
+alsa_BIN=beatdetect midi-rx
 
 #sdl_CFLAGS+=-lSDL_sound -lSDL -lSDL_mixer
 sdl_CFLAGS+=$(shell sdl-config --cflags --libs) -lSDL_mixer

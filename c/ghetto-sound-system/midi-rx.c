@@ -11,7 +11,8 @@
 #define MIDI_NOTE_ON	144
 #define MIDI_CONTROL	176
 #define MIDI_PITCH_BEND	224
-#define MIDI_FORMAT	"%d:%d:%d\n"
+#define MIDI_FORMAT	"%c%c%c"
+#define MIDI_FORMAT_ERR	"%d:%d:%d\n"
 
 snd_seq_t *open_seq();
 void midi_action(snd_seq_t *seq_handle);
@@ -55,6 +56,7 @@ void midi_action(snd_seq_t *seq_handle) {
         printf(MIDI_FORMAT, MIDI_NOTE_OFF, ev->data.control.channel, ev->data.note.note);
         break;
     }
+		fflush(stdout); fflush(stderr);
     snd_seq_free_event(ev);
   } while (snd_seq_event_input_pending(seq_handle, 0) > 0);
 }

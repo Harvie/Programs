@@ -5,7 +5,7 @@ use utf8;
 
 use strict;
 use warnings;
-use Curses::UI;
+use Curses::UI ;
 
 #use I18N::Collate;
 #setlocale('LC_COLLATE', 'cs_CZ.utf8');
@@ -20,7 +20,7 @@ use Curses::UI;
 
 
 
-my $cui = new Curses::UI( -color_support => 1, -compat => 0 );
+my $cui = new Curses::UI( -color_support => 1, -compat => 0, -utf8 => 1);
 
 #Create a menu ^
 

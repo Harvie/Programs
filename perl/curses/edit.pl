@@ -14,7 +14,7 @@ use Curses::UI;
 our $path = "/home";
 our $file = "";
 
-my $cui = new Curses::UI(-color_support => 1, -language => "czech");
+my $cui = new Curses::UI(-color_support => 1, -language => "czech", -utf8 => 1);
 my @menu = (
     {
          -label => 'Soubor', -submenu =>

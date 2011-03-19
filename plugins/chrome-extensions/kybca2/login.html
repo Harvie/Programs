@@ -10,7 +10,7 @@
 localStorage["reconnect"] = 1;
 function kybcaLogin() {
 	var check_mail_timer = setTimeout("kybcaLogin()", localStorage["secs"] * 1000);
-	if(localStorage["reconnect"] == 0) break;
+	if(localStorage["reconnect"] == 0) return;
 	localStorage["reconnect"] = 0;
 
 	if(!localStorage["secs"]) localStorage["secs"] = 30;

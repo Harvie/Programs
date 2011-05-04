@@ -1,0 +1,10 @@
+#Quick and dirty .gitignore to get rid of binaries, overrides global .gitignore :(
+/*
+!/*.*
+![Mm]akefile
+*.o
+*.exe
+*~
+_*
+*.bak
+*.rar

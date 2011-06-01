@@ -1,0 +1,11 @@
+# ~/.config/fsniper/config
+# You can get fsniper at http://code.l3ib.org/?p=fsniper.git
+
+watch {
+	/etc/ {
+		mtab {
+			# %% is replaced with the filename of the new file
+			handler = encfs-automount.sh %%;
+		}
+	}
+}

@@ -16,8 +16,10 @@
 
 //config
 #define HOUR_NUMBERS 1
+#define HOUR_HEXADECIMAL 1
 #define HI_PRECISION 1
 #define SHOW_DIGITS 1
+#define DIGITS_HEXADECIMAL 1
 #define MINUTE_DOTS 1
 #define SMOOTH_MOTION 1
 #define zoom 2
@@ -98,7 +100,11 @@ void render_clock(double h, double m, double s) {
 		y = round(r+polar2y(phi,r));
 		if(HOUR_NUMBERS) {
 			cifernik[x][y] = '0'+(i%10);
-			if(i>9) cifernik[x-1][y] = '0'+(i/10);
+			if(HOUR_HEXADECIMAL) {
+				sprintf(&cifernik[x][y],"%X",i);
+			} else {
+				if(i>9) cifernik[x-1][y] = '0'+(i/10);
+			}
 		} else {
 			cifernik[x][y] = color_number;
 		}
@@ -161,7 +167,10 @@ int main(void) {
 			s = cas->tm_sec;
 			top();
 			render_clock(cas->tm_hour,cas->tm_min,cas->tm_sec); //analog
-			if(SHOW_DIGITS) printf("\r[%.2d:%.2d:%.2d]",cas->tm_hour,cas->tm_min,cas->tm_sec); //digital
+			if(SHOW_DIGITS || DIGITS_HEXADECIMAL) putchar('\r');
+			if(SHOW_DIGITS) printf("DEC:[%.2d:%.2d:%.2d]",cas->tm_hour,cas->tm_min,cas->tm_sec); //digital
+			if(SHOW_DIGITS || DIGITS_HEXADECIMAL) putchar(' ');
+			if(DIGITS_HEXADECIMAL) printf("HEX:[%.2x:%.2x:%.2x]",cas->tm_hour,cas->tm_min,cas->tm_sec); //digital hexadec
 		}
 		if(HI_PRECISION) { usleep(100000); }
 		else { sleep(1); }

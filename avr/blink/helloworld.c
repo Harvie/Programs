@@ -1,4 +1,4 @@
-#define F_CPU 100000UL // Sets up the default speed for delay.h
+#define F_CPU 1000000UL // Sets up the default speed for delay.h
 // this is the header file that tells the compiler what pins and ports, etc.
 // are available on this chip.
 #include <avr/io.h>

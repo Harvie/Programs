@@ -1,0 +1,9 @@
+arduino	MCU port	tiny45	tiny2313
+GND	GND		4	10
+5V	VCC		8	20
+10	RESET		1	1
+11	MOSI/SDA	5	17
+12	MISO/DO		6	18
+13	SCK/USCK/SCL	7	19
+
+avrdude -cstk500v1 -P/dev/ttyUSB0 -b19200 -p attiny2313

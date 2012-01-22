@@ -17,7 +17,7 @@ void my_audio_callback(void *userdata, Uint8 *stream, int len) {
 	int sampl_freq = desired->freq;
 	sampl_freq = 44100;
 
-	double sine_freq = 50;
+	double sine_freq = 11025;
 	static double i,j; // = 0;
 
 	short int *u; u = (short int *)stream;

@@ -3,6 +3,8 @@
 #include <getopt.h>
 #include <gtk/gtk.h>
 
+#define ENV_PREFIX "XSOCK_"
+
 int return_true(void) { return 1; }
 
 void print_help(char ** argv) {
@@ -12,6 +14,7 @@ void print_help(char ** argv) {
 		"\t -c color\n"
 		"\t -w width\n"
 		"\t -h height\n"
+		//"\t -r reuse " ENV_PREFIX "* from environment\n"
 		"\t -? (display help)"
 		"\nExample: %s -c black -w 640 -h 480\n\n",
 		argv[0], argv[0]);
@@ -34,6 +37,15 @@ gint main(gint argc, gchar ** argv)
 				break;
 			case 'h':
 				height = atoi(optarg);
+				break;
+			case 'r': //Not yet
+				if(getenv(ENV_PREFIX"PID")
+					&& getenv(ENV_PREFIX"WID")
+					&& kill(atoi(getenv(ENV_PREFIX"PID")), 0)
+				) {
+					puts("REUSABLE");
+					return 0;
+				}
 				break;
 			case '?':
 				print_help(argv);
@@ -64,7 +76,7 @@ gint main(gint argc, gchar ** argv)
 	GdkNativeWindow wid = gtk_socket_get_id(GTK_SOCKET(sock));
 	int pid;
 	if ((pid = fork())) {
-		printf("XSOCK_WID=%d\nXSOCK_PID=%d\n", wid, pid);
+		printf(ENV_PREFIX"WID=%d\n"ENV_PREFIX"PID=%d\n", wid, pid);
 		return 0;
 	}
 	fclose(stdout);

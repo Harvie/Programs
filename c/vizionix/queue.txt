@@ -1,0 +1,4 @@
+#mplaywrap.sh -endpos 2 ~/Downloads/outputvideo.mpeg
+mplaywrap.sh -endpos 2 mplayer ~/Downloads/PROJEKCE/skeleton_walk_loop.mp4
+xtermwrap.sh -e 'timeout 1 ../spiral'
+

@@ -1,6 +1,9 @@
 #!/bin/bash
-kill -0 $XSOCK_PID || {
+TMPFILE="/tmp/xsock-$USER";
+[ -f "$TMPFILE" ] && . "$TMPFILE"
+[ -n "$XSOCK_PID" ] && kill -0 "$XSOCK_PID" 2>/dev/null || {
 	PATH="./:$PATH"
-	eval "$(mkxsock)"
+	eval "$(mkxsock | tee $TMPFILE)"
+	echo "XSOCK_PID set to $XSOCK_PID" >&2
 }
 export XSOCK_PID XSOCK_WID

@@ -1,4 +1,3 @@
 #!/bin/bash
-PATH="./:$PATH"
-eval "$(mkxsock)"
+. getxsock.sh
 mplayer -fs -wid "$XSOCK_WID" $@

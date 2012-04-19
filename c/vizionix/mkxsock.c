@@ -3,6 +3,8 @@
 #include <getopt.h>
 #include <gtk/gtk.h>
 
+int return_true(void) { return 1; }
+
 void print_help(char ** argv) {
 	printf(
 		"Usage: %s [args]\n"
@@ -51,7 +53,7 @@ gint main(gint argc, gchar ** argv)
 	//Create window
 	GtkWidget *win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	GtkWidget *sock = gtk_socket_new();
-	g_signal_connect(sock, "plug-removed", gtk_main_quit, NULL);
+	g_signal_connect(sock, "plug-removed", G_CALLBACK(return_true), NULL);
 	g_signal_connect(win, "delete-event", gtk_main_quit, NULL);
 	gtk_widget_set_size_request(sock, width, height);
 	gtk_widget_modify_bg(sock, GTK_STATE_NORMAL, &color);

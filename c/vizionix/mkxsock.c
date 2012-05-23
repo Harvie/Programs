@@ -5,7 +5,12 @@
 
 #define ENV_PREFIX "XSOCK_"
 
-int return_true(void) { return 1; }
+int return_true(GtkWidget *widget, gpointer data) { return 1; }
+
+int switch_sockets(GtkWidget *widget, gpointer data) {
+	fprintf(stderr,"SWITCH: %d\n", (int)data);
+	return 1;
+}
 
 void print_help(char ** argv) {
 	printf(
@@ -64,16 +69,18 @@ gint main(gint argc, gchar ** argv)
 
 	//Create window
 	GtkWidget *win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	GtkWidget *sock = gtk_socket_new();
-	g_signal_connect(sock, "plug-removed", G_CALLBACK(return_true), NULL);
+	GtkWidget *sock[1];
+	sock[0] = gtk_socket_new();
+	g_signal_connect(sock[0], "plug-added", G_CALLBACK(switch_sockets), (gpointer)23);
+	g_signal_connect(sock[0], "plug-removed", G_CALLBACK(return_true), NULL);
 	g_signal_connect(win, "delete-event", gtk_main_quit, NULL);
-	gtk_widget_set_size_request(sock, width, height);
-	gtk_widget_modify_bg(sock, GTK_STATE_NORMAL, &color);
-	gtk_container_add(GTK_CONTAINER(win), sock);
+	gtk_widget_set_size_request(sock[0], width, height);
+	gtk_widget_modify_bg(sock[0], GTK_STATE_NORMAL, &color);
+	gtk_container_add(GTK_CONTAINER(win), sock[0]);
 	gtk_widget_show_all(win);
 
 	//Print id
-	GdkNativeWindow wid = gtk_socket_get_id(GTK_SOCKET(sock));
+	GdkNativeWindow wid = gtk_socket_get_id(GTK_SOCKET(sock[0]));
 	int pid;
 	if ((pid = fork())) {
 		printf(ENV_PREFIX"WID=%d\n"ENV_PREFIX"PID=%d\n", wid, pid);

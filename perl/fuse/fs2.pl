@@ -3,11 +3,16 @@ use Fuse::Simple qw(accessor main nocache saferun runcode);
 #use threads;
 #use threads::shared;
 
+my $randfile = sub {
+	nocache $_[0]." ".rand(23)."\n";
+};
+
 
 my $randdir = sub {
 		my $list = {};
 		for(my $i=0;$i<int(rand(15));$i++) {
-			$list->{$i}="test #$i\n";
+			#$list->{$i}="test #$i\n";
+			$list->{$i}=saferun($randfile, $i);
 		}
 		nocache $list;
 };

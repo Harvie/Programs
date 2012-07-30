@@ -11,20 +11,18 @@
     * LEFT  |        |
             * RIGHT  |
                      * GROUND
-
-
                                          ___________
-                  +---------------+     |           |
-                  V               |     | PIR       |
-                                  |     |           |
-Soundcard INPUT   o==XXXXx---+    |     |           |
-                             |    |     |           |
-                          GND|    +-----|-o/  NC    |
-                             |    +-----|-/  Switch |
-Soundcard OUTPUT  o==XXXXx---+    |     |           |
-                                  |     |           |
-                  A               |     | 12V Power |
-                  +---------------+     |  +  -     |
+                                        |           |
+                                        | PIR       |
+                   LEFT =---------+     |           |
+Soundcard INPUT  GROUND =--+      |     |           |
+                           |      |     |           |
+                           |      +-----|-o/  NC    |
+                           |      +-----|-/  Switch |
+Soundcard OUTPUT GROUND =--+      |     |           |
+                   LEFT =---------+     |           |
+                                        | 12V Power |
+                                        |  +  -     |
                                         |__|__|_____|
                                            |  |
                                          To supply

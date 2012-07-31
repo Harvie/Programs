@@ -76,12 +76,13 @@ int main(int argc, char ** argv) {
 	int samplecount = 4000;
 	int treshold = -1;
 	char noreturn = 0;
+	char repeat = 1;
 	char integers=0;
 	char verbose=1;
 	int freqs[argc+1]; freqs[0]=-1;
 
 	int opt;
-	while ((opt = getopt(argc, argv, "?r:s:f:t:iqn")) != -1) {
+	while ((opt = getopt(argc, argv, "?r:s:f:t:iqna")) != -1) {
 		switch (opt) {
 			case 'r':
 				samplerate = atoi(optarg);
@@ -97,6 +98,9 @@ int main(int argc, char ** argv) {
 				break;
 			case 'i':
 				integers = 1;
+				break;
+			case 'a':
+				repeat = 0;
 				break;
 			case 'n':
 				noreturn = 1;
@@ -152,7 +156,7 @@ int main(int argc, char ** argv) {
 
 			//Set print true if over treshold or if changed to false (print for the last time after going under treshold)
 			printnow = power[i] > treshold;
-			print = print || printnow || (printlast && !noreturn);
+			print = !(!repeat && printlast && !(!printnow)) && (print || printnow || (printlast && !noreturn));
 		}
 		printlast = printnow;
 		fflush(stdout);

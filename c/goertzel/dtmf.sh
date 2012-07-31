@@ -1,11 +1,14 @@
 #!/bin/bash
 #This is sample implementation of DTMF decoder using my C implementation of Goertzel Algorithm
 #This is not very efficient or precise, it's just proof of concept
+#Note that it's also quite tricky (but not imposible) to detect DTMF using microphone
+#You will probably need to tune treshold and mixer settings a bit...
+#I've had best results using dtmfdial (Linux software) and two soundcards connected directly using cable
 #Usage example: arecord 2>/dev/null | ./dtmf.sh
 
-tresh=3
+tresh=10
 last='';
-./goertzel -i -q -r 8000 -s 400 -t $tresh -f 697 -f 770 -f 852 -f 941 -f 1209 -f 1336 -f 1477 -f 1633 | while read line; do
+./goertzel -i -q -a -r 8000 -s 400 -t $tresh -f 697 -f 770 -f 852 -f 941 -f 1209 -f 1336 -f 1477 -f 1633 $@ | while read line; do
 	#echo "$line";
 
 	#Get time

@@ -8,7 +8,7 @@
 
 tresh=10
 last='';
-./goertzel -i -q -a -r 8000 -s 400 -t $tresh -f 697 -f 770 -f 852 -f 941 -f 1209 -f 1336 -f 1477 -f 1633 $@ | while read line; do
+./goertzel -n -q -l -r 8000 -d 20 -t $tresh -f 697 -f 770 -f 852 -f 941 -f 1209 -f 1336 -f 1477 -f 1633 $@ | while read line; do
 	#echo "$line";
 
 	#Get time

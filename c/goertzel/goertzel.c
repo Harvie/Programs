@@ -82,12 +82,21 @@ int main(int argc, char ** argv) {
 	int freqs[argc+1]; freqs[0]=-1;
 
 	int opt;
-	while ((opt = getopt(argc, argv, "?d:r:s:f:t:iqna")) != -1) {
+	while ((opt = getopt(argc, argv, "?i:o:a:r:c:d:f:t:nlbq")) != -1) {
 		switch (opt) {
+			case 'i':
+				freopen(optarg, "r", stdin);
+				break;
+			case 'o':
+				freopen(optarg, "w", stdout);
+				break;
+			case 'a':
+				freopen(optarg, "a", stdout);
+				break;
 			case 'r':
 				samplerate = atoi(optarg);
 				break;
-			case 's':
+			case 'c':
 				samplecount = atoi(optarg);
 				break;
 			case 'd':
@@ -99,13 +108,13 @@ int main(int argc, char ** argv) {
 			case 't':
 				treshold = atoi(optarg);
 				break;
-			case 'i':
+			case 'n':
 				integers = 1;
 				break;
-			case 'a':
+			case 'l':
 				repeat = 0;
 				break;
-			case 'n':
+			case 'b':
 				noreturn = 1;
 				break;
 			case 'q':

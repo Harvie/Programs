@@ -12,10 +12,15 @@
 # Wake up
 # Enjoy your data
 
+
 out=/tmp/sleeplog-"$(date +%F_%r)".txt
 speaker-test -t sine &>/dev/null &
 tresh=10
 lastdate=0
+screen=false
+while getopts "s" OPT; do
+	test "$OPT" == 's' && screen=true;
+done
 arecord | ./goertzel -i -q -a -t $tresh -s 2000 | while read line; do
 	date="$(date +%s)"
 	time="$(echo "$line" | cut -f 1)"
@@ -23,8 +28,10 @@ arecord | ./goertzel -i -q -a -t $tresh -s 2000 | while read line; do
 	echo -ne "$time\t$date\t$(date '+%F%t%r')\t"
 	test "$level" -gt "$tresh" && {
 		echo -n "Nothing detected...";
+		$screen && xset dpms force off
 	} || {
 		echo -n "Motion detected!!!!";
+		$screen && xset dpms force on
 	}
 	test "$lastdate" != 0 && {
 		after=$(( $date - $lastdate))

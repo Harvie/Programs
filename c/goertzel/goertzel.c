@@ -2,16 +2,6 @@
 #include <math.h>
 #include <getopt.h>
 
-
-/*
-	Usage examples
-	arecord | ./goertzel
-	sox input.mp3 -b 8 -c 1 -r 8000 -t wav - | ./goertzel
-
-	Arguments for DTMF decoding:
-	-f 697 -f 770 -f 852 -f 941 -f 1209 -f 1336 -f 1477 -f 1633 -t 10
-*/
-
 float goertzel_mag(int numSamples,int TARGET_FREQUENCY,int SAMPLING_RATE, float* data)
 {
 	/*
@@ -54,7 +44,43 @@ float goertzel_mag(int numSamples,int TARGET_FREQUENCY,int SAMPLING_RATE, float*
 }
 
 void print_help(char ** argv) {
-	printf("help me %s\n", argv[0]);
+
+	printf(
+		"Arguments:\n"
+
+		"\t-i <file>\tInput from file (default STDIN)\n"
+		"\t-o <file>\tOutput to file (default STDOUT)\n"
+		"\t-a <file>\tOutput to file (append) (default STDOUT)\n"
+		"\n"
+		"\t-r <samplerate>\tInput samplerate (deault 8000 Hz)\n"
+		"\t-c <count>\tFrame size in samples (default 4000 Samples)\n"
+		"\t-d <ratio>\tFrame size (default 2) (samplerate will be divided by this number to get frame size same as -c)\n"
+		"\n"
+		"\t-f <freq>\tAdd frequency in Hz to detect (if no specified 440 Hz will be added)\n"
+		"\n"
+		"\t-t <treshold>\tSet treshold (used to hide magnitudes lower than treshold) (defaults -1)\n"
+		"\t-n\t\tPrint integers rather than floats\n"
+		"\t-l\t\tDo not repeat values while still over treshold\n"
+		"\t-b\t\tDo not print first value that will fall under treshold\n"
+		"\t-q\t\tQuiet mode: print only values\n"
+		"\n"
+		"\t-?\t\tPrint help\n"
+		"\n"
+	);
+
+	printf(
+		"Usage examples:\n"
+		"\tarecord | %s\n"
+		"\tsox input.mp3 -b 8 -c 1 -r 8000 -t wav - | %s\n"
+		"\t%s -n -q -l -r 8000 -d 20 -t $tresh -f 697 [-f 770 ...]\n"
+		"\n"
+		,argv[0],argv[0],argv[0]
+	);
+
+	printf(
+		"Frequencies for DTMF decoding:\n"
+		"\t-f 697 -f 770 -f 852 -f 941 -f 1209 -f 1336 -f 1477 -f 1633 -t 10\n"
+	);
 }
 
 void addfreq(int *freqs, int freq) {
@@ -65,13 +91,6 @@ void addfreq(int *freqs, int freq) {
 }
 
 int main(int argc, char ** argv) {
-	/*
-	int samples[] = {0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1};
-	int samplecount = 18;
-	float power = goertzel(samplecount, samples, 1.2, 18);
-	printf("G: %f\n", power);
-	*/
-
 	int samplerate = 8000;
 	int samplecount = 4000;
 	int treshold = -1;

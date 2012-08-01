@@ -82,13 +82,16 @@ int main(int argc, char ** argv) {
 	int freqs[argc+1]; freqs[0]=-1;
 
 	int opt;
-	while ((opt = getopt(argc, argv, "?r:s:f:t:iqna")) != -1) {
+	while ((opt = getopt(argc, argv, "?d:r:s:f:t:iqna")) != -1) {
 		switch (opt) {
 			case 'r':
 				samplerate = atoi(optarg);
 				break;
 			case 's':
 				samplecount = atoi(optarg);
+				break;
+			case 'd':
+				samplecount = samplerate/atoi(optarg);
 				break;
 			case 'f':
 				addfreq(freqs, atoi(optarg));

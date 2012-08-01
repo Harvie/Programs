@@ -1,0 +1,28 @@
+
+                            __________
+                           |
+   ___  _______  __________|
+  /   \/       \/          |   3.5mm Stereo Jack
+ |    ||       ||          |
+ |    ||       ||          |   (Mono version has right and
+  \___/\_______/\__________|   ground merged in single pole)
+                           |
+    ^       ^        ^     |___________
+    * LEFT  |        |
+            * RIGHT  |
+                     * GROUND
+                                         ___________
+                                        |           |
+                                        | PIR       |
+                   LEFT =---------+     |           |
+Soundcard INPUT  GROUND =--+      |     |           |
+                           |      |     |           |
+                           |      +-----|-o/  NC    |
+                           |      +-----|-/  Switch |
+Soundcard OUTPUT GROUND =--+      |     |           |
+                   LEFT =---------+     |           |
+                                        | 12V Power |
+                                        |  +  -     |
+                                        |__|__|_____|
+                                           |  |
+                                         To supply

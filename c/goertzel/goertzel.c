@@ -4,13 +4,6 @@
 
 float goertzel_mag(int numSamples,int TARGET_FREQUENCY,int SAMPLING_RATE, float* data)
 {
-	/*
-		On lower samplerates and frame sizes this may perform sub-optimally. Eg.:
-		When set to detect 440Hz (at 8000Hz samplerate and ~4000 samples)
-		it actually detects something around 438,3Hz rather than 400Hz...
-		If you can't increase samplerate way around this is just to increase sensitivity.
-	*/
-
     int     k,i;
     float   floatnumSamples;
     float   omega,sine,cosine,coeff,q0,q1,q2,magnitude,real,imag;
@@ -44,10 +37,28 @@ float goertzel_mag(int numSamples,int TARGET_FREQUENCY,int SAMPLING_RATE, float*
 }
 
 void print_help(char ** argv) {
+	printf(
+		"%s takes raw (wav) audio stream and computes power (or magnitude)\n"
+		"of desired frequencies using Goertzel algorithm for time frames\n"
+		"of fixed length (specified in samples or relative to sample rate).\n"
+		"This can be used in various frequency detection applications\n"
+		"like guitar tuning, DTMF decoding and many others...\n"
+		"\n"
+		"http://en.wikipedia.org/wiki/Goertzel_algorithm\n"
+		"\n"
+		"Curently only raw unsigned 8bit (u8) mono audio is supported, but\n"
+		"samplerate may vary. You can convert other formats before processing.\n"
+		"\n"
+		"On lower samplerates and frame sizes this may perform sub-optimally. Eg.:\n"
+		"When set to detect 440Hz (at 8000Hz samplerate and ~4000 samples)\n"
+		"it actually detects something around 438,3Hz rather than 400Hz...\n"
+		"If you can't increase samplerate way around this is just to increase sensitivity.\n"
+		"\n"
+		,argv[0]
+	);
 
 	printf(
 		"Arguments:\n"
-
 		"\t-i <file>\tInput from file (default STDIN)\n"
 		"\t-o <file>\tOutput to file (default STDOUT)\n"
 		"\t-a <file>\tOutput to file (append) (default STDOUT)\n"
@@ -56,7 +67,7 @@ void print_help(char ** argv) {
 		"\t-c <count>\tFrame size in samples (default 4000 Samples)\n"
 		"\t-d <ratio>\tFrame size (default 2) (samplerate will be divided by this number to get frame size same as -c)\n"
 		"\n"
-		"\t-f <freq>\tAdd frequency in Hz to detect (if no specified 440 Hz will be added)\n"
+		"\t-f <freq>\tAdd frequency in Hz to detect (use multiple times, if no added 440 Hz will be...)\n"
 		"\n"
 		"\t-t <treshold>\tSet treshold (used to hide magnitudes lower than treshold) (defaults -1)\n"
 		"\t-n\t\tPrint integers rather than floats\n"

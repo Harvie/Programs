@@ -28,10 +28,10 @@ arecord | ./goertzel -i -q -a -t $tresh -s 2000 | while read line; do
 	echo -ne "$time\t$date\t$(date '+%F%t%r')\t"
 	test "$level" -gt "$tresh" && {
 		echo -n "Nothing detected...";
-		$screen && xset dpms force off
+		$screen && xset dpms force off || true;
 	} || {
 		echo -n "Motion detected!!!!";
-		$screen && xset dpms force on
+		$screen && xset dpms force on;
 	}
 	test "$lastdate" != 0 && {
 		after=$(( $date - $lastdate))

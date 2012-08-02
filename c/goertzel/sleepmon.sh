@@ -40,7 +40,7 @@ arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 		echo -ne "\t$level After $after secs";
 	}
 	echo;
-	./sleepplot.sh "$out" &>/dev/null &
+	./sleepplot.sh "$out" &>/dev/null
 	lastdate="$date";
 done | tee "$out"
 kill $pid_test

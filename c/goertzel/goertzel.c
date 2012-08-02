@@ -70,7 +70,11 @@ void print_help(char ** argv) {
 		"\t-f <freq>\tAdd frequency in Hz to detect (use multiple times, if no added 440 Hz will be...)\n"
 		"\n"
 		"\t-t <treshold>\tSet treshold (used to hide magnitudes lower than treshold) (defaults -1)\n"
-		"\t-n\t\tPrint integers rather than floats\n"
+		"\t-n <format>\tSet output format\n"
+		"\t\tf: float (default)\n"
+		"\t\ti: integer\n"
+		"\t\tb: binary (0|1)\n"
+		"\t\tB: Boolean (false|true)\n"
 		"\t-l\t\tDo not repeat values while still over treshold\n"
 		"\t-b\t\tDo not print first value that will fall under treshold\n"
 		"\t-q\t\tQuiet mode: print only values\n"
@@ -107,12 +111,12 @@ int main(int argc, char ** argv) {
 	int treshold = -1;
 	char noreturn = 0;
 	char repeat = 1;
-	char integers=0;
+	char format=0;
 	char verbose=1;
 	int freqs[argc+1]; freqs[0]=-1;
 
 	int opt;
-	while ((opt = getopt(argc, argv, "?i:o:a:r:c:d:f:t:nlbq")) != -1) {
+	while ((opt = getopt(argc, argv, "?i:o:a:r:c:d:f:t:n:lbq")) != -1) {
 		switch (opt) {
 			case 'i':
 				freopen(optarg, "r", stdin);
@@ -139,7 +143,7 @@ int main(int argc, char ** argv) {
 				treshold = atoi(optarg);
 				break;
 			case 'n':
-				integers = 1;
+				format = optarg[0];
 				break;
 			case 'l':
 				repeat = 0;
@@ -208,10 +212,21 @@ int main(int argc, char ** argv) {
 			printf("%8.2f", position);
 			for(i=0;freqs[i]!=-1;i++) {
 				printf("\t");
-				if(integers)
-					printf("%d",(int)power[i]);
-				else
-					printf("%.4f",power[i]);
+				switch(format) {
+					case 'i':
+						printf("%d",(int)power[i]);
+						break;
+					case 'b':
+						printf("%d",power[i]>treshold);
+						break;
+					case 'B':
+						if(power[i]>treshold) printf("true");
+							else printf("false");
+						break;
+					case 'f':
+					default:
+						printf("%.4f",power[i]);
+				}
 			}
 			puts("");
 			fflush(stdout);

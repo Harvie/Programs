@@ -8,7 +8,7 @@
 
 tresh=10
 last='';
-./goertzel -n -q -l -r 8000 -d 20 -t $tresh -f 697 -f 770 -f 852 -f 941 -f 1209 -f 1336 -f 1477 -f 1633 $@ | while read line; do
+./goertzel -n B -q -l -r 8000 -d 20 -t $tresh -f 697 -f 770 -f 852 -f 941 -f 1209 -f 1336 -f 1477 -f 1633 $@ | while read line; do
 	#echo "$line";
 
 	#Get time
@@ -23,16 +23,6 @@ last='';
 	f="$(echo "$line" | cut -f 7)";
 	g="$(echo "$line" | cut -f 8)";
 	h="$(echo "$line" | cut -f 9)";
-
-	#Compare values to treshold
-	test $a -gt $tresh && a=true || a=false
-	test $b -gt $tresh && b=true || b=false
-	test $c -gt $tresh && c=true || c=false
-	test $d -gt $tresh && d=true || d=false
-	test $e -gt $tresh && e=true || e=false
-	test $f -gt $tresh && f=true || f=false
-	test $g -gt $tresh && g=true || g=false
-	test $h -gt $tresh && h=true || h=false
 
 	#echo "$pos: $a $b $c $d $e $f $g $h";
 	state="$a$b$c$d$e$f$g$h";

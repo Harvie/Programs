@@ -65,20 +65,23 @@ void print_help(char ** argv) {
 		"\n"
 		"\t-r <samplerate>\tInput samplerate (deault 8000 Hz)\n"
 		"\t-c <count>\tFrame size in samples (default 4000 Samples)\n"
-		"\t-d <ratio>\tFrame size (default 2) (samplerate will be divided by this number to get frame size same as -c)\n"
+		"\t-d <divisor>\tFrame size ( count = samplerate/divisor ) (default 2)\n"
 		"\n"
-		"\t-f <freq>\tAdd frequency in Hz to detect (use multiple times, if no added 440 Hz will be...)\n"
+		"\t-f <freq>\tAdd frequency in Hz to detect (use multiple times, default 440 Hz)\n"
 		"\n"
-		"\t-t <treshold>\tSet treshold (used to hide magnitudes lower than treshold) (defaults -1)\n"
-		"\t-n <format>\tSet output format\n"
-		"\t\tf: float (default)\n"
-		"\t\ti: integer\n"
-		"\t\tb: binary (0|1)\n"
-		"\t\tB: Boolean (false|true)\n"
-		"\t-l <filter>\tSet filter\n"
-		"\t\tf: Falldown: print only when over treshold or just falled under (default)\n"
-		"\t\tt: Treshold: print only when over treshold\n"
-		"\t\tc: Crossed: print only when treshold crossed\n"
+		"\t-n <format>\tSet number output format\n"
+		"\t\tf: float\t23.4223 (default)\n"
+		"\t\ti: integer\t23\n"
+		"\t\tb: binary\t(0|1)\n"
+		"\t\tB: Boolean\t(false|true)\n"
+		"\n"
+		"\t-t <treshold>\tSet treshold (used in filter, see -l) (defaults -1)\n"
+		"\t-l <filter>\tSet line filter\n"
+		"\t\tf: Falldown:\tprint only when over treshold or just crossed (default)\n"
+		"\t\tt: Treshold:\tprint only when over treshold\n"
+		"\t\tc: Crossed:\tprint only when treshold crossed\n"
+		"\t-u\t\tInvert\ttreshold (values under treshold will be displayed)\n"
+		"\n"
 		"\t-q\t\tQuiet mode: print only values\n"
 		"\n"
 		"\t-?\t\tPrint help\n"
@@ -110,14 +113,18 @@ void addfreq(int *freqs, int freq) {
 int main(int argc, char ** argv) {
 	int samplerate = 8000;
 	int samplecount = 4000;
+
 	int treshold = -1;
 	char filter = 0;
+	char under = 0;
+
 	char format=0;
 	char verbose=1;
+
 	int freqs[argc+1]; freqs[0]=-1;
 
 	int opt;
-	while ((opt = getopt(argc, argv, "?i:o:a:r:c:d:f:t:n:l:q")) != -1) {
+	while ((opt = getopt(argc, argv, "?i:o:a:r:c:d:f:t:n:l:uq")) != -1) {
 		switch (opt) {
 			case 'i':
 				freopen(optarg, "r", stdin);
@@ -148,6 +155,9 @@ int main(int argc, char ** argv) {
 				break;
 			case 'l':
 				filter = optarg[0];
+				break;
+			case 'u':
+				under = 1;
 				break;
 			case 'q':
 				verbose = 0;
@@ -200,7 +210,7 @@ int main(int argc, char ** argv) {
 			power[i] = goertzel_mag(samplecount, freqs[i], samplerate, samples);
 
 			//Decide if we will print
-			printnow = power[i] > treshold; //Is over treshold?
+			printnow = under ? power[i] < treshold : power[i] > treshold; //Is over/under treshold?
 			switch(filter) {
 				case 'c': //Print if treshold crossed
 					print = print || (laststate[i] != printnow);
@@ -222,7 +232,7 @@ int main(int argc, char ** argv) {
 				printf("\t");
 				switch(format) {
 					case 'i':
-						printf("%d",(int)power[i]);
+						printf("%d",(int)round(power[i]));
 						break;
 					case 'b':
 						printf("%d",power[i]>treshold);

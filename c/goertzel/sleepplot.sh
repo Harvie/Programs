@@ -7,7 +7,7 @@ test -z "$1" && {
 
 size="$(tail -n 1 "$1" | cut -d . -f 1)"
 test $size -gt 3600 && size="$(( $size/10 ))" #For prolonged periods
-size="$(( 200 + ($size * 2) ))"
+size="$(( 600 + $size ))"
 
 gnuplot << EOF
 set output "$1.png"

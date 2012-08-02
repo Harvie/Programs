@@ -29,7 +29,7 @@ set timefmt "%s"
 set grid
 
 #set pointsize 0.5
-plot "$1" using 2:5 with histeps;
+plot "$1" using 2:5 with steps;
 
 EOF
 

@@ -75,8 +75,10 @@ void print_help(char ** argv) {
 		"\t\ti: integer\n"
 		"\t\tb: binary (0|1)\n"
 		"\t\tB: Boolean (false|true)\n"
-		"\t-l\t\tDo not repeat values while still over treshold\n"
-		"\t-b\t\tDo not print first value that will fall under treshold\n"
+		"\t-l <filter>\tSet filter\n"
+		"\t\tf: Falldown: print only when over treshold or just falled under (default)\n"
+		"\t\tt: Treshold: print only when over treshold\n"
+		"\t\tc: Crossed: print only when treshold crossed\n"
 		"\t-q\t\tQuiet mode: print only values\n"
 		"\n"
 		"\t-?\t\tPrint help\n"
@@ -109,14 +111,13 @@ int main(int argc, char ** argv) {
 	int samplerate = 8000;
 	int samplecount = 4000;
 	int treshold = -1;
-	char noreturn = 0;
-	char repeat = 1;
+	char filter = 0;
 	char format=0;
 	char verbose=1;
 	int freqs[argc+1]; freqs[0]=-1;
 
 	int opt;
-	while ((opt = getopt(argc, argv, "?i:o:a:r:c:d:f:t:n:lbq")) != -1) {
+	while ((opt = getopt(argc, argv, "?i:o:a:r:c:d:f:t:n:l:q")) != -1) {
 		switch (opt) {
 			case 'i':
 				freopen(optarg, "r", stdin);
@@ -146,10 +147,7 @@ int main(int argc, char ** argv) {
 				format = optarg[0];
 				break;
 			case 'l':
-				repeat = 0;
-				break;
-			case 'b':
-				noreturn = 1;
+				filter = optarg[0];
 				break;
 			case 'q':
 				verbose = 0;
@@ -182,9 +180,10 @@ int main(int argc, char ** argv) {
 		puts("");
 	}
 
-	char print=0, printnow=0, printlast = 0;
+	int i;
+	char print=0, printnow=0;
+	char laststate[argc]; for(i=0;freqs[i]!=-1;i++) laststate[i]=-1;
 	while(!feof(stdin)) {
-		int i;
 
 		//Sample data
 		for(i=0;i<samplecount && !feof(stdin);i++) {
@@ -200,11 +199,20 @@ int main(int argc, char ** argv) {
 		for(i=0;freqs[i]!=-1;i++) {
 			power[i] = goertzel_mag(samplecount, freqs[i], samplerate, samples);
 
-			//Set print true if over treshold or if changed to false (print for the last time after going under treshold)
-			printnow = power[i] > treshold;
-			print = !(!repeat && printlast && !(!printnow)) && (print || printnow || (printlast && !noreturn));
+			//Decide if we will print
+			printnow = power[i] > treshold; //Is over treshold?
+			switch(filter) {
+				case 'c': //Print if treshold crossed
+					print = print || (laststate[i] != printnow);
+					break;
+				default:
+				case 'f': //Print if over treshold or falled down
+					print = print || (laststate[i] != printnow);
+				case 't': //Print if over treshold
+					print = print || printnow;
+			}
+			laststate[i] = printnow; //Store last state
 		}
-		printlast = printnow;
 		fflush(stdout);
 
 		//Print data

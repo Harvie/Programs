@@ -22,7 +22,7 @@ while getopts "s" OPT; do
 	test "$OPT" == 's' && screen=true;
 done
 echo "Writing to file: $out";
-arecord | ./goertzel -n i -q -l -t $tresh -d 4 | while read line; do
+arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 	date="$(date +%s)"
 	time="$(echo "$line" | cut -f 1)"
 	level="$(echo "$line" | cut -f 2)"
@@ -42,4 +42,5 @@ arecord | ./goertzel -n i -q -l -t $tresh -d 4 | while read line; do
 	lastdate="$date";
 done | tee "$out"
 kill $!
+echo
 echo "Your file: $out"

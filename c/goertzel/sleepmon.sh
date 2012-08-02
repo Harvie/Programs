@@ -28,10 +28,10 @@ arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 	level="$(echo "$line" | cut -f 2)"
 	echo -ne "$time\t$date\t$(date '+%F%t%T')\t"
 	test "$level" -gt "$tresh" && {
-		echo -n "Nothing detected...";
+		echo -n "0 Nothing detected...";
 		$screen && xset dpms force off || true;
 	} || {
-		echo -n "Motion detected!!!!";
+		echo -n "1 Motion detected!!!!";
 		$screen && xset dpms force on;
 	}
 	test "$lastdate" != 0 && {
@@ -39,6 +39,7 @@ arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 		echo -ne "\t$level After $after secs";
 	}
 	echo;
+	./sleepplot.sh "$out" &>/dev/null;
 	lastdate="$date";
 done | tee "$out"
 kill $!

@@ -18,6 +18,7 @@ Scriptable tone detection and audio analysis
   * **histogram.sh**: example using histogram.pl to draw realtime equalizer
   * **sleepmon.sh**: Generates frequency on soundcard output and detects it on input
      * Can be used to detect and log motion using soundcard and PIR sensor or NC switch
+  * **sleepplot.sh*: Generates gnuplot graph from sleeplog
   * TODO
      * Guitar tuner
      * Send me more...

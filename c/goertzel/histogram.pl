@@ -29,7 +29,7 @@ while(<STDIN>) {
 	my $i=0;
 	print "\033[H";
 	foreach my $i (1..$#values) {
-		print bar($values[$i],10,sprintf("%8s ",trim($header[$i])))."\n";
+		print bar($values[$i],50,sprintf("%8s ",trim($header[$i])))."\n";
 	}
 	print "Time: ".$values[0]."                   \n";
 	print "                           \n";

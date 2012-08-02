@@ -6,8 +6,10 @@ test -z "$1" && {
 }
 
 #Count events:
-seconds=60
-./sleepcount.sh "$1" "$seconds"
+seconds='60 300'
+for i in $seconds; do
+	./sleepcount.sh "$1" "$i" &
+done
 
 #Approximate size of graph
 size="$(tail -n 1 "$1" | cut -d . -f 1)"
@@ -32,8 +34,10 @@ set timefmt "%s"
 set grid
 
 #set pointsize 0.5
+#"$1.counts.$seconds" using 1:(\$2/5) title "Activations in last $seconds seconds" smooth csplines
 plot "$1" using 2:5 title "Sensor state" with steps,\
-"$1.counts.$seconds" using 1:(\$2/5) title "Activations in last $seconds seconds" smooth csplines
+"$1.counts.60" using 1:(\$2/5) title "Activations in last 60 seconds" smooth csplines,\
+"$1.counts.300" using 1:(\$2/10) title "Activations in last 300 seconds" smooth csplines\
 
 EOF
 

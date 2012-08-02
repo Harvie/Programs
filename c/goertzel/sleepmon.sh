@@ -15,6 +15,7 @@
 
 out=/tmp/sleeplog-"$(date +%F_%T)".txt
 speaker-test -t sine &>/dev/null &
+pid_test=$!
 tresh=10
 lastdate=0
 screen=false
@@ -39,9 +40,9 @@ arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 		echo -ne "\t$level After $after secs";
 	}
 	echo;
-	./sleepplot.sh "$out" &>/dev/null;
+	./sleepplot.sh "$out" &>/dev/null &
 	lastdate="$date";
 done | tee "$out"
-kill $!
+kill $pid_test
 echo
 echo "Your file: $out"

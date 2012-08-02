@@ -13,7 +13,7 @@
 # Enjoy your data
 
 
-out=/tmp/sleeplog-"$(date +%F_%r)".txt
+out=/tmp/sleeplog-"$(date +%F_%T)".txt
 speaker-test -t sine &>/dev/null &
 tresh=10
 lastdate=0
@@ -26,7 +26,7 @@ arecord | ./goertzel -n -q -l -t $tresh -d 4 | while read line; do
 	date="$(date +%s)"
 	time="$(echo "$line" | cut -f 1)"
 	level="$(echo "$line" | cut -f 2)"
-	echo -ne "$time\t$date\t$(date '+%F%t%r')\t"
+	echo -ne "$time\t$date\t$(date '+%F%t%T')\t"
 	test "$level" -gt "$tresh" && {
 		echo -n "Nothing detected...";
 		$screen && xset dpms force off || true;

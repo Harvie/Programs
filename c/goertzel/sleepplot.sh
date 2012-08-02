@@ -5,14 +5,9 @@ test -z "$1" && {
 	exit 23
 }
 
-#Count:
+#Count events:
 seconds=60
-cat "$1" | cut -f 2,5 | cut -d ' ' -f 1 | grep '1$' | while read line; do
-	time=$(echo $line | cut -d ' ' -f 1);
-	time=$(( $time + $seconds - $time%$seconds ))
-	echo "$time"
-done | uniq -c | sed -e 's/^\s*//g' | tr ' ' '\t' > "$1.counts"
-
+./sleepcount.sh "$1" "$seconds"
 
 #Approximate size of graph
 size="$(tail -n 1 "$1" | cut -d . -f 1)"
@@ -37,7 +32,8 @@ set timefmt "%s"
 set grid
 
 #set pointsize 0.5
-plot "$1" using 2:5 with steps, "$1.counts" using 2:(\$1/7) with lines
+plot "$1" using 2:5 title "Sensor state" with steps,\
+"$1.counts.$seconds" using 1:(\$2/5) title "Activations in last $seconds seconds" smooth csplines
 
 EOF
 

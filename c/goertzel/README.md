@@ -15,9 +15,9 @@ Scriptable tone detection and audio analysis
   * **dtmf.sh**: decodes DTMF signals in audio
   * **histogram.pl**: shows goertzel output in ASCII graphs
   * **histogram.sh**: example using histogram.pl to draw realtime equalizer
+  * **guitar-tuner.sh**: example using histogram.pl to tune guitar (currently only to low E)
   * **sleepmon.sh**: Generates frequency on soundcard output and detects it on input
      * Can be used to detect and log motion using soundcard and PIR sensor or NC switch
   * **sleepplot.sh**: Generates gnuplot graph from sleeplog
   * TODO
-     * Guitar tuner
      * Send me more...

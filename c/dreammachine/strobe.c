@@ -9,9 +9,9 @@
 #include <unistd.h>
 #include <signal.h>
 #ifndef __WIN32__
-  #include <fcntl.h>
+	#include <fcntl.h>
 #else
-  #include <windows.h>
+	#include <windows.h>
 #endif
 
 void signal_handler(int signo) {
@@ -54,14 +54,16 @@ int main(int argc, char *argv[]) {
 		fputs(state_a, stdout);
 			fflush(stdout);
 			usleep(half_interval);
-  		#ifndef __WIN32__
-    		int fflags = fcntl(fileno(stdin), F_GETFL, 0);
-    		fcntl(fileno(stdin), F_SETFL, fflags | O_NONBLOCK);
+/*
+			#ifndef __WIN32__
+				int fflags = fcntl(fileno(stdin), F_GETFL, 0);
+				fcntl(fileno(stdin), F_SETFL, fflags | O_NONBLOCK);
 				while(getchar()) puts(".");
-    		fcntl(fileno(stdin), F_SETFL, fflags);
-  		#else
-    		//WARNING! Somehow implement FILE_FLAG_OVERLAPPED & FILE_FLAG_NO_BUFFERING support on windows
+				fcntl(fileno(stdin), F_SETFL, fflags);
+			#else
+				//WARNING! Somehow implement FILE_FLAG_OVERLAPPED & FILE_FLAG_NO_BUFFERING support on windows
 			#endif
+*/
 			if(argc > 2) getchar(); //interactive strobe
 		fputs(state_b, stdout);
 			fflush(stdout);

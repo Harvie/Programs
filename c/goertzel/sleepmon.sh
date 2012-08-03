@@ -17,7 +17,11 @@ out=/tmp/sleeplog-"$(date +%F_%T)".txt
 speaker-test -t sine &>/dev/null &
 pid_test=$!
 tresh=10
-lastdate=0
+lastdate="$(date +%s)"
+laststate=0
+history='';
+historymax=120;
+historylen='10 30 120'
 screen=false
 while getopts "s" OPT; do
 	test "$OPT" == 's' && screen=true;
@@ -27,21 +31,37 @@ arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 	date="$(date +%s)"
 	time="$(echo "$line" | cut -f 1)"
 	level="$(echo "$line" | cut -f 2)"
-	echo -ne "$time\t$date\t$(date '+%F%t%T')\t"
-	test "$level" -gt "$tresh" && {
-		echo -n "0 Nothing detected...";
+	test "$level" -gt "$tresh" && state=false || state=true
+	$state && statenum=1 || statenum=0;
+	$state && statename='MOTION!' || statename='Nothing';
+
+	echo -ne "$time\t$date $(date '+%F %T') $statenum"
+
+	#History
+	after=$(( $date - $lastdate))
+	test $historymax -gt 0 && {
+		history=$(echo -n "$(yes | tr '\ny' $laststate | head -c $after)$history" | head -c $historymax)
+		for len in $historylen; do
+			on="$(echo -n ${history::$len} | tr -d 0 | wc -c)"
+			on="$(echo "scale=2; $on/$len" | bc)"
+			LC_ALL=C printf " %.2f" "$on"
+		done
+	}
+
+	#Debug
+	echo -e "\t($statename $level After $after secs)";
+
+	#Fun with values
+	$state && {
 		$screen && xset dpms force off || true;
 	} || {
-		echo -n "1 Motion detected!!!!";
 		$screen && xset dpms force on;
 	}
-	test "$lastdate" != 0 && {
-		after=$(( $date - $lastdate))
-		echo -ne "\t$level After $after secs";
-	}
-	echo;
-	./sleepplot.sh "$out" &>/dev/null
+	./sleepplot.sh "$out" &>/dev/null &
+
+	#Prepare invariants for next round
 	lastdate="$date";
+	laststate="$statenum";
 done | tee "$out"
 kill $pid_test
 echo

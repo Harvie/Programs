@@ -14,8 +14,11 @@
 
 out=/tmp/sleeplog-"$(date +%F_%T)".txt
 graphout="${out%%.*}.png"
+
+killall speaker-test &>/dev/null
 speaker-test -t sine &>/dev/null &
 pid_test=$!
+
 tresh=10
 lastdate="$(date +%s)"
 laststate=0

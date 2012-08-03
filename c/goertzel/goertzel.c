@@ -2,7 +2,7 @@
 #include <math.h>
 #include <getopt.h>
 
-float goertzel_mag(int numSamples,int TARGET_FREQUENCY,int SAMPLING_RATE, float* data)
+float goertzel_mag(int numSamples,float TARGET_FREQUENCY,int SAMPLING_RATE, float* data)
 {
     int     k,i;
     float   floatnumSamples;
@@ -11,7 +11,7 @@ float goertzel_mag(int numSamples,int TARGET_FREQUENCY,int SAMPLING_RATE, float*
     float   scalingFactor = numSamples / 2.0;
 
     floatnumSamples = (float) numSamples;
-    k = (int) (0.5 + ((floatnumSamples * TARGET_FREQUENCY) / SAMPLING_RATE));
+    k = (int) (0.5 + ((floatnumSamples * TARGET_FREQUENCY) / (float)SAMPLING_RATE));
     omega = (2.0 * M_PI * k) / floatnumSamples;
     sine = sin(omega);
     cosine = cos(omega);
@@ -103,7 +103,7 @@ void print_help(char ** argv) {
 	);
 }
 
-void addfreq(int *freqs, int freq) {
+void addfreq(float *freqs, float freq) {
 	int i = 0;
 	while(freqs[i]!=-1) i++;
 	freqs[i]=freq;
@@ -121,8 +121,10 @@ int main(int argc, char ** argv) {
 	char format=0;
 	char verbose=1;
 
-	int freqs[argc+1]; freqs[0]=-1;
+	float freqs[argc+1]; freqs[0]=-1;
 
+
+	float floatarg;
 	int opt;
 	while ((opt = getopt(argc, argv, "?i:o:a:r:c:d:f:t:n:l:uq")) != -1) {
 		switch (opt) {
@@ -145,7 +147,8 @@ int main(int argc, char ** argv) {
 				samplecount = samplerate/atoi(optarg);
 				break;
 			case 'f':
-				addfreq(freqs, atoi(optarg));
+				sscanf(optarg,"%f",&floatarg);
+				addfreq(freqs, floatarg);
 				break;
 			case 't':
 				treshold = atoi(optarg);
@@ -175,7 +178,7 @@ int main(int argc, char ** argv) {
 
 	if(verbose) {
 		fprintf(stderr,
-			"#Detected tone: %d Hz\n"
+			"#Detected tone: %.2f Hz\n"
 			"#Samplerate: %d Hz\n"
 			"#Frame lenght: %d samples\n"
 			"#Treshold: %d\n"
@@ -185,7 +188,7 @@ int main(int argc, char ** argv) {
 
 		printf("#Position");
 		int i; for(i=0;freqs[i]!=-1;i++) {
-			printf("\t%2dHz",freqs[i]);
+			printf("\t%2.0fHz",freqs[i]); //TODO: print decimal places
 		}
 		puts("");
 	}
@@ -243,7 +246,7 @@ int main(int argc, char ** argv) {
 						break;
 					case 'f':
 					default:
-						printf("%.4f",power[i]);
+						printf("%7.5f",power[i]);
 				}
 			}
 			puts("");

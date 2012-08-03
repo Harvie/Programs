@@ -23,10 +23,6 @@ bash ./sleepstats.sh "$out" &>/dev/null &
 
 tresh=10
 lastdate="$(date +%s)"
-laststate=0
-history='';
-historymax=120;
-historylen='10 30 60 90 120'
 screen=false
 graph=false
 
@@ -52,18 +48,8 @@ arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 
 	printf  "%.2f\t %s %s %d" "$time" "$date" "$(date '+%F %T')" "$statenum"
 
-	#History
-	after=$(( $date - $lastdate))
-	test $historymax -gt 0 && {
-		history=$(echo -n "$(yes | tr '\ny' $laststate | head -c $after)$history" | head -c $historymax)
-		for len in $historylen; do
-			on="$(echo -n ${history::$len} | tr -d 0 | wc -c)"
-			on="$(echo "scale=2; $on/$len" | bc)"
-			printf " %.2f" "$on"
-		done
-	}
-
 	#Debug
+	after=$(( $date - $lastdate))
 	printf " (%s %3d After %4d secs)\n" "$statename" "$level" "$after";
 
 	#Fun with values
@@ -76,7 +62,6 @@ arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 
 	#Prepare invariants for next round
 	lastdate="$date";
-	laststate="$statenum";
 done | tee "$out"
 kill $(jobs -p); sleep 0.2
 echo

@@ -9,6 +9,10 @@ in="$1";
 graphout="${in%%.*}.png"
 test -n "$2" && graphout="$2";
 
+#Last state
+last="$(tail -n 1 "$in" | cut -d ' ' -f 4)"
+test "$last" -gt 0 && last="motion" || last="peace";
+
 #Approximate size of graph
 size="$(tail -n 1 "$in" | cut -d . -f 1)"
 test $size -gt 3600 && size="$(( $size/10 ))" #For prolonged periods
@@ -19,7 +23,7 @@ gnuplot << EOF
 set output "$graphout"
 set terminal png size $size,400
 
-set title "Sleep motions"
+set title "Sleep motions (current state: $last)"
 set xlabel "time"
 set ylabel "motion"
 

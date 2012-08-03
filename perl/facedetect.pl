@@ -32,8 +32,7 @@ foreach(@cascades) {
 for my $face (@faces) {
     my $file2 = 'paroubek.jpg';
     my $image2 = Imager->new->read(file => $file2);
-    $image2 = $image2->scale(xpixels => $face->{width}, ypixels => $face->
-{height});
+    $image2 = $image2->scale(xpixels => $face->{width}, ypixels => $face->{height});
     $image->paste(left => $face->{x}, top => $face->{y}, src => $image2);
 }
 

@@ -17,7 +17,9 @@ graphout="${out%%.*}.png"
 
 killall speaker-test &>/dev/null
 speaker-test -t sine &>/dev/null &
-pid_test=$!
+
+touch "$out"
+bash ./sleepstats.sh "$out" &>/dev/null &
 
 tresh=10
 lastdate="$(date +%s)"
@@ -29,6 +31,8 @@ screen=false
 graph=false
 
 export LC_ALL=C
+
+#trap 'kill -9 $(jobs -p);' SIGINT
 
 while getopts "sg" OPT; do
 	test "$OPT" == 's' && screen=true;
@@ -74,7 +78,7 @@ arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 	lastdate="$date";
 	laststate="$statenum";
 done | tee "$out"
-kill $pid_test; sleep 0.2
+kill $(jobs -p); sleep 0.2
 echo
 echo "Your log: $out"
 $graph && {

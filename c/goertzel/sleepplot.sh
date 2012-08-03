@@ -38,7 +38,9 @@ set grid
 #set pointsize 0.5
 plot\
 "$in" using 2:5 title "Sensor state" with steps,\
-"" using 2:((\$6*3+\$7*6+\$8*6+\$9+\$10)/5) title "Avg." with lines\
+"$in.stats" using 1:((\$3*3+\$4*6+\$5*6+\$6+\$7)/5) title "Avg." smooth bezier\
+#"" using 2:((\$6*3+\$7*6+\$8*6+\$9+\$10)/5) title "Avg." with lines,\
+#"$in.stats" using 1:((\$3*3+\$4*6+\$5*6+\$6+\$7)/5) title "Avg." with lines,\
 #"" using 2:(\$6*2) title "Avg. 10s" with lines,\
 #"" using 2:(\$7*3) title "Avg. 30s" with lines,\
 #"" using 2:(\$8*3) title "Avg. 60s" with lines,\

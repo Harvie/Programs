@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Simple sleep monitor (Harvie 2012)
 #
 # You probably have soundcard with one output and input

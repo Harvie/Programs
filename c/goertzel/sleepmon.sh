@@ -12,8 +12,8 @@
 # Wake up
 # Enjoy your data
 
-
 out=/tmp/sleeplog-"$(date +%F_%T)".txt
+graphout="${out%%.*}.png"
 speaker-test -t sine &>/dev/null &
 pid_test=$!
 tresh=10
@@ -23,10 +23,16 @@ history='';
 historymax=120;
 historylen='10 30 120'
 screen=false
-while getopts "s" OPT; do
+graph=false
+
+while getopts "sg" OPT; do
 	test "$OPT" == 's' && screen=true;
+	test "$OPT" == 'g' && graph=true;
 done
-echo "Writing to file: $out";
+
+echo "Writing log to: $out";
+$graph && echo "Writing graph to: $graphout"
+echo
 arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 	date="$(date +%s)"
 	time="$(echo "$line" | cut -f 1)"
@@ -57,12 +63,16 @@ arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 	} || {
 		$screen && xset dpms force on;
 	}
-	./sleepplot.sh "$out" &>/dev/null &
+	$graph && ./sleepplot.sh "$out" "$graphout" &>/dev/null &
 
 	#Prepare invariants for next round
 	lastdate="$date";
 	laststate="$statenum";
 done | tee "$out"
-kill $pid_test
+kill $pid_test; sleep 0.2
 echo
-echo "Your file: $out"
+echo "Your log: $out"
+$graph && {
+	./sleepplot.sh "$out" "$graphout" &>/dev/null
+	echo "Your graph: $graphout"
+}

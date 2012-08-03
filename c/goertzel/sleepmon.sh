@@ -28,6 +28,8 @@ historylen='10 30 60 90 120'
 screen=false
 graph=false
 
+export LC_ALL=C
+
 while getopts "sg" OPT; do
 	test "$OPT" == 's' && screen=true;
 	test "$OPT" == 'g' && graph=true;
@@ -44,7 +46,7 @@ arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 	$state && statenum=1 || statenum=0;
 	$state && statename='MOTION!' || statename='Nothing';
 
-	echo -ne "$time\t$date $(date '+%F %T') $statenum"
+	printf  "%.2f\t %s %s %d" "$time" "$date" "$(date '+%F %T')" "$statenum"
 
 	#History
 	after=$(( $date - $lastdate))
@@ -53,12 +55,12 @@ arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 		for len in $historylen; do
 			on="$(echo -n ${history::$len} | tr -d 0 | wc -c)"
 			on="$(echo "scale=2; $on/$len" | bc)"
-			LC_ALL=C printf " %.2f" "$on"
+			printf " %.2f" "$on"
 		done
 	}
 
 	#Debug
-	printf "\t(%s %3d After %4d secs)\n" "$statename" "$level" "$after";
+	printf " (%s %3d After %4d secs)\n" "$statename" "$level" "$after";
 
 	#Fun with values
 	$state && {

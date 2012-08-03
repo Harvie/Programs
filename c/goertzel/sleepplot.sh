@@ -10,11 +10,11 @@ graphout="${in%%.*}.png"
 test -n "$2" && graphout="$2";
 
 #Last state
-last="$(tail -n 1 "$in" | cut -d ' ' -f 4)"
+last="$(tail -n 1 "$in" | cut -d ' ' -f 5)"
 test "$last" -gt 0 && last="motion" || last="peace";
 
 #Approximate size of graph
-size="$(tail -n 1 "$in" | cut -d . -f 1)"
+size="$(tail -n 1 "$in" | cut -d . -f 1 | sed -e 's/^0*//' | tee /tmp/lol)"
 test $size -gt 3600 && size="$(( $size/10 ))" #For prolonged periods
 size="$(( 600 + $size ))"
 

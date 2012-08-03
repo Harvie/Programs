@@ -17,7 +17,7 @@ size="$(( 600 + $size ))"
 #Plot it
 gnuplot << EOF
 set output "$graphout"
-set terminal png size $size,300
+set terminal png size $size,400
 
 set title "Sleep motions"
 set xlabel "time"
@@ -36,7 +36,9 @@ plot\
 "$in" using 2:5 title "Sensor state" with steps,\
 "" using 2:(\$6*2) title "Avg. 10s" with lines,\
 "" using 2:(\$7*3) title "Avg. 30s" with lines,\
-"" using 2:(\$8*4) title "Avg. 120s" smooth bezier\
+"" using 2:(\$8*3) title "Avg. 60s" with lines,\
+"" using 2:(\$9*3) title "Avg. 90s" with lines,\
+"" using 2:(\$10*4) title "Avg. 120s" smooth bezier\
 
 EOF
 

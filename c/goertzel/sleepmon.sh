@@ -21,7 +21,7 @@ lastdate="$(date +%s)"
 laststate=0
 history='';
 historymax=120;
-historylen='10 30 120'
+historylen='10 30 60 90 120'
 screen=false
 graph=false
 

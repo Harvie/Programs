@@ -58,7 +58,7 @@ arecord | ./goertzel -n i -q -l c -t $tresh -d 4 | while read line; do
 	}
 
 	#Debug
-	echo -e "\t($statename $level After $after secs)";
+	printf "\t(%s %3d After %4d secs)\n" "$statename" "$level" "$after";
 
 	#Fun with values
 	$state && {

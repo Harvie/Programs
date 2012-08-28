@@ -1,4 +1,5 @@
 *.*
+!*.ino
 !*.pde
 !/.gitignore
 applet/

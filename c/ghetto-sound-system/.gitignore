@@ -1,0 +1,6 @@
+.gitignore
+sampler
+synth
+beatdetect
+midi-rx
+ftdi-midi

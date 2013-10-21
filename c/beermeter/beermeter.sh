@@ -11,16 +11,27 @@ backend='./audio.sh'
 tmp="/tmp/beertmp-$$";
 dialog=$(which dialog);
 
+rst() { echo -ne "\033[0;0H"; }
+
 calc() {
-	echo 'scale=2; '"$@" | bc
+	precise="$(echo 'scale=10; '"$@" | bc)"
+	echo 'scale=2; '"$precise/1" | bc
+}
+
+beer_calc() {
+	pulses="$1"
+	litres=$(calc "$pulses/$pulses_per_liter")
+	beers=$(calc "($pulses/$pulses_per_liter)/$beer_liters")
+	price=$(calc "(($pulses/$pulses_per_liter)/$beer_liters)*$beer_price")
+	echo $beers beers '('$price $currency, $litres l, $pulses pulses')'
+}
+
+beer_pulses() {
+	echo $(wc -c "$accounts/$1" | cut -d ' ' -f 1)
 }
 
 beer_stat() {
-	pulses=$(wc -c "$accounts/$1" | cut -d ' ' -f 1)
-	litres=$(calc $pulses/$pulses_per_liter)
-	beers=$(calc $litres/$beer_liters)
-	price=$(calc $beers*$beer_price)
-	echo $beers piv '('$price $currency, $litres l, $pulses pulses')'
+	beer_calc "$(beer_pulses "$1")"
 }
 
 add_account() {
@@ -56,14 +67,30 @@ beer_menu() {
 	done | xargs -0 $dialog --menu "$title stamgasti" 0 0 0
 }
 
+tap() {
+	stamgast="$1"
+
+	pulses_start=$(beer_pulses "$stamgast")
+	clear
+	while true; do
+		pulses_current=$(beer_pulses "$stamgast")
+		pulses_diff=$[ $pulses_current - $pulses_start ]
+
+		rst
+		echo == Cepuje stamgast $stamgast, ukonci ctrl+c ==
+		echo "CURRE: $(beer_calc $pulses_diff)        ";
+		echo "TOTAL: $(beer_calc $pulses_current)     ";
+		sleep 0.5;
+	done &
+	"$backend" | tee -a "$accounts/$stamgast" >/dev/null
+	kill $!
+}
+
 main_menu() {
 	while true; do
 		beer_menu 2>"$tmp"
 		[ "$?" = "0" ] && {
-			stamgast="$(cat "$tmp")"
-			clear
-			echo == Cepuje stamgast $stamgast, ukonci ctrl+c ==
-			"$backend" | tee -a "$accounts/$stamgast"
+			tap "$(cat "$tmp")"
 			true
 		} || servis_menu
 	done

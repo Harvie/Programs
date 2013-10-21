@@ -1,4 +1,9 @@
 #!/bin/sh
+pulses_per_liter='4380'
+beer_liters='0.5'
+beer_price='23'
+currency='Kč'
+
 title='Beer-O-Meter'
 accounts='./accounts'
 totals="$accounts/.totals"
@@ -6,8 +11,16 @@ backend='./audio.sh'
 tmp="/tmp/beertmp-$$";
 dialog=$(which dialog);
 
+calc() {
+	echo 'scale=2; '"$@" | bc
+}
+
 beer_stat() {
-	echo $(wc -c "$accounts/$1" | cut -d ' ' -f 1) piv
+	pulses=$(wc -c "$accounts/$1" | cut -d ' ' -f 1)
+	litres=$(calc $pulses/$pulses_per_liter)
+	beers=$(calc $litres/$beer_liters)
+	price=$(calc $beers*$beer_price)
+	echo $beers piv '('$price $currency, $litres l, $pulses pulses')'
 }
 
 add_account() {

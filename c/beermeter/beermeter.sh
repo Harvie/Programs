@@ -11,6 +11,8 @@ backend='./audio.sh'
 tmp="/tmp/beertmp-$$";
 dialog=$(which dialog);
 
+#set +bm #job controll messages were messing up dialog's output!!!
+
 rst() { echo -ne "\033[0;0H"; }
 
 calc() {
@@ -36,11 +38,16 @@ beer_stat() {
 
 add_account() {
 	"$dialog" --inputbox "New account name" 0 0 2>"$tmp"
-	[ $? = 0 ] && touch "$accounts/$(cat "$tmp")";
+	stamgast=$(cat "$tmp")
+	[ $? = 0 ] && [ -n "$stamgast"] && touch "$accounts/$stamgast";
 }
 
 servis_menu() {
-	$dialog --menu "$title servis" 0 0 0 new "Novy stamgast" exit "Konec party" 2>"$tmp"
+	$dialog --menu "$title servis" 0 0 0 \
+		tap "Seznam stamgastu" \
+		new "Novy stamgast" \
+		exit "Konec party" \
+		2>"$tmp"
 	option="$(cat "$tmp")"
 
 	case $option in
@@ -64,7 +71,7 @@ beer_menu() {
 		echo -n "$i"; echo -ne "\x00";
 		echo -n $(beer_stat "$i");  echo -ne "\x00"
 		echo -e "$i\t$(beer_stat "$i")" >> "$totals"
-	done | xargs -0 $dialog --menu "$title stamgasti" 0 0 0
+	done | xargs -0 $dialog --menu "$title stamgasti" 0 0 0 2>"$1"
 }
 
 tap() {
@@ -72,23 +79,28 @@ tap() {
 
 	pulses_start=$(beer_pulses "$stamgast")
 	clear
-	while true; do
+	"$backend" >> "$accounts/$stamgast" &
+	pid="$!"
+	while kill -0 "$pid" 2>/dev/null; do
+		#echo "$stamgast" > /tmp/testo
 		pulses_current=$(beer_pulses "$stamgast")
 		pulses_diff=$[ $pulses_current - $pulses_start ]
 
 		rst
-		echo == Cepuje stamgast $stamgast, ukonci ctrl+c ==
+		echo == Cepuje stamgast "$stamgast", ukonci stisknutim [ENTER] ==
 		echo "CURRE: $(beer_calc $pulses_diff)        ";
 		echo "TOTAL: $(beer_calc $pulses_current)     ";
-		sleep 0.5;
+		sleep 0.3;
 	done &
-	"$backend" | tee -a "$accounts/$stamgast" >/dev/null
-	kill $!
+	read -n 1
+	pkill -TERM -P "$pid" 2>/dev/null
+	kill -TERM "$pid" 2>/dev/null
+	(sleep 3; kill -KILL "$pid" 2>/dev/null) &
 }
 
 main_menu() {
 	while true; do
-		beer_menu 2>"$tmp"
+		beer_menu "$tmp"
 		[ "$?" = "0" ] && {
 			tap "$(cat "$tmp")"
 			true

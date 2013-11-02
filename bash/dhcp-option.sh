@@ -10,16 +10,23 @@ dec_to_hex_right() {
 }
 
 escape() {
+	#Adds \x escapes to hexdump string
+
 	while read -n 2 i; do
 		[ -n "$i" ] && echo -n '\x'"$i";
 	done
 }
 
 dnsmasq() {
+	#Converts \x00\x00 notation to 00:00 notation
+
 	sed -e 's/^\\x//g' | sed -e 's/\\x/:/g'
 }
 
 dhcp_option() {
+	#Compile DHCP option using option number and data.
+	#Generates hex string including header with option number and data length.
+
 	separator='\x'
 	option_id="$1"
 	option_data="$2"

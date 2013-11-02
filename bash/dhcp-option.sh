@@ -30,13 +30,38 @@ dhcp_option() {
 	printf "$option_data" | xxd -ps -c 256 | escape
 }
 
+pd_prefix() {
+	#Generate prefix sub-option to be included in PD option of DHCPv6
+
+	option_id=26
+	lifetime_preferred='\x00\x00\x01\x2C'
+	lifetime_valid='\x00\x00\x01\x2C'
+
+	prefix_length='64'
+	#prefix = 16 octets:
+	prefix='\x20\x01\x06\x7c\x21\x90\x1a\x01''\x00\x00\x00\x00\x00\x00\x00\x00'
+
+	prefix_length_hex=$(dec_to_hex $prefix_length)
+
+	#echo $prefix_length_hex
+	dhcp_option $option_id "$lifetime_preferred$lifetime_valid$prefix_length_hex$prefix"
+}
+
 pd() {
-	option_id=25
+	#Generate data of PF option of DHCPv6
+
 	iaid='\x00\x00\x00\x00'
 	t1='\x00\x00\x01\x2C'
 	t2='\x00\x00\x01\x2C'
-	ia_pd_opts=''
-	dhcp_option $option_id "$iaid$t1$t2$id_pd_opts"
+	ia_pd_opts="$(pd_prefix)"
+	echo -n "$iaid$t1$t2$ia_pd_opts"
+}
+
+pd_option() {
+	#Generate PD option of DHCPv6 (including header)
+
+	option_id=25
+	dhcp_option $option_id "$(pd)"
 }
 
 pd | dnsmasq

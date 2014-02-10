@@ -10,12 +10,14 @@
  *
  */
 
+#include <stdlib.h>
 #include <string.h>
 #include <sys/prctl.h>
 #include <linux/seccomp.h>
 #include <sys/syscall.h>
 
 #define DISPLAY(msg) (syscall( SYS_write, 2, msg, strlen(msg) ))
+#define exit(status) { syscall( SYS_exit, status ); abort(); }
 
 int main() {
 	system("echo before");
@@ -25,4 +27,5 @@ int main() {
 	//fflush(NULL);
 
 	system("echo after");
+	exit(0);
 }

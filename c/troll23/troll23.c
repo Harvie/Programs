@@ -4,15 +4,32 @@
 #include <sys/types.h>
 #include <sys/syscall.h>
 #include <dlfcn.h>
+#include <unistd.h>
 #include <stdarg.h>
 #include <time.h>
+#include <string.h>
+
+#define i { srand(23); printf("%s();\n",__func__); }
 
 //Catch rand() calls etc...
-time_t time(time_t *tloc) { srand(23); return (time_t)0; }
-int rand(void) {	srand(23); return 23; }
-long int random(void) {	srand(23); return 23; }
-int rand_r(unsigned int *seedp) { srand(23); return 23; }
-int random_r(struct random_data *buf, int32_t *result) { srand(23); return 23; }
+int rand(void) { i; return 23; }
+long int random(void) { i; return 23; }
+int rand_r(unsigned int *seedp) { i; return 23; }
+int random_r(struct random_data *buf, int32_t *result) { i; return 23; }
+//Time
+time_t time(time_t *tloc) { i; return (time_t)0; }
+int clock_gettime(clockid_t clk_id, struct timespec *tp) { i; tp->tv_nsec=0; tp->tv_sec=0; return (time_t)0; }
+//OpenSSL (not working i guess...)
+int RAND_bytes(unsigned char *buf, int num) { i; memset(buf, 23, (size_t) num); return 23; }
+int RAND_pseudo_bytes(unsigned char *buf, int num) { i; memset(buf, 23, (size_t) num); return 23; }
+int FIPS_rand_bytes(unsigned char *buf, int num) { i; memset(buf, 23, (size_t) num); return 23; }
+int FIPS_rand_pseudo_bytes(unsigned char *buf, int num) { i; memset(buf, 23, (size_t) num); return 23; }
+//IDs
+pid_t getpid(void) { i; return (pid_t)0; }
+uid_t getuid(void) { i; return (uid_t)0; }
+gid_t getgid(void) { i; return (gid_t)0; }
+uid_t geteuid(void) { i; return (uid_t)0; }
+gid_t getegid(void) { i; return (gid_t)0; }
 
 //Catch open() calls (while redirecting filename):
 static const char *redirect_name(const char *name)

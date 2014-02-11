@@ -1,3 +1,5 @@
+#define F_CPU 100000000UL // Sets up the default speed for delay.h
+
 #include <avr/io.h>
 #include <util/delay.h>
 

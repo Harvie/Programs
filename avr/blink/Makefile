@@ -1,9 +1,10 @@
 #MCU=at90s2313
 MCU=attiny2313
+#FUSES=-U lfuse:w:0x64:m -U hfuse:w:0xdf:m -U efuse:w:0xff:m
 PORT=/dev/ttyUSB0
 CC=avr-gcc
 OBJCOPY=avr-objcopy
-PROJECT=helloworld
+PROJECT=helloworld2
 RESET=false
 # optimize for size:
 CFLAGS=-g -mmcu=$(MCU) -Wall -Wstrict-prototypes -Os -mcall-prologues
@@ -22,7 +23,7 @@ asm : $(PROJECT).c
 # load (program) the software into the eeprom:
 load: $(PROJECT).hex
 	$(RESET) && stty -F $(PORT) 19200 hupcl && sleep 2 && stty -F $(PORT) 19200 -hupcl && sleep 2 || true
-	avrdude -cstk500v1 -P$(PORT) -b19200 -p $(MCU) -Uflash:w:$(PROJECT).hex:i || $(MAKE) RESET=true MAKE=true load
+	avrdude -cstk500v1 -P$(PORT) -b19200 -p $(MCU) -Uflash:w:$(PROJECT).hex:i $(FUSES) || $(MAKE) RESET=true MAKE=true load
 	# uisp -dlpt=/dev/parport0 --erase --upload --verify if=$(PROJECT).hex -dprog=dapa  -v=3 --hash=12
 #-------------------
 clean:

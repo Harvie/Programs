@@ -5,6 +5,8 @@
 
 
 #define BAUD 31250
+#define BUFFER_SIZE 1
+#define LATENCY 0
 
 static snd_rawmidi_t *midi_in, *midi_out;
 struct ftdi_context ftdi;
@@ -38,20 +40,21 @@ int main(void) {
 	ftdi_disable_bitbang( &ftdi );
 	ftdi_set_baudrate(&ftdi, BAUD);
 
-	unsigned char buf;
+	unsigned char buf[BUFFER_SIZE];
 	int ret;
 	while(1) {
 		//FTDI2MIDI
-		ret = ftdi_read_data(&ftdi,&buf,1);
+		ret = ftdi_read_data(&ftdi, buf, BUFFER_SIZE);
 		if(ret < 0) break;
-		if(ret > 0) snd_rawmidi_write(midi_out, &buf, 1);
+		if(ret > 0) snd_rawmidi_write(midi_out, buf, BUFFER_SIZE);
 
 		//MIDI2FTDI
-		ret = snd_rawmidi_read(midi_in,&buf,1);
+		/*
+		ret = snd_rawmidi_read(midi_in, buf,BUFFER_SIZE);
 		if(ret < 0 && ret != -EAGAIN) break;
-		if(ret > 0) ftdi_write_data(&ftdi, &buf, 1);
-
-		usleep(1000);
+		if(ret > 0) ftdi_write_data(&ftdi, buf,BUFFER_SIZE);
+		*/
+		usleep(LATENCY);
 	}
 	exit(0);
 }

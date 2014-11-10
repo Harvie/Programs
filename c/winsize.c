@@ -3,8 +3,7 @@
 
 static int get_win_size (int fd, struct winsize *win)
 {
-  int err = ioctl (fd, TIOCGWINSZ, (char *) win);
-  return err;
+  return ioctl (fd, TIOCGWINSZ, (char *) win);
 }
 
 int main(void) {

@@ -3,6 +3,10 @@ _*
 *.bak
 *.old
 *.part
+*.dump
+
+*.pem
+*.crx
 
 pkg/
 src/

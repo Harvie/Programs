@@ -31,6 +31,7 @@ src/
 
 *.mp3
 *.wav
+*.mp4
 *.mpeg
 *.avi
 *.ogg

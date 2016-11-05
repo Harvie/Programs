@@ -1,0 +1,153 @@
+Hacker - 2oo7-o1|Operace stredni|Alpha o.7|Napsal: Harvie Y2K7<br />Mistnosti: 153
+Vitejte. Tuto hru pisu jako zamysleni nad stereotypem stredni skoly, omluvte prosim suchy humor (je to spise povzdech) a pravopisne, gramaticke i fakticke chyby. Autor popira jakoukoli souvislost mezi hrou, jim a jeho skolou. Vsechny osoby, fakta i podobnosti ve hre jsou ciste nahodne. Zaroven se zrikavam zodpovednosti za jakekoli poruseni zakonnych, nebo mravnich pravidel v dusledku inspirace touto hrou. Zivot neni hra a tohle uz vubec ne, to je zatim jen pre-relaese!!!<br />[5|VSTUPTE DO SVETA CYBERPUNKU]
+
+//Rano
+Probral jsi se na svoji matraci nekde v garazi nebo kde to vlastne bydlis, vsude okolo se vali sposta kabelu, disku, knih a casopisu. Piska budik: [6|zamacknout] nebo [7|nechat zvonit]
+Nez si se vyhrabal z ty hromady na podlaze, stejne dosla baterka, vzpomel jsi si na skolu a zacal jsi se prohrabavat plechovkami a krabicemi od pizzy. Muzes: [8|jit spat] nebo [7|jit se nasnidat]
+Chvili se sice motas, ale nakonec se trefis do dveri a razis si cestu k lednici, vyberes si z ni to nejmene skazene "jidlo" (neda se uz rict, ze by chladila). Das si: [10|kus pizzy z minuleho tydne] nebo [9|nejakej nasaklej rohlik]?
+Tohle neni dobry napad. Zkus [7|znovu vstat] nebo muzes [15|jit rovnou do skoly].
+Pri blizsim zkoumani si usoudlil, ze si das radeji [10|pizzu].
+Pizza nechutna tak spatne, nevadi ze nemuzes rozeznat jestli to na ni je kecup, nebo nejaka roztekla ancovicka. Zapijes to [11|teplou kolou] nebo [12|kofejnovym megadrinkem], co se ti usadil na dne hrnce na kafe?
+Vypil jsi ten humus a necitis se uz tak blbe. [13|Pokracuj...]
+Mel jsi docela problem napechovat to do krku, ale po chvili citis, jak se ti zacinal krev vlevat i do mozku (kdyby jsi byl ve hre, pribylo bi ti 10% staminy). Radsi jeste zustanes [13|chvili sedet].
+Ten drijak mel docela grady. Oci se ti zacinaji podlevat krvi a ty vis, ze tenhle den bude dlouhy. Je 9:00 a ty si rikas, ze by jsi mohl pomalu jit do [15|skoly].
+//Zaciname
+No vlastne nemusis rovnou do skoly. Mas na vyber: [18|Hrat na PSku] - [19|Hrat na XBOXu 360] - [16|Koukat na televizi] - [21|Zapnout komp] - [27|Jit do skoly].
+Ne zase nedavaji nic inteligentniho. Ovladac: [20|0] [16|1] [16|2] [16|3] [16|4] [16|5] [16|6] [20|7] [20|8] [20|9] [17|OFF/ON].
+Televize zablikala a pak zhasla nadobro. [15|Kasles na ni], nebo k ni jeste zkusis pripojit [18|PlayStation]?
+Tyve blbnes??!!! Odkdy hrajes tyhle pitominy? [15|Zkus to znova...]
+Rikal nekdo Microsoft?!! To ti vzdycky hne zlucnikem. [15|OMG Zpet!]
+Nevim sry, ale tenhle kanal nemas nalazenej. [16|Zkus jinej...]
+Zhavis komp, nastartujes sit, kdyz [22|vtom...]
+...zase vypnuli proud (Uz si uvazoval, ze bys tem vyderacum mohl zaplatit.), no nic, jestli chces na net, asi budes muset [27|jit do skoly].
+
+
+
+//Venku
+Vylezes ze sveho skromneho prizemniho bytu na chodbu. Ted si az uvedomil, ze zadnou chodbu vlastne nemas... stojis na ulici a rozhodujes se co dal: [33|Tak teda do skoly...] - [28|Jit na nakup]
+Mno, sel si na nakup a u pokladny si zjistil, ze nemas dost lovaku. nacpal jsi si tedy do kapsy par rohliku a hnusny mastny salam. Nanestesti te v samoobsluze zahledl agent od sekuritaku. Vsiml sis toho. Ted muzes [29|zacit utikat] nebo [30|pockat az te chiti].
+Fajn, trochu jsi se zadychal, ale zmizel si mu v podchodu. Ted uz nevis coby, des tedy [33|do skoly].
+Mel si stesti, agent te chytl, ale ty jsi mezitim nez k tobe prisel nenapadne z kapsy vytahl balicek salamu a namluvil jsi mu, ze si ho chces koupit. Kdyz te pustil, za prvnim rohem si ho pro jistotu hodil kolemjdoucimu do kosiku a bez problemu opustil samoobsluhu. No nemas sice salam, ale zase te nezabasli. [33|Jdes radeji do skoly.]
+
+//Doprava
+No stojis na chodniku a vybiras si, jak se nejrychleji dostat do skoly. Muzes jet [34|Vlakem] - [35|Autobusem] - [42|Tramvaji] - [43|Metrem] nebo [45|jit pesky].
+Vlakem sry, ale tady fakt vlak nejezdi. Hrabe ti uz? [33|Prober se!!!]
+Prisel jsi na zastavku (BTW: je tam tolik lidi, ze ti chvili trvalo, nez jsi se prodral k jizdnimu radu.), vsichni si tam hlasite stezuji na nepravidelnost verejne dopravy. Muzes [36|cekat] nebo to rovnou [33|vzdat].
+Asi mas rad cekani, takze stojis na [37|zastavce]...
+...a [38|stojis...]
+...a [39|stojis...]
+...a [40|stojis...]
+...a [41|stojis...]
+...a nakonec se na to stejne vykasles a odtahnes [33|pryc].
+Stoupnes si na zastavku a tesis se, jak se budes mackat... [44|Po chvili cekani...]
+Sestoupis po schodech do metra... ...a asi 4min. potom dobihani metra, ktere ti stejne [44|ujelo...]
+Konecne!!! je tady reknes "WOW" a [48|nastoupis] (namackas se tam jak soubor po KGB kompresi).
+Fajn, jdes do skoly teda po [48|vlastnich...] (stejne uz jdes pozde, takze hodina sem - hodina tam...)
+
+//Cesta
+Cesta sice chvili trva, ale po chvili opravdu stojis kousek od skoly a rozhodujes se: [56|Jit do skoly] - [146|Jit domu] - [49|Dneska zatahnou skolu]
+Tak to je slovo do pranice! Zatahnul si skolu. Leda, ze by te prece jenom hlodalo svedomi, muzes se este [48|vratit]. Nebo radeji pudes rychle [120|z dosahu skoly].
+
+
+
+
+
+//Skola
+No super. Prisel jsi do skoly asi o 3 hodiny pozde. Skola je zamcena. Muzes bud jit [58|zazvonit na vratnici] nebo [57|se na to vykaslat].
+Jo, mas pravdu, kasli na to. Stejne ale premitas: [120|Jit pryc] nebo [56|se radsi jeste vratit].
+Po asi 5min. zvoneni se ti nahodny kolemjdouci pokusil otevrit zamcene dvere. Bezvysledne. Nastesti se vratna jiz vratila z pravidelne pochuzky a pustila te [60|dovnitr...]
+
+Stojis na chodbe. Prakticky mas na vyber nasledujici destinace: [120|Pryc ze skoly], [63|satna], [62|nastenka s rozvrhem], [81|tvoje trida], [66|skolni bufet] a [61|dalsi chodby].
+Vydal jsi se chodbou doprava a nahoru po schodech. Vysvitly pred tebou dalsi moznosti: [64|WC], [68|Studentsky klub], [60|zpet na hlavni chodbu].
+Prisel si k nastence. Ocima si prejel skolni rad, ano "§:3.1 - naruseni integrity skolni site" tam porad jeste je... Zbezne sis prohledl rozvrh hodin: "OMG zase mame *****"... (Autor stale "jeste" studuje a nechtel vyjadrit antipatie k zadnemu z predmetu ani profesoru, takze si doplnte svuj oblibeny predmet) [60|Zpet...]
+Vstoupil si do satny. Prisel ke sve skrince a dostal navyber: [60|Prezout se do prezuvek], [60|Prezout se do tenisek], [60|Svleci bundu], [60|obleci bundu] nebo jen [60|odejit].
+Moc si toho sice nepopil, ale stejne se ti ulevilo. Nez se vratis zpet, muzes si bud [61|umyt ruce] (alespon jednou za tejden by ti to prospelo) nebo [61|neumyt ruce].
+//Bufet
+Waw - tedka pri hodine neni nikdy v bufetu fronta. Vstoupis do dveri a vzapeti zjistis, ze si prodavacka nekam odskocila, protoze nepocitala s navstevou pri hodine. Sebral jsi steak, kus pizzy, ledovou kavu (super h4x0r piti) a nacpal sis kapsy bombony, ktere si az do pozdnich hodin cucal. Potom jsi rychle [60|zmizel].
+//Skolni klub
+Vstoupil jsi do vetsi podkrovni mistnosti s postarsi [73|vypocetni technikou], [72|televizi] a [69|kopirkou]. [61|Zpet...]
+Kopirka na cipovky je pomerne zachovala (asi modernejsi, nez pocitace...), uz v prvaku si zjistil, jak ji [70|hacknout]. [68|Zpet.]
+Od prvaku vis, ze staci nenapadne zkratovat spravne dva draty, co jdou od ctecky karet a muzes [71|kopirovat] zadarmo. [68|Zpet.]
+Chvili premyslis, pak ale z tasky vytahnes nejake papiry sesite sesivackou, obratne je rozesijes a sesijes draty, ktere sis uz v prvaku nenapadne odholil. Pak premyslis, co dal. Zbezne mrknes na chodbu a pak pritisknes svoje hole pozadi na sklo, navolis 100 kopii a zmacknes "START". Vsechny papiry pak samozrejme vratis do zasobniku na ciste papiry a rozpojis svuj dumyslny spoj. [68|Pokracuj...]
+To snad ani nema smysl... [68|Zpet...]
+Sednul si k ty rachotine: [74|POWER] - [68|Ne, tohle fakt nemas zapotrebi...]
+Rachotina rachotive zarachtala a naskocili mswin 2000 (multilicence) - postaveno na technologii MS NT... ...rikas "W0W"... Chvili to trvalo, ale vysledek se [75|dostavil].
+Nabehlo ti tam naky okynko... ...omamene jsi diky svemu reflexu v 1ms napsal "root". Pak ses probral... Rozhledl ses vymazal roota a podle pokynu na zdi zadal "[76|user]" (samozrejme bez hesla).
+Jop. Este chvili to rachtalo a pak jsi uvidel "START" takze zase: "101" ...ehm tedy: "[77|W0W]"...
+Pokusil ses strcit tam fhlashku. Nothing happened... (pozn. aut.: casta hlaska z jednoho dungeonu, co jsem hral na GB Classic), pak zkusis internet "ping -t google.com". Hmm... to sou lagy. "Cilova sit neni dostupna"... Aha takze spravce zase stahuje pr0n a zatrhnul net. Tje jasný. Chvili se zamyslis nad vyznamem pocitace bez jakekoli mechaniky, nebo metody, pomoci ktere by jsi mohl neco dostat neco do nej, nebo z nej. Pak se znechucene [68|odhlasis].
+
+
+//Trida
+Ne to urcite nemuzes [60|myslet vazne]... Pockej, nebo chces fackt [82|vstoupit]?
+No, strach si prekonal. Ani tvuj prichod nedokazal probudit spici tridu... Profesor(ka) monotypne mumla to, za co ho plati... Ani jeho tvuj prichod nedokazal vyrusit. Muzes: [85|si sednout], [60|zase odejit] nebo [83|ohlasit profesorovi prichod].
+"Jste opily studente??! - uvedomte si, ze jste prisel 10min. pred koncem hodiny, tak co byste jeste chtel??": [85|jit si sednout] - [60|zase odejit]
+
+Posadil jsi se do lavice, zjistil, ze prakticky vsichni okolo tebe spi... Docela te to prestava bavit, takze si vybiras: [120|Rychle odtud vypadnout], [89|Otevrit tasku], [108|Pockat do konce hodiny].
+
+
+//Taska
+V tasce mas: [90|mobil] - [96|notebook] - [103|uceni] - [85|zavrit tasku]
+Vytahnul sis mobil. [89|Vratit do tasky]. Vymazal reklamni zpravu. A zamyslene prolistoval telefoni seznam. V tom te probudil zaznam "[91|112]".
+Jenom jestli mas [92|dost odvahy], jinak to radeji zase [89|schovej]. 
+Zavolal jsi na 112ku a nahlasil, ze ve tvoji skole je ukryta [93|bomba].
+Mno jenom uplny m*gor by si mohl myslet, ze z normalniho mobilu lze volat anonymne. za 15min. jiz netrpelive preslapujes v cele predbezneho zadrzeni. ENDE!!!
+
+//NTB
+Vytahnul sis notebook [89|Vratit do tasky]. Nabootovals Linux a premejslis [97|MPLAYER] - [98|XMMS] - [99|IRC] - [100|FIREFOX]
+Profesor chvili zasnul nad tvoji drzostzi, ale pak urazene a predcasne opustil ucebnu [89|Zavrit ntb]
+Hlasity poslech hudby vyvedl profesora uplne z konceptu snazil se te sice zapsat do tridni knihy, ale potom, co jsi mu odmitl oznamit svoje jmeno (jeste te tam nevidel a tvoji spici spoluzaci mu take nic nerekli), vzdal snahu a pokracoval ve vykladu za doprovodu tvoji oblibene hudby. [96|Zavrit]
+Zalogujes se do skolni WI-FI site a chvili nerusene resis problemy v kanalech. [96|Zavrit]
+Pres skolni WI-FI si prectes majly, smazes spam a prectes si novinky na tvym oblibenym webu. Pak bezducha brouzdas webem. [96|Zavrit]
+
+//Uceni
+Rozhledl ses okolo, co je vlastne za hodinu a pak sis vytahl svuj jediny blok na poznamky a zacal si kreslit. [96|Zavrit to]
+
+
+
+//Konec hodiny
+[109|Cekas...]
+[110|Cekas...]
+[111|Cekas...]
+[112|Cekas...]
+Konecne zazvonilo!!! chvili vahas, jestli [113|zustanes ve tride], nebo [60|se urychlene zpakujes a opustis tridu].
+Puvodne si chtel pockat ve tride, ale ten neuveritelny bordel te pohorsil a tak [120|odejdes ze skoly.]
+
+
+
+
+
+//Ven ze skoly
+Rozhodl jsi se, ze srandy uz bylo pro dnesek dost a zamiris [122|pryc].
+
+Stojis na ulici a slunecni svetlo pronikajici zelenym smogem ti sviti do oci. Uz se zase rozhodujes co udelas (Autor je absolutne znaven touto frazi...). Muzes jit: [123|Do skoly], [124|na obed], [126|do obchodaku], [136|do hospody] nebo [146|domu].
+[122|OMG Tam uz ne!!!]
+Zhltl si ten blaf a [122|odesel...] (Autor nechtel prilis rozpitvavat kvalitu skolni jidelny, aby hrac nepotrisnil svoji klavesnici, ci monitor necim velmi nehezkym.)
+
+Vstoupil jsi do nedalekeho obchodniho centra (nejmenovaneho), muzes si to jeste [122|rozmyslet], nebo si vybrat oddeleni [128|potraviny], [129|drogerie], [130|Elektronika], [133|Knihkupectvi]
+
+Rychle si do sebe nasoukal, co se do tebe veslo, obsah zaludku tu nastesti nekontroluji. [126|Odejit...]
+Rychle si do kapsy nahazel par drobnosti a prevzal sis balicek od znameho dealera (ne kamose - kseft je kseft...) a [126|Odesel...]
+Vstoupil si do obchodu s elektronikou a hned ti bylo jasny, ze vsechno pod bundu nepoberes, muzes si tedy vybrat a zbytek vzit priste: [131|700GB HDD] - [131|300GB HDD] - [131|100ks 9GB DVD] - [132|Grafická karta dle poslední módy]. [126|Nebo muzes odtahnout jak n00b].
+Super, tvoje corkarske techniky snad prevysi uz jen tvoje 1337i h4x0r5k3 5ki11y  [126|Pokracuj]
+OMG naco grafarnu, ty prece hry nehrajes [130|Zpet...]
+Hmm, tyhle h4x0r knihy si uz vsechny precet... [126|Zpet do vstupni haly...]
+
+//Hospoda
+Vlezl jsi do blizkeho pajzlu, muzes se [137|rozhlednout po kamosich], nebo [122|Odejit...]
+Mel si stesti a zahledl si znamou tvar. [138|prisednes si] nebo [122|odejdes]?.
+Sedis u stolu, muzes si dat [139|pifko], [139|preclik], [139|absynth], nebo se [122|vyparit bez placeni...]
+Obsluze chvili trvalo, nez pochopila co se deje, ale nakonec tvoje prani [138|vyplnila...]
+
+
+
+
+
+//Doma
+Stojis ve svem malem byte: [147|Naveceret se] - [153|Jit na komp] - [149|Jit spat]
+Nemas nic k jidlu (pozn. aut.: mozna ti nekdy neco naprogramuju =) [146|Zpet]
+
+Lehnes si do toho bordelu na matraci (nebo se ti este snad [146|nechce spat]?), pustis si radio (na baterky) a chvili premitas o dnesnim dni (pozn. aut.: v teto hre opravdu nehledejte hlubsi vyznam...) a pak [150|usneš] neklidným spánkem.
+CONGRATULATIONS!!! Vyhral si, takze si skoro tak hustej typek, jako ja (pozn. aut.: !!!buhehe na me nemas!!! - thx2dc)<br />ted muzes: [5|vzbudit se] a dat si druhy den, nebo [151|ZKONCIT].
+ZKONCILS =)<br /><i>To be continued</i>
+
+Bohuzel uz si strasne ospaly a des si [149|lehnout...]

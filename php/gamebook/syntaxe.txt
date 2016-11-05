@@ -1,0 +1,21 @@
+Formát souboru pro Open GameBook:
+
+
+Kodovani:
+UTF-8 nebo CP-1250
+
+Dalsi:
+Cely text je bud psany s diakritikou, nebo bez. (vyjimku tvori prvni radek, ktery muze diakritiku obsahovat i pokud zbytek souboru ne)
+Mezi jednotlivymy logickymy celky (Mistnosti, rozhovory, boje, dny, podkapitoly) vynechavejte dostatecny pocet volnych radek
+Ve hre pokud mozno nepouzivejte html tagy (brzy budou enginy pro jine platformy, nez web)
+
+Obsah souboru:
+
+První øádek je vyhrazen pro informace o hre - obsahuje ( oddìleno rourami - "|" ):
+Nadpis|Podnadpis|Kapitola|Popis- napø.: napsal: Autor Rok<br />Pøípadné další øádky komentáøe<br />...
+
+Další øádky mohou obsahovat následující:
+Text hry...............
+[X|Text Odkazu] - Zobrazeni odkazu na radek X se zadanym textem odkazu (na psani her pro OGB potrebujete krome napadu jen obycejny textovy editor s cislovanim radek.)
+{1\\2\\3\\4\\...\\X} - Nahodny vyber z techto X radku a zobrazeni odkazu na tento radek.
+%soubor.txt% - Zobrazeni odkazu na soubor.txt jako text bude pouzito jmeno souboru. Pouziti napr.: rozdeleni hry po kapitolach. (jeste neni implementovano!!!)

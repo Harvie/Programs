@@ -1,0 +1,6 @@
+DEMO|Ukázka funkcí a syntaxe OGB|první a jedinná|napsal: Harvie 2oo7
+Ahoj mas ne vyber: Jdi na [4|smrt] nebo zij [3|chvili dele], jestli nevis, [5|pouzij generator nahodnych cisel], nebo [6|"zluteho kone"].
+Ted sis chvili zil, muzes jit bud [2|zpet], nebo na [4|smrt].
+Zemrel jsi. Tvoje dobruzstvi tu konci. <br /> [2|RESTART].
+Ted budes nahodne poslan na smrt, na zacatek nebo na zluteho kone: {2\\4\\6}.
+luouèkı kùò úpìl ïábelské ódy. [2|Pokraèuj...]

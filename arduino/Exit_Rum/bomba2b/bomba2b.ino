@@ -68,7 +68,8 @@ void loop()
     display.setBrightness(15);
     display.writeDisplay();
 
-    while (keyboard.available()) keyboard.read();
+    while (keyboard.available())
+	keyboard.read();
 
     //Pockame na pripojeni kabelu
     display.print(0xCAB1, HEX);

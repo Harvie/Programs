@@ -5,9 +5,9 @@
 
 //Nastaveni bomby
 
-#define DISARM_CODE "12345678"
+#define DISARM_CODE "73138477"
 #define TIME_COUNTDOWN 600
-#define TIME_COUNTDOWN 15
+//#define TIME_COUNTDOWN 15
 
 //Prirazeni pinu
 
@@ -55,6 +55,39 @@ void setup()
     pinMode(PIN_CABLE_CHECK, INPUT_PULLUP);
 }
 
+int test_disarmed(int reset)
+{
+
+    static int guessed = 0, disarmed = 0;
+    if (reset) {
+	guessed = 0;
+	disarmed = 0;
+    }
+    //Cteme klavesnici
+    while (keyboard.available()) {
+	char c = keyboard.read();
+	if (c == PS2_ENTER) {
+	    Serial.println();
+	} else {
+	    Serial.print(c);
+	}
+	if (c == DISARM_CODE[guessed]) {
+	    guessed++;
+	    Serial.println("\nGOT!");
+	} else {
+	    guessed = 0;
+	    Serial.println("\nFAIL!");
+	}
+	if (DISARM_CODE[guessed] == 0) {
+	    disarmed = 1;
+	    Serial.println("\nDISARMED!");
+	}
+    }
+
+    return disarmed;
+
+}
+
 void loop()
 {
     //Vynulujem periferie
@@ -70,6 +103,7 @@ void loop()
 
     while (keyboard.available())
 	keyboard.read();
+    test_disarmed(1);
 
     //Pockame na pripojeni kabelu
     display.print(0xCAB1, HEX);
@@ -84,9 +118,7 @@ void loop()
 	delay(100);
 
     //Odpocitavame
-    int guessed = 0, disarmed = 0;
-
-    for (int cnt = TIME_COUNTDOWN; cnt >= 0 && !disarmed; cnt--) {
+    for (int cnt = TIME_COUNTDOWN; cnt >= 0 && !test_disarmed(0); cnt--) {
 	display.print(cnt_dec(cnt), DEC);
 	display.drawColon((cnt + 1) % 2);
 	display.writeDisplay();
@@ -95,70 +127,55 @@ void loop()
 	analogWrite(PIN_LED_G, random(0, 3));
 	analogWrite(PIN_LED_B, random(0, 3));
 
-	tone(PIN_COIL_LO, 1000, 30);
+	//Tikani / pipani
+	tone(PIN_COIL_LO, 1000, 50);
+	delay(60);
+	digitalWrite(PIN_COIL_LO, HIGH);
+	delay(40);
+	digitalWrite(PIN_COIL_LO, LOW);
 
-	delay(1000);
+	delay(900);
 
-	//Cteme klavesnici
-	while (keyboard.available()) {
-	    char c = keyboard.read();
-	    if (c == PS2_ENTER) {
-		Serial.println();
-	    } else {
-		Serial.print(c);
-	    }
-	    if (c == DISARM_CODE[guessed]) {
-		guessed++;
-		Serial.println("\nGOT!");
-	    } else {
-		guessed = 0;
-		Serial.println("\nFAIL!");
-	    }
-	    if (DISARM_CODE[guessed] == 0) {
-		disarmed = 1;
-		Serial.println("\nDISARMED!");
-	    }
-	}
     }
 
-    if (disarmed) {
-	//Bomba byla deaktivovana
-	tone(PIN_COIL_LO, 3000, 500);
-	delay(500);
-	tone(PIN_COIL_LO, 5000, 500);
-	analogWrite(PIN_LED_R, 0);
-	analogWrite(PIN_LED_G, 3);
-	analogWrite(PIN_LED_B, 0);
-	display.print(0xDEFD, HEX);
+
+    while (!test_disarmed(0)) {
+	//Bomba vybouchla
+	int i;
+
+	analogWrite(PIN_LED_R, random(0, 255));
+	analogWrite(PIN_LED_G, random(0, 0));
+	analogWrite(PIN_LED_B, random(0, 255));
+
+	for (i = 0; i < 10; i++)
+	    display.writeDigitRaw(i, random(0, 255));
+	display.setBrightness(random(0, 15));
 	display.writeDisplay();
-	delay(1000);
 
+	digitalWrite(PIN_COIL_HI, HIGH);
+	delay(20);
+	digitalWrite(PIN_COIL_HI, LOW);
+	int rnd = random(30, 100);
+	tone(PIN_COIL_LO, random(100, 8000), rnd);
+	delay(rnd);
     }
 
+
+    //Bomba byla deaktivovana
+    tone(PIN_COIL_LO, 3000, 500);
+    delay(500);
+    tone(PIN_COIL_LO, 5000, 500);
+    analogWrite(PIN_LED_R, 0);
+    analogWrite(PIN_LED_G, 0);
+    analogWrite(PIN_LED_B, 0);
+    display.print(0xDEFD, HEX);
+    display.writeDisplay();
+    delay(1000);
+
+
+    //Pockame na zmenu kabelu
     char s = digitalRead(PIN_CABLE_CHECK);
-    while (digitalRead(PIN_CABLE_CHECK) != s) {
-
-	if (!disarmed) {
-
-	    //Bomba vybouchla
-	    int i;
-
-	    analogWrite(PIN_LED_R, random(0, 255));
-	    analogWrite(PIN_LED_G, random(0, 0));
-	    analogWrite(PIN_LED_B, random(0, 255));
-
-	    for (i = 0; i < 10; i++)
-		display.writeDigitRaw(i, random(0, 255));
-	    display.setBrightness(random(0, 15));
-	    display.writeDisplay();
-
-	    digitalWrite(PIN_COIL_HI, HIGH);
-	    delay(20);
-	    digitalWrite(PIN_COIL_HI, LOW);
-	    int rnd = random(30, 100);
-	    tone(PIN_COIL_LO, random(100, 8000), rnd);
-	    delay(rnd);
-	}
-    }
+    while (digitalRead(PIN_CABLE_CHECK) == s)
+	delay(100);
 
 }

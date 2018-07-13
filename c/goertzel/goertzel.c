@@ -29,7 +29,7 @@ float goertzel_mag(int numSamples,float TARGET_FREQUENCY,int SAMPLING_RATE, floa
 
     // calculate the real and imaginary results
     // scaling appropriately
-    real = (q2 - q1 * cosine) / scalingFactor;
+    real = (q1 * cosine - q2) / scalingFactor;
     imag = (q1 * sine) / scalingFactor;
 
     magnitude = sqrtf(real*real + imag*imag);

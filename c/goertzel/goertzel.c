@@ -33,6 +33,7 @@ float goertzel_mag(int numSamples,float TARGET_FREQUENCY,int SAMPLING_RATE, floa
     imag = (q1 * sine) / scalingFactor;
 
     magnitude = sqrtf(real*real + imag*imag);
+    //phase = atan(imag/real)
     return magnitude;
 }
 

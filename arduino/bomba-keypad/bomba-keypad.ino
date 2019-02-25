@@ -10,6 +10,7 @@ PS2dev keyboard(19, 18); //clock, data
 #include <LedControl.h>
 
 LedControl lc=LedControl(16,14,15,2); //datain, clk, load, number of chips
+unsigned char dispbuf[32];
 
 #include <Keypad.h>
 
@@ -30,23 +31,49 @@ byte colPins[COLS] = {4, 5, 6}; //connect to the column pinouts of the keypad
 //initialize an instance of class NewKeypad
 Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
 
-void make_break_kb(byte data)
-{
-// makes and breaks the key
-    keyboard.write(data);
-    delay(50);
-    keyboard.write(0xF0);
-    delay(50);
-    keyboard.write(data);
-    delay(50);
-}
-
 char scancodes[] = {0x45, 0x16, 0x1E, 0x26, 0x25, 0x2E, 0x36, 0x3D, 0x3E, 0x46, 0x7C, 0x7C}; //Scancodes for numbers 0-9, *, #
 
-void setup(){
-  Serial.begin(9600);
+void cleardisp(char val) {
+  for(int i = 0; i<8; i++) dispbuf[i] = val;
+}
 
-    /*
+void drawdisp(int shift) {
+  lc.clearDisplay(0);
+  for(int i = 0; i<8; i++) {
+    if(shift) dispbuf[i] = dispbuf[i+1];
+    if(dispbuf[i] != '_') lc.setDigit(0,7-i,dispbuf[i],false); //addr, digit, value, decimalpoint
+  }
+}
+
+void intro() {
+  cleardisp('_');
+  for(int i = 0; i<100; i++) {
+    analogWrite(keyledPin, i);
+    if(i >= 20*1) dispbuf[3] = dispbuf[4] = 0;
+    if(i >= 20*2) dispbuf[2] = dispbuf[5] = 0;
+    if(i >= 20*3) dispbuf[1] = dispbuf[6] = 0;
+    if(i >= 20*4) dispbuf[0] = dispbuf[7] = 0;
+    drawdisp(0);
+    delay(20);
+  }
+}
+
+void outro() {
+  cleardisp(0);
+  for(int i = 100; i>=0; i--) {
+    analogWrite(keyledPin, i);
+    if(i <= 20*1) dispbuf[3] = dispbuf[4] = '_';
+    if(i <= 20*2) dispbuf[2] = dispbuf[5] = '_';
+    if(i <= 20*3) dispbuf[1] = dispbuf[6] = '_';
+    if(i <= 20*4) dispbuf[0] = dispbuf[7] = '_';
+    drawdisp(0);
+    delay(20);
+  }
+}
+
+
+void setup(){
+  /*
    The MAX72XX is in power-saving mode on startup,
    we have to do a wakeup call
    */
@@ -55,25 +82,60 @@ void setup(){
   lc.setIntensity(0,15); //0 - 15
   /* and clear the display */
   lc.clearDisplay(0);
+  
+  intro();
+  cleardisp('_'); drawdisp(0);
+  
+  // send the keyboard start up
+  keyboard.keyboard_init();
+  
+  Serial.begin(9600);
+
+
+
+  pinMode(LED_BUILTIN, OUTPUT);
 }
   
 void loop(){
+  unsigned char leds;
+  if(keyboard.keyboard_handle(&leds)) {
+    //Serial.print('LEDS');
+    //Serial.print(leds, HEX);
+    digitalWrite(LED_BUILTIN, leds);
+  }
+  
   char customKey = customKeypad.getKey();
   
   if (customKey){
     Serial.println(customKey);
-    analogWrite(keyledPin, random(0, 255));
+    //analogWrite(keyledPin, random(0, 255));
+    analogWrite(keyledPin, 255);
     unsigned char numkey = customKey-0x30;
     if(numkey < 10) {
-      lc.setDigit(0,0,numkey,false); //addr, digit, value, decimalpoint
-      lc.setDigit(0,7,numkey,false); //addr, digit, value, decimalpoint
-      make_break_kb(scancodes[numkey]);
+      //Send PS2
+      keyboard.keyboard_mkbrk(scancodes[numkey]);
+      
+      //Single digit
+      //lc.setDigit(0,7,numkey,false); //addr, digit, value, decimalpoint
+
+      //Scroll out display
+      dispbuf[8] = numkey;
+      drawdisp(1);
     }
   }
 
+  if (customKey == '*') {
+    //Send PS2
+    keyboard.keyboard_mkbrk(scancodes[10]);
+    
+    //analogWrite(keyledPin, 0);
+    outro();
+
+    cleardisp('_');
+    drawdisp(0);
+  }
+
   if (customKey == '#') {
-    lc.clearDisplay(0);
-    analogWrite(keyledPin, 0);
-    make_break_kb(scancodes[10]);
+    keyboard.keyboard_mkbrk(0x5A); //enter
   }
 }

@@ -2,10 +2,16 @@
  * PS2 pinout cinskej kabel: data cerveny (18), clock bily (19), 5V cerny, GND zluty
  */
 
+#define SOFTSERIAL
 
+#ifndef SOFTSERIAL
 #include <ps2dev.h>
-
 PS2dev keyboard(19, 18); //clock, data
+#else
+#include <SoftwareSerial.h>
+//#include <NewSoftSerial.h>
+SoftwareSerial mySerial(18, 19);
+#endif
 
 #include <LedControl.h>
 
@@ -85,9 +91,13 @@ void setup(){
   
   intro();
   cleardisp('_'); drawdisp(0);
-  
+
+#ifndef SOFTSERIAL
   // send the keyboard start up
   keyboard.keyboard_init();
+#else
+  mySerial.begin(4800);
+#endif
   
   Serial.begin(9600);
 
@@ -98,11 +108,13 @@ void setup(){
   
 void loop(){
   unsigned char leds;
+#ifndef SOFTSERIAL
   if(keyboard.keyboard_handle(&leds)) {
     //Serial.print('LEDS');
     //Serial.print(leds, HEX);
     digitalWrite(LED_BUILTIN, leds);
   }
+#endif
   
   char customKey = customKeypad.getKey();
   
@@ -112,8 +124,12 @@ void loop(){
     analogWrite(keyledPin, 255);
     unsigned char numkey = customKey-0x30;
     if(numkey < 10) {
+#ifndef SOFTSERIAL
       //Send PS2
       keyboard.keyboard_mkbrk(scancodes[numkey]);
+#else
+      mySerial.print(customKey);
+#endif
       
       //Single digit
       //lc.setDigit(0,7,numkey,false); //addr, digit, value, decimalpoint
@@ -126,7 +142,9 @@ void loop(){
 
   if (customKey == '*') {
     //Send PS2
+#ifndef SOFTSERIAL
     keyboard.keyboard_mkbrk(scancodes[10]);
+#endif
     
     //analogWrite(keyledPin, 0);
     outro();
@@ -136,6 +154,8 @@ void loop(){
   }
 
   if (customKey == '#') {
+#ifndef SOFTSERIAL
     keyboard.keyboard_mkbrk(0x5A); //enter
+#endif
   }
 }

@@ -20,6 +20,10 @@
 '''
 This decodes digital output of cheap generic calipers (usualy made in china)
 Decoder will show measured value in milimeters or inches.
+
+Please note that these devices often communicate on low voltage level,
+which might not be possible to capture with 3.3V logic analyzers.
+So additional circuitry might be needed to capture the signal.
 '''
 
 from .pd import Decoder

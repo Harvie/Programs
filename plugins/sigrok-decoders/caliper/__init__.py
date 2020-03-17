@@ -24,6 +24,13 @@ Decoder will show measured value in milimeters or inches.
 Please note that these devices often communicate on low voltage level,
 which might not be possible to capture with 3.3V logic analyzers.
 So additional circuitry might be needed to capture the signal.
+
+This is NOT for calipers using Digimatic protocol (eg. Mitutoyo and similar brands)
+
+More info:
+
+http://www.shumatech.com/support/chinese_scales.htm
+https://www.instructables.com/id/Reading-Digital-Callipers-with-an-Arduino-USB/
 '''
 
 from .pd import Decoder

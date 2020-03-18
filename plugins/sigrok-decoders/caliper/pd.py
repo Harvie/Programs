@@ -39,6 +39,7 @@ class Decoder(srd.Decoder):
     options = (
          {'id': 'timeout_ms', 'desc': 'Timeout packet after X ms, 0 to disable', 'default': 10},
          {'id': 'unit', 'desc': 'Convert units', 'default': 'keep', 'values': ('keep', 'mm', 'inch')},
+         {'id': 'changes', 'desc': 'Changes only', 'default': 'no', 'values': ('no', 'yes')},
     )
     tags = ['Analog/digital', 'IC', 'Sensor']
     annotations = (
@@ -74,6 +75,7 @@ class Decoder(srd.Decoder):
         return int(bin(x)[2:].zfill(l)[::-1], 2)
 
     def decode(self):
+        self.last_measurement = None
         while True:
             clk, data = self.wait([{0: 'r'},{'skip': round(self.samplerate/1000)}])
             #print([clk,data])
@@ -143,7 +145,9 @@ class Decoder(srd.Decoder):
             measurement = (str(number)+units)
             #print(measurement)
 
-            self.put(self.ss_cmd, self.es_cmd, self.out_ann, [0, [measurement, str(number)]])
+            if ((self.options['changes'] == 'no') or (self.last_measurement != measurement)):
+                self.put(self.ss_cmd, self.es_cmd, self.out_ann, [0, [measurement, str(number)]])
+                self.last_measurement = measurement
 
             #Prepare for next packet
             self.reset()

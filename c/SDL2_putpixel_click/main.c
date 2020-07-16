@@ -1,5 +1,6 @@
 //gcc -Wextra -pedantic-errors -o main.out main.c -lSDL2
 
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -35,18 +36,29 @@ int main(void) {
              case SDL_QUIT:
                 running = 0;
                 break;
+             case SDL_KEYDOWN:
+                //case SDL_KEYUP:
+                printf("Key: %d\t%d\t%d\n", event.key.keysym.scancode, event.key.keysym.sym, event.key.keysym.mod );
+                break;
              case SDL_MOUSEBUTTONDOWN:
                 //do whatever you want to do after a mouse button was pressed,
                 // e.g.:
 		//if(event.button.button == SDL_BUTTON_LEFT) {
-		  SDL_GetMouseState(&mouseX, &mouseY);
-		  printf("Click %d, %d, %d\n", mouseX, mouseY, event.button.button);
-        	  SDL_RenderDrawPoint(renderer, mouseX, mouseY);
-		  SDL_RenderPresent(renderer);
+		  while(event.type != SDL_MOUSEBUTTONUP) {
+		        SDL_GetMouseState(&mouseX, &mouseY);
+	        	SDL_RenderDrawPoint(renderer, mouseX, mouseY);
+	        	SDL_RenderDrawPoint(renderer, mouseX, mouseY+1);
+	        	SDL_RenderDrawPoint(renderer, mouseX+1, mouseY);
+	        	SDL_RenderDrawPoint(renderer, mouseX+1, mouseY+1);
+		        SDL_RenderPresent(renderer);
+			SDL_PollEvent(&event);
+		  }
+		  printf("Click: %d\t%d\t%d\n", mouseX, mouseY, event.button.button);
 		//}
                 break;
            }
         }
+	usleep(10000);
     }
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

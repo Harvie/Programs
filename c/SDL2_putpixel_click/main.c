@@ -15,8 +15,11 @@ int main(void) {
     int i;
 
     SDL_Init(SDL_INIT_VIDEO);
-    SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_WIDTH, 0, &window, &renderer);
+    SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_WIDTH, SDL_WINDOW_RESIZABLE, &window, &renderer);
     //SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+    //SDL_RenderSetScale(renderer, 2.0, 2.0);
+    SDL_SetWindowTitle(window, "Simple SDL paint");
+
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
@@ -35,6 +38,8 @@ int main(void) {
 	event.type = 0;
 	if(SDL_PollEvent(&event)) {
 	   switch(event.type){
+	     case SDL_WINDOWEVENT:
+		break;
              case SDL_QUIT:
                 running = 0;
                 break;

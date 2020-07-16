@@ -29,6 +29,8 @@ int main(void) {
 
     int running = 1;
     int mouseX, mouseY;
+    Uint32 fullscreen_status = 0;
+
     while(running) {
 	event.type = 0;
 	if(SDL_PollEvent(&event)) {
@@ -39,6 +41,16 @@ int main(void) {
              case SDL_KEYDOWN:
                 //case SDL_KEYUP:
                 printf("Key: %d\t%d\t%d\n", event.key.keysym.scancode, event.key.keysym.sym, event.key.keysym.mod );
+
+                if(event.key.keysym.scancode == SDL_SCANCODE_F && event.key.keysym.mod == KMOD_LCTRL) {
+                     fullscreen_status = fullscreen_status ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP;
+                     SDL_SetWindowFullscreen(window, fullscreen_status);
+                }
+
+                if(event.key.keysym.scancode == SDL_SCANCODE_Q && event.key.keysym.mod == KMOD_LCTRL) {
+                     running = 0;
+                }
+
                 break;
              case SDL_MOUSEBUTTONDOWN:
                 //do whatever you want to do after a mouse button was pressed,

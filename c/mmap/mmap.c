@@ -1,28 +1,26 @@
+//#define _GNU_SOURCE
+
 #include <stdio.h>
-#include <fcntl.h>
-#include <sys/mman.h>
-#include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
 
-unsigned char *fmmap(FILE *fd) {
-	struct stat sb;
-
-	if(!fd) perror("");
-	fd = fileno(fd);
-	fstat((int)fd, &sb);
-	return mmap(0, sb.st_size, PROT_READ, MAP_PRIVATE, (int)fd, 0);
-}
+#define MEM_PATH "hello.bin"
+#define MEM_SIZE 1048576
 
 int main() {
-	FILE *fd;
-	unsigned char *mm;
+	int fd;
+	fd = open(MEM_PATH, O_RDWR | O_SYNC | O_CREAT | O_CLOEXEC, S_IRUSR | S_IWUSR);
+	ftruncate(fd, MEM_SIZE);
 
-	fd = fopen("mmap.c", "r");
-	mm = fmmap(fd);
+	void *mem;
+	mem = mmap(NULL, MEM_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED , fd, 0);
+	close(fd);
 
-	perror("Status");
-	puts(mm);
-
-	//munmap(mm, 10);
-	fclose(fd);
+	char hello[] = "Hello!";
+	memcpy(mem, hello, sizeof(hello));
+	msync(mem, sizeof(hello), MS_SYNC);
 }

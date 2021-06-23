@@ -21,7 +21,7 @@ typedef struct pthread_mq_t {
 	pthread_mutex_t lock;
 	pthread_cond_t cond_readable;
 	pthread_cond_t cond_writable;
-	void * data;
+	uint8_t * data;
 	size_t msg_size;
 	size_t msg_count;
 	size_t msg_count_max;
@@ -38,7 +38,7 @@ bool pthread_mq_receive_generic(pthread_mq_t *mq, void * data, bool peek, const 
 
 // Multi mutex locking
 
-#define pthread_mutex_swap(a, b) ({ pthread_mutex_t *s; s = (a); a = (b); b = s; })
+#define pthread_mutex_swap(a, b) { pthread_mutex_t *s; s = (a); a = (b); b = s; }
 
 #define pthread_mutex_lock_two(a,b) pthread_mutex_timedlock_multi_generic((pthread_mutex_t *[2]){(a), (b)}, 2, true, NULL)
 #define pthread_mutex_timedlock_two(a,b,tm) pthread_mutex_timedlock_multi_generic((pthread_mutex_t *[2]){(a), (b)}, 2, true, (tm))

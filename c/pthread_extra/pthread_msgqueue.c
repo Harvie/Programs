@@ -49,6 +49,7 @@ bool pthread_mq_reset(pthread_mq_t *mq) {
 }
 
 bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, bool to_front, const struct timespec *restrict abs_timeout) {
+	//printf("S-Timed: %p\n", abs_timeout);
 	int ret;
 
 	//Lock queue
@@ -56,9 +57,12 @@ bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, bool to_front, const
 
 	//Wait for queue to be in writable condition
 	while(!pthread_mq_writable(mq)) {
+		//printf("S+Timed: %p\n", abs_timeout);
 		if(abs_timeout == NULL) {
 			ret = pthread_cond_wait(&mq->cond_writable, &mq->lock);
 		} else {
+			//printf("STimed: %p\n", abs_timeout);
+			assert(abs_timeout != NULL);
 			ret = pthread_cond_timedwait(&mq->cond_writable, &mq->lock, abs_timeout);
 		}
 		if(ret) {
@@ -68,7 +72,7 @@ bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, bool to_front, const
 	}
 
 	//Write data to queue
-	size_t idx = ( ( mq->msg_count_max + mq->head_idx + (to_front?-1:mq->msg_count) ) % mq->msg_count_max );
+	size_t idx = ( ( mq->head_idx + (to_front?mq->msg_count_max-1:mq->msg_count) ) % mq->msg_count_max );
 	void *ptr = mq->data + (idx * mq->msg_size);
 	mq->msg_count++;
 	if(to_front) mq->head_idx = (mq->msg_count_max + mq->head_idx - 1) % mq->msg_count_max;
@@ -91,6 +95,8 @@ bool pthread_mq_receive_generic(pthread_mq_t *mq, void * data, bool peek, const 
 		if(abs_timeout == NULL) {
 			ret = pthread_cond_wait(&mq->cond_readable, &mq->lock);
 		} else {
+			//printf("RTimed: %p\n", abs_timeout);
+			assert(abs_timeout != NULL);
 			ret = pthread_cond_timedwait(&mq->cond_readable, &mq->lock, abs_timeout);
 		}
 		if(ret) {

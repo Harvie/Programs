@@ -17,7 +17,7 @@ int main_mumu() {
 	//Set timeout
 	struct  timespec tm;
 	clock_gettime(CLOCK_REALTIME, &tm);
-	tm.tv_sec  += 5;
+	tm.tv_sec  += 2;
 
 	//Lock one of the locks for testing
 	pthread_mutex_lock(lck[2]);
@@ -29,24 +29,27 @@ int main_mumu() {
 		printf("FAILED!\n");
 	}
 
+	return 0;
 }
 
 
 pthread_mq_t myq;
 
-void *thread_recv(void *args) {
+void *thread_recv() {
+	//(void *)args;
+
 	char str[128];
 	while(1) {
 		pthread_mq_receive_generic(&myq, &str, false, PTHREAD_XTIME_FOREVER);
-		printf("RECVD: %.6s\t\t(waiting %d)\n", str, pthread_mq_waiting(&myq));
-		//sleep(1);
+		printf("RECVD: %.6s\t\t(waiting %d)\n", str, (int)pthread_mq_waiting(&myq));
+		sleep(1);
 	}
 }
 
 int main() {
-	main_mumu();
+	//main_mumu();
 
-	char tmp[128];
+	//char tmp[128];
 
 	pthread_mq_init(&myq, 6, 5);
 

@@ -1,5 +1,5 @@
-#COPT=-O2 -flto -ftree-vectorize -ftree-slp-vectorize -fvisibility=hidden -D_FORTIFY_SOURCE=2 -DMG_ENABLE_FS=0 -fstack-protector-strong $(CARCH)
-COPT=-fvisibility=hidden -DMG_ENABLE_FS=0 -fstack-protector-strong $(CARCH)
+COPT=-O2 -flto -ftree-vectorize -ftree-slp-vectorize -fvisibility=hidden -D_FORTIFY_SOURCE=2 -DMG_ENABLE_FS=0 -fstack-protector-strong -fno-delete-null-pointer-checks $(CARCH)
+#COPT=-fvisibility=hidden -DMG_ENABLE_FS=0 -fstack-protector-strong $(CARCH)
 CDEF=-D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=700 -D_DEFAULT_SOURCE=1 -D_GNU_SOURCE
 CERR=-Wall -Wextra -Werror -pedantic -Werror=date-time -Wformat-security -Wduplicated-cond -Wfloat-equal -Wshadow -Wlogical-not-parentheses -Wnull-dereference
 

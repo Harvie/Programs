@@ -1,30 +1,11 @@
-/*
- * CFLAGS=-lpthread make pthread_msgqueue
- */
-
 #include <pthread.h>
+#include <pthread_extra.h>
 #include <time.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <unistd.h>
-
-#define PTHREAD_X_NONWAIT (&(struct timespec){ .tv_sec = 0, .tv_nsec = 0 })
-#define PTHREAD_X_FOREVER NULL
-
-typedef struct pthread_mq_t {
-	pthread_mutex_t lock;
-	pthread_cond_t cond_readable;
-	pthread_cond_t cond_writable;
-	void * data;
-	size_t msg_size;
-	size_t msg_count;
-	size_t msg_count_max;
-	size_t head_idx;
-	char * name;
-} pthread_mq_t;
 
 bool pthread_mq_readable(pthread_mq_t *mq) { return (mq->msg_count > 0); }
 bool pthread_mq_writable(pthread_mq_t *mq) { return (mq->msg_count < mq->msg_count_max); }
@@ -132,49 +113,4 @@ bool pthread_mq_receive_generic(pthread_mq_t *mq, void * data, bool peek, const 
 	pthread_mq_cond(mq);
 	pthread_mutex_unlock(&mq->lock);
 	return true;
-}
-
-
-
-
-
-
-
-
-
-
-pthread_mq_t myq;
-
-void *thread_recv(void *args) {
-	char str[128];
-	while(1) {
-		pthread_mq_receive_generic(&myq, &str, false, NULL);
-		printf("RECVD: %.6s\t\t(waiting %d)\n", str, pthread_mq_waiting(&myq));
-		sleep(1);
-	}
-}
-
-int main() {
-	char tmp[128];
-
-	pthread_mq_init(&myq, 6, 5);
-
-	pthread_t t;
-	pthread_create(&t, NULL, thread_recv, NULL);
-
-	pthread_mq_send_generic(&myq, "AHOJ1", false, NULL);
-	pthread_mq_send_generic(&myq, "AHOJ2", false, NULL);
-	pthread_mq_send_generic(&myq, "AHOJ3", true, NULL);
-	pthread_mq_send_generic(&myq, "AHOJ4", true, NULL);
-	pthread_mq_send_generic(&myq, "AHOJ5", false, NULL);
-	pthread_mq_send_generic(&myq, "AHOJ6", true, NULL);
-
-	while(1) {
-		pthread_mq_send_generic(&myq, "B", false, NULL);
-		pthread_mq_send_generic(&myq, "A", true, NULL);
-		pthread_mq_send_generic(&myq, " A", false, NULL);
-		pthread_mq_send_generic(&myq, " B", false, NULL);
-	}
-
-	pthread_join(t, NULL);
 }

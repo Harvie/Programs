@@ -1,21 +1,7 @@
-/*
- * CFLAGS=-lpthread make pthread_multi
- */
-
-#include <pthread.h>
+#include <pthread_extra.h>
 #include <time.h>
 #include <stdio.h>
 #include <stdbool.h>
-
-#define pthread_mutex_swap(a, b) ({ pthread_mutex_t *s; s = (a); a = (b); b = s; })
-
-#define pthread_mutex_lock_two(a,b) pthread_mutex_timedlock_multi_generic((pthread_mutex_t *[2]){(a), (b)}, 2, true, NULL)
-#define pthread_mutex_timedlock_two(a,b,tm) pthread_mutex_timedlock_multi_generic((pthread_mutex_t *[2]){(a), (b)}, 2, true, (tm))
-#define pthread_mutex_trylock_two(a,b) pthread_mutex_timedlock_multi_generic((pthread_mutex_t *[2]){(a), (b)}, 2, false, NULL)
-
-#define pthread_mutex_lock_multi(lcks,cnt) pthread_mutex_timedlock_multi_generic((lcks),(cnt),true,NULL)
-#define pthread_mutex_timedlock_multi(lcks,cnt,tm) pthread_mutex_timedlock_multi_generic((lcks),(cnt),true,(tm))
-#define pthread_mutex_trylock_multi(lcks,cnt) pthread_mutex_timedlock_multi_generic((lcks),(cnt),false,NULL)
 
 /*
 //This is first prototype for two mutexes only, it is useful in order to understand how this all works
@@ -78,29 +64,4 @@ int pthread_mutex_timedlock_multi_generic(pthread_mutex_t **lck, int cnt, bool b
 		//Try to block on locked mutex in next round
 		pthread_mutex_swap(lck[0],lck[locked]);
 	}
-}
-
-int main() {
-	//Prepare mutex array for tests
-	static pthread_mutex_t la = PTHREAD_MUTEX_INITIALIZER;
-	static pthread_mutex_t lb = PTHREAD_MUTEX_INITIALIZER;
-	static pthread_mutex_t lc = PTHREAD_MUTEX_INITIALIZER;
-	static pthread_mutex_t ld = PTHREAD_MUTEX_INITIALIZER;
-	static pthread_mutex_t *lck[4] = {&la, &lb, &lc, &ld};
-
-	//Set timeout
-	struct  timespec tm;
-	clock_gettime(CLOCK_REALTIME, &tm);
-	tm.tv_sec  += 5;
-
-	//Lock one of the locks for testing
-	pthread_mutex_lock(lck[2]);
-
-	if(!pthread_mutex_timedlock_multi(lck, 4, &tm)) {
-	//if(!pthread_mutex_timedlock_two(&la, lck[2], &tm)) {
-		printf("LOCKED!\n");
-	} else {
-		printf("FAILED!\n");
-	}
-
 }

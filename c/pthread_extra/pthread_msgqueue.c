@@ -59,16 +59,24 @@ bool pthread_mq_reset(pthread_mq_t *mq) {
 }
 
 bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, bool to_front, bool block, const struct timespec *restrict abs_timeout) {
+	int ret;
+
 	//Lock queue
 	if(pthread_mutex_timedlock(&mq->lock, abs_timeout)) return false;
 
 	//Wait for queue to be in writable condition
 	while(!pthread_mq_writable(mq)) {
-		if(pthread_cond_timedwait(&mq->cond_writable, &mq->lock, abs_timeout)) {
+		if(abs_timeout == NULL) {
+			ret = pthread_cond_wait(&mq->cond_writable, &mq->lock);
+		} else {
+			ret = pthread_cond_timedwait(&mq->cond_writable, &mq->lock, abs_timeout);
+		}
+		if(ret) {
 			pthread_mutex_unlock(&mq->lock);
 			return false;
 		}
 	}
+	printf("Writable\n");
 
 	//Write data to queue
 	size_t idx = ( ( mq->msg_count_max + mq->head_idx + (to_front?-1:mq->msg_count) ) % mq->msg_count_max );
@@ -84,5 +92,16 @@ bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, bool to_front, bool 
 }
 
 int main() {
+	pthread_mq_t myq;
+	pthread_mq_init(&myq, 6, 5);
+	pthread_mq_send_generic(&myq, "AHOJ1", false, true, NULL);
+	pthread_mq_send_generic(&myq, "AHOJ2", false, true, NULL);
+	pthread_mq_send_generic(&myq, "AHOJ3", true, true, NULL);
+	pthread_mq_send_generic(&myq, "AHOJ4", true, true, NULL);
+	pthread_mq_send_generic(&myq, "AHOJ5", false, true, NULL);
+	//pthread_mq_send_generic(&myq, "AHOJ6", false, true, NULL);
 
+	for(int i = 0; i<5; i++) {
+		printf("%.6s\n", (char *)(myq.data+i*6));
+	}
 }

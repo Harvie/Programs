@@ -62,7 +62,7 @@ bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, bool to_front, const
 			ret = pthread_cond_wait(&mq->cond_writable, &mq->lock);
 		} else {
 			//printf("STimed: %p\n", abs_timeout);
-			assert(abs_timeout != NULL);
+			//assert(abs_timeout != NULL);
 			ret = pthread_cond_timedwait(&mq->cond_writable, &mq->lock, abs_timeout);
 		}
 		if(ret) {
@@ -96,7 +96,7 @@ bool pthread_mq_receive_generic(pthread_mq_t *mq, void * data, bool peek, const 
 			ret = pthread_cond_wait(&mq->cond_readable, &mq->lock);
 		} else {
 			//printf("RTimed: %p\n", abs_timeout);
-			assert(abs_timeout != NULL);
+			//assert(abs_timeout != NULL);
 			ret = pthread_cond_timedwait(&mq->cond_readable, &mq->lock, abs_timeout);
 		}
 		if(ret) {

@@ -11,6 +11,7 @@ void pthread_pause_handler() {
 	sigfillset(&sigset);
 	sigdelset(&sigset, PTHREAD_XSIG_CONT);
 	sigsuspend(&sigset);
+	//int sig; sigwait(&sigset, &sig);
 }
 
 void pthread_pause_enable() {

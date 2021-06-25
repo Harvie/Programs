@@ -5,9 +5,23 @@
 #include <time.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <signal.h>
 
 #define PTHREAD_XTIME_NOBLOCK (&(struct timespec){ .tv_sec = 0, .tv_nsec = 0 })
 #define PTHREAD_XTIME_FOREVER NULL
+
+//Pausing
+
+#define PTHREAD_XSIG_STOP (SIGRTMIN+0)
+#define PTHREAD_XSIG_CONT (SIGRTMIN+1)
+#define PTHREAD_XSIGRTMIN (SIGRTMIN+2) //First unused RT signal
+
+#define pthread_pause(t)   (pthread_kill((t), PTHREAD_XSIG_STOP));
+#define pthread_unpause(t) (pthread_kill((t), PTHREAD_XSIG_CONT));
+
+void pthread_unpause_handler();
+void pthread_pause_handler();
+void pthread_pause_enable();
 
 // Message queues
 

@@ -40,11 +40,20 @@ void *thread_recv() {
 
 	char str[128];
 	while(1) {
-		pthread_mq_receive_generic(&myq, &str, false, PTHREAD_XTIME_FOREVER);
-		printf("RECVD: %.6s\t\t(waiting %d)\n", str, (int)pthread_mq_waiting(&myq));
-		sleep(1);
+		if(pthread_mq_receive_generic(&myq, &str, false, PTHREAD_XTIME_FOREVER))
+			printf("-RECVD: %.6s\t\t(waiting %d)\n", str, (int)pthread_mq_waiting(&myq));
+		if(pthread_mq_receive_generic(&myq, &str, false, PTHREAD_XTIME_NOBLOCK))
+			printf("+RECVD: %.6s\t\t(waiting %d)\n", str, (int)pthread_mq_waiting(&myq));
 	}
 }
+
+void *thread_send() {
+	while(1) {
+		pthread_mq_send_generic(&myq, " X   ", true, PTHREAD_XTIME_NOBLOCK);
+		pthread_mq_send_generic(&myq, " Y   ", false, PTHREAD_XTIME_FOREVER);
+	}
+}
+
 
 int main() {
 	//main_mumu();
@@ -55,6 +64,8 @@ int main() {
 
 	pthread_t t;
 	pthread_create(&t, NULL, thread_recv, NULL);
+	pthread_t s;
+	pthread_create(&s, NULL, thread_send, NULL);
 
 	pthread_mq_send_generic(&myq, "AHOJ1", false, NULL);
 	pthread_mq_send_generic(&myq, "AHOJ2", false, NULL);
@@ -64,11 +75,10 @@ int main() {
 	pthread_mq_send_generic(&myq, "AHOJ6", true, NULL);
 
 	while(1) {
-		pthread_mq_send_generic(&myq, "B", false, NULL);
-		pthread_mq_send_generic(&myq, "A", true, NULL);
-		pthread_mq_send_generic(&myq, " A", false, NULL);
-		pthread_mq_send_generic(&myq, " B", false, NULL);
-		sleep(1);
+		pthread_mq_send_generic(&myq, "B    ", false, NULL);
+		pthread_mq_send_generic(&myq, "A    ", true, NULL);
+		pthread_mq_send_generic(&myq, " B   ", false, PTHREAD_XTIME_FOREVER);
+		pthread_mq_send_generic(&myq, " A   ", false, PTHREAD_XTIME_NOBLOCK);
 	}
 
 	pthread_join(t, NULL);

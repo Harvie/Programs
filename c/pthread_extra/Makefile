@@ -11,12 +11,14 @@ CXXFLAGS+=$(COPT) $(CERR) $(CDEF) -std=c++11 $(CLIB)
 LDFLAGS+=$(COPT) $(LIB)
 
 BIN=test
-OBJ=pthread_multi.o pthread_msgqueue.o test.o
+OBJ=pthread_pause.o pthread_multi.o pthread_msgqueue.o test.o
 
 all: $(BIN)
 $(BIN): $(OBJ)
 	$(CXX) -o $(BIN) $(OBJ) $(LDFLAGS)
 	strip --strip-unneeded $(BIN)
+
+	gcc -lpthread -I . test_pause.c pthread_pause.o -o test_pause
 
 clean:
 	rm -f $(BIN) $(OBJ) $(DEPS)

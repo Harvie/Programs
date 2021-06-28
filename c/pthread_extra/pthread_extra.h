@@ -2,26 +2,45 @@
 #define __PTHREAD_EXTRA_H__
 
 #include <pthread.h>
-#include <time.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <signal.h>
+//#include <time.h>
 
 #define PTHREAD_XTIME_NOBLOCK (&(struct timespec){ .tv_sec = 0, .tv_nsec = 0 })
 #define PTHREAD_XTIME_FOREVER NULL
 
-//Pausing
+// User data
 
+#define PTHREAD_XTHREADS_MAX 65535
+#define PTHREAD_XNULL ((pthread_t)NULL)
+
+#ifdef __PTHREAD_EXTRA_INTERNAL
+typedef struct pthread_user_data_internal_t {
+	pthread_t tid; //Thread ID
+	sig_atomic_t running; //Internaly used by pthread_pause
+	void *usr; //User pointer
+} pthread_user_data_internal_t;
+
+pthread_user_data_internal_t* pthread_user_data_internal(pthread_t thread);
+#endif //__PTHREAD_EXTRA_INTERNAL
+
+void** pthread_user_data_ptr(pthread_t thread);
+void*  pthread_user_data_get(pthread_t thread);
+void   pthread_user_data_set(pthread_t thread, void *usr);
+
+// Pausing
+
+//GDB: handle SIG34 nostop noprint
 #define PTHREAD_XSIG_STOP (SIGRTMIN+0)
 #define PTHREAD_XSIG_CONT (SIGRTMIN+1)
 #define PTHREAD_XSIGRTMIN (SIGRTMIN+2) //First unused RT signal
 
-#define pthread_pause(t)   (pthread_kill((t), PTHREAD_XSIG_STOP));
-#define pthread_unpause(t) (pthread_kill((t), PTHREAD_XSIG_CONT));
-
 void pthread_unpause_handler();
 void pthread_pause_handler();
 void pthread_pause_enable();
+int pthread_pause(pthread_t thread);
+int pthread_unpause(pthread_t thread);
 
 // Message queues
 

@@ -47,6 +47,7 @@ void pthread_pause_enable();
 int pthread_pause(pthread_t thread);
 int pthread_unpause(pthread_t thread);
 int pthread_pause_reschedule(pthread_t thread);
+int pthread_extra_yield();
 
 // Message queues
 

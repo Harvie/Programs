@@ -63,6 +63,12 @@ int pthread_pause_reschedule(pthread_t thread) {
 	return 0;
 }
 
+int pthread_extra_yield() {
+	//Yield to both schedulers
+	pthread_pause_reschedule(pthread_self());
+	return pthread_yield();
+}
+
 int pthread_pause(pthread_t thread) {
 	//Set thread as paused and notify it via signal (wait when queue full)
 	pthread_user_data_internal(thread)->running = 0;

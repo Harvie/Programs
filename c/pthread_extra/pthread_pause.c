@@ -25,6 +25,9 @@ void pthread_pause_handler() {
 }
 
 void pthread_pause_enable() {
+	//Add thread to internal registry
+	pthread_user_data_internal(pthread_self());
+
 	//Nesting signals too deep is not good for stack
 	//You can get runtime stats using following command:
 	//grep -i sig /proc/$(pgrep binary)/status
@@ -42,6 +45,9 @@ void pthread_pause_enable() {
 }
 
 void pthread_pause_disable() {
+	//Add thread to internal registry
+	pthread_user_data_internal(pthread_self());
+
 	//Block signal
 	sigset_t sigset;
 	sigemptyset(&sigset);

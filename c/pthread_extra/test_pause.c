@@ -22,6 +22,22 @@ int main() {
 	//That way you can be sure it is pausable immediately
 	pthread_create(&a, NULL, thread_test, " A");
 	pthread_create(&b, NULL, thread_test, " B");
+	//sleep(1);
+
+	//printf("OK\n");
+	/*
+	for(int32_t i = 1;i>0;i++) {
+		pthread_pause(a);
+		pthread_pause(a);
+		pthread_unpause(a);
+		pthread_unpause(a);
+	}
+	*/
+	/*
+	exit(23);
+	pthread_pause(a);
+	pthread_unpause(b);
+	*/
 
 	while(1) {
 		pthread_pause(b);

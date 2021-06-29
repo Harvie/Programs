@@ -19,7 +19,7 @@ void pthread_pause_handler() {
 	sigset_t sigset;
 	sigfillset(&sigset);
 	sigdelset(&sigset, PTHREAD_XSIG_STOP);
-	while(!pthread_user_data_internal(pthread_self())->running) {
+	if(!pthread_user_data_internal(pthread_self())->running) {
 		sigsuspend(&sigset);
 	}
 }

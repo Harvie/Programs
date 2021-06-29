@@ -39,6 +39,10 @@ size_t pthread_mq_waiting(pthread_mq_t *mq) {
 	return mq->msg_count;
 }
 
+size_t pthread_mq_vacant(pthread_mq_t *mq) {
+	return (mq->msg_count_max - mq->msg_count);
+}
+
 bool pthread_mq_reset(pthread_mq_t *mq) {
 	if(pthread_mutex_lock(&mq->lock)) return false;
 	mq->msg_count = 0;

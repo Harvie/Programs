@@ -64,10 +64,13 @@ typedef struct pthread_mq_t {
 
 bool pthread_mq_init(pthread_mq_t *mq, size_t msg_size, size_t msg_count_max);
 void pthread_mq_free(pthread_mq_t *mq);
-size_t pthread_mq_waiting(pthread_mq_t *mq);
+
 bool pthread_mq_reset(pthread_mq_t *mq);
 bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, bool to_front, const struct timespec *restrict abs_timeout);
 bool pthread_mq_receive_generic(pthread_mq_t *mq, void * data, bool peek, const struct timespec *restrict abs_timeout);
+
+size_t pthread_mq_waiting(pthread_mq_t *mq);
+size_t pthread_mq_vacant(pthread_mq_t *mq);
 
 // Multi mutex locking
 

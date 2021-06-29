@@ -75,6 +75,9 @@ bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, pthread_mq_flags_t f
 		}
 	}
 
+	//Handle overwrite
+	assert(!(flags & PTHREAD_XMQ_OVERW) && "FIXME: Overwrite not implemented yet!");
+
 	//Write data to queue
 	bool to_front = (flags & PTHREAD_XMQ_FRONT);
 	size_t idx = ( ( mq->head_idx + (to_front?mq->msg_count_max-1:mq->msg_count) ) % mq->msg_count_max );

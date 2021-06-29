@@ -20,8 +20,8 @@ int main() {
 	pthread_t a, b;
 	pthread_pause_enable(); //Will get inherited by all threads from now on
 	//That way you can be sure it is pausable immediately
-	pthread_create(&a, NULL, thread_test, " A");
-	pthread_create(&b, NULL, thread_test, " B");
+	pthread_extra_create(&a, NULL, thread_test, " A");
+	pthread_extra_create(&b, NULL, thread_test, " B");
 	//sleep(1);
 
 	//printf("OK\n");

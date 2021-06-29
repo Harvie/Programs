@@ -28,6 +28,7 @@ pthread_user_data_internal_t* pthread_user_data_internal(pthread_t thread);
 void** pthread_user_data_ptr(pthread_t thread);
 void*  pthread_user_data_get(pthread_t thread);
 void   pthread_user_data_set(pthread_t thread, void *usr);
+void   pthread_user_data_cleanup(void * arg);
 
 // Pausing
 
@@ -36,11 +37,16 @@ void   pthread_user_data_set(pthread_t thread, void *usr);
 #define PTHREAD_XSIG_CONT (SIGRTMIN+1)
 #define PTHREAD_XSIGRTMIN (SIGRTMIN+2) //First unused RT signal
 
+int pthread_extra_create(pthread_t *restrict thread,
+                          const pthread_attr_t *restrict attr,
+                          void *(*start_routine)(void *),
+                          void *restrict arg);
 void pthread_unpause_handler();
 void pthread_pause_handler();
 void pthread_pause_enable();
 int pthread_pause(pthread_t thread);
 int pthread_unpause(pthread_t thread);
+int pthread_pause_reschedule(pthread_t thread);
 
 // Message queues
 

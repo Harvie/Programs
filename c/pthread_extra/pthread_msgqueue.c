@@ -52,7 +52,7 @@ bool pthread_mq_reset(pthread_mq_t *mq) {
 	return true;
 }
 
-bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, bool to_front, const struct timespec *restrict abs_timeout) {
+bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, pthread_mq_flags_t flags, const struct timespec *restrict abs_timeout) {
 	//printf("S-Timed: %p\n", abs_timeout);
 	int ret;
 
@@ -76,6 +76,7 @@ bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, bool to_front, const
 	}
 
 	//Write data to queue
+	bool to_front = (flags & PTHREAD_XMQ_FRONT);
 	size_t idx = ( ( mq->head_idx + (to_front?mq->msg_count_max-1:mq->msg_count) ) % mq->msg_count_max );
 	void *ptr = mq->data + (idx * mq->msg_size);
 	mq->msg_count++;
@@ -88,7 +89,7 @@ bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, bool to_front, const
 	return true;
 }
 
-bool pthread_mq_receive_generic(pthread_mq_t *mq, void * data, bool peek, const struct timespec *restrict abs_timeout) {
+bool pthread_mq_receive_generic(pthread_mq_t *mq, void * data, pthread_mq_flags_t flags, const struct timespec *restrict abs_timeout) {
 	int ret;
 
 	//Lock queue
@@ -114,6 +115,7 @@ bool pthread_mq_receive_generic(pthread_mq_t *mq, void * data, bool peek, const 
 	memcpy(data, ptr, mq->msg_size);
 
 	//Delete data from queue if not peeking
+	bool peek = (flags & PTHREAD_XMQ_PEEK);
 	if(!peek) {
 		mq->msg_count--;
 		mq->head_idx = (mq->head_idx+1) % mq->msg_count_max;

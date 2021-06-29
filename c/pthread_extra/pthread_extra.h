@@ -44,11 +44,14 @@ int pthread_unpause(pthread_t thread);
 
 // Message queues
 
-#define PTHREAD_XMQ_FRONT true
-#define PTHREAD_XMQ_BACK false
-
-#define PTHREAD_XMQ_RECV false
-#define PTHREAD_XMQ_PEEK true
+//Flags
+typedef uint8_t pthread_mq_flags_t;
+#define PTHREAD_XMQ_NONE	0			///< No flags specified (default behaviour)
+#define PTHREAD_XMQ_FRONT	1			///< Send to front of the queue (scheduled for next receive)
+#define PTHREAD_XMQ_BACK	PTHREAD_XMQ_NONE	///< Send to back of the queue (default)
+#define PTHREAD_XMQ_PEEK	2			///< Only peek, do not remove received item
+#define PTHREAD_XMQ_RECV	PTHREAD_XMQ_NONE	///< Remove received item from queue (default)
+#define PTHREAD_XMQ_OVERW	4			///< Overwrite item if queue full
 
 typedef struct pthread_mq_t {
 	pthread_mutex_t lock;
@@ -66,8 +69,8 @@ bool pthread_mq_init(pthread_mq_t *mq, size_t msg_size, size_t msg_count_max);
 void pthread_mq_free(pthread_mq_t *mq);
 
 bool pthread_mq_reset(pthread_mq_t *mq);
-bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, bool to_front, const struct timespec *restrict abs_timeout);
-bool pthread_mq_receive_generic(pthread_mq_t *mq, void * data, bool peek, const struct timespec *restrict abs_timeout);
+bool pthread_mq_send_generic(pthread_mq_t *mq, void * data, pthread_mq_flags_t flags, const struct timespec *restrict abs_timeout);
+bool pthread_mq_receive_generic(pthread_mq_t *mq, void * data, pthread_mq_flags_t flags, const struct timespec *restrict abs_timeout);
 
 size_t pthread_mq_waiting(pthread_mq_t *mq);
 size_t pthread_mq_vacant(pthread_mq_t *mq);

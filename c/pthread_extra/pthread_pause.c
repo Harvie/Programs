@@ -6,12 +6,17 @@
 #include <errno.h>
 #include <unistd.h>
 #include <sys/resource.h>
+//#include <sys/siginfo.h>
 //#include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 //#include <sys/time.h>
 
-void pthread_pause_handler() {
+void pthread_pause_handler(const int signal, siginfo_t *info, void *ptr) {
+	(void)signal; (void)info; (void)ptr;
+	pthread_user_data_internal_t *td = (pthread_user_data_internal_t *)(info->si_value.sival_ptr);
+	(void)td;
+
 	//Do nothing when there are more signals pending (to cleanup the queue)
 	sigset_t pending;
 	sigpending(&pending);
@@ -21,7 +26,11 @@ void pthread_pause_handler() {
 	sigset_t sigset;
 	sigfillset(&sigset);
 	sigdelset(&sigset, PTHREAD_XSIG_STOP);
-	if(!pthread_user_data_internal(pthread_self())->running) {
+
+	//printf("RCV: %p = %p\n", (void *)pthread_user_data_internal(pthread_self()), (void *)td);
+
+	//if(!pthread_user_data_internal(pthread_self())->running) {
+	if(!td->running) {
 		sigsuspend(&sigset);
 	}
 }
@@ -36,13 +45,22 @@ void pthread_pause_enable() {
 	struct rlimit sigq = {.rlim_cur = 32, .rlim_max=32};
 	setrlimit(RLIMIT_SIGPENDING, &sigq);
 
-	//Setup signal handler
-	signal(PTHREAD_XSIG_STOP, pthread_pause_handler);
-
-	//Unblock signal
+	//Prepare signal mask
 	sigset_t sigset;
 	sigemptyset(&sigset);
 	sigaddset(&sigset, PTHREAD_XSIG_STOP);
+
+	//Setup signal handler
+	//signal(PTHREAD_XSIG_STOP, pthread_pause_handler);
+	const struct sigaction pause_sa = {
+		.sa_sigaction = pthread_pause_handler,
+		.sa_mask = sigset,
+		.sa_flags = SA_SIGINFO,
+		.sa_restorer = NULL
+	};
+	sigaction(PTHREAD_XSIG_STOP, &pause_sa, NULL);
+
+	//Unblock signal
 	pthread_sigmask(SIG_UNBLOCK, &sigset, NULL);
 }
 
@@ -59,8 +77,11 @@ void pthread_pause_disable() {
 
 int pthread_pause_reschedule(pthread_t thread) {
 	//Send signal to initiate pause handler
+	//printf("SND: %p\n", (void *)pthread_user_data_internal(thread));
 	//while(pthread_kill(thread, PTHREAD_XSIG_STOP) == EAGAIN) usleep(1000);
-	while(pthread_sigqueue(thread, PTHREAD_XSIG_STOP, (const union sigval){.sival_ptr=NULL}) == EAGAIN) usleep(1000);
+	while(pthread_sigqueue(thread, PTHREAD_XSIG_STOP,
+		(const union sigval){.sival_ptr=pthread_user_data_internal(thread)}
+		) == EAGAIN) usleep(1000);
 	return 0;
 }
 

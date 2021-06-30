@@ -18,8 +18,9 @@
 #ifdef __PTHREAD_EXTRA_INTERNAL
 typedef struct pthread_user_data_internal_t {
 	pthread_t tid; //Thread ID
-	sig_atomic_t running; //Internaly used by pthread_pause
 	void *usr; //User pointer
+	//Internaly used members:
+	sig_atomic_t running; //pthread_pause
 } pthread_user_data_internal_t;
 
 pthread_user_data_internal_t* pthread_user_data_internal(pthread_t thread);

@@ -59,7 +59,8 @@ void pthread_pause_disable() {
 
 int pthread_pause_reschedule(pthread_t thread) {
 	//Send signal to initiate pause handler
-	while(pthread_kill(thread, PTHREAD_XSIG_STOP) == EAGAIN) usleep(1000);
+	//while(pthread_kill(thread, PTHREAD_XSIG_STOP) == EAGAIN) usleep(1000);
+	while(pthread_sigqueue(thread, PTHREAD_XSIG_STOP, (const union sigval){.sival_ptr=NULL}) == EAGAIN) usleep(1000);
 	return 0;
 }
 

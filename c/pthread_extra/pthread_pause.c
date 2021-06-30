@@ -37,7 +37,7 @@ void pthread_pause_handler(const int signal, siginfo_t *info, void *ptr) {
 
 void pthread_pause_enable() {
 	//Add thread to internal registry
-	pthread_user_data_internal(pthread_self());
+	//pthread_user_data_internal(pthread_self());
 
 	//Nesting signals too deep is not good for stack
 	//You can get runtime stats using following command:
@@ -66,7 +66,7 @@ void pthread_pause_enable() {
 
 void pthread_pause_disable() {
 	//Add thread to internal registry
-	pthread_user_data_internal(pthread_self());
+	//pthread_user_data_internal(pthread_self());
 
 	//Block signal
 	sigset_t sigset;

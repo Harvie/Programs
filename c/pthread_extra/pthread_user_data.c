@@ -7,24 +7,43 @@
 //Static array with user data for all thread handles
 //TODO: perhaps use something more sophisticated like linked list?
 pthread_user_data_internal_t pthread_user_data[PTHREAD_XTHREADS_MAX+1] = {{.tid=PTHREAD_XNULL}};
+pthread_mutex_t pthread_user_data_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+int pthread_user_data_lock() {
+	pthread_pause_disable();
+	return pthread_mutex_lock(&pthread_user_data_mutex);
+}
+
+int pthread_user_data_unlock() {
+	pthread_mutex_unlock(&pthread_user_data_mutex);
+	pthread_pause_enable();
+	return 0;
+}
 
 //Get pointer to internal record tied to specified thread
 pthread_user_data_internal_t* pthread_user_data_internal(pthread_t thread) {
 	//Return NULL if requested thread handle is NULL
 	if(pthread_equal(thread, PTHREAD_XNULL)) return NULL;
 
+	//Lock
+	pthread_user_data_lock(); //TODO: maybe use R/W locking scheme?
+
 	//Find if the thread is already registered, add it if not
-	//FIXME: recycle slots of destroyed threads!!!
+	//FIXME: detect overflow of array and cause assert fail!
+	//FIXME: recycle slots of destroyed threads!!! signaled using pthread_user_data_remove();
 	pthread_t i;
 	for(i = 0; i<PTHREAD_XTHREADS_MAX; i++) {
 		if(pthread_equal(pthread_user_data[i].tid, PTHREAD_XNULL)) {
-			//FIXME: Should be locking for addition to the array!!!!
 			pthread_user_data[i+1].tid = PTHREAD_XNULL;
 			pthread_user_data[i].tid = thread;
 			break;
 		}
 		if(pthread_equal(pthread_user_data[i].tid, thread)) break;
 	}
+
+	//UnLock
+	pthread_user_data_unlock();
+
 	//Return pointer
 	return &pthread_user_data[i];
 }

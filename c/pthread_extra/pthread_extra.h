@@ -45,6 +45,7 @@ int pthread_extra_create(pthread_t *restrict thread,
 void pthread_unpause_handler();
 void pthread_pause_handler();
 void pthread_pause_enable();
+void pthread_pause_disable();
 int pthread_pause(pthread_t thread);
 int pthread_unpause(pthread_t thread);
 int pthread_pause_reschedule(pthread_t thread);

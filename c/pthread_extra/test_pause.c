@@ -54,6 +54,13 @@ int main() {
 		pthread_unpause(a);
 		pthread_unpause(b);
 		sleep(1);
+
+		printf("SWITCH MAIN ONLY:\n");
+		pthread_pause_all();
+		sleep(1);
+		printf("SWITCH MAIN A+B:\n");
+		pthread_unpause_all();
+		sleep(1);
 	}
 
 	pthread_join(a, NULL);

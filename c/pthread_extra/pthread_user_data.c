@@ -48,6 +48,19 @@ pthread_user_data_internal_t* pthread_user_data_internal(pthread_t thread) {
 	return &pthread_user_data[i];
 }
 
+//Iterate specified callback over all registered threads
+int pthread_user_data_internal_iterate(int (*routine)(pthread_t), void *arg) {
+	(void) arg;
+	int i;
+	pthread_user_data_lock();
+	for(i = 0; i<PTHREAD_XTHREADS_MAX; i++) {
+		if(pthread_equal(pthread_user_data[i].tid, PTHREAD_XNULL)) break;
+		routine(pthread_user_data[i].tid);
+	}
+	pthread_user_data_unlock();
+	return i;
+}
+
 //Get pointer to user specified pointer of that thread
 void** pthread_user_data_ptr(pthread_t thread) {
 	return &pthread_user_data_internal(thread)->usr;

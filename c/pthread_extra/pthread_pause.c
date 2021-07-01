@@ -14,7 +14,7 @@
 
 ///When this variable is nonzero, only referenced thread is allowed to run
 ///Access has to be protected by pthread_user_data_lock()
-pthread_t pthread_pause_holder = 0;
+pthread_t pthread_pause_holder = PTHREAD_XNULL;
 
 void pthread_pause_handler(const int signal, siginfo_t *info, void *ptr) {
 	(void)signal; (void)info; (void)ptr;
@@ -98,7 +98,7 @@ int pthread_pause_reschedule(pthread_t thread) {
 	//Check if thread has running flag
 	int run = (pthread_user_data_internal(thread)->running);
 	//Check if privileged (single thread) mode is active
-	if((pthread_pause_holder != 0) && !pthread_equal(pthread_pause_holder, thread)) {
+	if((pthread_pause_holder != PTHREAD_XNULL) && !pthread_equal(pthread_pause_holder, thread)) {
 		run = 0;
 	}
 	pthread_user_data_unlock();
@@ -137,19 +137,19 @@ int pthread_unpause(pthread_t thread) {
 
 int pthread_pause_all() {
 	pthread_user_data_lock();
-	if(pthread_pause_holder!=0) assert(pthread_equal(pthread_pause_holder, pthread_self()));
+	if(pthread_pause_holder!=PTHREAD_XNULL) assert(pthread_equal(pthread_pause_holder, pthread_self()));
 	pthread_pause_holder = pthread_self();
 	pthread_user_data_unlock();
-	//todo reschedule all
+	pthread_user_data_internal_iterate(&pthread_pause_reschedule, NULL);
 	return 0;
 }
 
 int pthread_unpause_all() {
 	pthread_user_data_lock();
-	if(pthread_pause_holder!=0) assert(pthread_equal(pthread_pause_holder, pthread_self()));
-	pthread_pause_holder = 0;
+	if(pthread_pause_holder!=PTHREAD_XNULL) assert(pthread_equal(pthread_pause_holder, pthread_self()));
+	pthread_pause_holder = PTHREAD_XNULL;
 	pthread_user_data_unlock();
-	//todo reschedule
+	pthread_user_data_internal_iterate(&pthread_pause_reschedule, NULL);
 	return 0;
 }
 

@@ -32,6 +32,7 @@ void** pthread_user_data_ptr(pthread_t thread);
 void*  pthread_user_data_get(pthread_t thread);
 void   pthread_user_data_set(pthread_t thread, void *usr);
 void   pthread_user_data_cleanup(void * arg);
+int pthread_user_data_internal_iterate(int (*routine)(pthread_t), void *arg);
 
 // Pausing
 
@@ -50,6 +51,8 @@ void pthread_pause_enable();
 void pthread_pause_disable();
 int pthread_pause(pthread_t thread);
 int pthread_unpause(pthread_t thread);
+int pthread_pause_all();
+int pthread_unpause_all();
 int pthread_pause_reschedule(pthread_t thread);
 int pthread_extra_yield();
 

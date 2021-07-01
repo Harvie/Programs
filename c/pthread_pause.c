@@ -20,6 +20,8 @@
 #define PTHREAD_XSIG_CONT (SIGRTMIN+1)
 #define PTHREAD_XSIGRTMIN (SIGRTMIN+2) //First unused RT signal
 
+pthread_t main_thread;
+
 void pthread_pause_handler(int signal) {
     //Do nothing when there are more signals pending (to cleanup the queue)
     sigset_t pending;
@@ -94,11 +96,14 @@ void *thread_test() {
 	pthread_pause_disable();
         printf("Running!\n");
 	pthread_pause_enable();
+	//pthread_pause(main_thread);
+	//pthread_unpause(main_thread);
     }
 }
 
 int main() {
     pthread_t t;
+    main_thread = pthread_self();
     pthread_pause_enable(); //Will get inherited by all threads from now on
     //you need to call pthread_pause_enable (or disable) before creating threads,
     //otherwise first signal will kill whole process

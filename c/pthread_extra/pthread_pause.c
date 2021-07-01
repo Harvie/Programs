@@ -12,10 +12,14 @@
 #include <assert.h>
 //#include <sys/time.h>
 
+///When this variable is nonzero, only referenced thread is allowed to run
+///Access has to be protected by pthread_user_data_lock()
+pthread_t pthread_pause_holder = 0;
+
 void pthread_pause_handler(const int signal, siginfo_t *info, void *ptr) {
 	(void)signal; (void)info; (void)ptr;
-	pthread_user_data_internal_t *td = (pthread_user_data_internal_t *)(info->si_value.sival_ptr);
-	(void)td;
+	int run = info->si_value.sival_int;
+	//(void)td;
 
 	//Do nothing when there are more signals pending (to cleanup the queue)
 	sigset_t pending;
@@ -30,7 +34,7 @@ void pthread_pause_handler(const int signal, siginfo_t *info, void *ptr) {
 	//printf("RCV: %p = %p\n", (void *)pthread_user_data_internal(pthread_self()), (void *)td);
 
 	//if(!pthread_user_data_internal(pthread_self())->running) {
-	if(!td->running) {
+	if(!run) {
 		sigsuspend(&sigset);
 	}
 }
@@ -75,12 +79,34 @@ void pthread_pause_disable() {
 	pthread_sigmask(SIG_BLOCK, &sigset, NULL);
 }
 
+/*
 int pthread_pause_reschedule(pthread_t thread) {
 	//Send signal to initiate pause handler
 	//printf("SND: %p\n", (void *)pthread_user_data_internal(thread));
 	//while(pthread_kill(thread, PTHREAD_XSIG_STOP) == EAGAIN) usleep(1000);
 	while(pthread_sigqueue(thread, PTHREAD_XSIG_STOP,
 		(const union sigval){.sival_ptr=pthread_user_data_internal(thread)}
+		) == EAGAIN) usleep(1000);
+	return 0;
+}
+*/
+
+int pthread_pause_reschedule(pthread_t thread) {
+	//Decide if the thread should run
+
+	pthread_user_data_lock();
+	//Check if thread has running flag
+	int run = (pthread_user_data_internal(thread)->running);
+	//Check if privileged (single thread) mode is active
+	if((pthread_pause_holder != 0) && !pthread_equal(pthread_pause_holder, thread)) {
+		run = 0;
+	}
+	pthread_user_data_unlock();
+
+	//Send signal to initiate pause handler (keep trying while SigQueue is full)
+	//while(pthread_kill(thread, PTHREAD_XSIG_STOP) == EAGAIN) usleep(1000);
+	while(pthread_sigqueue(thread, PTHREAD_XSIG_STOP,
+		(const union sigval){.sival_int=run}
 		) == EAGAIN) usleep(1000);
 	return 0;
 }
@@ -93,18 +119,39 @@ int pthread_extra_yield() {
 
 int pthread_pause(pthread_t thread) {
 	//Set thread as paused and notify it via signal (wait when queue full)
+	pthread_user_data_lock();
 	pthread_user_data_internal(thread)->running = 0;
+	pthread_user_data_unlock();
 	pthread_pause_reschedule(thread);
 	return 0;
 }
 
 int pthread_unpause(pthread_t thread) {
 	//Set thread as running and notify it via signal (wait when queue full)
+	pthread_user_data_lock();
 	pthread_user_data_internal(thread)->running = 1;
+	pthread_user_data_unlock();
 	pthread_pause_reschedule(thread);
 	return 0;
 }
 
+int pthread_pause_all() {
+	pthread_user_data_lock();
+	if(pthread_pause_holder!=0) assert(pthread_equal(pthread_pause_holder, pthread_self()));
+	pthread_pause_holder = pthread_self();
+	pthread_user_data_unlock();
+	//todo reschedule all
+	return 0;
+}
+
+int pthread_unpause_all() {
+	pthread_user_data_lock();
+	if(pthread_pause_holder!=0) assert(pthread_equal(pthread_pause_holder, pthread_self()));
+	pthread_pause_holder = 0;
+	pthread_user_data_unlock();
+	//todo reschedule
+	return 0;
+}
 
 
 // Wrappers ///////////////////////////////////////////////////////////
@@ -126,8 +173,10 @@ void *pthread_extra_thread_wrapper(void *arg) {
 	pthread_cleanup_push(pthread_user_data_cleanup, (void *)pthread_self());
 
 	//Check if we should be running according to pthread_pause sub-scheduler
-	pthread_pause_reschedule(pthread_self());
+	//pthread_pause_reschedule(pthread_self());
+	pthread_extra_yield();
 
+	//Run actual task
 	return task.start_routine(task.arg);
 
 	pthread_cleanup_pop(1); //Needed by pthread_cleanup_push() macro

@@ -24,6 +24,8 @@ typedef struct pthread_user_data_internal_t {
 } pthread_user_data_internal_t;
 
 pthread_user_data_internal_t* pthread_user_data_internal(pthread_t thread);
+int pthread_user_data_lock();
+int pthread_user_data_unlock();
 #endif //__PTHREAD_EXTRA_INTERNAL
 
 void** pthread_user_data_ptr(pthread_t thread);

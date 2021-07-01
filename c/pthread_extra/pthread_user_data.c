@@ -7,7 +7,7 @@
 //Static array with user data for all thread handles
 //TODO: perhaps use something more sophisticated like linked list?
 pthread_user_data_internal_t pthread_user_data[PTHREAD_XTHREADS_MAX+1] = {{.tid=PTHREAD_XNULL}};
-pthread_mutex_t pthread_user_data_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t pthread_user_data_mutex = PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
 
 int pthread_user_data_lock() {
 	pthread_pause_disable();

@@ -1,7 +1,7 @@
-//Filename: pause.c
+//Filename: pthread_pause.c
 //Author: Tomas 'Harvie' Mudrunka 2021
-//Build: CFLAGS=-lpthread make pause; ./pause
-//Test: valgrind --tool=helgrind ./pause
+//Build: CFLAGS=-lpthread make pthread_pause; ./pthread_pause
+//Test: valgrind --tool=helgrind ./pthread_pause
 
 //I've wrote this code as excercise to solve following stack overflow question:
 // https://stackoverflow.com/questions/9397068/how-to-pause-a-pthread-any-time-i-want/68119116#68119116

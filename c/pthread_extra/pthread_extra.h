@@ -56,6 +56,12 @@ int pthread_unpause_all();
 int pthread_pause_reschedule(pthread_t thread);
 int pthread_extra_yield();
 
+// Pause compatible sleeps
+
+void pthread_nanosleep(struct timespec t);
+void pthread_nsleep(time_t s, long ns);
+void pthread_sleep(time_t s);
+
 // Message queues
 
 //Flags

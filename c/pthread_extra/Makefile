@@ -11,7 +11,7 @@ CXXFLAGS+=$(COPT) $(CERR) $(CDEF) -std=c++11 $(CLIB)
 LDFLAGS+=$(COPT) $(LIB)
 
 BIN=test
-OBJ=pthread_user_data.o pthread_pause.o pthread_multi.o pthread_msgqueue.o test.o
+OBJ=pthread_user_data.o pthread_sleep.o pthread_pause.o pthread_multi.o pthread_msgqueue.o test.o
 
 all: $(BIN)
 $(BIN): $(OBJ)

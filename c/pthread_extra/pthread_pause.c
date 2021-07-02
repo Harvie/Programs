@@ -49,9 +49,6 @@ void pthread_pause_handler(const int signal, siginfo_t *info, void *ptr) {
 void pthread_pause_enable() {
 	pthread_pause_init(); //Make sure semaphore is init'd
 
-	//Add thread to internal registry
-	pthread_user_data_internal(pthread_self());
-
 	//Nesting signals too deep is not good for stack
 	//You can get runtime stats using following command:
 	//grep -i sig /proc/$(pgrep binary)/status
@@ -71,17 +68,22 @@ void pthread_pause_enable() {
 		.sa_flags = SA_SIGINFO | SA_RESTART,
 		.sa_restorer = NULL
 	};
+
 	sigaction(PTHREAD_XSIG_STOP, &pause_sa, NULL);
 
 	//Unblock signal
 	pthread_sigmask(SIG_UNBLOCK, &sigset, NULL);
+
+	//Add thread to internal registry
+	pthread_user_data_internal(pthread_self()); //Only now, when signals are unblocked!
 }
 
 void pthread_pause_disable() {
+	//pthread_user_data_lock();
 	pthread_pause_init(); //Make sure semaphore is init'd
 
 	//Add thread to internal registry
-	pthread_user_data_internal(pthread_self());
+	//pthread_user_data_internal(pthread_self()); //DEADLOCKS!
 
 	//Block signal
 	sigset_t sigset;
@@ -89,9 +91,12 @@ void pthread_pause_disable() {
 	sigaddset(&sigset, PTHREAD_XSIG_STOP);
 
 	//Make sure all signals are dispatched before we block them
-	sem_wait(&pthread_pause_sem);
+	//Maybe not a good idea, causes DEADLOCKS!
+	//sem_wait(&pthread_pause_sem);
 	pthread_sigmask(SIG_BLOCK, &sigset, NULL);
-	sem_post(&pthread_pause_sem);
+	//sem_post(&pthread_pause_sem);
+
+	//pthread_user_data_unlock();
 }
 
 /*
@@ -108,7 +113,6 @@ int pthread_pause_reschedule(pthread_t thread) {
 
 int pthread_pause_reschedule(pthread_t thread) {
 	//Decide if the thread should run and signal it
-
 	pthread_user_data_lock();
 
 	//Wait for semaphore which means signal queue is empty
@@ -146,18 +150,20 @@ int pthread_extra_yield() {
 	return pthread_yield();
 }
 
+///Pause specified thread (block until it is paused)
 int pthread_pause(pthread_t thread) {
-	//Set thread as paused and notify it via signal (wait when queue full)
 	pthread_user_data_lock();
+	//Set thread as paused and notify it via signal (wait when queue full)
 	pthread_user_data_internal(thread)->running = 0;
 	pthread_pause_reschedule(thread);
 	pthread_user_data_unlock();
 	return 0;
 }
 
+///UnPause specified thread (block until it is unpaused)
 int pthread_unpause(pthread_t thread) {
-	//Set thread as running and notify it via signal (wait when queue full)
 	pthread_user_data_lock();
+	//Set thread as running and notify it via signal (wait when queue full)
 	pthread_user_data_internal(thread)->running = 1;
 	pthread_pause_reschedule(thread);
 	pthread_user_data_unlock();
@@ -204,8 +210,10 @@ void *pthread_extra_thread_wrapper(void *arg) {
 	pthread_extra_wrapper_t task = *((pthread_extra_wrapper_t*)arg);
 	free(arg);
 
+	pthread_pause_enable();
+
 	//Register new thread to user data structure
-	pthread_user_data_internal(pthread_self()); //Perhaps already done in pthread_extra_yield()??
+	//pthread_user_data_internal(pthread_self()); //Perhaps already done in pthread_extra_yield() and pthread_pause_enable()??
 
 	//TODO: user_data should do this automaticaly?
 	pthread_cleanup_push(pthread_user_data_cleanup, (void *)pthread_self());

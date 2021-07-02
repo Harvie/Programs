@@ -1,3 +1,5 @@
+#define PTHREAD_FREEWHEEL
+
 #include <signal.h>
 #include <pthread.h>
 #include <pthread_extra.h>
@@ -5,6 +7,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <unistd.h>
+
+//#define printf(...) (0)
 
 pthread_t main_thread;
 
@@ -50,20 +54,35 @@ int main() {
 	while(1) {
 		pthread_pause(b);
 		pthread_unpause(a);
+		pthread_pause_disable();
+		pthread_pause_disable();
+		pthread_pause_disable();
 		printf("SWITCH A:\n");
+		pthread_pause_enable();
+		pthread_pause_enable();
+		pthread_pause_enable();
 		pthread_sleep(2);
 
+		pthread_pause_all();
 		printf("SWITCH B:\n");
+		pthread_unpause_all();
 		pthread_pause(a);
 		pthread_unpause(b);
 		pthread_sleep(2);
 
+		//pthread_pause_disable();
+		pthread_pause_all();
 		printf("SWITCH A+B:\n");
+		pthread_unpause_all();
+		//pthread_pause_enable();
 		pthread_unpause(a);
 		pthread_unpause(b);
 		pthread_sleep(1);
 
+		//pthread_pause_disable();
+		pthread_pause_all();
 		printf("SWITCH MAIN ONLY:\n");
+		//pthread_pause_enable();
 		pthread_pause_all();
 		//printf("\n");
 		pthread_sleep(1);

@@ -59,7 +59,7 @@ void pthread_pause_enable() {
 	const struct sigaction pause_sa = {
 		.sa_sigaction = pthread_pause_handler,
 		.sa_mask = sigset,
-		.sa_flags = SA_SIGINFO,
+		.sa_flags = SA_SIGINFO | SA_RESTART,
 		.sa_restorer = NULL
 	};
 	sigaction(PTHREAD_XSIG_STOP, &pause_sa, NULL);

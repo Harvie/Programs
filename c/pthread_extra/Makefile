@@ -18,7 +18,7 @@ $(BIN): $(OBJ)
 	$(CXX) -o $(BIN) $(OBJ) $(LDFLAGS)
 	strip --strip-unneeded $(BIN)
 
-	gcc -lpthread -I . test_pause.c pthread_user_data.o pthread_pause.o -o test_pause
+	gcc -lpthread -I . test_pause.c pthread_user_data.o pthread_pause.o pthread_sleep.o -o test_pause
 
 clean:
 	rm -f $(BIN) $(OBJ) $(DEPS)

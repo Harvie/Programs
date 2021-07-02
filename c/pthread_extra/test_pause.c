@@ -6,23 +6,31 @@
 #include <assert.h>
 #include <unistd.h>
 
+pthread_t main_thread;
+
 void *thread_test(void *arg) {
 	//Whole process dies if you kill thread immediately before it is pausable
 	//pthread_pause_enable();
 	while(1) {
-		usleep(1000*300);
+		pthread_nsleep(0, 1000*1000*300);
+		//pthread_pause_all();
+		pthread_pause(main_thread);
 		printf("Running%s!\n", (char *)arg);
+		//pthread_unpause_all();
+		pthread_unpause(main_thread);
 	}
 }
 
 int main() {
+
+	main_thread = pthread_self();
 
 	pthread_t a, b;
 	pthread_pause_enable(); //Will get inherited by all threads from now on
 	//That way you can be sure it is pausable immediately
 	pthread_extra_create(&a, NULL, thread_test, " A");
 	pthread_extra_create(&b, NULL, thread_test, " B");
-	//sleep(1);
+	//pthread_sleep(1);
 
 	//printf("OK\n");
 	/*
@@ -43,24 +51,24 @@ int main() {
 		pthread_pause(b);
 		pthread_unpause(a);
 		printf("SWITCH A:\n");
-		sleep(2);
+		pthread_sleep(2);
 
 		printf("SWITCH B:\n");
 		pthread_pause(a);
 		pthread_unpause(b);
-		sleep(2);
+		pthread_sleep(2);
 
 		printf("SWITCH A+B:\n");
 		pthread_unpause(a);
 		pthread_unpause(b);
-		sleep(1);
+		pthread_sleep(1);
 
 		printf("SWITCH MAIN ONLY:\n");
 		pthread_pause_all();
-		sleep(1);
+		pthread_sleep(1);
 		printf("SWITCH MAIN A+B:\n");
 		pthread_unpause_all();
-		sleep(1);
+		pthread_sleep(1);
 	}
 
 	pthread_join(a, NULL);

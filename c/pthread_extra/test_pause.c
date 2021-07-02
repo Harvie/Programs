@@ -13,10 +13,10 @@ void *thread_test(void *arg) {
 	//pthread_pause_enable();
 	while(1) {
 		pthread_nsleep(0, 1000*1000*300);
-		//pthread_pause_all();
-		pthread_pause(main_thread);
+		pthread_pause_all();
 		printf("Running%s!\n", (char *)arg);
-		//pthread_unpause_all();
+		pthread_unpause_all();
+		pthread_pause(main_thread);
 		pthread_unpause(main_thread);
 	}
 }
@@ -65,9 +65,11 @@ int main() {
 
 		printf("SWITCH MAIN ONLY:\n");
 		pthread_pause_all();
+		//printf("\n");
 		pthread_sleep(1);
 		printf("SWITCH MAIN A+B:\n");
 		pthread_unpause_all();
+		//printf("\n");
 		pthread_sleep(1);
 	}
 

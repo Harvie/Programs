@@ -1,5 +1,6 @@
 #define __PTHREAD_EXTRA_INTERNAL
 
+//#include <stdio.h>
 #include <assert.h>
 #include <pthread.h>
 #include <pthread_extra.h>
@@ -10,13 +11,13 @@ pthread_user_data_internal_t pthread_user_data[PTHREAD_XTHREADS_MAX+1] = {{.tid=
 pthread_mutex_t pthread_user_data_mutex = PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
 
 int pthread_user_data_lock() {
-	pthread_pause_disable();
+	//pthread_pause_disable();
 	return pthread_mutex_lock(&pthread_user_data_mutex);
 }
 
 int pthread_user_data_unlock() {
 	pthread_mutex_unlock(&pthread_user_data_mutex);
-	pthread_pause_enable();
+	//pthread_pause_enable();
 	return 0;
 }
 
@@ -36,6 +37,8 @@ pthread_user_data_internal_t* pthread_user_data_internal(pthread_t thread) {
 		if(pthread_equal(pthread_user_data[i].tid, PTHREAD_XNULL)) {
 			pthread_user_data[i+1].tid = PTHREAD_XNULL;
 			pthread_user_data[i].tid = thread;
+			pthread_user_data[i].running = 1; //NEW THREADS ARE RUNNING UNLESS PAUSED!
+			//printf("ADDED %lu = %lu\n", pthread_user_data[i].tid, thread);
 			break;
 		}
 		if(pthread_equal(pthread_user_data[i].tid, thread)) break;

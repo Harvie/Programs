@@ -47,16 +47,16 @@ void pthread_pause_handler(const int signal, siginfo_t *info, void *ptr) {
 }
 
 void pthread_pause_enable() {
+	pthread_pause_init(); //Make sure semaphore is init'd
+
 	//Add thread to internal registry
-	//pthread_user_data_internal(pthread_self());
+	pthread_user_data_internal(pthread_self());
 
 	//Nesting signals too deep is not good for stack
 	//You can get runtime stats using following command:
 	//grep -i sig /proc/$(pgrep binary)/status
 	//struct rlimit sigq = {.rlim_cur = 32, .rlim_max=32};
 	//setrlimit(RLIMIT_SIGPENDING, &sigq);
-
-	pthread_pause_init(); //Make sure semaphore is init'd
 
 	//Prepare signal mask
 	sigset_t sigset;
@@ -78,10 +78,10 @@ void pthread_pause_enable() {
 }
 
 void pthread_pause_disable() {
-	//Add thread to internal registry
-	//pthread_user_data_internal(pthread_self());
-
 	pthread_pause_init(); //Make sure semaphore is init'd
+
+	//Add thread to internal registry
+	pthread_user_data_internal(pthread_self());
 
 	//Block signal
 	sigset_t sigset;
@@ -109,6 +109,8 @@ int pthread_pause_reschedule(pthread_t thread) {
 int pthread_pause_reschedule(pthread_t thread) {
 	//Decide if the thread should run and signal it
 
+	pthread_user_data_lock();
+
 	//Wait for semaphore which means signal queue is empty
 	pthread_pause_init(); //Make sure semaphore is init'd
 	sem_wait(&pthread_pause_sem);
@@ -116,17 +118,16 @@ int pthread_pause_reschedule(pthread_t thread) {
 	//Only call this if you already acquired pthread_pause_sem semaphore!!!!
 	//Otherwise call pthread_pause_reschedule()
 
-	pthread_user_data_lock();
 	//Check if thread has running flag
 	int run = (pthread_user_data_internal(thread)->running);
 	//Check if privileged (single thread) mode is active
-	if((pthread_pause_holder != PTHREAD_XNULL) && !pthread_equal(pthread_pause_holder, thread)) {
+	if(!pthread_equal(pthread_pause_holder, PTHREAD_XNULL) && !pthread_equal(pthread_pause_holder, thread)) {
 		run = 0;
 	}
-	pthread_user_data_unlock();
 
 	//Send signal to initiate pause handler (keep trying while SigQueue is full)
 	//while(pthread_kill(thread, PTHREAD_XSIG_STOP) == EAGAIN) usleep(1000);
+	//printf("Sched %lu = %d (self: %lu, lck: %lu)\n", thread, run, pthread_self(), pthread_pause_holder);
 	while(pthread_sigqueue(thread, PTHREAD_XSIG_STOP,
 		(const union sigval){.sival_int=run}
 		) == EAGAIN) usleep(1000);
@@ -134,6 +135,7 @@ int pthread_pause_reschedule(pthread_t thread) {
 	//Wait for signal to be delivered
 	sem_wait(&pthread_pause_sem);
 	sem_post(&pthread_pause_sem);
+	pthread_user_data_unlock();
 
 	return 0;
 }
@@ -162,20 +164,29 @@ int pthread_unpause(pthread_t thread) {
 	return 0;
 }
 
+///Enter exclusive mode by pausing everyone else
 int pthread_pause_all() {
+	//printf("Pause ALL\n");
 	pthread_user_data_lock();
-	if(pthread_pause_holder!=PTHREAD_XNULL) assert(pthread_equal(pthread_pause_holder, pthread_self()));
+	//printf("Pause ALL+\n");
+	//printf("Pause %p == %p\n", (void *)pthread_pause_holder, (void *)pthread_self());
+	if(!pthread_equal(pthread_pause_holder,PTHREAD_XNULL)) assert(pthread_equal(pthread_pause_holder, pthread_self()));
 	pthread_pause_holder = pthread_self();
 	pthread_user_data_internal_iterate(&pthread_pause_reschedule, NULL);
+	//printf("Pause ALL!\n");
 	pthread_user_data_unlock();
 	return 0;
 }
 
+///Leave exclusive mode by unpausing everyone else
 int pthread_unpause_all() {
+	//printf("UnPause ALL\n");
 	pthread_user_data_lock();
-	if(pthread_pause_holder!=PTHREAD_XNULL) assert(pthread_equal(pthread_pause_holder, pthread_self()));
+	//printf("UnPause ALL+\n");
+	if(!pthread_equal(pthread_pause_holder,PTHREAD_XNULL)) assert(pthread_equal(pthread_pause_holder, pthread_self()));
 	pthread_pause_holder = PTHREAD_XNULL;
 	pthread_user_data_internal_iterate(&pthread_pause_reschedule, NULL);
+	//printf("UnPause ALL!\n");
 	pthread_user_data_unlock();
 	return 0;
 }
@@ -194,7 +205,7 @@ void *pthread_extra_thread_wrapper(void *arg) {
 	free(arg);
 
 	//Register new thread to user data structure
-	pthread_user_data_internal(pthread_self());
+	pthread_user_data_internal(pthread_self()); //Perhaps already done in pthread_extra_yield()??
 
 	//TODO: user_data should do this automaticaly?
 	pthread_cleanup_push(pthread_user_data_cleanup, (void *)pthread_self());

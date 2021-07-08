@@ -1,5 +1,9 @@
 #define __PTHREAD_EXTRA_INTERNAL
 
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE //PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP
+#endif //_GNU_SOURCE
+
 //#include <stdio.h>
 #include <assert.h>
 #include <pthread.h>
@@ -35,6 +39,7 @@ pthread_user_data_internal_t* pthread_user_data_internal(pthread_t thread) {
 	pthread_t i;
 	for(i = 0; i<PTHREAD_XTHREADS_MAX; i++) {
 		if(pthread_equal(pthread_user_data[i].tid, PTHREAD_XNULL)) {
+			assert(((i+1)<PTHREAD_XTHREADS_MAX) && "FIXME: Pthread_extra user data table overflow!");
 			pthread_user_data[i+1].tid = PTHREAD_XNULL;
 			pthread_user_data[i].tid = thread;
 			pthread_user_data[i].running = 1; //NEW THREADS ARE RUNNING UNLESS PAUSED!

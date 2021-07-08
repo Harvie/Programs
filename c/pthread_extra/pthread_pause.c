@@ -150,9 +150,17 @@ int pthread_extra_yield() {
 	return pthread_yield();
 }
 
+///Sanity check to be sure there are no race conditions
+inline void pthread_pause_assert_owner() {
+	if(!pthread_equal(pthread_pause_holder,PTHREAD_XNULL))
+		assert(pthread_equal(pthread_pause_holder, pthread_self()));
+}
+
 ///Pause specified thread (block until it is paused)
 int pthread_pause(pthread_t thread) {
 	pthread_user_data_lock();
+	pthread_pause_assert_owner();
+	//if(!pthread_equal(pthread_pause_holder,PTHREAD_XNULL)) assert(pthread_equal(pthread_pause_holder, pthread_self()));
 	//Set thread as paused and notify it via signal (wait when queue full)
 	pthread_user_data_internal(thread)->running = 0;
 	pthread_pause_reschedule(thread);
@@ -163,6 +171,7 @@ int pthread_pause(pthread_t thread) {
 ///UnPause specified thread (block until it is unpaused)
 int pthread_unpause(pthread_t thread) {
 	pthread_user_data_lock();
+	pthread_pause_assert_owner();
 	//Set thread as running and notify it via signal (wait when queue full)
 	pthread_user_data_internal(thread)->running = 1;
 	pthread_pause_reschedule(thread);
@@ -176,7 +185,7 @@ int pthread_pause_all() {
 	pthread_user_data_lock();
 	//printf("Pause ALL+\n");
 	//printf("Pause %p == %p\n", (void *)pthread_pause_holder, (void *)pthread_self());
-	if(!pthread_equal(pthread_pause_holder,PTHREAD_XNULL)) assert(pthread_equal(pthread_pause_holder, pthread_self()));
+	pthread_pause_assert_owner();
 	pthread_pause_holder = pthread_self();
 	pthread_user_data_internal_iterate(&pthread_pause_reschedule, NULL);
 	//printf("Pause ALL!\n");
@@ -189,7 +198,7 @@ int pthread_unpause_all() {
 	//printf("UnPause ALL\n");
 	pthread_user_data_lock();
 	//printf("UnPause ALL+\n");
-	if(!pthread_equal(pthread_pause_holder,PTHREAD_XNULL)) assert(pthread_equal(pthread_pause_holder, pthread_self()));
+	pthread_pause_assert_owner();
 	pthread_pause_holder = PTHREAD_XNULL;
 	pthread_user_data_internal_iterate(&pthread_pause_reschedule, NULL);
 	//printf("UnPause ALL!\n");

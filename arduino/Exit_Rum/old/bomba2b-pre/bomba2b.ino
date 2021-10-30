@@ -6,7 +6,7 @@
 //Nastaveni bomby
 
 #define DISARM_CODE "73138477"
-#define TIME_COUNTDOWN 600 //600
+#define TIME_COUNTDOWN 600
 //#define TIME_COUNTDOWN 15
 
 //Prirazeni pinu
@@ -27,20 +27,13 @@
 
 //////////////////////////////////////////////////////////////////
 
-#define SOFTSERIAL
-
-#ifndef SOFTSERIAL
 #include <PS2Keyboard.h>
-PS2Keyboard keyboard;
-#else
-#include <SoftwareSerial.h>
-SoftwareSerial mySerial(PIN_KEY_CLK, PIN_KEY_DATA);
-#endif
 
 //#include <Wire.h> // Enable this line if using Arduino Uno, Mega, etc.
 #include <Adafruit_GFX.h>
 #include "Adafruit_LEDBackpack.h"
 
+PS2Keyboard keyboard;
 Adafruit_7segment display = Adafruit_7segment();
 
 #define cnt_sec(s) (s%60)
@@ -51,12 +44,7 @@ void setup()
 {
     //Pripravime periferie
     Serial.begin(9600);
-    Serial.println("zaciname");
-#ifndef SOFTSERIAL
     keyboard.begin(PIN_KEY_DATA, PIN_KEY_CLK);
-#else
-    mySerial.begin(4800);
-#endif
     display.begin(ADDR_DISPLAY);
 
     pinMode(PIN_LED_R, OUTPUT);
@@ -76,40 +64,19 @@ int test_disarmed(int reset)
 	disarmed = 0;
     }
     //Cteme klavesnici
-#ifndef SOFTSERIAL
     while (keyboard.available()) {
-	    char c = keyboard.read();
-      //Serial.print("Klavesa: ");
-      //Serial.println(c);
-#else
-    while (mySerial.available()) {
-      char c = mySerial.read();
-#endif
-#ifndef SOFTSERIAL
+	char c = keyboard.read();
 	if (c == PS2_ENTER) {
 	    Serial.println();
 	} else {
-#else
-  if(1) {    
-#endif
 	    Serial.print(c);
 	}
-
-  if (c < '0' || c > '9') {
-     Serial.println("IGNORED!");
-    continue;
-    
-    }
 	if (c == DISARM_CODE[guessed]) {
 	    guessed++;
 	    Serial.println("\nGOT!");
 	} else {
 	    guessed = 0;
 	    Serial.println("\nFAIL!");
-      if (c == DISARM_CODE[guessed]) {
-        guessed++;
-        Serial.println("\nGOT!");
-      }
 	}
 	if (DISARM_CODE[guessed] == 0) {
 	    disarmed = 1;
@@ -134,13 +101,8 @@ void loop()
     display.setBrightness(15);
     display.writeDisplay();
 
-#ifndef SOFTSERIAL
     while (keyboard.available())
 	keyboard.read();
-#else
-    while (mySerial.available())
-  mySerial.read();
-#endif
     test_disarmed(1);
 
     //Pockame na pripojeni kabelu

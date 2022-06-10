@@ -28,6 +28,11 @@ int main(void) {
         	exit(-1);
     	}
 
+	int i, count = SDL_GetNumAudioDevices(0);
+	for (i = 0; i < count; ++i) {
+    		printf("Audio device %d: %s\n", i, SDL_GetAudioDeviceName(i, 0));
+	}
+
 	dev = SDL_OpenAudioDevice(NULL, 1, &want, &have, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
 	if (dev == 0) {
 		SDL_Log("Failed to open audio: %s", SDL_GetError());

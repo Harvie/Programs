@@ -1,7 +1,9 @@
 #!/bin/sh
+#
 #Serial line tester v0.3
-#Tested in busybox ash
 #(c) Tomas Mudrunka 2022-2024
+#
+#Tested in: busybox ash, bash
 
 trylimit=0
 seconds=0

@@ -1,5 +1,6 @@
 #!/bin/sh
-#Serial line tester, should work in busybox ash
+#Serial line tester v0.3
+#Tested in busybox ash
 #(c) Tomas Mudrunka 2022-2024
 
 trylimit=0
@@ -54,9 +55,8 @@ while true; do
 	unset line
 	read -rst 1 -u 6 line
 	#echo "LINE: $line"
-	[ "$line" != "$testdata" ] && {
+	[ "$line" != "$testdata" ] && errcnt=$((errcnt+1)) &&
 		echo -e "$(date +'%D %T')\t$errcnt\tError receiving data $port_tx -> $port_rx"
-	} && errcnt=$((errcnt+1))
 	trycnt=$((trycnt+1))
 	#echo "try $trycnt err $errcnt lim $trylimit"
 	[ $trylimit -gt 0 -a $trycnt -gt $trylimit ] && break

@@ -5,6 +5,8 @@
 #
 #Tested in: busybox ash, bash
 
+function serial_loopback_test() {
+
 trylimit=0
 seconds=0
 baudrate=115200
@@ -71,3 +73,7 @@ exec 6<&-
 echo TRANSMITTED: $trycnt, ERRORS: $errcnt, SECONDS: $(($(date +%s)-$datestart))
 [ "$errcnt" = "0" -a "$trycnt" -gt 0 ] && exit 0
 exit 255
+
+}
+
+serial_loopback_test "$@"

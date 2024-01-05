@@ -22,15 +22,15 @@ while getopts ":t:r:b:l:s:w" OPT; do
 		s) seconds=$OPTARG;;
 		w) workaround_rs485=true;;
 
-		'?') echo "Usage: $0 -t /dev/ttyTX [-r /dev/ttyRX] [-b 9600] [-l 10] [-s 10] [-w]"	>&2; exit 250;;
-		':') echo "Missing option argument for -$OPTARG"					>&2; exit 251;;
-		*  ) echo "Unimplemented option: -$OPT"							>&2; exit 252;;
+		'?') echo "Usage: $0 -t /dev/ttyTX [-r /dev/ttyRX] [-b 9600] [-l 10] [-s 10] [-w]"	>&2; return 250;;
+		':') echo "Missing option argument for -$OPTARG"					>&2; return 251;;
+		*  ) echo "Unimplemented option: -$OPT"							>&2; return 252;;
 	esac
 done
 
 [ -z "$port_tx" ] && port_tx="$port_rx"
 [ -z "$port_rx" ] && port_rx="$port_tx"
-[ -z "$port_rx" ] && { echo Port not specified; exit 253; }
+[ -z "$port_rx" ] && { echo Port not specified; return 253; }
 
 
 testdata="${RANDOM}d82b2ae45432e7c80699852ab557b279c42180a379711aae85487bda0cc58602f65c0ab5af0d510d6ac1606c52f887f3332052f67c45212dbbf2730${RANDOM}"
@@ -71,8 +71,8 @@ exec 5>&-
 exec 6<&-
 
 echo TRANSMITTED: $trycnt, ERRORS: $errcnt, SECONDS: $(($(date +%s)-$datestart))
-[ "$errcnt" = "0" -a "$trycnt" -gt 0 ] && exit 0
-exit 255
+[ "$errcnt" = "0" -a "$trycnt" -gt 0 ] && return 0
+return 255
 
 }
 

@@ -7,6 +7,8 @@
 
 function serial_loopback_test() {
 
+unset port_tx
+unset port_rx
 trylimit=0
 seconds=0
 baudrate=115200

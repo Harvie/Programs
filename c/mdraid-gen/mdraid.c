@@ -9,6 +9,10 @@ mdadm --examine test.img
 losetup /dev/loop1 test.img
 mdadm --assemble md /dev/loop1
 
+Some docs:
+https://raid.wiki.kernel.org/index.php/RAID_superblock_formats#Sub-versions_of_the_version-1_superblock
+https://docs.huihoo.com/doxygen/linux/kernel/3.7/md__p_8h_source.html
+
 */
 
 //#include <cstddef>

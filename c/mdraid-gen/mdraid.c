@@ -6,6 +6,9 @@ make mdraid
 ./mdraid > test.img
 mdadm --examine test.img
 
+losetup /dev/loop1 test.img
+mdadm --assemble md /dev/loop1
+
 */
 
 //#include <cstddef>
@@ -56,6 +59,8 @@ static unsigned int calc_sb_1_csum(struct mdp_superblock_1 * sb)
 }
 
 int main() {
+	size_t data_size = 10000; //512B sectors
+
 	srand(time(NULL)); //FIXME: Seed UUID properly
 
 	struct mdp_superblock_1 sb = {0};
@@ -68,23 +73,23 @@ int main() {
 
 	//TODO: set these
 	random_uuid(sb.set_uuid);	/* user-space generated. U8[16]*/
-	memcpy(sb.set_name, "localhost:777", 6);	/* set and interpreted by user-space. CHAR[32] */
+	memcpy(sb.set_name, "localhost:7", 12);	/* set and interpreted by user-space. CHAR[32] */
 	sb.ctime=0;		/* lo 40 bits are seconds, top 24 are microseconds or 0*/
 
 	sb.level=1;		/* -4 (multipath), -1 (linear), 0,1,4,5 */
-	sb.layout=2;		/* only for raid5 and raid10 currently */
-	sb.size;		/* used size of component devices, in 512byte sectors */
+	//sb.layout=2;		/* only for raid5 and raid10 currently */
+	sb.size=data_size+128;		/* used size of component devices, in 512byte sectors */
 
 	sb.chunksize=0;		/* in 512byte sectors - not used in raid 1 */
 	sb.raid_disks=1;
-	sb.bitmap_offset=0;	/* sectors after start of superblock that bitmap starts
+	sb.bitmap_offset=8;	/* sectors after start of superblock that bitmap starts
 					 * NOTE: signed, so bitmap can be before superblock
 					 * only meaningful of feature_map[0] is set.
 					 */
 
 	/* constant this-device information - 64 bytes */
-	sb.data_offset=4096+sizeof(sb);	/* sector start of data, often 0 */
-	sb.data_size;	/* sectors in this device that can be used for data */
+	sb.data_offset=128;	/* sector start of data, often 0 */
+	sb.data_size=data_size;	/* sectors in this device that can be used for data */
 	sb.super_offset=8;	/* sector start of this superblock */
 
 	sb.dev_number=0;	/* permanent identifier of this  device - not role in raid */
@@ -113,7 +118,9 @@ int main() {
 	sb.sb_csum=calc_sb_1_csum(&sb);
 
 	//printf("Superblock\n");
-	for(int i=0;i<4096;i++) putc(0, stdout);
+	for(int i=0;i<(8*512);i++) putc(0, stdout);
 	fwrite(&sb, sizeof(sb), 1, stdout);
-	for(int i=0;i<40960;i++) putc(0, stdout);
+	for(int i=0;i<((120*512)-sizeof(sb));i++) putc(0, stdout);
+
+	for(int i=0;i<(data_size*512);i++) putc(0, stdout);
 }

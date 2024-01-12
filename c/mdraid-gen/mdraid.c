@@ -59,6 +59,8 @@ static unsigned int calc_sb_1_csum(struct mdp_superblock_1 * sb)
 }
 
 int main() {
+	//printf("Superblock\n");
+
 	size_t data_size = 8192; //512B sectors (should be divisible by 8 sectors to keep 4kB alignment)
 
 	srand(time(NULL)); //FIXME: Seed UUID properly
@@ -68,7 +70,7 @@ int main() {
 	/* constant array information - 128 bytes */
 	sb.magic = 0xa92b4efc;		/* MD_SB_MAGIC: 0xa92b4efc - little endian */
 	sb.major_version = 1;	/* 1 */
-	sb.feature_map = 0;	/* bit 0 set if 'bitmap_offset' is meaningful */
+	sb.feature_map = 0; //MD_FEATURE_BITMAP_OFFSET;	/* bit 0 set if 'bitmap_offset' is meaningful */ //FIXME: internal bitmap bit is not seen by mdadm????
 	sb.pad0 = 0;		/* always set to 0 when writing */
 
 	//TODO: set these
@@ -99,6 +101,14 @@ int main() {
 		//#define	WriteMostly1	1	/* mask for writemostly flag in above */
 		//#define	FailFast1	2	/* Should avoid retries and fixups and just fail */
 
+		/* Bad block log.  If there are any bad blocks the feature flag is set.
+		* If offset and size are non-zero, that space is reserved and available
+		*/
+	sb.bblog_shift=9;    /* shift from sectors to block size */ //FIXME: not sure with this!
+	sb.bblog_size=8; /* number of sectors reserved for list */
+	sb.bblog_offset=16;   /* sector offset from superblock to bblog,
+			* signed - not unsigned */
+
 	/* array state information - 64 bytes */
 	sb.utime=0;		/* 40 bits second, 24 bits microseconds */
 	sb.events=0;		/* incremented when superblock updated */
@@ -115,9 +125,8 @@ int main() {
 	//__le16	dev_roles[];	/* role in array, or 0xffff for a spare, or 0xfffe for faulty */
 
 
+	//Calculate checksum
 	sb.sb_csum=calc_sb_1_csum(&sb);
-
-	//printf("Superblock\n");
 
 	//Empty space before metadata (sector 0 - 7)
 	for(int i=0;i<(sb.super_offset*512);i++) putc(0, stdout);

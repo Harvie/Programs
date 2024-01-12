@@ -59,7 +59,7 @@ static unsigned int calc_sb_1_csum(struct mdp_superblock_1 * sb)
 }
 
 int main() {
-	size_t data_size = 10000; //512B sectors
+	size_t data_size = 8192; //512B sectors (should be divisible by 8 sectors to keep 4kB alignment)
 
 	srand(time(NULL)); //FIXME: Seed UUID properly
 
@@ -78,7 +78,7 @@ int main() {
 
 	sb.level=1;		/* -4 (multipath), -1 (linear), 0,1,4,5 */
 	//sb.layout=2;		/* only for raid5 and raid10 currently */
-	sb.size=data_size+128;		/* used size of component devices, in 512byte sectors */
+	sb.size=data_size;	/* used size of component devices, in 512byte sectors */
 
 	sb.chunksize=0;		/* in 512byte sectors - not used in raid 1 */
 	sb.raid_disks=1;
@@ -88,7 +88,7 @@ int main() {
 					 */
 
 	/* constant this-device information - 64 bytes */
-	sb.data_offset=128;	/* sector start of data, often 0 */
+	sb.data_offset=2048;	/* sector start of data, often 0 */
 	sb.data_size=data_size;	/* sectors in this device that can be used for data */
 	sb.super_offset=8;	/* sector start of this superblock */
 
@@ -103,7 +103,7 @@ int main() {
 	sb.utime=0;		/* 40 bits second, 24 bits microseconds */
 	sb.events=0;		/* incremented when superblock updated */
 	sb.resync_offset=0;	/* data before this offset (from data_offset) known to be in sync */
-	sb.max_dev=1;	/* size of devs[] array to consider */
+	sb.max_dev=sb.raid_disks; /* size of devs[] array to consider */
 	//__u8	pad3[64-32];	/* set to 0 when writing */
 
 	/* device state information. Indexed by dev_number.
@@ -118,9 +118,14 @@ int main() {
 	sb.sb_csum=calc_sb_1_csum(&sb);
 
 	//printf("Superblock\n");
-	for(int i=0;i<(8*512);i++) putc(0, stdout);
-	fwrite(&sb, sizeof(sb), 1, stdout);
-	for(int i=0;i<((120*512)-sizeof(sb));i++) putc(0, stdout);
 
+	//Empty space before metadata (sector 0 - 7)
+	for(int i=0;i<(sb.super_offset*512);i++) putc(0, stdout);
+
+	//Superblock and padding (sector 8 - 2048)
+	fwrite(&sb, sizeof(sb), 1, stdout);
+	for(int i=0;i<(((sb.data_offset-sb.super_offset)*512)-sizeof(sb));i++) putc(0, stdout);
+
+	//Data (N sectors)
 	for(int i=0;i<(data_size*512);i++) putc(0, stdout);
 }

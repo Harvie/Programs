@@ -80,7 +80,7 @@ int main() {
 	//TODO: set these
 	random_uuid(sb.set_uuid);	/* user-space generated. U8[16]*/
 	memcpy(sb.set_name, "localhost:7", 12);	/* set and interpreted by user-space. CHAR[32] */
-	sb.ctime=0;		/* lo 40 bits are seconds, top 24 are microseconds or 0*/
+	sb.ctime=time(NULL);	/* lo 40 bits are seconds, top 24 are microseconds or 0*/
 
 	sb.level=1;		/* -4 (multipath), -1 (linear), 0,1,4,5 */
 	//sb.layout=2;		/* only for raid5 and raid10 currently */

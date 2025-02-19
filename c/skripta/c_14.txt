@@ -1,0 +1,70 @@
+====== Pointery (ukazatele) ======
+Doteď platilo, že když jsme potřebovali pracovat s nějakým kusem paměti (proměnnou), jednoduše jsme ji nadeklarovali (nebo nadefinovali) a kompilátor se za nás postaral o to, aby se po spuštění programu nalézala v paměti a my s ní mohli pracovat.
+
+
+===== Referencování =====
+Základní operací kterou musíme znát je použití referenčního (& - Ampersand) a dereferenčního (* - Hvězdička) operátoru.
+
+Pokud aplikujeme referenční operátor na některou z proměnných (nebo cokoli jiného, co je fyzicky uložené v paměti), dostaneme adresu v paměti, na které je tento objekt umístěn. Např. následující kód, který by normálně měl vytisknout hexadecimální (šestnáctkovou) interpretaci hodnoty proměnné cislo nám díky operátoru "&" před identifikátorem proměnné vytiskne adresu v paměti (na které je samozřejmě uložen obsah naší proměnné).
+
+<code c>
+int cislo = 2;
+printf("0x%X\n", &cislo);
+</code>
+
+Nutno ještě podotknout, že bývá zvykem, že se šestnáctkové číslo (to, které vypíšeme pomocí "%x" nebo "%X") pro rozlišení od čísel v jiných číselných soustavách (desítkové, dvojkové, osmičkové) zapisuje s "0x" na začátku, formátovací řetězec pro 'slušné' vypsání čísla v šestnáctkovém tvaru pomocí standartní funkce printf() (adresy v paměti a adresy vůbec nebývá zvykem udávat jinak než šestnáctkově) by tedy vypadal například takto: "0x%X", s odřádkováním pak takto: "0x%X\n".
+
+A proč se operátoru "&" říká "referenční"? Je to jednoduše proto, že nám vrací referenci (neboli odkaz) na proměnnou a sice v podobě její adresy.
+
+
+===== Dereferencování =====
+Ještě užitečnější možností, než je referencování je možnost tzv. dereference. Dereferencování nám umožňuje naopak pracovat s pamětí, pokud známe její adresu. Dereferencování probíhá pomocí operátoru "*". To můžete vidět na následujícím příkladu:
+
+<code c>
+int data, adresa;
+
+data = 32; //Inicializace promenne
+adresa = &data; //Do promenne adresa ulozime adresu promenne data (pomoci referencovani)
+printf("0x%X\n", adresa); //Vytiskneme si adresu
+printf("%d\n", *adresa); //Na promennou adresa pouzijeme dereferencni operator a vytiskneme tedy hodnotu promenne data
+
+*adresa = 23; //Zapiseme 23 do pameti urcene adresou ulozenou v promenne adresa
+printf("%d\n", data); //Tim, ze jsme zapisovali na adresu ziskanou referenci romenne data, jsme zmenili i hodnotu promene data
+
+//Nyni lze tedy tvrdit, ze hodnoty data a *adresa jsou to same.
+//Stejne jsou i hodnoty &data a adresa.
+</code>
+
+Pokud používáme proměnnou pouze na uložení jiné adresy a pomocí dereference přes ní přistupujeme k datům na této adrese, takové proměnné říkáme pointer. Toto označení není špatné ani v případě, že jím titulujeme přímo tuto adresu.
+
+Dalším pěkným příkladem může být také toto:
+
+<code c>
+int data;
+*(&(*(&data))) = 32; //To je to same jako: data = 32;
+</code>
+
+===== Neoprávněný přístup do paměti =====
+Neoprávněný přístup do paměti je zatím asi jediná chyba, která nás při programování potkala, pokud tedy mluvíme o chybách, které neodchytí kompilátor (nebo preprocesor), ale nastanou až za běhu programu. V podstatě jde o to, že pokud se program pokusí číst nebo zapisovat do paměti, kterou si nealokoval (tudíž je buď volná, nebo patří někomu jinému), systém ho zarazí a z bezpečnostních důvodů ukončí (takový přístup může signalizovat, že se někdo pokouší program nabourat, nebo sám o sobě způsobit jiné škody).
+
+Jak si takový neoprávněný přístup nasimulovat?
+
+<code c>
+int *a, b;
+a = 31337; //Toto je vymyslena adresa, ktera pravdepodobne nepatri nasemu programu (teoreticky by mohla, ale pravdepodobnost je celkem miziva)
+*a = 32; //Pokusime se zapsat na neplatnou adresu -> Pad programu
+b = *a; //Pokusime se cist z neplatne adresy -> Taktez Segmentation fault (sem se uz program nedostane, protoze havaroval)
+</code>
+
+===== Správná deklarace pointerů =====
+Všiměte si, že jsem v nadpisu použil slovo deklarace pointerů, nikoli definice. To proto, že adresa uchovávaná v pointeru by měla být zjištěna až za běhu programu. Pokud jí zapíšeme přímo do kódu, tak program buď spadne, nebo bude-li fungovat, tak jenom někde a někdy, podle toho, co na dané adrese je.
+
+Chceme li tedy vytvořit pointer například na integer, uděláme to takto:
+
+<code c>
+int *cislo, a;
+cislo = &a; //inicializace
+</code>
+
+S tím jsme se již setkali v předchozích příkladech, ale já jsem to záměrně nechal až na konec.
+Proč je u pointeru nutné určit, na jaký datový typ bude ukazovat si povíme později. Pro nás je ale důleřité, že pointer nezabírá tolik místa, jako může být nutné pro uložení dat, která budou na cílové adrese. To si jednak musíme uvědomit při deklaraci a za druhé nám to může urychlit program tak, že nějaké funkci předáme pouze pointer (ta ho musí očekávat) a funkce tak pracuje skrze tento pointer (adresu) přímo nad našimi daty, aniž by se vytvářela jejich kopie v kontextu funkce. Této možnosti se říká předání odkazem a dalo by se to přirovnat k situaci ze skutečného života, kdy potřebujete vykonat nějakou stavební úpravu a můžete (s nadsázkou) buď odnést celý dům k zedníkovi, nebo můžete zedníkovi donést jen papírek s adresou tohoto domu (tedy pointer).

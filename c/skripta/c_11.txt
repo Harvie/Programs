@@ -1,0 +1,82 @@
+====== Preprocesor ======
+Už jsme si nastínili, že než se námi napsaný zdrojový kód dostane do kompilátoru, projde vyčištěním, doplněním a částečnou optimalizací v tzv. preprocesoru. Nyní si ukážeme, jak používat některé jeho direktivy (funkce), předtím je snad jen dobré poznamenat, že direktivy preprocesoru se označují znakem # (hash,mřížka,křížek,sharp).
+
+===== Inkludování - vkládání jiného souboru =====
+Preprocesor nám umožňuje vložit do zdrojového kódu veškerý obsah jiného souboru, této direktivy využijeme např. při odděleném překladu, nebo při vkládání hlavičkových souborů různých knihoven. Například inkludováním <stdio.h> si zpřístupníme Ansi C funkce pro práci s textovým vstupem a výstupem (klávesnice, obrazovka, soubory).
+
+Vložení probíhá pomocí direktivy pomocí direktivy #include, např.:
+
+<code c>
+#include <stdio.h> //Se špičatými závorkami se soubor hledá v adresáři, kde má překladač standartní hlavičkové soubory (jako je stdio.h)
+#include "mujprogram.h" //S uvozovkami se soubor hledá ve stejném adresáři, jako je náš zdrojový kód, pokud není nalezen, hledá se ve standartním adresáři
+#include NAZEV_KONSTANTY //Viz. symbolické konstanty
+</code>
+
+Musíme si ale dávat pozor, aby jsme omylem neinkludovali sami sebe, nebo jiný soubor, který inkluduje nás, to by pravděpodobně vedlo k zaseknutí preprocesoru v nekonečné smyčce. Jak tomu předcházet: viz. podmíněný překlad.
+
+
+===== Symbolické konstanty =====
+Rozdílem použití této konstanty (ve srvonání např. s definicí běžné konstanty) je to, že ji nelze po kompilaci měnit, protože preprocesor představuje z tohoto hlediska pouze pomůcku, která vyhledá v kódu identifikátory makra a nahradí je hodnotou tohoto makra (asi jako to dělá váš oblíbený textový editor pomocí funkce "najít a nahradit"). To je výhodné např. pro uchování číselných hodnot (dříve se makra používala k definici velikosti statického pole, dnes již musí Ansi C podle normy umět alokovat pole za běhu, aby bylo možné jeho velikost určit pomocí proměnné), naopak jsou makra nevhodná například pro uchování větších řetězců, které používáme na více místech (rozkopírování několika stejných desítek bytů na několik míst v kódu nikomu ještě nepřidalo).
+
+Použití:
+
+Nahradit všechny výskyty NAZEV_MAKRA textem retezec:
+  #define NAZEV_KONSTANTY [retezec]
+
+Zrušit definici makra NAZEV_KONSTANTY:
+  #undef NAZEV_KONSTANTY
+
+Jak jste si mohli všimnout, je zvykem psát identifikátory symbolických konstant celé velkými písmeny (opět až na vyjímky), abychom je oddělili od normálních proměnných.
+
+===== Makra =====
+//Pokud jste ještě nečetli kapitolu Funkce, tak následující odstavec klidně přeskočte.//
+
+Také existují ještě zajímavější druhy symbolických konstant a těmi jsou makra, ty se liší tím, že obsahují (podobně jako funkce) argumenty, takové nám mohou nahradit menší funkci, to sice také prodlužuje kód (a velikost výsledného programu), ale nadruhou stranu tím ušetříme čas na volání funkce (což může být někdy poměrně dost), o případných zbytečných automatických přetypování a přiřazování ani nemluvě.
+
+Použití:
+  #define nasobek(a,b) ((a)*(b))
+
+zápis:
+  nasobek(1,2)
+se potom rozvine na:
+  ((1)*(2))
+
+Zde musíme dát pozor na závorky, pokud bychom napsali jen: #define nasobek(a,b) a*b, mohlo by se nám potom stát, že makro použijeme (slovo zavoláme by nebylo příliš vhodné) například tímto způsobem:
+  int i = nasobek(2+3,1+2)*7
+pak by se makro rozvinulo v:
+  int i = 2+3*1+2*7
+a to je úplně jiný výraz než námi předpokládaný
+  int i = ((2+3)*(1+2))*7
+
+===== Podmíněný překlad (podmínky preprocesoru) =====
+Podmíněný překlad je možnost preprocesoru vypouštět některé části kódu na základě toho, jestli je definována nějaká symbolická konstanta, typicky jde o potlačení ladících výpisů (které by nám v případě, že je zakážeme pomocí běžné podmínky if() a například čísla, kterým je ovládáme zbytečně okupovali prostor v paměti a výkon procesoru).
+
+Použití:
+
+<code c>
+#define LADIT //Budeme ladit
+
+int main() {
+	//nejake prikazy
+	#if defined(LADIT)
+		//ladici prikazy	
+	#endif
+}
+</code>
+
+Dalším využitím podmíněného překladu je například předcházení zacykleným inkludováním, následující soubor se nenainkluduje dvakrát:
+
+<code c>
+#define UZ_INKLUDOVANO
+#ifndef UZ_INKLUDOVANO
+	//Zamysleny obsah souboru
+#endif
+</code>
+
+===== Předdefinované symbolické konstanty preprocesoru =====
+Z preprocesoru můžeme také zjišťovat různé informace a zařídit se podle nich, k tomu nám pomůžou předdefinované symbolické konstanty mezi ně patří např.:
+  * Datum a čas překladu
+  * Soubor a řádek ve zdrojovém kódu
+  * Operační systém
+  * Verze C / Podpora C++
+  * Další informace o cílovém systému

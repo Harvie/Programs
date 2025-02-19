@@ -1,0 +1,74 @@
+====== Napojení C na další systémy ======
+
+===== Napojení na webové aplikace (CGI a PHP) =====
+V někerých případech se může stát, že budete potřebovat, aby váš program napsaný v C spolupracoval s vaší webovou aplikací, dnes si představíme dva nejjednodušší způsoby, jak toho docílit. První se bude zabívat CGI rozhraním (Common Gateway Interface) a druhý nám ukáže, jak napojit program na webovou aplikaci pomocí wrapperu napsaného v PHP.
+
+===== Common Gateway Interface (CGI) =====
+CGI je rozhraní, které nám umožní, aby webserver předával požadavek přímo našemu programu. Jaké jsou výhody a nevýhody C proti jiným webovým server-side jazykům (jako PHP, JSP, nebo ASP) je celkem průhledné. C je sice rychlejší, ale musí být zkompilováno pro danou platformu. Nemůžete tedy jednoduše vzít vaší aplikaci, kterou jste do teď provozovali na Linuxu (na procesoru řady x86) a všechny soubory jednoduše uploadnout na HPBSD server (s procesorem PA-RISC), ale budete muset všechny binární soubory ze zdrojových kódů překompilovat pro tuto platformu.
+
+Když napíšete a zkompilujete CGI aplikaci, potřebujete ještě webserver, který CGI podporuje a musíte ho nastavit podle instrukcí dle konkrétního serveru, potom nahrajete spustitelné soubory do příslušného adresáře. Nastavení serveru tady rozebírat nebudu.
+
+Jaký je tedy rozdíl mezi normálním programem a CGI programem? Jde o obyčejný textový program pro příkazový řádek, s tím rozdílem, že výstup (například text vypsaný pomocí printf()) se nevypisuje na obrazovku, ale do obsahu vrácené webové stránky, nejdříve, ale musíme poslat alespoň minimální HTTP hlavičku (pro více informací si přečtěte něco o HTTP protokolu), pokud tedy chceme například vygenerovat HTML dokument s nadpisem první úrovně, kód bude vypadat takto:
+
+<file c cgi-hello.c>
+#include <stdio.h>
+
+int main() {
+	printf("Content-type: text/html\n"); //HTTP hlavicka udavajici typ obsahu
+	printf("\n"); //Po posledni hlavicce se posila prazdny radek.
+	//Nyni uz muzeme zahajit vystup:
+	printf("<h1>Hello world!</h1>\n");
+}
+</file>
+
+Ještě bychom měli vědět, jak se dostaneme k datům předávaným metodami GET nebo POST. Oba dva typy parametrů jsou předávány jako řetězec ve formátu, v jakém je server dostane od klienta, většinou takový řetězec vypadá například takto (běžný URL query string):
+
+  prvnipromena=224&druha=Zapis%20data&treti&ctvrta=posledni
+
+Pokud jsou data předávána v GETu, nahdete je v proměnné prostředí pojmenované "QUERY_STRING", pokud tedy například chceme získat a vytisknout celý GET požadavek, uděláme to pomocí funkce getenv() zhruba takto:
+
+<file c cgi-get.c>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main () {
+	char *get;
+	get = getenv("QUERY_STRING"); //Získáme pointer na QUERY_STRING
+  
+	printf("Content-type: text/html\n\n");
+	if (p != NULL) printf("<h1>CGI - GET</h1>\n<textarea>%s</textarea>", get); //Vytiskneme QUERY_STRING
+	return 0;
+}
+</file>
+
+Pokud ale chceme získat data z POSTu, budou v přesně stejném tvaru, jako v případě GETu, s tím rozdílem, že budou čekat na standartním vstupu, jinými slovy to znamená, že je můžeme načítat například pomocí funkcí scanf(), nebo getc(), to tady dále rozebírat nebudu, protože to je poměrně základní znalost.
+
+
+===== Wrapper v PHP =====
+PHP (Portable Hypertext Preprocesor) je interpretovaný programovací jazyk (podobně, jako PERL, nebo Python), který se dá provozovat například i na webovém serveru. Pro nás je důležité, že obsahuje některé funkce, pomocí kterých se lze odvolávat i na binární spustitelné soubory, požadavky na spustitelný soubor jsou víceméně stejné, jako u CGI, ale s tím rozdílem, že tento soubor nemusí být primárně určen jako webová aplikace, nebo se nacházet ve speciálním adresáři, úplně postačí, když bude mít dobře nastavená práva pro spouštění.
+
+Jak toto propojení v PHP vytvoříme? Poslouží nám k tomu funkce jako system(), nebo popen() (které se mimochodem chovají stejně, jako jejich jmenovci v Ansi C), shell_exec() a nebo proc_open(). Z následující tabulky pochopíte, co jednotlivé funkce umožňují:
+
+  * system() - spustí program se zadanými parametry a vypíše výstup (stdout)
+  * shell_exec() - spustí program se zadanými parametry a vrátí výstup (stdout)
+  * popen() - otevře program podobně jako například soubor, buď pro čtení stdoutu nebo zápis na stdin programu
+  * proc_open() - dovoluje otevřít program tak, aby bylo možné zároveň pracovat se všemi jeho výstupy i vstupem (stdout, stderr, stdin)
+
+Jednoduchý PHP skript, který nám spustí náš smyšlený program napsaný v C, který může obsluhovat smyšlený teploměr by vypadal například takto:
+
+<file php c.php>
+<h1>Teploty</h1>
+<?php
+	echo("<h2>Vevnitř</h2>\n");
+	echo(htmlspecialchars(shell_exec('./thermo -in'))."\n");
+	echo("<h2>Venku</h2>\n");
+	echo(htmlspecialchars(shell_exec('./thermo -out'))."\n");
+?>
+</file>
+
+Všiměte si, že jsem použil ještě funkci PHP nazvanou htmlspecialchars(), která zajistí, že například špičaté závorky budou převedeny na příslušné HTML entity, místo toho, aby způsobily nekorektní zobrazení dokumentu. Sám podobný skript používám, abych si mohl přes webové rozhraní vypisovat aktuální informace o serveru (teplota procesoru, disků, volné místo na disku, přihlášení uživatelé, spuštěné procesy, atd...). To je tedy vše, co si o spolupráci programů napsaných v C s vebovými aplikacemi můžeme říct, aniž bychom přesáhli rámec naší hodiny.
+
+
+===== Jiné systémy =====
+Podobně, jako z PHP voláme program napsaný v C, můžeme z C také volat jiný program, nebo můžeme například pomocí socketů vytvořit spojení například s naslouchajícím serverem. Propojení dvou programů může také probíhat pomocí roury, nebo pojmenované FIFO (first in, first out) roury.
+

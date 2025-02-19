@@ -1,0 +1,62 @@
+====== Funkce - úvod ======
+Při programování neustále voláme nějaké funkce, funkci, která nám vypíše to, zjistí tamto, vypočítá tohle, ukončí program, otevře soubor, čte ze souboru a takřka cokoli složitějšího děláme pomocí funkcí.
+
+===== Volání funkce =====
+Volání funkce (jak už víme) probíhá například zápisem:
+
+<code c>
+int b = 4;
+int y = secti(1, b);
+</code>
+
+Podobný zápis předá jedničku a hodnotu proměnné int b funkci secti() a do proměnné x nám uloží návratovou hodnotu funkce (konkrétně tohoto callu - neboli zavolání). Tuto hodnotu není nutné nikam ukládat. Můžeme ji také např. použít v jiném výrazu, jako argument jiné funkce, nebo dokonce prostě zahodit/nepoužít.
+
+
+===== Definice funkce =====
+Ovšem se nám může stát, že budeme potřebovat použít jeden algoritmus, nebo blok kódu na více místech našeho programu a pokud bychom ho jen rozkopírovali, nebo (dokonce) opsali, byli bysme pro smích všem programátorům (včetně začátečníků). Napíšeme si tedy vlastní funkci, je to jednoduché:
+
+<code c>
+//Definice nasi prvni funkce - nachazi se mimo funkci main()
+int secti(int prvni, int druhe) { //Sem za hlavicku funkce je dobre psat jednoduchy popis funkce (napr. "secte dve cisla int")
+	//Telo funkce secti():
+	int x;
+	x = prvni+druhe; //Secteme prvni a druhe a ulozime do x
+	return x; //Vratime x
+} //Pozor!!! tady jiz neni strednik
+
+//A nyni muzeme vyzkouset nas stary dobry ukazkovy kod
+int main(int argc, char *argv[]) { //Volani ale jiz provedeme z funkce main():
+	int b = 4;
+	int y = secti(1, b);
+	printf("%d\n", x);
+}
+</code>
+
+===== Pravidla =====
+Při psaní nových funkcí samozřejmě také platí jistá pravidla, například to jsou:
+
+  * Identifikátor nové funkce nesmí být použit ničím jiným (zdá se to zřejmé, ale pokud bychom například chtěli nadefinovat novou funkci printf(), tak neuspějeme, i když platí jisté vyjímky).
+  * Typ vraceného čísla (return hodnoty) musí být stejný jako typ funkce například funkce int secti() nemůže vracet hodnotu čísla float x, můžeme se také spolehnout na tzv. automatické přetypování tedy např.: <code c>
+int secti(int a, int b) { return a+b; } //Tato funkce je hezčejší a rychlejšejší než ta, co jsme si ukázali.
+</code>
+  * Na konci definice fce nepíšeme (stejně jako například za cykly) středník! (jde o hloupou, ale častou chybu).
+
+
+===== Parametry funkce =====
+Funkci předáváme parametry (tím, jak to ve skutečnosti probíhá v procesoru se zatím zatěžovat nebudeme), jsou to např. nějaká čísla, se kterými můžeme ve funkci dále pracovat. Rozlišujeme dvoje parametry - tzv. skutečné parametry a tzv. formální parametry.
+
+  * Skutečný parametr je ten, kterým funkci voláme, tedy například při volání secti(2,3); jsou 2 a 3 skutečnými parametry funkce secti().
+  * Formální parametr je ten, se kterým pracujeme v těle funkce, tedy například ve funkci s hlavičkou int secti(int prvni, int druhe); tyto dvě a všechny ostatní proměnné, které vytvoříme v těle funkce nijak neovlivňují zbytek programu a mohou se jmenovat stejně (mít stejný identifikátor) jako např. jiná proměnná ve funkci main().
+
+
+===== Návratová hodnota =====
+Návratová hodnota je cokoli, co funkce vrátí (zavoláním funkce return(), nebo dosažením konce funkce), vždy jde o stejný datový typ, jako je typ funkce (návratová hodnota je jakousi hodnotou této funkce). Pokud nezavoláme funkci return(), ale funkce se ukončí dosažením konce svého kódu, je automaticky vrácena 0.
+
+===== Cvičení =====
+  * Vysvětlete zjednodušeně, co znamená hlavička funkce main(): int main(int argc, char *argv[]) { /*Nejaky kod*/ }
+  * Čím je funkce main() specifická?
+
+===== Samostatná cvičení =====
+  * Napište co nejjednodušší funkci, která korektně umocní dvě čísla typu float (jedno druhým).
+  * Napište funkci, která vypíše "hello, world\n" tolikrát, kolik bude hodnota jediného parametru typu int.
+

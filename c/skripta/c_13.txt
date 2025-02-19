@@ -1,0 +1,101 @@
+====== Globální proměnné, přetěžování funkcí, funkční prototypy, rekurzivní funkce ======
+Minule jsme si ukázali základy práce s funkcemi, dnes si to ještě o něco ztížíme.
+
+===== Globální proměnná =====
+Říkali jsme si, že pokud ve funkci pracujeme s proměnnými, tyto neovlivňují zbytek programu, naopak ani nemůžeme pracovat s jinými proměnnými v programu (funkce běží v jiném tzv. kontextu). Pokud bychom ale stejně chtěli nadefinovat proměnnou, která bude použitelná v celém programu (má tzv. Globální viditelnost), můžeme to udělat například její definicí/deklarací mimo funkci main, takový kód by vypadal zhruba takto:
+
+<code c>
+int vypis_x() { printf("x = %d\n", x); } //Vypise globalni promennou x
+int inc_x() { x++; } //Zvetsi globalni promennou x o 1
+
+int x = 2; //Globalni prommena x = 2
+
+int main(int argc, char *argv[]) { //Hlavni funkce (ta se vetsinou nekomentuje!)
+	vypis_x();
+	x = 4; //x = 4
+	inc_x(); //x = 5
+	vypis_x();
+	x = inc_x(); //x = 0 (funkce inc_x() sice x zvysi na 6, ale nasledne vrati hodnotu 0, ktera je zde do x prirazena)
+	vypis_x();
+}
+</code>
+
+Můžeme si všimnout, že když definujeme novou funkci, děláme to také raději mimo fci main(), tato naše funkce je pak "viditelná" (dostupná) kdekoli.
+
+===== Přetěžování funkcí =====
+Psal jsem, že identifikátor funkce nesmí s ničím kolidovat. To není tak úplně pravda. Můžeme mít několik funkcí se stejným jménem, ale jiným počtem neby typem parametrů, nejlépe to je vidět na následujícím příkladu:
+
+<code c>
+int secti(int a, int b) { return a+b; }
+int secti(int a, int b, int c) { return a+b+c; }
+int secti(char c) { putc c; }
+</code>
+
+Pak pomocí volání secti() můžeme sečíst dvě, nebo tři čísla (a nemusíme tedy přemýšlet, jak se jmenuje funkce na sečtení tří čísel), pokud zavoláme secti() s jedním parametrem typu char, tak dokonce tato funkce udělá něco úplně jiného a to je vypsání znaku (což je stejně nečekané, jako sčítání s jedním číslem ;).
+
+
+===== Funkční prototypy =====
+Zatím jsme vždy funkci definovali jen před místem, kde jsme ji použili (to je logické, protože proměnnou také musíme vždy nejdříve nadefinovat, než s ní začneme pracovat). Mohlo by se ale stát, že otevřeme soubor se zdrojovým kódem našeho programu, a než se dostaneme k funkci main(), která obsahuje hlavní logiku našeho programu, budeme se muset prokousat spoustou pomocných funkcí, které pro nás nemají tak velký význam.
+
+Můžeme tedy funkci nad main() jen "nadeklarovat" (toto označení není úplně na místě, ale přesto je takřka pravdivé) a napsat (nadefinovat) ji níže. Tomu se říká použití funkčního prototypu. Funkční prototyp je vlastně pouze hlavička dané funkce zakončená středníkem. Funkční prototyp také nemusí obsahovat seznam parametrů (a jejich datových typů), v tom případě ale funkci nelze přetěžovat a kompilátor neví jaké parametry má očekávat (jede odzhora dolů) a proto nemůže opravit chyby jako volání s nesprávným počtem, nebo typem parametrů, které takřka vždy musí skončit s oblíbenou hláškou "Segmentation fault", neboli neoprávněný přístup do paměti.
+
+V případě, že používáme funkční prototypy, tak stručný komentář píšeme k prototypu, nikoli k tělu funkce.
+
+Bývá také zvykem, že se funkční prototypy dávají do hlavičkového souboru (viz. kapitola Preprocesor), který se jmenuje stejně jako náš zdrojový kód, s tím rozdílem, že místo přípony .c má příponu .h, to je užitečné, pokud chceme tyto funkce používat i v jiných souborech našeho projektu (tomu se říká tzv. oddělená kompilace). Tento hlavičkový soubor se pak includuje nejen do našeho zdrojového kódu, ale do všech dalších souborů, které chtějí mít k těmto funkcím přístup.
+
+<code c>
+int tisk(int x); //Funkce vypise prvni parametr jako int a vrati jeho dvojnasobek (pozor, tady strednik pro zmenu je!)
+//int tisk(); //Toto je druha moznost zapisu funkcniho prototypu, tedy bez parametru...
+
+int main(int argc, char *argv[]) {
+	tisk(4);
+}
+
+int tisk(int x) {
+	printf("%d\n", x);
+}
+</code>
+
+===== Rekurzivní funkce =====
+Rekurzivní funkce je funkce, které volá sama sebe, musíme ale pamatovat na to, že pokud nebude počet rekurzivních volání konečný, tak bude nekonečný, to v praxi znamená, že takový program se logicky zasekne v nekonečné smyčce, což vyústí v jednu ze tří věcí. Buď dojde paměť, nebo jiné prostředky, program začne velmi špatně hospodařit s časem CPU a "vycucne" výkon, který potřebují jiné programy, nebo zůstane stát na místě a dokola opakovat nějakou jednoduchou akci.
+
+Možná není na první pohled zřejmé, k čemu jsou takové funkce dobré, uvedu vám tedy příklad z praxe, který jsem sám několikrát použil a je používaný ve spoustě programů. Představte si, že potřebujete vypsat, nebo prohledat obsah adresáře včetně podadresářů a jejich podadresářů, atd... Jak to tedy uděláme? Jednoduše si napíšeme funkci, která otevře zvolený kořenový adresář (jeho jméno se předává jako parametr) a projíždí si ho položku po položce, když narazí na soubor, tak ho zpracuje (např. vypíše jeho název), pokud ale narazí na adresář, tak ho nejen vypíše, ale potom ještě rekurzivně zavolá sama sebe a předá si cestu k tomuto adresáři tak, že k názvu kořenového adresáře připojí jméno adresáře k prohledání, aby vznikla celá cesta. Dovedete si tedy představit, že ve finále si tímto postupem projedeme všechny složky a podsložky a jejich podsložky ve zvoleném adresáři.
+
+Takže rekurzivní funkce jsou velmi výhodné, je-li třeba operovat například nad nějakými stromovými strukturami, na druhou stranu se ale dají použít i jinak než ke zkoumání nebo vytváření (např. kreslení) stromů.
+
+Tady je příklad jednoduché rekurzivní fce:
+
+<code c>
+int rekurze(int x, int y, int z) {
+	if(x>z) return(rekurze(x-y, y, z));
+	return(x);
+}
+</code>
+
+Pokud tuto funkci zavoláme (např.: rekurze(10, 1, 0);), bude volat sama sebe a postupně odečítat od zadaného parametru x parametr y, dokud nebude platit, že x<=z, pak vrátí x, v našem případě bude návratem hodnota 0.
+
+
+===== Samostatná cvičení =====
+  * Napište rekurzivní funkci, která vypíše "hello, world\n" tolikrát, kolik bude hodnota jediného parametru typu int.
+  * Nadefinujte globální proměnnou typu int a napište funkci, která zvětší její hodnotu o číslo zadané jako parametr.
+  * Tuto funkci přetěžte a udělejte druhou, která sečte nejdřív dva parametry dohromady a pak toto číslo teprve přičte k vaší globální proměnné.
+  * Pro tyto dvě funkce vytvořte funkční prototypy a přesuňte jejich kód pod funkci main(), ve které je odzkoušejte.
+  * Zkuste vypočítat, kolikrát se zavolá fce rekurze() z výkladu (výše) při volání rekurze(10, 1, 0);, potom to vyzkoušejte, použijte k tomu globální proměnnou int a.
+  * Co funkce vratí pro hodnoty 4 a 3?: <code c>
+int ff1(x, y) {
+	if (x>0) return ff1(x-1, y)+1;
+	return y;
+}
+</code>
+  * Co funkce vratí pro hodnoty 2 a 7?: <code c>
+int ff2(x, y) {
+	if (x < y) return ff2(x+1,y);
+	return x;
+}
+</code>
+  * Co funkce vratí pro hodnoty 2 a 4?: <code c>
+int ff3(x, y) {
+	if (x == 0) return 0;
+	return ff3(x-1,y)+y;
+}
+</code>

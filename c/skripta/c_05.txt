@@ -1,0 +1,45 @@
+====== Konstanty, konstantní proměnné ======
+Konstata je výraz pro jakákoliv data, se kterými program pracuje a píšeme je přímo do zdrojového kódu.
+Konstantou může být např. číslo, znak, řetězec, pointer, a další...
+Konstanta se chová jako výraz, jako R-Hodnota (lze ji přiřadit, ale nelze přiřadit do ní).
+S konstantami jsme se již setkaly v kapitole probírající přiřazení.
+
+===== Typy konstant s okomentovaným příkladem =====
+  int	32		//cele cislo (Integer)
+  long	L940		//cislo typu long
+  float	2.345		//cislo s plovouci radovou carkou (teckou)
+  float	F940		//Jiny zapis floatu (bez tecky by nebylo jasne, ze jde o float)
+  double  3.45		//cislo double
+  char	'A'		//znak (pro binarni data pouzivejte unsigned char nebo lepe int)
+  char[] "Muj text"	//retezec - pole znaku - viz. znak
+
+===== Možnosti zápisu celých čísel (příklady) =====
+  decimálně	123
+  hexadecimálně	0x1A6F
+  oktálně	029
+
+
+===== Možnosti zápisu znaků (literály - platí i pro řetězce) =====
+  decimálně	\0232 ('\0232')
+  hexadecimálně	\x0A ('\x0A')
+
+
+===== Speciální znaky =====
+  \n ('\n')	Přechod na další řádek
+  \r ('\r')	Přechod na začátek řádku
+  \t ('\t')	Tabelátor
+
+
+===== Příklady literálů =====
+  char str[] = "\tPole ch\x41ru, neboli retezec,\nje to tak.";
+  char str[] = "Preruseny"	" retezec\n";
+  char str[] = "Preruseny " "retezec "
+  	     "muze pokracovat i na dalsi radce!\n";
+
+
+===== Konstantní proměnné =====
+Konstantní proměnná je taková proměnná, která se po inicializaci stává konstantou (nelze ji měnit, je to tedy neproměnná proměnná ;D).
+Deklarace konstantní proměnné probíhá pomocí tzv. "typového modifikátoru", v našem případě "const".
+
+Příklad:
+  const int a, b = 32; //Promenna b jiz nepujde zmenit, promenna a pujde zmenit pouze jednou (inicializovat).

@@ -1,0 +1,96 @@
+====== Ahoj, světe! ======
+Tzv. "Ahoj, světe!" (v originále "hello, world") je jednoduchý program, který prostě jen vypíše "hello, world", ten je sám o sobě prakticky k ničemu, ale pro programátory je důležitý protože se naučíme jak vypadá program, který nic vlastně nedělá, jak se zkompiluje a spustí, tedy všechny formality, které nás dělí od vlastního programování.
+
+A takto tedy vypadá hello world v C:
+
+<file c hello.c>
+  #include <stdio.h>
+  
+  int main(int argc, char *argv[]) //Pro primitivni programy muzeme pouzit jen: int main(void)
+  {
+    //Toto je komentar
+    /* 
+     * A toto je
+     * viceradkovy komentar
+     */
+    printf("hello, world\n");
+    return(0);
+  }
+</file>
+Tento text uložíme pomocí nejobyčejnějšího textového editoru do souboru s příponou .c (tedy např.: "hello.c"). Na konci souboru musí být minimálně jeden prázdný řádek a soubor nesmí končit v otevřeném komentáři tedy např.: "/*Za touto vetou bude konec souboru". Jinak kompilátor (nebo spíše preprocesor) nahlásí chybu.
+
+
+===== Rozbor prvního programu =====
+Po kompilaci a spuštění tohoto programu začne počítač vykonávat naše příkazy tak, jak jsou napsány ze shora dolů, z leva do prava. Teď si ukážeme co program udělá krok za krokem, řádek po řádku:
+
+  #include <stdio.h>
+To není příkaz, který by se prováděl při spuštění programu, ale ještě před kompilací. Jde o tzv. "direktivu preprocesoru" (začínají # - křížkem), preprocesor je program, který připraví náš kód pro kompilátor (odstraní nepotřebné mezery, prázdné řádky, rozvine makra,...). Direktiva preprocesoru #include <soubor> způsobí to, že bude nahrazena obsahem souboru "soubor", čili na začítek našeho programu se vloží soubor stdio.h, který obsahuje především funkce na práci s příkazovým řádkem a soubory. Pokud je jméno souboru ve špičatých závorkách (#include <soubor>), hledá se soubor v adresáři pro hlavičkové soubory, který je součástí kompilátoru, pokud bychom napsali jméno souboru mezi uvozovky (#include "soubor"), preprocesor by hledal soubor ve stejném adresáři, jako se nachází náš program.
+
+  int main(int argc,char *argv[]) { /*Nase prikazy...*/ }
+Toto je deklarace funkce main, funkce main je první funkce, která je zavolána po spuštění programu, jinými slovy příkazy uvedené ve složených závorkách ({}) budou provedeny neprodleně po spuštění našeho programu. Klíčové slovo "int" před jménem funkce říká, že funkce vrací integer (tedy celé číslo). Dvě proměnné nadeklarované v závorkách za jménem funkce (int argc, char *argv[]) se používají k získání parametrů od našeho OS, jde o argumenty z příkazové řádky (nebo třeba jména souborů přetažená na ikonku našeho programu). přičemž celé číslo argc obsahuje počet parametrů a pole řetězců (polí znaků) argv[] obsahuje text těchto argumentů.
+
+  /* Komentáře */
+Vše, co je umístěno mezi /* a */ (v našem příkladu můžete vidět zdobnější zápis s hvězdičkou na každé řádce, to zůstává na fantazii programátora...) bude ignorováno, můžeme to tedy použít pro popisování našich programů (to je velmi důležité, jinak se v našem programu ztratíme). Také můžeme použít komentář pomocí // , kdy vše od // až do konce řádku je ignorováno.
+
+  printf("hello, world\n");
+Tento řádek vypíše na obrazovku text "hello, world" a přejde na nový řádek ("\n" značí newline dle zvyku na vašem OS, tj. ekvivalent enteru). Funkce printf() je nadefinovaná v souboru stdio.h (viz. výše) a jako první parametr přijímá text, který chceme vypsat, nebo formátovací řetězec. Tímto prvním argumentem je vždy řetězec (např. text v uvozovkách). Pokud bychom chtěli vypsat uvozovku, musíme použít \" pokud lomítko, tak \\ a pokud znam procenta, tak %%. Všiměte si, že deklarace, definice a volání funkce (náš případ) musí končit středníkem (;), nikoli však novým řádkem, stačí mezera, nebo tabelátor.
+
+  return(0);
+Jde opět o volání funkce. Funkce return() (jména funkcí píšeme standartně s () na konci, aby bylo na první pohled jasné, že jde o funkci) způsobí to, že je funkcí, ze které je zavolána (v našem případě main()), vrácena hodnota zadaná jako první parametr této funkce return(). Pokud toto zavoláme z funkce main, znamená to pro nás ukončení programu s návratovou hodnotou 0. Návratové hodnoty jsou čísla (int main(), tedy funkce main() je typu integer == celé číslo), které programy předávají operačnímu systému po skončení, aby měl přehled o úspěšnosti vykonání programu (0 znamená bez chyby a obecně pak platí, že čím vyšší číslo, tím horší chyba).
+
+Pokud program dojde na konec kódu funkce, je automaticky navrácena hodnota 0, pokud to není změněno pomocí funkce return();
+
+
+===== Co budeme potřebovat pro psaní a spuštění programů v C =====
+V první řadě budeme potřebovat plaintextový editor (jsme začátečníci a budeme tedy raději konzervativní, takže kódovani utf-8, nebo cp-1250, raději žédné wide-chary a už vůbec ne textové editory typu Word!!!). Naopak se nám hodí editor se zvýrazněnou syntaxí a jinými "vychytávkami", které nám mnohonásobně usnadní psaní kódu a například nám i napovídá, jeden z nejlepších nejuniverzálnějších editorů je SciTe (na enginu Scintilla).
+
+Můžeme použít například editory dostupné pro náš OS
+Microsoft:
+  * SciTe (doporučuji)
+  * PSPad (nedoporučuji)
+  * notepad
+Unixy:
+  * SciTe (doporučuji)
+  * nano (doporučuji pro příkazový řádek)
+  * mcedit (balíček mc)
+  * vim
+
+Potom budeme také potřebovat program, který převede námi psaný a čitelný strojový kód na strojový kód tj. procesorem čitelné instrukce (ty se ukládají v binárním spustitelné souboru čitelném operačním systémem). A samozřejmě standartní knihovny ANSI C (verzi pro vývojáře).
+
+Na platformách od Microsoftu to znamená instalci jednoho z těchto balíčků
+  * MinGW (gcc, g++) - (doporučuji)
+  * Borland C Compiler
+
+Na Unixových platformách pak pravděpodobně potřebujeme tyto balíčky
+  * gcc
+  * g++ (pokud máme zájem také o C++)
+  * libc-dev (poslední verze)
+
+Nebo můžeme sáhnout po celých IDE (Integrované vývojové prostředí)
+Jde o jakýsi balíček Vše-V-Jednom. To v praxi znamená potřebný editor uživatelsky přívětivě spolupracující s kompilátorem, jinými slovy nainstalujeme jeden balíček programů místo všech výše zmíněných.
+
+Ze všech IDE pro Unixy i MS systémy je pro nás nejvýhodnější multiplatformní IDE Dev-C++ (dev-cpp) - (doporučuji).
+Pro jednotlivé systémy existují samozřejmě i další IDE:
+
+Na Windows máme např.
+  * C++ Builder
+  * Microsoft Visual Studio (nebo Visual C++)
+
+Na Unixech pak stojí za zmínku
+  * Eclipse (s pluginem pro C)
+  * NetBeans (s pluginem pro C)
+  * Anjuta
+  * KDevelop
+
+
+
+=====  Samostatné cvičení =====
+  * Vyberte si jedno z freewarových řešení dle výběru vyučujícího (Dev-C++, nebo SciTe s gcc/g++).
+  * Vyhledejte si ho pomocí Googlu, stáhněte a nainstalujte ho na váš počítač.
+  * Vyzkoušejte si kompilaci a spuštění našeho prvního programu (Hello, world!).
+  * Vyzkoušejte si práci s editorem, zvýraznění syntaxe a případně automatické dokončování kódu.
+  * Pokuste se náš program zkompilovat podruhé, ale v kódu změňte text, který se bude vypisovat na obrazovku.
+
+Následující body platí i pro všechna budoucí cvičení:
+  * Veškeré problémy se pokuste vyřešit nejdříve pomocí Googlu, případně pomocí manuálu dodaného s produktem.
+  * V případě neúspěchu se obraťte na vyučujícího.

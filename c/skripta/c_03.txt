@@ -1,0 +1,101 @@
+====== Datové typy, deklarace, identifikátory, přiřazení, inicializace, definice ======
+Jazyk C disponuje několika základními datovými typy, jiné si můžeme vytvořit sami. Datový typ v praxi popisuje formát nějaké hodnoty, která vyžaduje alokaci předem daného místa v paměti (většinou měříme v bytech), na to se ukládá požadovaná hodnota (samozřejmě binárně), které přísluší (což není úplně tak závazné) konkrétní interpretace (logická hodnota, číslo, znak, text).
+
+
+===== Základní jednoduché datové typy =====
+Celočíselné
+  * char	- 1B
+  * short	- 2B
+  * int		- 2B
+  * long	- 4B
+
+S Plovoucí desetinnou čárkou
+  * float	- 4B
+  * double	- 8B
+  * long double	- 10B
+
+//pozn.: Hodnoty se mohou lišit podle konkrétní implementace (kompilátoru). Velikost konkrétního typu v bytech získáte také pomocí makra preprocesoru sizeof(), tedy např sizeof(char) bude nahrazeno číslem 1.//
+
+Například datový typ char má velikost 1B, to odpovídá 256ti možným kombinacím, standartně jednoduché datové typy počítají s možností uložení záporného čísla, takže např. char může dosahovat hodnot -128 až 127, podobné je to se všemi jednoduchými typy.
+
+Pokud ale nechceme zbytečně alokovat (zabírat) paměť pro záporná čísla, když víme, že toho nevyužijeme, můžeme použít operátoru "unsigned" (česky "bez znaménka"), tím docílíme toho, že se rozsah všech možných hodnot našeho typu "posune" na 0 a výše. Např. tedy datový typ "unsigned char" může nést hodnotu 0 až 255 tj. nějaký libovolný byte.
+
+
+===== Deklarace, identifikátory =====
+Takže ve zkratce známe několik důležitých datových typů a určitě nás zajímá jejich využití. První možností je, jak již bylo naznačeno, ukládání informací do paměti. Abychom mohli ukládat data do paměti, musíme si nejprve vytvořit proměnnou (staticky-na pevno alokovat část paměti), toho docílíme jednoduchým kusem kódu, vše ostatní už vyřeší kompilátor.
+
+Této proceduře se říká "deklarace", to znamená, že v paměti zabereme místo a přiřadíme mu "identifikátor" (jméno), který budeme pokaždé používat při práci s tímto prostorem v paměti (to není podmínkou, identifikátoru je totiž přiřazena nějaká konkrétní adresa v paměti, ale o tom až v pokračování pro pokročilé).
+
+Identifikátory mohou sice obsahovat různé znaky, my se ale zatím budeme držet malých písmen (v případě potřeby lze několik slov oddělit např. podtržítkem ("_")), to nám musí stačit, také se můžeme držet některých tradic (znaky začínájí na "c" ("cmuj_znak"), proměnné používané k řízení cyklů se většinou označují pouze "i" - může nám stačit pro celý jednodušší program bez vnořených cyklů, atd...)
+
+A takto proběhne deklarace z pohledu programátora:
+  datovy_typ identifikator[, dalsi_identifikator, ...]; //Deklarace konci strednikem
+
+Takže pokud například potřebujeme tři proměné, pro uložení hodnot 0 - 4 294 967 295, použijeme tuto konstrukci:
+  unsigned int moje_cislo, moje_dalsi_cislo, moje_posledni_cislo;
+
+Pozor ovšem na redeklaraci - tj. pokus o opětovnou deklaraci/definici libovolné proměnné, funkce, nebo čehokoli jiného, jejíž identifikátor je již používán, to je chyba, která většinou zkončí chybou překladače (kompilátoru).
+
+
+===== Přiřazení, inicializace =====
+Přiřazení je operace, která na danou adresu ukládá námi vybraná data, probíhá pomocí operátoru rovnítko ("=") levé a pravé hodnoty (l-hodnota, r-hodnota - od left, right).
+
+Obecný zápis je tento:
+  l-hodnota = r-hodnota; //I prirazeni opet konci strednikem
+
+L-hodnota je v levo, tj. cíl přiřazení, r-hodnota je v pravo, tj hodnota přiřazení, po úspěšném přiřazení platí, že se l-hodnota rovná r-hodnotě.
+Pokud bychom tedy do námi deklarované proměnné moje_cislo chtěli přiřadit hodnotu 5, postupujeme takto:
+  moje_cislo = 5;
+
+Pokud je hodnota do proměnné jednou přiřazena, lze ji samozřejmě přepsat jinou (až na vyjímky, o tom později...).
+
+Pokud je to poprvé, co do nově nadeklarované proměnné přiřazujeme hodnotu, takovému přiřazení říkáme také inicializace.
+
+
+===== Definice =====
+Definice je výraz pro inicializaci provedenou zároveň při deklaraci (nebudeme polemizovat o rozdílu slov deklarace a definice z pohledu českého jazyka...).
+
+Zápis definice je tento:
+  datovy_typ identifikator = nova_hodnota[, dalsi_identifikator = nova_hodnota, ...]; //Samozrejme strednik
+
+Konkretne napriklad takto:
+  unsigned char pocet_psu = 10;
+
+Ovšem zde se naskytuje další možnost udělat chybu a to je redeklarace:
+  unsigned char pocet_psu = 10;
+  unsigned char pocet_psu = 11; //Chybne pridani jednoho psa - pokus o redeklaraci!
+Spravny zapis je samozřejmě tento:
+  unsigned char pocet_psu = 10; //Definice
+  pocet_psu = 11; //Spravne pridani jednoho psa - pouze prirazeni
+
+
+====== Funkce printf() podrobněji ======
+funkce printf nabízí kromě výpisu textu tak, jak je zadán do jejího parametru také možnost výpisu obsahu proměnných.
+Pokud bychom například chtěli vypsat proměnné pocet_psu a pocet_kocek, docilime toho timpo zpusobem:
+
+  printf("Pocet psu: %d\nPocet kocek: %d\n", pocet_psu, pocet_kocek); //Ansi-C funkce ze stdio.h - Nezapomeneme na #include <stdio.h>!!!
+
+Symbol %d bude nahrazen číslem načteným z naší proměnné, s každým podobným operátorem přibyde funkci printf() jeden povinný parametr, tzn., že pokud je v našem řetězi dvakrát "%d", musíme kromě prvního parametru (tzv. formátovacího řetězce) specifikovat ještě další dva parametry, tj. např. dvě proměnné v požadovaném pořadí.
+
+Tady je seznam všech nejdůležitějších operátorů pro formátovací řetězec funkce printf:
+
+Pro čísla typu int
+  * %d - vypíše číslo dekadicky
+  * %u - vypíše číslo dekadicky neznaménkově (unsigned)
+  * %x - vypíše číslo hexadecimálně malými písmenky
+  * %X - vypíše číslo hexadecimálně velkými písmenky
+  * %o - vypíše číslo oktálně
+
+Pro ostatní typy
+  * %ld - vypíše číslo typu long dekadicky
+  * %f  - vypíše číslo typu float dekadicky
+  * %Lf - vypíše číslo typu long double dekadicky
+
+Pro pole
+  * %s - vypíše řetězec (tomu se budeme věnovat později)
+
+
+===== Samostatné cvičení =====
+  * Co vypíše následující příkaz?:
+    * <code c>printf("Pocet psu: %d\nPocet kocek: %d\n", 34, 5);</code>
+  * Napište a zkompilujte program, který na začátku deklaruje jednu proměnnou a druhou definuje libovolným celým číslem, první proměnnou inicializujte také libovolným číslem. Pro obě proměnné si zvolte příslušné (a paměťově výhodné) datové typy. Nakonec pomocí příkazu printf() vypište na monitor tato čísla desítkově i šestnáctkově, ve formátovacím řetězci použijte několik přechodů na novou řádku, vtipný text a ještě vypište jedno číslo specifikované konstantou přímo jako argument funkce printf(). Smíte použít pouze jediné volání funkce printf(). Celý zdrojový kód progamu vhodně okomentujte.

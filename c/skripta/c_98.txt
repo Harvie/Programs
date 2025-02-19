@@ -1,0 +1,41 @@
+====== Vysvětlivky ======
+<code>
+Akronym - Zkratka vzniklá spojením počátečních písmen slov ve slovním spojení, nebo větě.
+BFU - Běžný Franta Uživatel - slangové ozn. pro uživatele bez hlubších znalostí, pravděpodobně to jednou bude váš typický uživatel. Aplikace je nutno přizpůsobovat těmto uživatelům.
+CLI - Command Line Interface - Akronym pro příkazový řádek.
+IDE - Integrated developing environment - Integrované vývojové prostředí - Zkládá se především z editoru a kompilátoru (případně může obsahovat debugger nebo GUIBuilder).
+UI - User Interface - Uživatelské rozhraní - rozhraní, pomocí kterého uživatel komunikuje s aplikací.
+GUI - Graphical User Interface - Specifický druh UI využívající grafiku (většinou tzv. okenní aplikace).
+C - Programovací jazyk.
+Ansi C - Americká norma popisující konvence, které musí dodržet kompilátor. Používá se zároveň i jako označení současné verze jazyka C.
+C++ - Programovací jazyk vycházející z jazyka C. Byl rozšířen především o podporu objektů.
+Decimální - Desítkový
+HexaDecimální - Šestnáctkový
+Binární - Dvojkový
+Oktální - Osmičkový
+Preprocesor kompilátoru - Program, který připravuje zdrojový kód pro kompilátor (maže nepotřebné mezery, komentáře, atd...).
+Kompilátor - Program, který převádí zdrojový kód na binární objektový kód.
+Assembler - Jazyk symbolických adres. Programovací jazyk využívající přímo instrukce procesoru (jen zapsané čitelnější formou).
+Linker - Program vytvářející spustitelný soubor z objektového kódu vytvořeného při kompilaci.
+</code>
+====== Prameny ======
+Tady naleznete seznam zdrojů, které sem (kromě svých vlastních znalostí) použil k napsání těchto skript a které vám důrazně doporučuji si pročíst, nebo je prohledávat při nejasnostech ohledně Ansi C, nebo C jako takového.
+
+Povinná četba každého Céčkaře
+  * Pavel Herout - Učebnice Jazyka C (Kopp) - I. a II. díl
+  * Jon Erickson - Hacking: umění exploitace (Zoner press)
+
+Knihovní funkce Ansi C
+  * http://www.java2s.com/Code/C/CatalogC.htm - Seznam standartizovaných funkcí s popisem
+  * http://dione.zcu.cz/studium/doc/lang/ansi-c/ - Západočeská univerzita - seznam funkcí se syntaxí
+  * http://www.sallyx.org/ - Několik pěkných článků o C
+  * http://www.soom.cz/index.php?name=articles/rubrika&sid=3 - Různé články o C pro začátečníky
+
+Všeobecné informace
+  * cs.wikipedia.org
+  * en.wikipedia.org
+
+Všechno ostatní
+ * google.com
+   * Existují pokročilé techniky googlování, které vám pomohou snázeji najít to, co skutečně hledáte
+

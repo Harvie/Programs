@@ -1,0 +1,49 @@
+====== Dynamická pole ======
+V této kapitole si představíme způsob, kterým můžeme pracovat s polem alokovaným až za běhu programu.
+
+===== Alokace =====
+Na následujícím příkladu si ukážeme, jak je to doopravdy s definicí (nebo deklarací) polí.
+
+<code c>
+unsigned char static[10];
+unsigned char *dynamic;
+</code>
+
+V obou případech vytvoříme pointer na char (případně pole), jediný rozdíl je v tom, že static je konstanta, kterou nelze měnit a obsahuje pointer na již alokované místo v paměti (to se alokovalo při definici), ale dynamic neobsahuje nic (resp. není inicializovaný) a nealokuje žádné místo (alokuje pouze místo pro sebe).
+
+Takže když chceme dynamic začít používat stejně jako static, stačí nám použít tento zápis:
+
+<code c>
+unsigned char static[10];
+unsigned char *dynamic; //Deklarace pointeru na char (případně pole charů)
+
+dynamic = malloc(10); //Alokujeme 10 bytů a pointer na ně přiřadíme do pole
+if(!dynamic) {
+	printf("Nelze alokovat paměť!\n");
+	exit(1);
+}
+</code>
+
+Nyní můžeme k oběma polím přistupovat následujícím způsobem:
+
+<code c>
+static[3] = 'a';
+dynamic[3] = 'a';
+
+*(static + 3 * sizeof(char)) = 'a';
+*(dynamic + 3 * sizeof(char)) = 'a';
+</code>
+
+Jak vidíte, k oběma polím (jak statickému tak dynamickému) můžeme přistupovat naprosto totožným způsobem, tedy pomocí operátoru [], který (jak jsme nyní zjistili) také zahrnuje dereferenci, nebo pomocí čistě dereferenčního operátoru a pointerové aritmetiky.
+
+===== Pokročilé postupy =====
+Pokud potřebujeme pole o proměnné velikosti, tak jediným možným způsobem zůstává vždy alokovat nové pole (o jiné velikosti) a stará data do něj v cyklu přetáhnout. Je samozřejmě vhodné staré pole uvolnit (pomocí free()).
+
+===== Přetečení bufferu =====
+Dobré je také vědět, že pokud načítáme jakákoli data od uživatele (např. z argumentů, klávesnice, sítě nebo souboru) a chceme je uložit do pole (např. řetězce), musíme pohlídat, aby data nepřetekla nad velikost pole, v takovém případě by mohlo dojít k pádu programu pokud by programu byl předán příliš dlouhý řetězec, nebo dokonce zápisu nebezpečného kódu na významná místa v paměti, pokud by se někdo pokusil program napadnout záměrně. Je tedy nutné si hlídat, jestli nepřekračujeme maximální offsety pole.
+
+
+===== Samostatná cvičení =====
+  * Napište program, který dokáže do statického pole načíst z klávesnice libovolný řetězec tak, aby nebyla přesažena velikost pole. Nezapomeňte na to, že poslední znak pole musí být nulový.
+  * Vytvořte obdobu předchozího programu, s tím, že se pole alokuje dynamicky.
+  * Zkuste napsat program tak, aby zvládl načíst libovolně dlouhý řetězec do pole o proměnné velikosti.

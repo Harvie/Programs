@@ -1,0 +1,90 @@
+====== Standartní vstup a výstup ======
+
+===== Řádkový výstup =====
+Již jsme se seznámili s použitím funkce printf(), další užitečnou funkcí je putchar(), která vypíše jeden znak/byte.
+
+==== Vstup ====
+Samozřejmě budeme potřebovat také odezvu ze strany uživatele, k tomu nám budou sloužit funkce scanf(), která je opakem printf() a getchar(), která je opakem putchar().
+
+Funkce getchar() nám vrací ASCII hodnotu jediného načteného znaku.
+
+Funkce scanf() nám oproti tomu zapíše získaná data na danou adresu v paměti, to nebudeme hlouběji rozebírat, důležité ale je, že před identifikátor proměnné musíme napsat operátor ampersand ("&"). Pokud tedy budeme například chtít načíst z klávesnice desítkové číslo, použijeme tento zápis:
+
+<code c>
+  int a;
+  scanf("%d", &a);
+</code>
+
+==== Převod řetězce na číslo ====
+Často potřebujeme, aby nám uživatel zadal číslo, z terminálu můžeme číst ale pouze znaky (případně řetězce). Naštěstí pro nás existují v Ansi C funkce, které nám dovolí uskutečnit tento převod, jsou to tyto:
+
+  * atoi() - ascii to int
+  * atol() - ascii to long
+  * atof() - ascii to float
+
+
+==== Souhrnné příklady ====
+
+<code c>
+  char text[] = "Toto je nějaký text";
+  int cislo = 5;
+  printf("Toto je text: %s a tohle cislo: %d\n", text); //Vypíše: Toto je text: Toto je nějaký text a tohle cislo: 5(a odřádkuje)
+
+  char ascii_cislo[] = "64";
+  cislo = atoi(ascii_cislo); //Priradi do promene cislo cislo urcene retezcem ascii_cislo[], tj.: 64.
+
+  char vstup[1024]; //Toto není příliš optimální řešení, protože se v něm skrývá bezpečnostní hrozba, nebo možnost kolapsu našeho programu, pokud uživatel zadá více jak 1024 znaků... My se tímto problémem ale zatím zabývat nebudeme, ovšem nutno poznamenat, že správné řešení by bylo úplně jiné.
+  int vstup_cislo;
+  scanf("%s", &vstup);
+  scanf("%d", &vstup_cislo);
+</code>
+
+==== Další převody ====
+Další velice používanou funkcí pro převody (např. čísla na řetězec) je sprintf().
+Tato funkce pracuje obdobně, jako printf() (kterou doufám již všichni známe), s tím rozdílem, že sprintf() přijímá ještě první argument, kterým je identifikátor řetězce, do kterého bude po zformátování výsledný řetězec uložen (printf() by ho jen vypsalo).
+
+
+==== Řešený příklad ====
+<file c calc.c>
+/* calc.c
+ * Napište program, který načte z řádky dvě čísla, sečte je a výsledek vypíše formou rovnice.
+ * K získání prvního celého čísla použijte přímo scanf(), druhé převeďte z řetězce získaného ze scanf() pomocí atoi().
+ * Program zkompilujte a otestujte.
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+	char a[10];
+	int x, y;
+	printf("Prvni scitanec: ");
+	scanf("%d", &x); //Prvni cislo nacteme rovnou jako dekadickou hodnotu
+
+	printf("Druhy scitanec: ");
+	scanf("%s", &a); //Do retezce a ulozime ascii zapis cisla (pismenka) z klavesnice
+	y = atoi(a); //Do integeru y ulozime cislo ziskane z retezce a
+
+	printf("Vysledek: %d+%d = %d\n", x, y, (x+y)); //Vypiseme vysledek
+}
+</file>
+
+Například takto vypadá program za běhu:
+  harvie@harvie-ntb:~/Desktop/skripta/c$ gcc calc.c -o calc -std=c99 && chmod +x calc #kompilace
+  harvie@harvie-ntb:~/Desktop/skripta/c$ ./calc #spusteni
+  Prvni scitanec: 2
+  Druhy scitanec: 3
+  Vysledek: 2+3 = 5
+  harvie@harvie-ntb:~/Desktop/skripta/c$
+
+
+==== Přesměrování vstupu a výstupu ====
+Zjistěte si, jakým způsobem umí váš operační systém přesměrovávat vstup a výstup do souborů a ze souborů, tak aby se výstup programu nevypsal na obrazovaku, ale do souboru, nebo naopak se vstup načetl ze souboru, nebo byl výstup přesměrován na vstup jiného programu. (většinou k tomu slouží operátory příkazového řádku >,>>,<,|). 
+
+Kromě použití operátorů příkazové řádky tohoto také můžeme docílit pomocí funkce freopen() aplikované na handly stdin, stdout, nebo stderr, to ale pro nás není zatím nutné umět.
+
+
+==== Samostatná cvičení ====
+  * Upravte program tak, aby fungoval nad desetinými čísly (float)
+  * Předchozí program upravte tak, aby po spuštění vypsal 3 očíslované možnosti a podle zadaného čísla buď sčítal, odčítal, nebo násobil.
+

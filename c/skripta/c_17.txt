@@ -1,0 +1,98 @@
+====== Spouštění externích programů ======
+Tato kapitola by měla nastínit, jakým způsobem je možné zavolat externí program (příkaz), stejně, jako byste ho třeba napsali do příkazové řádky.
+
+===== Funkce system() =====
+Funkce system() dokáže spustit příkaz a to dokonce s využitím operátorl příkazového interpretu (např.: <,>,>>,|), ten jí předáme jako obyčejný řetězec, tedy například system("ls");, s tím, že výstup tohoto příkazu bude vypsán na obrazovku.
+
+Samozřejmě si musíme uvědomit, že ve chvíli, kdy použijeme podobné volání externího programu, se náš (relativně přenositelný) program stává závislý na existenci daného příkazu na cílové platformě. Tedy například pokud budeme chtít uživateli zobrazit seznam souborů voláním příkazu "ls", program nám bude bezproblémově fungovat na většině UNIXových systémů naopak na Windows bychom museli tento příkaz změnit na "dir".
+
+V případě, že je nezbytně nutné volat externí programy, je dobré na začátku programu nadefinovat symbolické konstanty s cestou k tomuto programu, nebo příkazy například načítat z nějakého konfiguračního souboru, který se bude pro každou platformu lišit, také je možné aby náš program nějakým způsobem automaticky ověřoval, jestli program existuje, nebo třeba od někud zjistil, na jaké běží platformě a podle toho se zařídil.
+
+===== Další funkce pro práci s externími programy =====
+Existuje spousta dalších funkcí, které vám umožní pokročilejší práci se spustitelnými soubory, jako je například nahrazení našeho programu v paměti jiným, spuštění na pozadí, otevření procesu jako souboru a čtení a zápis dat na jeho I/O.
+
+====== Práce s proměnnými prostředí ======
+Proměnné prostředí jsou proměnné, které nám poskytuje program, který náš program spouští (většinou příkazový řádek, nebo grafické prostředí). Tyto proměnné jsou nahrány do paměti našeho programu spolu s jeho kódem.
+
+Typickou proměnnou prostředí je "PATH", proměnná, ve které jsou uložené cesty k adresářům, ve kterých se hledá program, který se pokoušíme spustit, pokud není nalezen v aktuálním adresáři. Pokud vás zajímá, jaké další proměnné váš OS běžně poskytuje, zkuste si příkazy export na UNIXech, nebo set na Windows, pomocí těchto příkazů lze také nastavit nové proměnné, nebo změnit stávající. Existuje funkce getenv(), která nám vrátí pointer na danou proměnnou. Následující příklad ukazuje, jak vytisknout námi zvolenou proměnnou prostředí:
+
+<file c getenv-path.c>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main ()
+{
+  char *p;
+  p = getenv( "PATH" );
+  if (p != NULL) printf ("PATH: %s", p);
+}
+</file>
+
+====== Větvení procesu, paralelní zpracování programu ======
+===== Funkce fork() =====
+Pokud potřebujeme v našem programu opustit lineární řízení, jinak řečeno - dělat dvě (a více) věcí najednou. Můžeme pomocí systémového volání fork() vytvořit dokonalou kopii procesu našeho programu, která se bude lišit pouze tím, že návratová hodnota fork() v ní bude 0 a samozřejmě bude mít jiné PID (identifikační číslo procesu). Volání fork() (neboli větvení) je výsadou pouze UNIXových (a samozřejmě UNIX-Like) systémů a na MS Windows bychom podobnou věc museli řešit jinak a daleko složitěji.
+
+Abych vás nenapínal, tady je první příklad:
+
+<code c>
+int main() {
+	if(fork()) return;
+	/* Tento kod se bude jiz provadet na pozadi... */
+	sleep(10);
+	printf("BAF!\n");
+}
+</code>
+
+V našem případě jsem zavolali fork() hned na začátku programu, tím se vytvořili kopii našeho procesu, v originále se návratová hodnota volání fork() rovnala 1, to jsme ověřili podmínkou, takže v prvním procesu se nám vykonal return() a tím pádem se první proces zavřel. Máme tedy nový proces, který ovšem není tak pevně svázán s naší příkazovou řádkou a ta se tedy uvolní (a budeme moci normálně dále pracovat a spouštět další programy). Protože se nám ale v procesu nakopírovalo číslo file deskriptoru (ukazatele na soubor), pomocí kterého se dá vypisovat do konzole (na STDOUT), může náš tak trochu záškodnický program na pozadí za 10 sekund vypsat nic netušícímu uživateli "BAF!" a to klidně doprostřed výpisu jiného programu (podobně, jako se vám třeba v BASHi můžou vypisovat oznámení o nových mailech).
+
+Spuštění programu na pozadí je ale pouze začátkem toho, co fork() doopravdy umí. Podívejme se na následující kód.:
+
+<code c>
+	/* nejaky kod */
+	if(!fork()) {
+		udelej_neco();
+		return;
+	}
+	/* dalsi kod */
+</code>
+
+V tomto případě se zavolá na pozadí pouze funkce udelej_neco() a program bude ihned pokračovat dále. Typickým příkladem může být stahování nějakého velkého souboru (nebo více souborů) z webového serveru (pro zjednodušení jsem použil externí program wget volaný pomocí system()):
+
+<file c fork.c>
+#include <stdio.h>
+
+int main() {
+	if(!fork()) { system("wget http://server/soubor1"); return; }
+	if(!fork()) { system("wget http://server/soubor2"); return; }
+	if(!fork()) { system("wget http://server/soubor3"); return; }
+	if(!fork()) { system("wget http://server/soubor4"); return; }
+	return;
+}
+</file>
+
+Tím docílíme toho, že se budou všechny 4 soubory stahovat najednou a ne jeden podruhém, jako kdybychom pouze 4x pod sebou zavolali system(). Díky tomu, že jsem do podmínky přidal vikřičník jsem si zajistil to, že se soubor bude stahovat v kopii a nikoli v originálním procesu. Původnímu procesu se říká parrent (rodič) a kopie se označuje jako child (dítě) i když v případě fork() jsou oba procesy spíše bratry či sestřičkami. Důležité je také to, že po stažení souboru zavoláme return(), protože kdybychom to neudělali, tak by se každý soubor mohl stáhnout vícekrát, protože se náš program v paměti zkopíroval i s tím, co má dělat potom.
+
+Stinnou stránkou celé věci je to, že jednotlivé procesy se nemohou vzájemně příliš dorozumívat, musíme pak přistoupit k použití prostředků jako jsou soubory, pojmenované pajpy (fifo roury), unix domain sockety a nebo dokonce síťové sockety.
+
+Další věcí je, že náš program bude velmi těžkopádný, pokud budeme používat fork() ve větším měřítku, například pokud bychom psali webový (nebo jiný) server, tak musíme obsluhovat více uživatelů najednou. Pokud bychom ale na každého uživatele vytvořili jednu kopii procesu, může se nám stát, že nám brzo začnou docházet systémové prostředky (mluvíme o serverech s ~100 requesty najednou), pokud nám nedojdou hardwarové prostředky, tak se nám zaplní process table (vyčerpáme maximální počet procesů povolený operačním systémem), proto je lepší počet 'forků' omezit a ještě lépe používat thready (viz. dále).
+
+Pro zájemce: Existuje lokální DoS útok pojmenovaný ForkBomb, který způsobí zaplnění tabulky procesů a vede neodvratně k zamrznutí systému, protože nelze vytvořit žádný nový proces, nemůžeme ani spustit program, který by útok ukončil. Uvádím to proto, že k podobné věci může dojít pokud někde voláme fork() v cyklu (např. potřebujeme n podprocesů) a omylem vytvoříme nekonečnou smyčku.
+
+Např. takto:
+
+  while(1) fork();
+
+Na UNIXových systémech se dá proti nečekané chybě bránit tím, že nastavíme limit počtu procesů pro každého uživatele, v případě podobného výmrzu můžeme jako jiný uživatel (typicky root) procesy pozabíjet. Na Windows proti této chybě takřka není ochrana. A ačkoli v jádře systému Windows nic jako fork() neexistuje, může nastat podobný problém, pokud se nám omylem podaří to, že jeden program neustále spouští sám sebe.
+
+===== Thready =====
+Další možností jak může náš program dělat více věcí najednou jsou takzvané thready (vlákna) ty se od forku liší v tom, že nejde o kopii procesu, ale jeho součást. Thread je tím pádem jakýsi podřadný proces. Narozdíl od forku existují thready i na Windows. Další výhodou je, že thready mohou dále komunikovat se zbytkem procesu, například pomocí globálních proměnných (například proměnné deklarované mimo funkci main()), potom je ale třeba hlídat, aby se dva thready nepokusily zapisovat do stejné proměnné (== stejného místa v paměti), potom by mohlo dojít k poškození těchto společných dat. K tomu se používá tzv. synchronizace threadů. Práce s thready už je ale složitější a proto si ji zde nebudeme ukazovat...
+
+
+===== Samostatná cvičení =====
+  * Napište program, který vypíše, na jakém místě se v paměti nachází proměnná prostředí, jejíž název byl zadán jako parametr.
+  * Napište program, který vezme všechny argumenty (kromě prvního), spojí je do jednoho řetězce (oddělené mezerami) a výslednou větu vytiskne orámovanou znakem (případně prvním znakem řetězce), který je udaný prvním argumentem (vlevo a vpravo bude jeden znak mezera). Výsledný výstup pak mže vypadat napříkad takto:
+
+  ./ramecek * "Ahoj lidi," jak\ se máte?
+  ***************************
+  * Ahoj lidi, jak se máte? *
+  ***************************

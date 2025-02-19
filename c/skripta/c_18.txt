@@ -1,0 +1,73 @@
+====== Práce se soubory ======
+Doteď jsme naše data ukládali jen do paměti RAM. O všechna data uložená v  paměti RAM přijdeme v okamžiku ukončení programu, nebo vypnutí počítače. To nemusí bý vždy postačující a můžeme chtít svoje data uložit nějakým trvanlivějším způsobem, ideálním řešením bude jejich zapsání na pevný disk, konkrétně do souboru.
+
+Klasickým příkladem práce se soubory je jednoduchý tetový editor (nano, gedit, SciTE, notepad, atd...). Takový editor při svém spuštění načte zvolený soubor do paměti, kde s ním může uživatel pracovat a před svým ukončením tato data z paměti uloží i s úpravami zpět do souboru na příslušném paměťovém médiu.
+
+Ovšem si pamatujte, že problematika základní práce se soubory je mnohem komplikovanější, než jak je zde popsána a pokud máte zájem, doporučuji si projít odkazy na konci této publikace.
+
+===== Otevření souboru =====
+Abychom mohli pracovat se souborem, musíme ho nejdříve otevřít. Se soubory se dá pracovat například pomocí tzv. file deskriptorů, neo také ukazatelů (je to podobné, jako nám již známé pointery, s tím rozdílem, že neukazují na disk, ale obsahují číslo, které operační systém tomuto souboru přiřadil a podle kterého ho dále rozlišuje). Funkce na práci se soubory opět zpřístupníme vložením hlavičkového souboru <stdio.h>.
+
+Jak tedy takové otevření a čtení ze souboru funguje, to pochopíte z následujícího kusu kódu:
+
+<code c>
+FILE *fp; //Nadeklarujeme deskriptor fp
+fp = fopen("soubor.txt", "r"); //Otevíráme "soubor.txt" v režimu "r", tedy "pro čtení"
+if(fp == NULL) { //Osetrime chyby (napr. soubor neexistuje, nebo nemame prava pro cteni)
+	printf("Nepodarilo se otevrit soubor!\n");
+	exit(1);
+}
+
+char retezec[101];
+fgets(retezec , 100, fp); //Nacteme 100 bytů (znaků) z fp do retezce retezec
+puts(retezec); //Vytiskneme tento retezec na obrazovku
+
+fclose(fp); //Zavreme soubor
+</code>
+
+A tady je například správný postup, jak vypsat celý soubor znak po znaku na obrazovku, všimněte si, že každý znak po celou dobu porovnávám s konstantou EOF, v případě, že jí odpovídá, znamená to, že je soubor na konci (EOF znamená End Of File):
+
+<code c>
+int c;
+while((c = fgetc(fp)) != EOF) putc(c);
+</code>
+
+===== Režimy fopen() =====
+Když pomocí fopen() otevíráme soubor, můžeme ho otevřít celkem asi v 9ti režimech. Toto jsou 3 základní:
+
+  * "r" - read - čtení
+  * "w" - write - zápis
+  * "a" - append - zápis (přidání) na konec
+
+Ke každému režimu můžeme ještě připojit "b", tedy: "rb", "wb", "ab", to znamená, že se soubory bude zacházeno čistě po binární stránce, tedy že to, co do souboru zapíšete v něm určitě bude a naopak, že přečtete to, co v něm skutečně je. Bez písmenka b dochází k automatické konverzi tzv. line-end kódování, já nechci zabíhat příliš do podrobností, ale v zásadě jde o to, že každá skupina operačních systémů (UNIX + UNIX-like, Windows a staré MAC OSy) ukládají znak odřádkování (Enteru) jinak. Na linuxu je to jen LF, na Windows CR+LF a na starších MAC OSech je to LF+CR, pokud ale v C pracujeme se soubory v textovém režimu (bez "b"), tak s těmito odlišnostmi můžeme pracovat naprosto transparentně (tj. Enter je pokaždé "\n" nezávisle na systému). Pokud bychom ale například pracovali s nějakým binárním (např. spustitelný soubor, hudba, video), mohlo by takřka náhodné změnění některých bytů na jiné způsobit poměrně velké potíže, proto vždy pracujeme s binárními soubory jinak. U binárních souborů je také špatně, pokud je byte po bytu načítáme do charu, protože ačkoli char je datový typ o velikosti 1B, stejně nemohou být všechny hodnoty korektně interpretovány, proto k načítání bytů z bin. soubori použijeme integer.
+
+===== Funkce na čtení ze souboru ("r") =====
+  * fgetc(deskriptor);
+    * Vrati jeden byte (znak) ze souboru
+  * fgets(retezec, delka, deskriptor);
+    * Precte delka znaku do retezec
+  * fscanf(deskriptor, "%s", retezec);
+    * Precete radek do retezec
+
+===== Funkce na zápis do souboru ("w", "a") =====
+  * fputc(byte, deskriptor);
+    * Zapise byte do souboru
+  * fputs(retezec, deskriptor);
+    * Zapise retezec do souboru
+  * fprintf(deskriptor, format_retezec, dalsi argumenty);
+    * Jako printf(), ale zapisuje do souboru
+
+
+===== Předotevřené soubory =====
+Je dobré vědět, že v C jsou otevřené následující soubory, se kterými pracují funkce jako printf() a pod, když tisknou na obrazovku, nebo načítají z klávesnice, vy toho můžete využít tak, že je zpracujete pomocí funkcí na práci s normálními soubory, nebo je třeba zavřete pro potlačení výstupu. Pak je můžete dokonce opět otevřít a způsobit tak, že všechen výstup vašeho programu, který se normálně provádí na obrazovku bude místo toho uložen do vámi zvoleného souboru. Na druhou stranu nesmíme zapomenout na to, že už nelze zaručit, že znovu půjde otevřít tyto soubory do původního stavu, aby například opět vypisovali na obrazovku. Např. v Linuxu to možné je, v ostatních UNIX-like systémech asi také, ale s jinými takové zkušenost nemám. Na Windows to pravděpodobně možné nebude.
+
+  * stdout - "w" - stanartní výstup
+  * stderr - "w" - standartní chybový výstup
+  * stdin - "r" - standartní vstup
+
+
+===== Samostatná cvičení =====
+  * Napište program, který vypíše celý soubor (určený 1. argumentem) otevřený v textovém módu.
+  * Napište program, který binárně zapíše obsah souboru určeného 1. argumentem do souboru určeného druhým argumentem. Půjde o alternativu programu na kopírování souborů (cp, copy, atd...), tento program vyzkoušejte zkopírováním jiného spustitelného souboru, zvukového záznamu a videa, nebo jiného binárního souboru. Tyto kopie musí mít stejnou velikost a být funkční stejně jako jejich originály.
+  * Napište program, který znak po znaku přečte celý binární soubor a vypíše číselnou hodnotu každého znaku na nový řádek hexadecimálně, desítkově a binárně.
+  * Napište program, který na střídačku binárně čte byte po bytu ze dvou souborů a zapisuje do jednoho souboru. Pokud tedy 1. soubor bude obsahovat byty "AAAAA" a druhý "BBBBB", pak bude výsledný soubor obsahovat "ABABABABAB", potom napište program, který zvládne za byty správně rozdělit tak, aby byly soubory opět použitelné (stejně jako u kopírování).

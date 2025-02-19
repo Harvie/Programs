@@ -1,0 +1,56 @@
+       _                 _       ____
+      | | __ _ _____   _| | __  / ___|
+   _  | |/ _` |_  / | | | |/ / | |
+  | |_| | (_| |/ /| |_| |   <  | |___
+   \___/ \__,_/___|\__, |_|\_\  \____|
+                   |___/
+  
+  
+  	Jazyk C
+  	Základy praktického programování
+  
+  	V Praze 2oo7 pro SSPŠ
+  	Tomáš Harvie Mudruňka a kolektiv
+
+TODO mergnout adresare c a sbirka do wiki...
+
+====== Předmluva ======
+Tento text vznikl puvodne jako skripta pro Smíchovskou Střední Průmyslovou Školu, nyní ho v jeho vlastním zájmu chci publikovat na wiki, kde je volně k použití i k editaci...
+
+Skripta si nekladou za cil byt dokonalou referencni priruckou, ani wiki o jazyce C, ucelem je vytvorit ucebni texty pro jednotlive lekce kurzu programovani v jazyce C v rozsahu stravitelnem studenty stredni skoly.
+
+**Se skripty v celém rozsahu můžete zatím nakládat v souladu s licencí
+[[http://creativecommons.org/licenses/by-nc-sa/3.0/cz/|Creative Commons: Uveďte autora-Neužívejte dílo komerčně-Zachovejte licenci 3.0 Česko]]**
+
+Kromě plaintextové verze mám v plánu text vyexportovat také do následujících formátů
+  * PDF
+  * HTML
+  * nroff (manuálové stránky)
+
+//~~Tomáš Mudruňka~~//
+====== Rozpis lekcí ======
+
+
+  - [[c_00|Co bychom měli znát...]]
+  - [[c_01|Předmluva, Něco málo o C]]
+  - [[c_02|Hello World!]]
+  - [[c_03|Proměnné, printf()]]
+  - [[c_04|Výhody a nevýhody programování textových aplikací (Agitační materiál ;)]]
+  - [[c_05|Konstanty]]
+  - [[c_06|Základní operátory]]
+  - [[c_07|Standartní vstup a výstup]]
+  - [[c_08|Podmínky a cykly]]
+  - [[c_09|Statická pole]]
+  - [[c_10|Argumenty programu]]
+  - [[c_11|Preprocesor]]
+  - [[c_12|Funkce - úvod]]
+  - [[c_13|Funkce - pokračování, Globální proměnné]]
+  - [[c_14|Pointery]]
+  - [[c_15|Dynamická alokace paměti]]
+  - [[c_16|Dynamická pole]]
+  - [[c_17|Některé funkce OS]]
+  - [[c_18|Práce se soubory]]
+  - [[c_19|Napojení C na další systémy]]
+  - [[c_20|Zadání samostatné práce]] ->možno využít při suplování<-
+  - [[c_98|Odborné a slangové pojmy, Prameny]]
+

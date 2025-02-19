@@ -1,0 +1,13 @@
+====== Co bychom měli znát než začneme programovat ======
+  * Povinné
+    * 1B (byte) == 8b (bitů) + další základní výpočty s jednotkami informace/paměti
+    * základní práce s operačním systémem používaným k výuce
+    * práce s příkazovým řádkem (CLI) na tomto OS (procházení adresářů, mazání, přejmenování a kopírování souborů, nastavování práv pro spouštění, spouštění programů)
+    * základy programování z jiného jazyka (cokoli, v nejhorším případě alespoň nějaký značkovací jazyk, jako html, nebo BASIC, který se vyučuje u nás na škole)
+
+  * Nepovinné
+    * psaní na klávesnici (především umístění různých speciálních znaků)
+
+**Ohledně jakékoli nejasnosti ohledně čehokoli se prosím kdykoli informujte u vyučujícího ("když už tu teda trčíme...").**
+
+Také nezapomeňte připomenout svému lektorovi, aby nezapoměl, že nemá zapomenout vám ukázat doplňkové studijní materiály, připravil jsem si pro vás totiž zábavná videa a animace :-)

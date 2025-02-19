@@ -1,0 +1,75 @@
+====== Freestyle Coding Contest ======
+//Pozn.: Tato lekce může být použita suplujícím v případě absence vyučujícího, je ale nutné slevit z nároků a říct studentům, aby aplikace upravili tak, aby nemuseli používat znalosti, které ještě nemají, nebo si vymysleli jednodušší zadání, jehož správnost (a především správnost vypracování programu) bude ověřena při první možné příležitosti vyučujícím lektorem.//
+
+V poslední lekci jsem si pro vás připravil zadání různých malých (a do jisté míry užitečných) prográmků, které byste se svými znalostmi měli být schopni vytvořit. Protože ale nemusí být úplně průhledné, jak takový program napsat (ačkoli teoretické znalosti byste na to mít měli), v případě nejasností požádejte profesora o pomocnou berličku v místech, která vám nejsou úplně jasná (samozřejmě až po chvilce namáhání hlavy ;). Pokud nemáte žádný vlastní nápad, můžete si vybrat jeden (nebo několik) z následujících projektů:
+
+===== Kalkulátor =====
+Pokuste se napsat co nejkomplexnější a nejpřívětivější program na provádění různých druhů výpočtů. Program můžete například doplit i o pokročilé funkce, jako vykreslení grafu (pomocí písmenek) průběhu různých funkcí při různých vstupních hodnotách (stačí například sin()), nebo libovolnou jinou funkci dle zájmu (výpočet obvodu kruhu, nebo cokoli, co ve své kalkulačce chcete mít).
+
+===== Interpreter jednoduchého jazyka =====
+Vymyslete si jednoduchý interpretovaný programovací jazyk a napište pro něj interpreter. Stačí například 3-5 příkazů, pro zjednodušení může mít každý příkaz délku 1 znak, nebo řádek. V jednodušší obdobě nemusí jazyk být schopný dělat nic smysluplného, například pokud první písmenko řádku určuje akci a zbytek jsou data, která se mají zpracovat a "P" znamená vytisknout a "M" vynásobit dvěmi a vytisknout, může náledující program:
+
+  PTento text bude vypsan
+  CToto je komentar
+  M23 //toto cislo bude vynasobeno dvěmi a vypsáno
+
+Po zpracování vaším interpreterem například vytvořit následující výpis:
+
+  Tento text bude vypsan
+  46
+
+Co bude jazyk dělat je čistě na vás, může také například do dvojrozměrného pole kreslit čáru (L,P,N,D,T = vlevo, vpravo, nahoru, dolu, tisk) a když narazí na příkaz pro tisk, tak toto "plátno" vytiskne (vypíše).
+
+Tedy program **DDDPPPNNLLDT** vypíše například toto:
+
+  #
+  ####
+  ## #
+  ####
+
+Můžete si samozřejmě doplnit další příkazy (změna písmenka/barvy), nebo napsat něco úplně jiného.
+
+
+===== Shell =====
+Napište jednoduchý příkazový řádek (podobný například BASHi, nebo CMD) implementujte do něj funkci pro spouštění zadaných příkazů. Na internetu zjistěte, jakým způsobem lze zjistit aktuální adresář a vypisujte ho jako součást výzvy (na začátek řádky). Můžete implementovat i další virtuální příkazy na mazání, přesouvání a kopírování souborů, apod... Záleží opět jen na vaší fantazii.
+
+===== Mnohojazyčná aplikace =====
+Napište program, který obsahuje několik jednoduchých textových menu a libovolnou funkčnost (můžete se inspirovat jinými příklady). Veškeré texty v programu se budou načítat ze souboru specifikovaného v jiném (konfiguračním souboru). Vytvořte najméně dva datové soubory s lokalizacemi programu do vašeho mateřského jazyka a libovolného jiného. Soubor s jazykem nastavený v konfiguračním souboru by měl jít dočasně změnit pomocí argumentu programu.
+
+===== Engine textové hry =====
+Napište engine a alespoň jeden datový soubor pro textovou hru (elektronický gamebook), uživatel bude o pohybu mezi místnostmi této adventury (načtené ze souboru, jehož jméno zadá v parametru) rozhodovat zadáním čísla místnosti, číslo místnosti může odpovídat jedné konkrétní řádce v textovém souboru. Do enginu můžete dodělat možnosti soubojů (pomocí náhodných čísel), nebo kontrolu, jestli hráč dostal skutečně na výběr číslo místnosti, které zadal.
+
+===== Primitivní textový editor =====
+Program pro CLI (příkazový řádek) přijme jako argumenty režim (R - přečíst (vypsat na obrazovku), W - přečíst a zapsat, nebo A - přečíst a přídat) a jméno souboru, bude ho vypisovat po 15 řádkách (pokaždé počká na enter), až se dostane na konec souboru, tak pokud je pomocí prvního argumentu aktivován režim, který umožňuje zápis do souboru, vypíše řetězec "\n----- NEJAKY TEXT -----\n" (NEJAKY TEXT budou informace o souboru) a vše, co od té chvíle uživatel napíše na klávesnici zaznamená do souboru (přepíše celý soubor). Uživatel svůj vstup ukončí pomocí programátorem zvolené klávesy stlačené současně s Control (CTRL), nesmí ale jít o kombinace CTRL+C nebo CTRL+D. Pokud uživatel zadá volbu R, program místo toho rovnou skončí.
+
+Pokud program argument s názvem souboru neobdrží, automaticky vypíše seznam souborů (pomocí volání system() a příslušného programu - tj. ls, dir,...) a na jméno souboru se dotáže. Pokud soubor neexistuje, nabídne jeho vytvoření. Pokud je zadán první argument, tento soubor zpracuje v daném režimu, v jiném případě se uživatele taktéž zeptá.
+
+===== Ascii Grafika =====
+Tento program by měl dokázat vykreslovat (alespoň) 3 libovolné různé obrazce, prvním parametrem je určen tvar, druhým znak (barva) a dalšími potřebné parametry (rozměry). Způsob, jakým bude tvar vykreslován a jakým bude prováděn výpočet nechám na vás, důležité je ale, aby se tvar zobrazoval korektně nezávisle na zadaném rozměru. Výstup (u těch opravdu nejjednodušších obrazců) může vypadat například takto:
+
+<code>
+Čtverec (c):
+./grafika c # 4 4
+####
+#  #
+#  #
+####
+
+Kruh (k):
+./grafika k o 3
+ o  o
+o    o
+ o  o
+
+Trojúhelník (t):
+./grafika t A 5
+  A
+ A A
+AAAAA
+</code>
+
+===== Další nápady =====
+Můžete samozřejmě vymyslet a zrealizovat svůj ještě zajímavější nápad, nebo libovolná zadání libovolně modafakovat.
+
+Nejlepší programátor (čistota kódu*nápaditost) bude odměněn diplomem "Fr335ty13 C0din9 C0nt35+ - Zlatý byte" (nebo taky ne ;)...
+

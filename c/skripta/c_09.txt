@@ -1,0 +1,133 @@
+====== Pole ======
+Pole je datový typ skládající se z určitého počtu jiných datových typů.
+Zatím jsme se s poli setkali jen jako s řetězci (řetězec je pole jednotlivých znaků, pole končí znakem s ASCII hodnotou \x00).
+
+Nejlepší bude, pokud si to vysvětlíme na jednoduchém příkladu. Například budeme potřebovat uložit 10 čísel int, které budou všechny sloužit k podobnému účelu, ale je možné, že se jejich počet bude v budoucnosti měnit, nebo jsme líní pro je jednotlivě deklarovat (a byli bysme hloupí, kdybychom to tak dělali).
+
+Použijeme tedy např. tuto deklaraci:
+  int cisla[10];
+
+Tím jsme poprosili systém o 10*sizeof(int) bytů (neboli paměť potřebnou pro uložení 10 integerů, typicky to bude 20B).
+
+Nyní můžeme s čísli jednoduše pracovat, musíme si však pamatovat, že ačkoli jsme nadeklarovali 10 integerů, k prvnímu přistupujeme pomocí [0] a k desátému pomocí [9], proč tomu tak je si vysvětlíme za chvilku.
+
+===== Příklad =====
+<code c>
+int cisla[10], a = 2;
+cisla[0] = 1;
+cisla[1] = 2;
+cisla[a] = cisla[0]*cisla[1]+cisla[2];
+cisla[2]++;
+//promenna cisla[2] drzi nyni hodnotu 5
+
+cisla[10] = 18; //Zde by zase pravděpodobně došlo k pádu programu, protože se pokoušíme přistupovat k neexistující 11. položce pole.
+</code>
+
+===== Uložení pole v paměti =====
+držme se naší deklarace z předchozího příkladu, tedy:
+  int cisla[10];
+V tom případě jsme si říkali, že bude v paměti alokováno 10*sizeof(int) bytů, to bude vypadat následovně:
+
+   __ __ __ __ __ __ __ __ __ __ 
+  |00|00|00|00|00|00|00|00|00|00|
+   -- -- -- -- -- -- -- -- -- --
+  ^                          ^
+  |_ Toto je adresa &cisla   |_  Toto je adresa &cisla+9*sizeof(int) (neboli cisla[9])
+     (neboli cisla[0])
+
+Pokud si tedy zkusíme vytisknout printf("%d\n", &cisla);, získáme adresu v paměti (to dělá operátor &), na které je naše pole uložené, touto adresou je obyčejné číslo, je ale zvykem zapisovat ho šestnáctkově, toto je pro nás ale zatím dostačující.
+
+Tím, že použijeme zápis cisla[0] dojde k tomu, že získáme přístup k sizeof(int) bytům na adrese &cisla, tedy k prvnímu integeru, když chceme přistupovat k druhému integeru v poli použijeme cisla[1], protože tím se dostáváme z adresy &cisla o jeden int dále (tedy: &cisla+1*sizeof(int)), je tedy zřejmé, že pokud se pokusíme pracovat s cisla[10], octneme se již v části paměti, která nepatří našemu programu a náš program bude ukončen, protože v jiném případě by náš program mohl ovlivňovat práci jiného programu.
+
+
+===== Zjištění velikosti pole =====
+Je možné, že neznáme velikost pole, a potřebujeme ho zpracovat (např. v cyklu), k tomu opět použijeme operátor sizeof(). V následujícím příkladu si také můžete všimnout, že při deklaraci pole můžeme jeho velikost určit jinou celočíselnou proměnnou (to je možné až v novějších verzích jazyka C).
+Následující kus kódu ukazuje, jak zjistit a vypsat velikost pole.
+
+<code c>
+int i = 30;
+int cisla[i];
+//Nejaky jiny kod
+printf("Pocet cisel: %d\n", sizeof(cisla)/sizeof(int));
+</code>
+
+Příkaz sizeof(cisla) nám vrátí počet bytů, které pole skutečně zabírá v paměti, to může být různé. nás ale zajímá kolik prvků (int) pole má a s kolika můžeme ve skutečnosti pracovat. K tomu musíme ještě toto číslo vydělit hodnotou sizeof(int) (nebo sizeof(jiny_typ_naseho_pole)), ta totiž určuje, kolik každý prvek pole zabírá v paměti.
+
+Když si to shrneme: Víme, kolik místa zabírá pole v RAMce a víme, kolik má zabírat jeden jediný prvek, jednoduše tedy vydělíme (vrátíme se ve vzpomínkách do 2. třídy ZŠ ;) a máme požadované číslo, pokud nás ovšem zajímá nejvyšší "offset" (to číslo v hranatých závorkách), jaké můžeme použít, nesmíme ještě zapomenout odečíst 1.
+
+===== N-rozměrná pole =====
+Můžeme také vytvářet mnohorozměrná pole (např.: dvou-rozměrná, tří-rozměrná, sto-rozměrná, n-rozměrná), takové mnohorozměrné pole je laicky řečeno pole polí, nebo pole polí polí polí polí, typickým příkladem je pole řetězců.
+
+Deklarace takového pole může vypadat takto:
+
+<code c>
+int a[3][40]; //a je pole 40ti polí o 3 integerech
+//Podobná pole si většinou představujeme jako 3x40 čtverečků (40 je výška)
+char c[4][6][8];
+//Takové pole si pro změnu můžeme vizualizovat jako 8mi patrový kvádr, přičemž každé patro se zkládá z 4x6 kostiček (každá kostička drží nějaký znak).
+</code>
+
+U složitějších polí si můžeme představit například několik takových kvádříků uspořádaných do několika polic v několika skříních v několika řadách,...
+Prostě jakkoli.
+
+
+Pokud máme například pole int pole[2][3], pak pole[0] je pole 3 integerů jako např. int druhe[3].
+
+Ostatní práce s poli je naprosto analogická k polím jednorozměrným.
+
+
+===== Řešený příklad - zpracování pole v cyklu =====
+
+
+Toto je velmi často používaná věc! Více se dozvíte v kapitole "podmínky a cykly", tady jen uvádím jednoduchý příklad.
+Můžeme si zde všimnout dvou totožných cyklů, přičemž jeden je while() a druhý for().
+
+<file c arrays.c>
+/* arrays.c
+ * Napiste program, ktery naplni pole integeru nahodnymy cisly a potom je vypise.
+ * Pouzijte cykly for i while
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+	int i, cisla[10];
+
+	i=0;
+	while(i<sizeof(cisla)/sizeof(int)) {
+		cisla[i] = rand(); //K generovani nahodnych cisel slouzi funkce rand()
+		i++;
+	}
+	
+	for(i=0;i<sizeof(cisla)/sizeof(int);i++) printf("%d. cislo je: %d\n", i, cisla[i]);
+}
+
+//EOF
+</file>
+
+===== Samostatná cvičení =====
+  * Pomocí dvou vnořených cyklů naplňte dvojrozměrné pole znaků (char[x][y]) šachovnicí (8x8) z 1 a 0, pomocí dalšího vnořeného cyklu ji pak vytiskněte
+    * Velikost šachovnice bude možno libovolně měnit pomocí dvou proměnných (int x = 8, y = 8;).
+    * Očekávaný výsledek: <code>
+01010101
+10101010
+01010101
+10101010
+01010101
+10101010
+01010101
+10101010
+</code>
+  * Upravte program z předchozího cvičení tak, aby byly protilehlé rohy spojeny osmičkami.
+  * Upravte program z předchozího cvičení tak, aby byl čtverec lemován nulami.
+    *Očekávaný výsledek: <code>
+00000000
+08101080
+01810800
+00188010
+01088100
+00801810
+08010180
+00000000
+</code>

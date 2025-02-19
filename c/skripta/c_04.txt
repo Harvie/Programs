@@ -1,0 +1,33 @@
+====== Výhody a nevýhody programování textových aplikací ======
+V našich seminářích se budeme zabívat především psaním aplikací pro CLI (tedy příkazový řádek).
+Účelem této hodiny je poskytnout vám objektivní pohled na tyto aplikace ve srovnání s aplikacemi grafickými.
+
+===== Pokud v C píšeme konzolové aplikace, získáme tyto výhody: =====
+  * Textové aplikace jsou rychlejší.
+  * Při vzdáleném přístupu k počítači se text (SSH/Telnet) přenáší rychleji než grafika (VNC/MST).
+  * Zkušenějším uživatelům usnadňují práci a posouvají pro ně efektivitu úplně jinam, než si BFU (běžný Franta uživatel) dokáže představit.
+  * Bude velmi snadné, aby další aplikace/skripty mohly využívat naší aplikaci (např. je běžnou praxí, že se nejdříve napíše textová aplikace a grafika se píše až jako nástavba na ni - úplně samostatný spustitelný soubor).
+  * Veškeré výpisy programu i vstupy do něj můžeme ukládat nebo načítat do souboru, případně rovnou zpracovávat výstup jiného programu.
+  * Tyto aplikace mohou být použity jako webové aplikace (buď jako binární CGI aplikace, nebo prostřednictvím interpretovaných skriptů).
+  * Textové aplikace (především ty v čistém Ansi C) jsou snadno přenositelné na všechny platformy, pro které jsou dostupné kompilátory (Nejen Windows a Unixy, ale také obrovské množství dalších systémů).
+  * Pokud se naučíte psát textové aplikace, bude pro vás snadné vytvářet grafické aplikace pomocí tzv. GUIBuilderů známých například z vývojového prostředí Visual Basicu implementovaného Microsoftem nebo IBM. Pro více info viz. níže.
+
+===== Nevýhody textových programů =====
+  * Pokud píšete aplikace pro běžné uživatele, budou pro ně neefektivní, protože neovládají příkazový řádek na potřebné úrovni.
+  * Tyto uživatelé si samozřejmě budou stěžovat ;D (Dobrým kompromisem pro jednodušší aplikace je napsat si další program, který bude fungovat jako grafická nadstavba).
+
+===== Výhody grafických aplikací =====
+  * Spousta tzv. "eye-candy" -> Spokojení uživatelé
+  * Ovládání zvládne i p*blb
+
+===== Nevýhody grafických aplikací =====
+  * Je obtížné je ovládat pomocí jiných programů a tedy nemůžeme práci s nimi potřebně automatizovat.
+  * Jsou náročnější na systémové prostředky.
+
+===== GUIBuildery - prostředí pro jednoduchý návrh grafického rozhraní programů v C/C++ =====
+  * Borland C++ Builder (Windows)
+  * Kylix (Linux - kompatibilní s C++ Builderem a Delphy - zastaralé)
+  * Microsoft Visual Studio (Windows)
+  * wxDev-Cpp (Windows, programy ale možno kompilovat i na Linuxu s potřebnými knihovnami - wxWidgets)
+  * GLade (Linux - GTK+2)
+  * další... (cokoli, s čím se vám dobře pracuje...)

@@ -1,0 +1,98 @@
+====== Základní operátory ======
+R-hodnota (viz. dříve) se může skládat z více prvků s vlastnostmi r-hodnoty. To uděláme za pomoci nějakých operátorů, se dvěmi hodnotami můžeme provádět různé operace (aritmetické, logické a další). k tomu nám slouží různé operátory.
+
+===== Příklad =====
+<code c>
+  int x, a, b = 2;
+  x = (a = (b * 2) - 3);
+</code>
+Na konci tohoto kódu budou proměnné "x" a "a" držet hodnotu 1.
+
+Z toho také vyplívá, že celé přiřazení (l-hodnota = r-hodnota) je zároveň r-hodnotou a lze ho přiřadit do jiné l-hodnoty (např. proměnné).
+Také si všimněme, že lze použít závorky () k seskupování výrazů a úpravě jejich priorit (víme, že násobení má přednost před sčítáním), tato základní asociativita funguje stejně jako v matematice, pokud si nejsme jisti, nemusíme experimentovat a prostě se pojistíme závorkou.
+
+
+===== Přehled operátorů =====
+Zde naleznete seznam různých operátorů. Některé z nich budeme používat a vysvětlíme si je, ale většinu z nich zatím potřebovat nebudeme, ale k tomuto seznamu se určitě budete potřebovat vracet.
+
+  +	sčítání
+  -	odčítání
+  *	násobení
+  /	dělení
+
+  %	dělení modulo (zbytek po dělení)
+
+  ++, --  inkrementace resp. dekrementace hodnoty, prefixový i postfixový zápis
+  = *= /= %= += -= <<= >>= &= |= ^= 	jednoduché přiřazení a přiřazení s výpočtem
+
+  < 	menší než
+  > 	větší než
+  <= 	menší nebo rovno
+  >= 	větší nebo rovno
+  == 	rovnost
+  != 	nerovnost
+
+  && 	logický součin (and)
+  || 	logický součet (or)
+
+  !  	logická negace
+  ~ 	bitová negace
+
+  <<, >>  bitový posun vlevo resp. vpravo
+  & 	bitový součin (and)
+  | 	bitový součet (or)
+  ^ 	bitový vylučovací (exkluzivní) součet (xor)
+
+  ?:  	podmíněné vyhodnocení  	zprava doleva
+
+  . 	tečka, přímý přístup ke členu struktury
+  -> 	nepřímý přístup ke členu struktury
+  , 	čárka, oddělení výrazů
+
+  sizeof	získání velikosti objektu v bytech
+  (typ)  	přetypování na typ uvedený v závorkách
+
+  &  	reference (získání adresy objektu)
+  * 	dereference (získání objektu dle adresy)
+
+===== Porovnávání =====
+V kapitole, kde budeme probírat podmínky a cykly určitě využijeme porovnávací operátory (<,>,<=,>=,==,!=), logickou negaci (!) a logický součin a součet (&&,||).
+Pokud jde o porovnávací operátory, tak vždy vrací hodnotu true (1 nebo jiná nenulová hodnota), nebo  false (0), tj. pravda/nepravda.
+Logický součin (&&) vrací true pouze pokud jsou obě hodnoty true. Pokud je první hodnota false, tak se druhá nevyhodnocuje (zjednodusene vyhodnocovani).
+Logický součet (||) vrací true pokud je alespoň jedna z hodnot true. Pokud je první hodnota true, tak se druhá nevyhodnocuje (zjednodusene vyhodnocovani).
+Logická negace vrací opak (!1 je 0, !0 je 1).
+
+
+===== Příklady =====
+<code c>
+int a = 2, b = 3, x = 4, y = 2;
+b = !(b == a); //b bude true
+b = (b != a); //b bude true (jde o prakticky jiny zapis stejneho vypoctu)
+b = (a = 2); //casta chyba - nedojde k porovnani, ale prirazeni 2 do a a nasledne do b
+x = (x <= y); //x bude false
+y = !((1 <= 2)||(b = 7)); //y bude false, prirazeni 7 do b neprobehne (pouzito zjednodusene vyhodnocovani)
+y = 128; //y bude true
+y = 0; //y bude false
+y = !y; //y bude true
+</code>
+
+===== Inkrementace, dekrementace,... =====
+Hodnotu proměnné můžeme změnit i jiným způsobem, než je přiřazení:
+
+<code c>
+int a = 31, b;
+a++; //a bude zvětšena o 1 (jiný zápis: a = a+1; )
+a *= 2; //a bude vynásobeno 2 (jiný zápis: a = a*2; )
+b = a++; //a bude přiřazeno do b a následně zvětšeno o 1
+b = --a; //a bude zmenšeno o 1 a nasledne prirazeno do b
+</code>
+
+===== Operátor sizeof() =====
+sizeof je makro preprocesoru, které nám vrátí velikost daného datového typu (viz. kapitola jednoduché datové typy) v bytech. Víme, že například celé číslo (int) zabírá v paměti většinou 2 byty, výraz sizeof(int) nám tedy vrátí u většiny kompilátorů číslo 2.
+
+
+===== Samostatné cvičení =====
+  * Vymyslete přiřazení co nejsložitějšího výrazu, jehož výsledkem bude hodnota false.
+  * Jakou hodnotu bude mít následující výraz:
+    * <code c>(((!(1 > 2 || 2 > 1)) * 2 + 4) / 2) == 7</code>
+

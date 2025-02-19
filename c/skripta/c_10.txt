@@ -1,0 +1,82 @@
+====== Argumenty programu ======
+Další možností, jak můžeme našemu programu předat nějaká data, je to, že mu je zdělíme už při spouštění. To se provádí pomocí tzv. argumentů (můžeme se také setkat s pojmem parametry), ty předáme programu tak, že je napíšeme za jeho název oddělené mezerami. To je přesně to, k čemu dochází pokud např. ve vašem operačním systému otevíráte nějaký textový dokument, video nebo cokoli v jiném programu. V takovém případě grafické prostředí, které pravděpodobně používáte k ovládání počítače vyvolá příkaz podobný těmto:
+
+  * prehravac_filmu film.avi
+  * cesta/super\ jukebox jedna\ pisnicka.ogg "druha - pisnicka.mp3"
+  * "c:\program files\msoffice\word\word.exe" dokument.doc
+
+Můžeme si všimnout, že všechny parametry jsou odděleny mezerami, pokud je nutné, aby parametr obsahoval mezeru, dáme ho buď do uvozovek, nebo před mezeru dáme zpětné lomítko (to se na windows nepoužívá), pokud ovšem potřebujeme, aby argument obsahoval uvozovku, dáme před ni také zpětné lomítko.
+
+Také by bylo dobré poznamenat, že prvním argumentem (i když se takto neoznačuje) je vždy název programu.
+
+===== Argumenty z hlediska programátora =====
+Operační systém předává našemu programu argumenty pomocí dvou proměnných.
+První z nich je int argc, která obsahuje počet argumentů, pokud tedy například předáme programu dva argumenty, tak bude platit, že argc == 3, protože kromě těchto dvou souborů bylo programu předáno ještě jméno spustitelného souboru (tedy název programu).
+Druhou proměnnou, která už obsahuje data konkrétních argumentů je char *argv[], jde o pole řetězců, to tedy znamená, že např. argv[0] bude první argument (název programu), argv[1] druhý, atd...
+
+Aby náš program mohl od systému parametry převzít, musíme je nadeklarovat v hlavičce funkce main(), tedy např.:
+
+<code c>
+int main(int argc, char *argv[]) {
+	//Telo programu
+}
+</code>
+
+===== Padám, padáš, padáme! =====
+V případě, že by se náš program pokusil přistupovat k nezadanému argumentu, dojde k jeho pádu, protože operační systém toto místo (kde náš argument není) již používá k jiným účelům a je nežádoucí, aby k němu náš program získal přístup. Je tedy vhodné pomocí hodnoty argc vždy ověřovat, jestli konkrétní argument existuje. V opačném případě bychom se mohli od operačního systému dočkat ukončení programu a vypsání podobné chybové hlášky: "Neoprávněný přístup do paměti (SIGSEGV)", nebo známější anglická hláška "Segmentation fault. Core dumped.".
+
+Takové ošetření by mohlo vypadat například takto:
+
+<code c>
+int main(int argc, char *argv[]) {
+	if(argc > 1) {
+		printf("Byl zadán argument %s\n", argv[1]);
+	} else {
+		printf("Nebyl zadán žádný argument!\n");
+	}
+}
+</code>
+
+===== Řešený příklad =====
+<file c args.c>
+/* args.c
+ * Napiste program, ktery vypise pocet parametru, prvni parametr a nasledujici dva secte jako cela cisla a vypise ve tvaru rovnice
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[]) {
+	int x, y;
+	printf("Pocet parametru: %d\n", argc);
+	printf("Jmeno programu: %s\n", argv[0]);
+	x = atoi(argv[1]);
+	y = atoi(argv[2]);
+	printf("Prvni scitanec: %d\n", x);
+	printf("Druhy scitanec: %d\n", y);
+	printf("Vysledek: %d+%d = %d\n", x, y, (x+y));
+}
+</file>
+
+===== Výstup programu: =====
+<code>
+harvie@harvie-ntb:~/Desktop/skripta/c$ ./args 2 3
+Pocet parametru: 3
+Jmeno programu: ./args
+Prvni scitanec: 2
+Druhy scitanec: 3
+Vysledek: 2+3 = 5
+</code>
+Nyní se program pokusí přistupovat k neexistujícímu argumentu:
+<code>
+harvie@harvie-ntb:~/Desktop/skripta/c$ ./args 2
+Pocet parametru: 2
+Jmeno programu: ./args
+Neoprávněný přístup do paměti (SIGSEGV)
+</code>
+
+===== Samostatná cvičení =====
+  * upravte předchozí příklad tak, aby kontroloval počet parametrů a v případě jejich neexistence použil místo daného sčítance nulu.
+  * Napište program, který pomocí cyklu while vypíše všechny argumenty pod sebe.
+  * Napište program, který pomocí cyklu for vypíše všechny argumenty pod sebe.
+

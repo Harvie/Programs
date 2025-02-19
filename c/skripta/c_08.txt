@@ -1,0 +1,128 @@
+======  Podmínky a cykly ======
+Tyto dvě důležité věci jsou častou součástí většiny programů.
+
+
+===== Podmínka =====
+Podmínka je operátor, který nám umožní vykonat nějaký kód pouze pokud je splněna nějaká podmínka. Podmínka se vyhodnocuje tak, že se vypočítá hodnota výrazu předaného podmínce a pokud tato hodnota odpovídá logické pravdě (to většinou znamená nenulové číslo), vykoná se daný příkaz.
+
+Jednoduchá podmínka může vypadat například takto:
+
+<code c>
+int a = 1, b = 2;
+if(a<b) printf("a je mensi nez b");
+</code>
+
+Jaké operátory máme a jak se vyhodnocují jsme se již dozvěděli z kapitoly operátory, na druhou stranu to nemusí být na první pohled jasné, proto ještě v rychlosti shrnu alespoň srovnávací (komparační) operátory:
+
+  == - je rovno
+  != - není rovno
+  >  - větší než
+  <  - menší než
+  >= - větší nebo rovno
+  <= - menší nebo rovno
+  !  - logická negace
+  && - logické AND (A)
+  || - logické OR (NEBO)
+
+Pokud tyto operátory použijeme na dvě čísla (operandy), výslednou hodnotou bude vždy logická hodnota (pravda/nepravda - true/false - 1/0), u většiny kompilátorů je to 0 nebo 1. Pokud tedy vyhodnocujeme podmínku (např. pomocí if()), pokaždé, když ji předáme nenulovou hodnotu, je proveden následující příkaz. Např.:
+
+<code c>
+if(1) if(255) if(!0) printf("tento prikaz bude proveden vzdy\n");
+if(!1) if(0) printf("tento prikaz nebude proveden nikdy\n");
+</code>
+
+S if souvisí ještě jeden operátor a tím je else, tím můžeme určit co se stane, když podmínka splněna nebude.
+
+<code c>
+if(a>b) printf("a je mensi nez b\n"); else printf("a je vetsi nez b\n");
+</code>
+
+===== Složený příkaz (Blok kódu) =====
+Pokud několik příkazů uzavřeme do složených závorek, začnou se vůči kódu mimo ně chovat jako jeden příkaz. V podmínkách a cyklech můžeme tedy vykonat více příkazů tam, kde bychom mohli normálně vykonat pouze jeden. např. následující kód vypíše 3x "Nejaky text\n".
+
+<code c>
+int podminka = 1;
+
+if(podminka) printf("Nejaky text\n");
+if(podminka) { printf("Nejaky "); printf("text\n"); }
+if(podminka) {
+	printf("Nejaky ");
+	printf("text\n");
+	}
+</code>
+
+Následující kód pak zmenší hodnotu většího ze dvou čísel.
+
+<code c>
+if(a>b) {
+	a--;
+} else {
+	b--;
+}
+</code>
+
+===== Cyklus while =====
+Jde o základní cyklus, jediné, čím se liší od podmínky je to, že se příkaz neustále opakuje, dokud je podmínka splněna.
+Příklady:
+
+<code c>
+while(1) printf("#"); //Budeme do nekonečna vypisovat znak '#'
+
+int i = 30;
+while(i>10) { //Budeme zmensovat i, dokud bude vetsi nez 10
+	i--;
+}
+</code>
+
+===== Cyklus for =====
+Cyklus for je podobný cyklu while, akorát s tím rozdílem, že kromě podmínky obsahuje také příkazy, které se spustí před začátkem cyklu a pak při každé iteraci (opakování).
+
+Následující while cyklus
+
+<code c>
+int i = 30;
+while(i>10) {
+	i--;
+	printf("%d", i);
+}
+</code>
+tedy můžeme zapsat pomocí for-u i takto:
+<code c>
+int i;
+for(int i=30;i>10;i--) printf("%d", i);
+</code>
+
+Což je mnohem přehlednější.
+
+===== Vnořené (zahnízděné) cykly =====
+Dobré je si také uvědomit, že můžeme mít například dva cykly v sobě.
+
+===== Řešený příklad =====
+Napište program, který vypíše za sebe čísla od 0 do 10 a zpět oddělené čárkami.
+
+<file c loops.c>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+	int x=1, a=0;
+	for(int i=0;i<=20;i++){
+		printf("%d", a);
+		if(i<20) printf(",");
+		if(a>=10) x=(-1);
+		a+=x;
+	}
+	printf("\n");
+}
+
+//EOF
+</file>
+
+Výstup:
+  harvie@harvie-ntb:~/Desktop/skripta/c$ ./loops
+  0,1,2,3,4,5,6,7,8,9,10,9,8,7,6,5,4,3,2,1,0
+
+===== Samostatná cvičení =====
+  * Upravte předchozí program tak, aby nepoužíval více než jeden cyklus
+  * Napište program, který 10x pod sebe vypíše číslice od 0 do 9.
+  * Upravte předchozí program tak, aby vykreslil šachovnici (8x8) z 0 a 1.

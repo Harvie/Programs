@@ -1,0 +1,64 @@
+===== Předmluva =====
+Účelem této příručky je přiblížit vám základy programování hned z několika pohledů:
+  * První složkou jsou základy praktického programování v ANSI C (napsat, zkompilovat, spustit, upravit).
+  * Dále se také seznámíme s programátorskou kulturou a základy slušného chování při získávání informací na internetu.
+  * A nakonec prohloubíme své znalosti o počítači, operačním systému a zužitkujeme nové poznatky při programování.
+
+===== Počátky =====
+Vývoj jazyka C začal v Bellových laboratořích AT&T mezi léty 1969 a 1973. Ritchie tvrdí, že nejpřínosnější období bylo v roce 1972. Pojmenování "C" zvolili, protože mnoho vlastností přebírali ze staršího jazyka zvaného "B", jehož název byl zase odvozen od jazyka BCPL (ale to není jisté, neboť Thompson také vytvořil jazyk Bon na poctu své ženy Bonnie).
+
+V roce 1973 se stal jazyk C dostatečně stabilním. Většina zdrojového kódu jádra Unixu, původně napsaného v assemleru PDP-11, byla přepsána do C. Unix tedy patří mezi první operační systémy, které byly napsané v jiném než strojovém jazyce či assembleru. Předchozí byl například systém Multics (napsaný v PL/I) a TRIPOS (napsaný v BCPL).ovat, opravit - to vše pokud možno nezávisle na platformě).
+  * Dále se podíváme na vyhledávání informací, řešení problémů pomocí internetového vyhledávače a na programátorskou kulturu (Pokud komunikujeme s jinými programátory -byť jen po internetu-, musíme dodržovat jisté konvence. Největší a nejméně snadno dodržiteknou je nechtít po někom to, aby někdo mrhal svým časem nad něčím, co můžete udělat sami). Do této esence patří samozřejmě také konvence ve psaní zdrojového kódu a programování vůbec.
+  * A nakonec prohloubíme své znalosti ANSI C, to především znamená, že se podíváme se na pointery (ukazatele) a dynamickou alokaci paměti.
+
+Protože C je velmi komplikovaný jazyk, budeme se držet základů a věcí nezbytných k tomu, abychom měli kompaktní soubor znalostí vhodných k tomu, abychom napsali nějaký pěkný program.
+
+
+===== Proč C? =====
+C je programovací jazyk, který vyvinuli Ken Thompson a Dennis Ritchie pro potřeby operačního systému Unix. V současné době je to jeden z nejpopulárnějších jazyků, zřejmě nejčastější pro psaní systémového softwaru, ale velmi rozšířený i pro aplikace.
+
+C je nízkoúrovňový, kompilovaný, relativně minimalistický a rychlý programovací jazyk. Je dostatečně mocný na většinu systémového programování, mimoto podporuje také možnost využít ve zdrojovém kódu jazyk assembler, který pracuje víceméně s instrukcemi procesoru pro případ, že by něco (velmi nízkoúrovňového) nebylo možné napsat, to ale pro naše účely nebudeme potřebovat.
+
+Z toho vyplývá, že operační systémy, překladače, knihovny a interpretry vysokoúrovňových jazyků jsou často implementovány právě v C.
+
+Ukládání dat je v C řešeno třemi základními způsoby: statickou alokací paměti (při překladu), automatickou alokací paměti na zásobníku, dynamickou alokací na haldě (heap) pomocí knihovních funkcí. Jazyk nedisponuje žádnou abstrakcí nad alokací: s pamětí se pracuje přes datový typ zvaný ukazatel, který drží odkaz na paměť, ale je na něm možné provádět aritmetické operace. Ukazatelé tedy existují nezávisle na proměnných, na které odkazují, a je na odpovědnosti programátora, aby neukazovaly na paměť nealokovanou.
+
+Jazyky Java a C#, oba odvozené od C, používají méně univerzální způsob odkazování alokovaných proměnných, který snižuje pravděpodobnost chyby v programu. Jazyk C++, původně rozšíření jazyka C, si ovšem ukazatele zachoval.
+
+Mnoho dalších moderních programovacích jazyků (Nejen kompilovaných) přebírá způsob zápisu (neboli syntaxi) z jazyka C. Patří mezi ně například zmíněná Java či Perl a PHP.
+
+Dalším plusem je, že se při výuce a psaní programů v C se můžete naučit mnoho podrobností o funkci počítače a rozšířit je na víc než "Tam ten procesor tam počítá s nějakejma číslama a něco si dává někam do paměti", C vám ukáže, jak funguje práce s pamětí, pokud se blíže podíváme na strojový kód (vzniklý kompilací zdrojového kódu) dozvíme se podrobněji jak funguje procesor a také specifika konkrétní architektury.
+
+V C můžeme nejen psát textové nebo grafické aplikce, ale dokonce programovat webové aplikace podobně, jako například v PHP, nebo dokonce psát programy pro jednočipové mikropočítače (šváby).
+
+
+===== Historie jazyka C =====
+==== Počátky ====
+Vývoj jazyka C začal v Bellových laboratořích AT&T mezi léty 1969 a 1973. Ritchie tvrdí, že nejpřínosnější období bylo v roce 1972. Pojmenování „C“ zvolili, protože mnoho vlastností přebírali ze staršího jazyka zvaného „B“, jehož název byl zase odvozen od jazyka BCPL (ale to není jisté, neboť Thompson také vytvořil jazyk Bon na poctu své ženy Bonnie).
+
+V roce 1973 se stal jazyk C dostatečně stabilním. Většina zdrojového kódu jádra Unixu, původně napsaného v assemleru PDP-11, byla přepsána do C. Unix tedy patří mezi první operační systémy, které byly napsané v jiném než strojovém jazyce či assembleru. Předchozí byl například systém Multics (napsaný v PL/I) a TRIPOS (napsaný v BCPL).
+
+==== K&R C ====
+V roce 1978, Ritchie a Brian Kernighan vydali první vydání knihy The C Programming Language. Tato kniha, mezi programátory C známá jako „K&R“, sloužila po mnoho let jako neformální specifikace jazyka. Verze C, kterou takto popsali, bývá označována jako „K&R C“. (Druhé vydání knihy popisovalo novější standard ANSI C.)
+
+K&R C je považován za základní normu, kterou musejí obsahovat všechny překladače jazyka C. Ještě mnoho let po uvedení ANSI C to byl „nejmenší společný jmenovatel“, který využívali programátoří v jazyce C kvůli maximální přenositelnosti, protože zdaleka ne všechny překladače plně podporovaly ANSI C.
+
+V několika letech následujících po uvedení K&R C bylo uvedeno a přidáno několik „neoficiálních“ vlastností jazyka, které byly podporovány překladači od AT&T a některých dalších dodavatelů.
+
+==== ANSI C a ISO C ====
+V pozdních sedmdesátých letech začalo C nahrazovat BASIC jako přední programovací jazyk pro mikropočítače. Během osmdesátých let bylo přejato pro použití na platformě IBM PC a jeho popularita se značně zvýšila. Tou dobou Bjarne Stroustrup a další v Bellových laboratořích začali pracovat na rozšiřování C o objektově orientované prvky. Jazyk, který vytvořili, zvaný C++, je dnes nejrozšířenější programovací jazyk pro aplikace na Microsoft Windows. C zůstává stále populárnější ve světě Unixu.
+
+Jedním z cílů standardizačního procesu ANSI C byl vytvořit nadmnožinu K&R C zahrnující mnoho „neoficiálních vlastností“. Navíc standardizační komise přidala několik vlastností jako funkční prototypy (vypůjčené z C++) a schopnější preprocesor.
+
+ANSI C je dnes podporováno téměř všemi rozšířenými překladači. Většina kódu psaného v současné době v C je založena na ANSI C. Jakýkoli program napsaný pouze ve standardním C je přeložitelný a spustitelný na jakékoli platformě, která odpovídá tomuto standardu. Nicméně mnoho programů se dá přeložit pouze na jedné platformě nebo jedním překladačem, kvůli (i) použití nestandadních knihoven, např. pro grafiku, a také (ii) některé překladače v implicitním módu neodpovídají standardu ANSI C.
+
+==== C99 ====
+Po standardizaci jazyka v roce 1989 se většina vývoje soustředila na jazyk C++. Přesto však na konci 90. let došlo k vydání dokumentu ISO 9899:1999 (obvykle nazývaný C99), který byl následně v březnu 2000 přijat i jako ANSI standard.
+
+C99 představil několik nových vlastností, které byly mnohdy v překladačích už implementovány jako rozšíření.
+
+Standard C99 je v některých ohledech přísnější než původní standard C89; například je zakázáno odkazovat na stejnou paměť ukazateli jiných typů. Toto umožňuje vylepšenou optimalizaci, ale může způsobit problémy s kompilací starších programů.
+
+Žádný kompilátor zatím neobsahuje kompletní implementaci C99, přestože některé jsou poměrně blízko (GCC). Firmy jako Microsoft nebo Borland neprojevily velký zájem o implementaci C99, především kvůli tomu, že většinu nových vlastností poskytuje C++ a to často nekompatibilně s C99 (datový typ complex v C99 versus třída complex v C++).
+
+
